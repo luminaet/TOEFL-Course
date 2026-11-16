@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": 1794809082862,
+  "updatedAt": 1794817060841,
   "settings": {
     "totalMinutes": 120,
     "audioPlays": 1,
@@ -608,7 +608,6 @@
                   "passage": "",
                   "questions": [
                     {
-                      "id": "lb-u1-q1",
                       "q": "Why can't the man attend the study group tonight?",
                       "o": [
                         "He is sick.",
@@ -618,10 +617,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Conversation detail"
+                      "topic": "Conversation detail",
+                      "id": "lb-u1-q1"
                     },
                     {
-                      "id": "lb-u1-q2",
                       "q": "What do the speakers decide to do?",
                       "o": [
                         "Cancel the group",
@@ -631,7 +630,113 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "Conversation main idea"
+                      "topic": "Conversation main idea",
+                      "id": "lb-u1-q2"
+                    }
+                  ]
+                },
+                {
+                  "id": "lb-u2",
+                  "title": "University Library",
+                  "audioUrl": "",
+                  "script": "Woman: Excuse me, could you tell me where I can find books about English grammar?\nMan: Sure. You can find them on the third floor, in the language section.\nWoman: Thank you. Can I borrow the books for two weeks?\nMan: Yes, students can borrow up to three books for two weeks.\nWoman: That's great. I need them for my English assignment.\nMan: Don't forget to bring your student card when you borrow the books.\nWoman: Okay. Thank you for your help.\nMan: You're welcome.\nNarrator: Where can the woman find books about English grammar?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "Where can the woman find books about English grammar?",
+                      "o": [
+                        "On the first floor.",
+                        "On the second floor.",
+                        "On the third floor.",
+                        "Near the library entrance."
+                      ],
+                      "a": 2,
+                      "e": "",
+                      "topic": "",
+                      "id": "lb-u2-q1"
+                    },
+                    {
+                      "q": "What does the woman need to bring when borrowing books?",
+                      "o": [
+                        "Her student card.",
+                        "Her assignment.",
+                        "Her notebook.",
+                        "Her library ticket."
+                      ],
+                      "a": 0,
+                      "e": "",
+                      "topic": "",
+                      "id": "lb-u2-q2"
+                    }
+                  ]
+                },
+                {
+                  "id": "lb-u3",
+                  "title": "Making a Doctor's Appointment",
+                  "audioUrl": "",
+                  "script": "Man: Good morning. I'd like to make an appointment with the doctor.\nWoman: Certainly. What day would you like to come?\nMan: Is the doctor available tomorrow morning?\nWoman: Let me check. Yes, there is an available appointment at ten thirty.\nMan: That sounds good. How long do I need to wait?\nWoman: Usually, you only need to wait about fifteen minutes.\nMan: Okay. I'll come tomorrow at ten thirty.\nWoman: All right. May I have your name, please?\nMan: My name is David Brown.\nNarrator: Why does the man call the woman?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "Why does the man call the woman?",
+                      "o": [
+                        "To cancel an appointment.",
+                        "To make a doctor's appointment.",
+                        "To ask for medicine.",
+                        "To find a hospital."
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "",
+                      "id": "lb-u3-q1"
+                    },
+                    {
+                      "q": "What time is the man's appointment?",
+                      "o": [
+                        "At 9:30.",
+                        "At 10:00.",
+                        "At 10:15.",
+                        "At 10:30."
+                      ],
+                      "a": 3,
+                      "e": "",
+                      "topic": "",
+                      "id": "lb-u3-q2"
+                    }
+                  ]
+                },
+                {
+                  "id": "lb-u4",
+                  "title": "Planning a Weekend Trip",
+                  "audioUrl": "",
+                  "script": "Woman: Do you have any plans for the weekend?\nMan: Not yet. Why?\nWoman: I'm thinking about going to the beach on Saturday. Would you like to come with me?\nMan: That sounds interesting. How will we get there?\nWoman: We can take the bus. It takes about two hours to reach the beach.\nMan: What time should we leave?\nWoman: I think we should leave at seven in the morning.\nMan: Okay. Should I bring anything?\nWoman: Bring some food, water, and your swimming clothes.\nMan: Great! I'm looking forward to it.\nNarrator: Where are the speakers planning to go?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "Where are the speakers planning to go?",
+                      "o": [
+                        "To the mountains.",
+                        "To the beach.",
+                        "To the museum.",
+                        "To the shopping center."
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "",
+                      "id": "lb-u4-q1"
+                    },
+                    {
+                      "q": "How will they travel to their destination?",
+                      "o": [
+                        "By train.",
+                        "By car.",
+                        "By bus.",
+                        "By airplane."
+                      ],
+                      "a": 2,
+                      "e": "",
+                      "topic": "",
+                      "id": "lb-u4-q2"
                     }
                   ]
                 }
@@ -643,7 +748,113 @@
               "title": "Part C — Talks",
               "directions": "In Part C you will hear talks, such as a lecture or an announcement. After each talk you will answer several questions about it.",
               "target": 12,
-              "units": []
+              "units": [
+                {
+                  "id": "lc-u1",
+                  "title": "The Importance of Drinking Water",
+                  "audioUrl": "",
+                  "script": "Narrator: Listen to a talk about the importance of drinking water.\nWoman: Good morning, everyone. Today, I would like to talk about the importance of drinking water. Water is very important for our bodies. It helps us stay healthy and gives our bodies the energy to do daily activities. Drinking enough water also helps us concentrate better when studying.Most people need about eight glasses of water every day, although the amount may vary depending on their activities and the weather. If we do not drink enough water, we may feel tired and have difficulty concentrating. Therefore, remember to drink water regularly, especially when the weather is hot.\nNarrator: Question 35. What is the main topic of the talk?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "Question 35. What is the main topic of the talk?",
+                      "o": [
+                        "The importance of eating vegetables.",
+                        "The importance of drinking water.",
+                        "The benefits of regular exercise.",
+                        "The causes of sleeping problems."
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "",
+                      "id": "lc-u1-q1"
+                    },
+                    {
+                      "q": "According to the speaker, what may happen if people do not drink enough water?",
+                      "o": [
+                        "They may feel tired.",
+                        "They may become stronger.",
+                        "They may sleep longer.",
+                        "They may become hungry."
+                      ],
+                      "a": 0,
+                      "e": "",
+                      "topic": "",
+                      "id": "lc-u1-q2"
+                    }
+                  ]
+                },
+                {
+                  "id": "lc-u2",
+                  "title": "The History of the Telephone",
+                  "audioUrl": "",
+                  "script": "Narrator: Listen to a talk about the history of the telephone.\nMan: The telephone is one of the most important inventions in human history. It allows people to communicate with each other over long distances. Alexander Graham Bell is widely credited with inventing the first practical telephone in 1876. In the past, telephones were large and usually stayed in one place. People could only make calls using wires. Today, telephones have become smaller and more advanced. Smartphones allow people not only to make calls but also to send messages, take pictures, and access the internet. The telephone has changed the way people communicate in their daily lives.\nNarrator: Who is widely credited with inventing the first practical telephone?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "Who is widely credited with inventing the first practical telephone?",
+                      "o": [
+                        "Thomas Edison.",
+                        "Alexander Graham Bell.",
+                        "Albert Einstein.",
+                        "Isaac Newton."
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "",
+                      "id": "lc-u2-q1"
+                    },
+                    {
+                      "q": "What can people do with modern smartphones besides making calls?",
+                      "o": [
+                        "Only listen to music.",
+                        "Only watch television.",
+                        "Send messages and access the internet.",
+                        "Print documents without a printer."
+                      ],
+                      "a": 2,
+                      "e": "",
+                      "topic": "",
+                      "id": "lc-u2-q2"
+                    }
+                  ]
+                },
+                {
+                  "id": "lc-u3",
+                  "title": "The Benefits of Reading Books",
+                  "audioUrl": "",
+                  "script": "Narrator: Listen to a short lecture about reading books.\nWoman: Reading books is a useful activity for students. It provides many benefits, especially for those who want to improve their language skills. First, reading helps students learn new vocabulary. When students read regularly, they become familiar with different words and expressions. Second, reading can improve writing skills. Students can learn how to organize sentences and develop ideas by reading different types of texts. Finally, reading also increases knowledge because books contain information about many subjects, such as science, history, and culture. For these reasons, students should make reading a regular habit.\nNarrator: What is one benefit of reading books mentioned by the speaker?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "What is one benefit of reading books mentioned by the speaker?",
+                      "o": [
+                        "It helps students improve their vocabulary.",
+                        "It makes students sleep less.",
+                        "It reduces the need to study.",
+                        "It helps students avoid examinations."
+                      ],
+                      "a": 0,
+                      "e": "",
+                      "topic": "",
+                      "id": "lc-u3-q1"
+                    },
+                    {
+                      "q": "According to the speaker, how can reading improve writing skills?",
+                      "o": [
+                        "By helping students memorize every book.",
+                        "By teaching students to organize sentences and develop ideas.",
+                        "By encouraging students to write shorter texts only.",
+                        "By making students read without understanding."
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "",
+                      "id": "lc-u3-q2"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
