@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": 1794822146866,
+  "updatedAt": 1794822487575,
   "settings": {
     "totalMinutes": 120,
     "audioPlays": 1,
@@ -820,16 +820,16 @@
                   "id": "lc-u2",
                   "title": "The History of the Telephone",
                   "audioUrl": "",
-                  "script": "Narrator: Listen to a talk about the history of the telephone.\nMan: The telephone is one of the most important inventions in human history. It allows people to communicate with each other over long distances. Alexander Graham Bell is widely credited with ***inventing*** the first practical telephone in 1876. In the past, telephones were large and usually stayed in one place. People could only make calls using wires. Today, telephones have become smaller and more advanced. Smartphones allow people not only to make calls but also to send messages, take pictures, and access the internet. The telephone has changed the way people communicate in their daily lives.\nNarrator: Who is widely credited with inventing the first practical telephone?",
+                  "script": "Narrator: Listen to a talk about the history of the telephone.\nMan: The telephone is one of the most important inventions in human history. It allows people to communicate with each other over long distances. Alexander Graham Bell is widely credited with inventing the first practical telephone in 1876. In the past, telephones were large and usually stayed in one place. People could only make calls using wires. Today, telephones have become smaller and more advanced. Smartphones allow people not only to make calls but also to send messages, take pictures, and access the internet. The telephone has changed the way people communicate in their daily lives.\nNarrator: Who is widely credited with inventing the first practical telephone?",
                   "passage": "",
                   "questions": [
                     {
-                      "q": "Who is widely credited with inventing the first practical telephone?",
+                      "q": "When is the first practical telephone invented?",
                       "o": [
-                        "Maintained",
-                        "Built",
-                        "Managed",
-                        "Found"
+                        "In the early of 19th century",
+                        "In the end of 20th century",
+                        "In the end of 19 century",
+                        "In the early of 20th century"
                       ],
                       "a": 3,
                       "e": "",
