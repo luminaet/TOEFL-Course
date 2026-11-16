@@ -133,6 +133,7 @@ function render(){stopTest();buildTabs();({soal:vSoal,settings:vSettings,voices:
 
 /* ---------- SOAL ---------- */
 function vSoal(){
+ const _y=scrollY;
  const lv=D.levels[lvl],flat=X.flatten(lv),S=lv.sections[sec];
  const lchips=X.LEVELS.map(l=>`<button class="chip ${l===lvl?"active":""}" data-act="lvl" data-id="${l}">${LV[l]} (${X.flatten(D.levels[l]).qs.length})</button>`).join("");
  const schips=X.SECS.map(s=>`<button class="chip ${s===sec?"active":""}" data-act="sec" data-id="${s}">${X.META[s].ico} ${X.META[s].short} (${flat.count[s]}/${X.META[s].std})</button>`).join("");
@@ -154,11 +155,11 @@ function vSoal(){
  <details class="box" open><summary>Format penulisan soal — ${X.META[sec].short}</summary><pre>${esc(noQ()?FORMAT.listeningNoQ:FORMAT[sec])}</pre>${noQ()?`<p class="hint"><b>Mode Medium/Hard:</b> baris <code>Q:</code> tidak diperlukan. Pertanyaan cukup dibacakan Narrator di script; mahasiswa hanya melihat pilihan A–D. Soal baru dimulai setiap kali pilihan <code>A)</code> muncul lagi. Menulis <code>Q:</code> tetap boleh bila Anda ingin pertanyaan tampil di layar.</p>`:""}
  <p class="hint">Gunakan <code>### Judul</code> untuk memisahkan unit (satu percakapan/pidato/bacaan dengan beberapa soal). Tanpa <code>###</code>, setiap blok soal dianggap satu unit. Urutan penulisan = urutan tampil. Soal diberi nomor otomatis per sesi.${sec==="listening"?" Pembicara yang dikenali: <b>Narrator</b>, <b>Woman</b>, <b>Man</b>.":""}</p></details>
  ${parts}<div class="row"><button class="btn secondary" data-act="partAdd">＋ Tambah part</button></div>`;
- growAll();
+ growAll();scrollTo(scrollX,_y);
 }
 const noQ=()=>sec==="listening"&&lvl!=="easy";
-function autoGrow(t){t.style.height="auto";t.style.height=Math.min(t.scrollHeight+4,Math.round(innerHeight*0.75))+"px";}
-function growAll(){document.querySelectorAll("textarea.code").forEach(autoGrow);}
+function autoGrow(t){const y=scrollY,x=scrollX,ts=t.scrollTop;t.style.height="auto";t.style.height=Math.min(t.scrollHeight+4,Math.round(innerHeight*0.75))+"px";t.scrollTop=ts;scrollTo(x,y);}
+function growAll(){const y=scrollY,x=scrollX;document.querySelectorAll("textarea.code").forEach(autoGrow);scrollTo(x,y);}
 function readPart(i){
  const p=D.levels[lvl].sections[sec].parts[i];
  const r=X.parseUnits($("#pu-"+i).value,p.id,{optionalQ:noQ()});
