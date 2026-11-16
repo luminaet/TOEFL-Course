@@ -4,7 +4,7 @@
 (function(){
 "use strict";
 var X=window.LuminaExam,L=window.Lumina,esc=L.esc;
-var ex=null,examCfg=null;
+var ex=null,examCfg=null,view="";
 var $=function(id){return document.getElementById(id);};
 var isAdmin=function(){return !!me&&me.role==="admin";};
 
@@ -106,7 +106,7 @@ function tick(){
  if(rem<=0)submitExam(true);
 }
 R.exam=function(){
- if(!ex)return showPage("pretest");
+ if(view==="intro"||!ex)return;
  if(ex.done)return renderResult();
  renderShell();
 };
@@ -214,20 +214,20 @@ function handle(e){
  if(a==="intro"){
   if(ex&&ex.level!==id&&!ex.done&&!confirm("You have another test in progress in this session. Open this level anyway? (Your other test stays saved.)"))return;
   if(!(ex&&ex.level===id&&!ex.done))ex=ex&&ex.done?null:ex;
-  window._exLevel=id;$("exam-body").innerHTML=introHTML(id);showPage("exam");
+  window._exLevel=id;view="intro";$("exam-body").innerHTML=introHTML(id);showPage("exam");
  }
  else if(a==="home"){showPage("pretest");}
  else if(a==="begin"){
-  var lv=window._exLevel;buildEx(lv,null);if(!ex.preview)persist();startTimer();showPage("exam");renderShell();
+  var lv=window._exLevel;view="run";buildEx(lv,null);if(!ex.preview)persist();startTimer();showPage("exam");renderShell();
  }
  else if(a==="resume"){
-  var lv2=window._exLevel;
+  var lv2=window._exLevel;view="run";
   if(!(ex&&ex.level===lv2&&!ex.done)){var s=me&&X.loadRun(me.user,lv2);buildEx(lv2,s||null);}
   if(ex.endAt<=Date.now()){submitExam(true);showPage("exam");return;}
   startTimer();showPage("exam");renderShell();
  }
- else if(a==="restart"){if(!confirm("Discard your saved progress and start over?"))return;if(me)X.clearRun(me.user,window._exLevel);discardEx();$("exam-body").innerHTML=introHTML(window._exLevel);}
- else if(a==="retake"){discardEx();$("exam-body").innerHTML=introHTML(window._exLevel);}
+ else if(a==="restart"){if(!confirm("Discard your saved progress and start over?"))return;if(me)X.clearRun(me.user,window._exLevel);discardEx();view="intro";$("exam-body").innerHTML=introHTML(window._exLevel);}
+ else if(a==="retake"){discardEx();view="intro";$("exam-body").innerHTML=introHTML(window._exLevel);}
  else if(a==="play")playAudio();
  else if(a==="stop")stopAudio();
  else if(a==="prev")go(ex.idx-1);
