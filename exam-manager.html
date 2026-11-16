@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exam Manager | Lumina Project</title>
+<style>
+:root{--red:#981f34;--red-dark:#751629;--ink:#20283a;--muted:#697589;--bg:#f4f6fa;--line:#e6eaf1;--green:#16866b;--danger:#b3261e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"Segoe UI",Arial,sans-serif;padding-bottom:60px}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+.hero{background:linear-gradient(115deg,var(--red-dark),#b52b43 58%,#8c1b30);color:#fff;padding:14px max(4vw,18px)}
+.hero-inner{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.hero h1{font-size:24px;margin:2px 0}.hero p{margin:0;font-size:12px;color:#ffe9ed}
+.btn{border:0;border-radius:9px;padding:10px 15px;font-size:12.5px;font-weight:750;background:var(--red);color:#fff;text-decoration:none;display:inline-block}
+.btn.secondary{background:#eef1f6;color:#435067}.btn.ghost{background:#ffffff26}.btn.danger{background:#fdecea;color:var(--danger)}.btn.small{padding:7px 10px;font-size:12px}
+.row{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.wrap{max-width:1100px;margin:18px auto;padding:0 18px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 5px 22px #26334b08}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{border:0;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 14px;font-weight:700;font-size:13px;color:#536075}.tab.active{background:#fae9ed;color:var(--red);border-color:#f0c3cc}
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:20px;padding:7px 13px;font-size:12.5px;font-weight:650;color:#536075}.chip.active{background:var(--red);border-color:var(--red);color:#fff}
+.box{border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px}.box h3{margin:0 0 8px;font-size:15px}
+.sub{font-size:12.5px;color:var(--muted);line-height:1.55;margin:0 0 10px}
+.form{display:grid;gap:11px}.form label{display:grid;gap:5px;font-size:12px;font-weight:700;color:#536075}
+.form input,.form textarea,.form select{width:100%;border:1px solid var(--line);border-radius:9px;padding:9px 10px;font-size:13px;background:#fff;color:var(--ink)}
+textarea.code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.55;min-height:260px;resize:vertical;white-space:pre}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.hint{font-size:11.5px;color:var(--muted);font-weight:400;line-height:1.5}
+.tag{display:inline-block;font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:10px;background:#eef1f6;color:#536075}.tag.ok{background:#e6f5f0;color:var(--green)}.tag.bad{background:#fdecea;color:var(--danger)}
+.banner{padding:11px 14px;border-radius:11px;background:#fff4e6;border:1px solid #f3d9b4;color:#8a5413;font-size:12.5px;margin-bottom:14px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}
+.note{padding:12px 14px;background:#f5f7fb;border-radius:11px;font-size:12.5px;line-height:1.6;color:#596579;margin-bottom:14px}
+pre{background:#f7f8fb;border-radius:9px;padding:10px 12px;font-size:12px;line-height:1.55;overflow:auto;margin:6px 0}
+details summary{cursor:pointer;font-weight:700;font-size:13px}
+.login{min-height:100vh;display:grid;place-items:center;background:linear-gradient(115deg,var(--red-dark),#b52b43 58%,#8c1b30);padding:20px}
+.login-card{background:#fff;border-radius:18px;padding:26px;width:100%;max-width:380px}
+.err{display:none;color:var(--danger);background:#fff3f4;border:1px solid #e7a2a9;border-radius:9px;padding:9px 11px;font-size:12px}
+.modal{position:fixed;inset:0;background:#0008;display:grid;place-items:center;z-index:50;padding:20px}.modal-card{background:#fff;border-radius:14px;padding:22px;width:100%;max-width:420px}
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#20283a;color:#fff;padding:10px 18px;border-radius:10px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:60}#toast.show{opacity:1}
+@media(max-width:760px){.grid2,.grid3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="login" class="login hidden"><div class="login-card"><h2 style="margin:0 0 4px">🔒 Exam Manager</h2><p class="hint" style="margin:0 0 14px">Masuk dengan akun admin.</p>
+<form id="lf" class="form"><label>Username<input id="lu" required></label><label>Password<input id="lp" type="password" required></label><div id="le" class="err"></div><button class="btn" type="submit">Masuk</button><a href="index.html" class="hint" style="text-align:center">← Kembali ke web</a></form></div></div>
+
+<div id="app" class="hidden">
+<header class="hero"><div class="hero-inner"><div><div style="font-size:9px;letter-spacing:2px;color:#ffdce2;font-weight:700">LUMINA LEARNING PLATFORM</div><h1>Exam Manager</h1><p>Kelola soal TOEFL Pre-Test: Listening, Structure &amp; Written Expression, Reading.</p></div>
+<div class="row"><a class="btn ghost small" href="content-manager.html">Content Manager</a><a class="btn ghost small" href="index.html" target="_blank" rel="noopener">Lihat web ↗</a><button class="btn ghost small" id="logout">Keluar</button></div></div></header>
+<div class="wrap"><div id="banner"></div><div class="tabs" id="tabs"></div><div class="panel" id="view"></div></div>
+</div>
+<div id="modal" class="modal hidden"></div><div id="toast"></div>
+
+<script src="lumina-core.js"></script>
+<script src="lumina-exam.js"></script>
+<script>
+const L=window.Lumina,X=window.LuminaExam,esc=L.esc,$=s=>document.querySelector(s);
+let D=null,tab="soal",lvl="easy",sec="listening",audioCtl=null;
+const LV={easy:"Easy",medium:"Medium",hard:"Hard"};
+const TABS=[["soal","📝 Soal per level"],["settings","⚙️ Pengaturan & intro"],["voices","🔊 Suara listening"],["publish","💾 Publikasi & backup"]];
+const FORMAT={
+ listening:`### Judul unit (hanya untuk admin, tidak tampil ke mahasiswa)
+Audio: https://link-audio.mp3        ← OPSIONAL. Jika diisi, file audio dipakai.
+Woman: Have you finished the report?  ← Jika Audio kosong, baris Narrator/Woman/Man
+Man: Almost. I need to check the data.   dibacakan oleh suara sistem.
+Narrator: What does the man mean?
+Q: What does the man imply?
+A) It is finished.
+B) It needs a final check.
+C) It was lost.
+D) It is too long.
+Answer: B
+Topic: Short conversation
+Explain: (opsional, tidak ditampilkan ke mahasiswa)`,
+ swo:`Part A (Structure) — satu soal per blok, pisahkan dengan baris kosong:
+Q: The committee _____ the decision yesterday.
+A) make
+B) makes
+C) made
+D) making
+Answer: C
+Topic: Verb tense
+
+Part B (Written Expression) — tandai 4 bagian bergaris bawah dengan __kata__, pilihan A–D dibuat otomatis:
+Q: The __researcher__ collected the data __careful__, so the results __were__ __reliable__.
+Answer: B
+Topic: Adverbs`,
+ reading:`### Judul bacaan
+Passage: Paragraf pertama...
+
+Paragraf kedua (baris kosong = paragraf baru)...
+
+Q: What is the main idea of the passage?
+A) ...
+B) ...
+C) ...
+D) ...
+Answer: B
+Topic: Main idea
+
+Q: Soal kedua untuk bacaan yang sama...
+(dst. — biasanya 10 soal per bacaan, 5 bacaan)`
+};
+const toast=m=>{const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("show"),2000);};
+function commit(m){if(!X.saveDraft(D)){alert("Gagal menyimpan: penyimpanan browser penuh/diblokir.");return false;}toast(m||"Tersimpan ✓");banner();return true;}
+function banner(){$("#banner").innerHTML=D.updatedAt>X.getExportedAt()?`<div class="banner"><span>📤 Ada perubahan yang <b>belum dipublikasikan</b>. Unduh <b>lumina-exam.json</b> dan unggah ke folder yang sama dengan index.html.</span><button class="btn small" data-act="export">Unduh lumina-exam.json</button></div>`:"";}
+function stopTest(){if(audioCtl){audioCtl.stop();audioCtl=null;}if(window.speechSynthesis)speechSynthesis.cancel();}
+function modal(h,cb){const m=$("#modal");m.innerHTML=`<div class="modal-card">${h}</div>`;m.classList.remove("hidden");cb&&cb();}
+function closeModal(){$("#modal").classList.add("hidden");}
+function buildTabs(){$("#tabs").innerHTML=TABS.map(t=>`<button class="tab ${t[0]===tab?"active":""}" data-tab="${t[0]}">${t[1]}</button>`).join("");}
+function render(){stopTest();buildTabs();({soal:vSoal,settings:vSettings,voices:vVoices,publish:vPublish})[tab]();banner();}
+
+/* ---------- SOAL ---------- */
+function vSoal(){
+ const lv=D.levels[lvl],flat=X.flatten(lv),S=lv.sections[sec];
+ const lchips=X.LEVELS.map(l=>`<button class="chip ${l===lvl?"active":""}" data-act="lvl" data-id="${l}">${LV[l]} (${X.flatten(D.levels[l]).qs.length})</button>`).join("");
+ const schips=X.SECS.map(s=>`<button class="chip ${s===sec?"active":""}" data-act="sec" data-id="${s}">${X.META[s].ico} ${X.META[s].short} (${flat.count[s]}/${X.META[s].std})</button>`).join("");
+ const parts=S.parts.map((p,i)=>{
+  const n=p.units.reduce((a,u)=>a+u.questions.length,0),ok=!p.target||n>=p.target;
+  const audioN=p.units.filter(u=>u.audioUrl).length,ttsN=p.units.filter(u=>!u.audioUrl&&u.script).length;
+  return `<div class="box"><div class="row" style="justify-content:space-between;margin-bottom:8px"><h3 style="margin:0">${esc(p.title)} <span class="tag ${ok?"ok":"bad"}">${n}${p.target?" / "+p.target:""} soal</span> <span class="tag">${p.units.length} unit</span>${sec==="listening"?` <span class="tag">${audioN} file audio · ${ttsN} suara sistem</span>`:""}</h3>
+   <button class="btn danger small" data-act="partDel" data-id="${i}">Hapus part</button></div>
+  <div class="form"><div class="grid2"><label>Judul part<input id="pt-${i}" value="${esc(p.title)}"></label><label>Target jumlah soal (panduan)<input id="pg-${i}" type="number" min="0" max="200" value="${p.target}"></label></div>
+  <label>Petunjuk (directions) untuk part ini<textarea id="pd-${i}" rows="3">${esc(p.directions)}</textarea></label>
+  <label>Daftar soal (format teks — lihat contoh format di atas)<textarea class="code" id="pu-${i}" spellcheck="false">${esc(X.serializeUnits(p.units))}</textarea></label>
+  <div class="row"><button class="btn" data-act="partSave" data-id="${i}">Simpan part</button>${sec==="listening"?`<button class="btn secondary" data-act="testAudio" data-id="${i}">▶ Tes unit pertama</button><button class="btn secondary small" data-act="testStop">■ Stop</button>`:""}</div></div></div>`;
+ }).join("");
+ $("#view").innerHTML=`<div class="chips">${lchips}</div><div class="chips">${schips}</div>
+ <div class="box"><h3>${X.META[sec].name}</h3><div class="form"><label>Petunjuk sesi (tampil di halaman pengantar)<textarea id="sd" rows="3">${esc(S.directions)}</textarea></label>
+ <label>Waktu yang disarankan untuk sesi ini (menit — hanya informasi; timer sebenarnya satu untuk seluruh tes)<input id="sm" type="number" min="1" max="240" value="${S.minutes}" style="max-width:140px"></label>
+ <div><button class="btn" data-act="secSave">Simpan sesi</button></div></div></div>
+ <details class="box" open><summary>Format penulisan soal — ${X.META[sec].short}</summary><pre>${esc(FORMAT[sec])}</pre>
+ <p class="hint">Gunakan <code>### Judul</code> untuk memisahkan unit (satu percakapan/pidato/bacaan dengan beberapa soal). Tanpa <code>###</code>, setiap blok soal dianggap satu unit. Urutan penulisan = urutan tampil. Soal diberi nomor otomatis per sesi.${sec==="listening"?" Pembicara yang dikenali: <b>Narrator</b>, <b>Woman</b>, <b>Man</b>.":""}</p></details>
+ ${parts}<div class="row"><button class="btn secondary" data-act="partAdd">＋ Tambah part</button></div>`;
+}
+function readPart(i){
+ const p=D.levels[lvl].sections[sec].parts[i];
+ const r=X.parseUnits($("#pu-"+i).value,p.id);
+ return {p,r};
+}
+const A={
+ lvl(id){lvl=id;vSoal();},sec(id){sec=id;vSoal();},
+ secSave(){const S=D.levels[lvl].sections[sec];S.directions=$("#sd").value.trim();S.minutes=Math.min(240,Math.max(1,Math.round(Number($("#sm").value))||X.META[sec].minutes));commit("Sesi tersimpan");},
+ partSave(i){
+  const {p,r}=readPart(i);
+  if(r.errors.length){alert("Soal belum disimpan. Perbaiki dulu:\n\n"+r.errors.join("\n"));return;}
+  p.title=$("#pt-"+i).value.trim()||p.title;p.target=Math.max(0,Math.round(Number($("#pg-"+i).value))||0);p.directions=$("#pd-"+i).value.trim();p.units=r.units;
+  if(commit("Part tersimpan: "+r.units.length+" unit"))vSoal();
+ },
+ partDel(i){const S=D.levels[lvl].sections[sec],p=S.parts[i];if(!confirm("Hapus part \""+p.title+"\" beserta semua soalnya?"))return;S.parts.splice(i,1);if(!S.parts.length)S.parts=X.emptyParts(sec).slice(0,1);commit("Part dihapus");vSoal();},
+ partAdd(){
+  modal(`<h3>Tambah part</h3><form class="form" id="pa"><label>Judul part<input id="pa-t" required placeholder="mis. Part D — Extra"></label>${sec==="swo"?`<label>Jenis<select id="pa-ty"><option value="structure">Structure (melengkapi kalimat)</option><option value="error">Written Expression (bagian bergaris bawah)</option></select></label>`:""}<div class="row"><button class="btn" type="submit">Tambah</button><button class="btn secondary" type="button" id="pa-c">Batal</button></div></form>`,()=>{
+   $("#pa-c").onclick=closeModal;
+   $("#pa").onsubmit=e=>{e.preventDefault();const ty=sec==="swo"?$("#pa-ty").value:(sec==="reading"?"passage":"short");
+    D.levels[lvl].sections[sec].parts.push({id:X.uid("p").replace(/[^\w-]/g,""),type:ty,title:$("#pa-t").value.trim(),directions:"",target:0,units:[]});closeModal();commit("Part ditambahkan");vSoal();};
+  });
+ },
+ testAudio(i){
+  stopTest();
+  const {r}=readPart(i),u=r.units.find(x=>x.audioUrl||x.script);
+  if(!u){alert(r.errors.length?r.errors.join("\n"):"Belum ada unit dengan audio atau script.");return;}
+  if(u.audioUrl){const a=new Audio(L.normalizeAudioUrl(u.audioUrl));audioCtl={stop(){a.pause();}};a.onerror=()=>alert("Audio tidak dapat dimuat. Periksa link (Google Drive: bagikan ke 'Siapa saja yang memiliki link').");a.play().catch(()=>a.onerror());}
+  else audioCtl=X.speakScript(u.script,D.settings.voices);
+ },
+ testStop(){stopTest();},
+ export(){X.download(D);banner();toast("File diunduh");},
+ async pull(){const p=await X.fetchPublished();if(!p){alert("lumina-exam.json tidak ditemukan di server.");return;}if(!confirm("Ganti draf di browser ini dengan versi dari server?"))return;D=p;commit("Diambil dari server");render();},
+ reset(){if(!confirm("Kembalikan semua soal Pre-Test ke contoh awal? Tidak bisa dibatalkan."))return;const keep=D.settings;D=X.defaults();D.settings=keep;commit("Dikembalikan");render();},
+ voiceTest(role){
+  stopTest();const c=readVoice(role);
+  const txt={narrator:"Narrator: Listen to the following conversation, then answer the question.",woman:"Woman: Have you finished the report for Professor Allen?",man:"Man: Almost. I still need to check the figures in the last section."}[role];
+  audioCtl=X.speakScript(txt,{[role]:c});
+ },
+ voiceDialog(){stopTest();audioCtl=X.speakScript("Narrator: Listen to a conversation between two students.\nWoman: Have you finished the report for Professor Allen?\nMan: Almost. I still need to check the figures in the last section.\nNarrator: What does the man mean?",D.settings.voices);},
+ voiceSave(){X.ROLES.forEach(r=>D.settings.voices[r]=readVoice(r));commit("Pengaturan suara tersimpan");},
+ setSave(){
+  D.settings.totalMinutes=Math.min(360,Math.max(10,Math.round(Number($("#s-tot").value))||120));
+  D.settings.audioPlays=Math.min(10,Math.max(0,Math.round(Number($("#s-ap").value))));if(isNaN(D.settings.audioPlays))D.settings.audioPlays=1;
+  D.settings.generalNotes=$("#s-notes").value.trim();commit("Pengaturan tersimpan");
+ }
+};
+function readVoice(r){return {voice:$("#v-"+r).value,rate:Number($("#r-"+r).value),pitch:Number($("#p-"+r).value)};}
+
+/* ---------- PENGATURAN ---------- */
+function vSettings(){
+ const s=D.settings;
+ $("#view").innerHTML=`<div class="box"><h3>Pengaturan ujian</h3><div class="form">
+ <label>Durasi total (menit)<input id="s-tot" type="number" min="10" max="360" value="${s.totalMinutes}" style="max-width:140px"><span class="hint">Satu hitung mundur untuk ketiga sesi. Standar TOEFL ITP ±115 menit; default 120.</span></label>
+ <label>Batas putar audio per unit (0 = tanpa batas)<input id="s-ap" type="number" min="0" max="10" value="${s.audioPlays}" style="max-width:140px"><span class="hint">Pada TOEFL asli audio hanya diputar 1 kali. Admin yang melihat pratinjau selalu tanpa batas.</span></label>
+ <label>Catatan tambahan di halaman pengantar (opsional)<textarea id="s-notes" rows="3" placeholder="mis. Siapkan headphone. Kerjakan di ruangan tenang.">${esc(s.generalNotes)}</textarea></label>
+ <div><button class="btn" data-act="setSave">Simpan</button></div></div></div>
+ <div class="note"><b>Struktur standar TOEFL ITP:</b> Listening 50 soal (Part A 30 percakapan pendek, Part B 8 percakapan panjang, Part C 12 pidato/ceramah) · Structure &amp; Written Expression 40 soal (15 + 25) · Reading 50 soal (5 bacaan × 10). Sistem penilaian di halaman mahasiswa: skor skala 31–68 per sesi (perkiraan linear), total = rata-rata × 10 (310–680). Petunjuk tiap sesi/part diedit di tab <b>Soal per level</b>.</div>`;
+}
+
+/* ---------- SUARA ---------- */
+function vVoices(){
+ const vs=X.listVoices(),en=vs.filter(v=>/^en/i.test(v.lang)),rest=vs.filter(v=>!/^en/i.test(v.lang));
+ const opts=sel=>`<option value="">Otomatis (suara Inggris terbaik, sesuai peran)</option>`+[["Bahasa Inggris",en],["Lainnya",rest]].map(([g,l])=>l.length?`<optgroup label="${g}">${l.map(v=>`<option value="${esc(v.name)}" ${v.name===sel?"selected":""}>${esc(v.name)} (${esc(v.lang)})</option>`).join("")}</optgroup>`:"").join("");
+ const NAMES={narrator:"🎙️ Narrator",woman:"👩 Woman (wanita)",man:"👨 Man (pria)"};
+ $("#view").innerHTML=`<div class="note">Dipakai untuk unit Listening yang <b>tidak punya link audio</b> — script bertanda <code>Narrator:</code>, <code>Woman:</code>, <code>Man:</code> dibacakan oleh suara browser. Daftar suara di bawah adalah suara yang ada di <b>perangkat ini</b>; perangkat mahasiswa bisa berbeda. Jika suara yang Anda pilih tidak ada di perangkat mahasiswa, sistem otomatis memakai suara Inggris terdekat (wanita/pria). Untuk hasil yang sama persis di semua perangkat, gunakan file audio. ${vs.length?"":"<b>Daftar suara belum termuat — coba muat ulang halaman, atau browser ini tidak mendukung suara.</b>"}</div>
+ <div class="grid3">${X.ROLES.map(r=>{const c=D.settings.voices[r];return `<div class="box"><h3>${NAMES[r]}</h3><div class="form">
+  <label>Suara<select id="v-${r}">${opts(c.voice)}</select></label>
+  <label>Kecepatan <span class="hint" id="rv-${r}">${c.rate}</span><input id="r-${r}" type="range" min="0.6" max="1.3" step="0.05" value="${c.rate}" oninput="document.getElementById('rv-${r}').textContent=this.value"></label>
+  <label>Nada (pitch) <span class="hint" id="pv-${r}">${c.pitch}</span><input id="p-${r}" type="range" min="0.5" max="1.6" step="0.05" value="${c.pitch}" oninput="document.getElementById('pv-${r}').textContent=this.value"></label>
+  <button class="btn secondary small" data-act="voiceTest" data-id="${r}">▶ Tes suara</button></div></div>`;}).join("")}</div>
+ <div class="row"><button class="btn" data-act="voiceSave">Simpan pengaturan suara</button><button class="btn secondary" data-act="voiceDialog">▶ Tes percakapan lengkap</button><button class="btn secondary small" data-act="testStop">■ Stop</button></div>
+ <p class="hint">Tips: pilih suara wanita untuk Woman dan suara pria untuk Man; jika hanya tersedia satu suara, bedakan lewat nada (pitch).</p>`;
+}
+
+/* ---------- PUBLIKASI ---------- */
+function vPublish(){
+ $("#view").innerHTML=`<div class="box"><h3>1. Publikasikan ke mahasiswa</h3><p class="sub">Unduh <code>lumina-exam.json</code> lalu unggah ke folder yang sama dengan <code>index.html</code> (timpa file lama). Mahasiswa membaca file ini; draf di browser ini hanya terlihat oleh admin.</p><button class="btn" data-act="export">⬇ Unduh lumina-exam.json</button></div>
+ <div class="box"><h3>2. Pulihkan dari file</h3><label class="btn secondary" style="cursor:pointer">Pilih file (.json)<input id="imp" type="file" accept=".json,application/json" hidden></label></div>
+ <div class="box"><h3>3. Ambil versi yang sudah dipublikasikan</h3><button class="btn secondary" data-act="pull">Ambil dari server</button></div>
+ <div class="box"><h3>4. Kembalikan contoh awal</h3><button class="btn danger" data-act="reset">Kembalikan ke contoh awal</button></div>`;
+ $("#imp").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const j=JSON.parse(await f.text());if(!j||!j.levels)throw 0;if(!confirm("Ganti draf di browser ini dengan isi file?"))return;D=X.normalize(j);commit("Dipulihkan");render();}catch(x){alert("File tidak valid.");}e.target.value="";};
+}
+
+document.addEventListener("click",e=>{
+ const t=e.target.closest("[data-tab]");if(t){tab=t.dataset.tab;render();return;}
+ const b=e.target.closest("[data-act]");if(!b)return;const f=A[b.dataset.act];if(f)f(b.dataset.id);
+});
+if(window.speechSynthesis)speechSynthesis.addEventListener("voiceschanged",()=>{if(D&&tab==="voices"&&!document.activeElement.closest("#view select"))vVoices();});
+
+/* ---------- login ---------- */
+let core=null,fails=0,lock=0;
+const err=m=>{const el=$("#le");el.textContent=m;el.style.display=m?"block":"none";};
+function enter(){
+ $("#login").classList.add("hidden");$("#app").classList.remove("hidden");
+ X.loadViewer(true).then(d=>{D=d;render();});
+}
+$("#lf").addEventListener("submit",e=>{
+ e.preventDefault();
+ if(Date.now()<lock){err("Terlalu banyak percobaan. Tunggu sebentar.");return;}
+ const a=L.checkLogin(core,$("#lu").value,$("#lp").value);
+ if(!a){if(++fails>=5){fails=0;lock=Date.now()+30000;}err("Username atau password salah.");return;}
+ if(a.role!=="admin"){err("Akun ini bukan admin.");return;}
+ fails=0;L.setSession(a);e.target.reset();enter();
+});
+$("#logout").addEventListener("click",()=>{L.setSession(null);$("#app").classList.add("hidden");$("#login").classList.remove("hidden");});
+L.load().then(d=>{core=d;const me=L.currentAccount(core);if(me&&me.role==="admin")enter();else $("#login").classList.remove("hidden");});
+</script>
+</body>
+</html>
