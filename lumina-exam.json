@@ -1,0 +1,968 @@
+{
+  "version": 1,
+  "updatedAt": 1794808952006,
+  "settings": {
+    "totalMinutes": 120,
+    "audioPlays": 1,
+    "generalNotes": "",
+    "voices": {
+      "narrator": {
+        "voice": "",
+        "rate": 0.95,
+        "pitch": 1
+      },
+      "woman": {
+        "voice": "",
+        "rate": 0.95,
+        "pitch": 1.15
+      },
+      "man": {
+        "voice": "",
+        "rate": 0.95,
+        "pitch": 0.8
+      }
+    }
+  },
+  "levels": {
+    "easy": {
+      "sections": {
+        "listening": {
+          "directions": "In this section you will demonstrate your ability to understand conversations and talks in English. Each audio can be played only the number of times shown on the screen. Read each question carefully, then choose the best answer.",
+          "minutes": 40,
+          "parts": [
+            {
+              "id": "la",
+              "type": "short",
+              "title": "Part A — Short Conversations",
+              "directions": "In Part A you will hear short conversations between two people. After each conversation you will hear a question about what was said. Choose the best answer, (A), (B), (C), or (D).",
+              "target": 30,
+              "units": [
+                {
+                  "id": "la-u1",
+                  "title": "Report",
+                  "audioUrl": "",
+                  "script": "Woman: Have you finished the report for Professor Allen?\nMan: Almost. I still need to check the figures in the last section.\nNarrator: What does the man mean?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "What does the man mean?",
+                      "o": [
+                        "It has already been submitted.",
+                        "It needs a final check.",
+                        "It was lost.",
+                        "It is too long."
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u1-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "la-u2",
+                  "title": "Library",
+                  "audioUrl": "",
+                  "script": "Man: Do you know where I can find the journals for my research?\nWoman: They moved them to the second floor of the library last week.\nNarrator: What does the woman say about the journals?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "What does the woman say about the journals?",
+                      "o": [
+                        "On the first floor",
+                        "At the front desk",
+                        "On the second floor",
+                        "In the professor's office"
+                      ],
+                      "a": 2,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u2-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "la-u3",
+                  "title": "Unit 3",
+                  "audioUrl": "",
+                  "script": "Woman: Are you going to the library this afternoon?'\nMan: I can't. I have to finish my homework first.\nNarrator: What does the man mean?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "What does the man mean?",
+                      "o": [
+                        "He will go to the library tomorrow.",
+                        "He needs to complete his assignment.",
+                        "He has already finished his homework.",
+                        "He doesn't like studying at the library."
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u3-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "la-u4",
+                  "title": "Suggestion",
+                  "audioUrl": "",
+                  "script": "Man: It's very hot in this room.\nWoman: Why don't you turn on the air conditioner?\nNarrator: What does the woman suggest?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "What does the woman suggest?",
+                      "o": [
+                        "Opening the window.",
+                        "Leaving the room.",
+                        "Turning on the air conditioner.",
+                        "Drinking some cold water."
+                      ],
+                      "a": 2,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u4-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "la-u5",
+                  "title": "Agreement",
+                  "audioUrl": "",
+                  "script": "Woman: I think this movie is really interesting.\nMan: I agree. I enjoyed every minute of it.\nNarrator: What does the man mean?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "What does the man mean?",
+                      "o": [
+                        "He didn't like the movie.",
+                        "He thinks the movie is interesting too.",
+                        "He hasn't watched the movie.",
+                        "He wants to watch another movie."
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u5-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "la-u6",
+                  "title": "Inference",
+                  "audioUrl": "",
+                  "script": "Man: Did you bring your umbrella?\nWoman: No, I didn't. But look at those dark clouds!\nNarrator: What will probably happen?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "What will probably happen?",
+                      "o": [
+                        "It will rain soon.",
+                        "The weather will become hotter.",
+                        "The woman will go swimming.",
+                        "The sky will become clear."
+                      ],
+                      "a": 0,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u6-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "la-u7",
+                  "title": "Time",
+                  "audioUrl": "",
+                  "script": "Woman: What time does the class begin?\nMan: It starts at nine, but we need to be there fifteen minutes earlier.\nNarrator: When should they arrive?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "When should they arrive?",
+                      "o": [
+                        "At 8:15.",
+                        "At 8:30.",
+                        "At 8:45.",
+                        "At 9:15."
+                      ],
+                      "a": 2,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u7-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "la-u8",
+                  "title": "Location",
+                  "audioUrl": "",
+                  "script": "Man: Excuse me, where can I find the English books?\nWoman: They're on the second floor, next to the computer room.\nNarrator: Where are the English books?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "Where are the English books?",
+                      "o": [
+                        "On the first floor.",
+                        "In the computer room.",
+                        "On the second floor.",
+                        "Next to the cafeteria."
+                      ],
+                      "a": 2,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u8-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "la-u9",
+                  "title": "Negative Expression",
+                  "audioUrl": "",
+                  "script": "Woman: Did you enjoy the concert last night?\nMan: I didn't enjoy it at all. The music was too loud.\nNarrator: What does the man say about the concert?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "What does the man say about the concert?",
+                      "o": [
+                        "He thought it was too noisy.",
+                        "He liked it very much.",
+                        "He missed the concert.",
+                        "He arrived late."
+                      ],
+                      "a": 0,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u9-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "la-u10",
+                  "title": "Reason / Cause",
+                  "audioUrl": "",
+                  "script": "Man: Why didn't you come to the meeting yesterday?\nWoman: I had a terrible headache, so I stayed home.\nNarrator: Why didn't the woman attend the meeting?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "Why didn't the woman attend the meeting?",
+                      "o": [
+                        "She forgot about it.",
+                        "She had to work.",
+                        "She was sick.",
+                        "She was out of town."
+                      ],
+                      "a": 2,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u10-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "la-u11",
+                  "title": "Future Plan",
+                  "audioUrl": "",
+                  "script": "Woman: What are you going to do this weekend?\nMan: I'm planning to visit my grandparents in the village.\nNarrator: What will the man probably do this weekend?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "What will the man probably do this weekend?",
+                      "o": [
+                        "Study at the library.",
+                        "Visit his grandparents.",
+                        "Go shopping with friends.",
+                        "Stay at home."
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u11-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "la-u12",
+                  "title": "Comparison",
+                  "audioUrl": "",
+                  "script": "Man: Is your new apartment bigger than your old one?\nWoman: Yes, it's much larger, and it has two bedrooms.\nNarrator: What can we learn about the woman's new apartment?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "What can we learn about the woman's new apartment?",
+                      "o": [
+                        "It is smaller than her old apartment.",
+                        "It has only one bedroom.",
+                        "It is bigger than her old apartment.",
+                        "It is more expensive than her old apartment."
+                      ],
+                      "a": 2,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u12-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "la-u13",
+                  "title": "Price / Cost",
+                  "audioUrl": "",
+                  "script": "Woman: How much did you pay for that notebook?\nMan: It was five dollars, but I got a one-dollar discount.\nNarrator: How much did the man pay?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "How much did the man pay?",
+                      "o": [
+                        "One dollar.",
+                        "Four dollars.",
+                        "Five dollars.",
+                        "Six dollars."
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u13-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "la-u14",
+                  "title": "Indirect Response",
+                  "audioUrl": "",
+                  "script": "Man: Would you mind closing the door?\nWoman: Not at all.\nNarrator: What will the woman probably do?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "What will the woman probably do?",
+                      "o": [
+                        "Close the door.",
+                        "Open the door.",
+                        "Leave the room.",
+                        "Lock the window."
+                      ],
+                      "a": 0,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u14-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "la-u15",
+                  "title": "Occupation",
+                  "audioUrl": "",
+                  "script": "Woman: I heard your sister works at the hospital. What does she do there?\nMan: She takes care of patients and helps doctors.\nNarrator: What is the man's sister's occupation?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "What is the man's sister's occupation?",
+                      "o": [
+                        "A teacher.",
+                        "A nurse.",
+                        "A secretary.",
+                        "A police officer."
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u15-q1"
+                    },
+                    {
+                      "q": "What does the woman recommend?",
+                      "o": [
+                        "Buying a new laptop.",
+                        "Replacing the keyboard.",
+                        "Charging the laptop.",
+                        "Taking the laptop to school."
+                      ],
+                      "a": 2,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u15-q2"
+                    },
+                    {
+                      "q": "What will the man probably do next?",
+                      "o": [
+                        "Read the remaining chapters.",
+                        "Take the English test immediately.",
+                        "Go to the cinema.",
+                        "Stop studying."
+                      ],
+                      "a": 0,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u15-q3"
+                    }
+                  ]
+                },
+                {
+                  "id": "la-u16",
+                  "title": "Topic / Main Idea",
+                  "audioUrl": "",
+                  "script": "Man: What are you reading?\nWoman: It's a book about the history of Indonesia.\nNarrator: What is the woman reading about?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "What is the woman reading about?",
+                      "o": [
+                        "Indonesian food.",
+                        "Indonesian culture.",
+                        "Indonesian history.",
+                        "Indonesian language."
+                      ],
+                      "a": 2,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u16-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "la-u17",
+                  "title": "Implied Meaning",
+                  "audioUrl": "",
+                  "script": "Woman: Can you help me carry these boxes?\nMan: Sure, but let me finish my lunch first.\nNarrator: What does the man imply?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "What does the man imply?",
+                      "o": [
+                        "He refuses to help the woman.",
+                        "He will help her after lunch.",
+                        "He has already carried the boxes.",
+                        "He wants the woman to carry the boxes alone."
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u17-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "la-u18",
+                  "title": "Frequency",
+                  "audioUrl": "",
+                  "script": "Man: How often do you go jogging?\nWoman: I usually do it three times a week.\nNarrator: How frequently does the woman go jogging?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "How frequently does the woman go jogging?",
+                      "o": [
+                        "Every day.",
+                        "Once a week.",
+                        "Twice a week.",
+                        "Three times a week."
+                      ],
+                      "a": 2,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u18-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "la-u19",
+                  "title": "Sequence of Events",
+                  "audioUrl": "",
+                  "script": "Woman: Did you have breakfast before coming to campus?\nMan: No, I went straight to the bus stop because I woke up late.\nNarrator: What did the man do first this morning?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "What did the man do first this morning?",
+                      "o": [
+                        "He ate breakfast.",
+                        "He went to the bus stop.",
+                        "He woke up late.",
+                        "He went to campus by car."
+                      ],
+                      "a": 2,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u19-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "la-u20",
+                  "title": "Advice",
+                  "audioUrl": "",
+                  "script": "Man: I have an important presentation tomorrow, but I'm very nervous.\nWoman: You should practice in front of a mirror tonight.\nNarrator: What does the woman advise the man to do?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "What does the woman advise the man to do?",
+                      "o": [
+                        "Cancel his presentation.",
+                        "Practice his presentation.",
+                        "Go to bed early without studying.",
+                        "Ask someone to replace him."
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u20-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "la-u21",
+                  "title": "Negative Agreement",
+                  "audioUrl": "",
+                  "script": "Woman: I don't like waking up early.\nMan: Neither do I. I prefer sleeping late.\nNarrator: What does the man mean?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "What does the man mean?",
+                      "o": [
+                        "He enjoys waking up early.",
+                        "He also dislikes waking up early.",
+                        "He always wakes up at five.",
+                        "He never sleeps late."
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u21-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "la-u22",
+                  "title": "Distance",
+                  "audioUrl": "",
+                  "script": "Man: Is the post office far from here?\nWoman: Not really. It's only a five-minute walk.\nNarrator: What does the woman say about the post office?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "What does the woman say about the post office?",
+                      "o": [
+                        "It is very far away.",
+                        "It takes five minutes to walk there.",
+                        "It is closed today.",
+                        "It is next to the hospital."
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u22-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "la-u23",
+                  "title": "Purpose",
+                  "audioUrl": "",
+                  "script": "Woman: Why are you going to the bookstore?\nMan: I need to buy a dictionary for my English class.\nNarrator: Why is the man going to the bookstore?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "Why is the man going to the bookstore?",
+                      "o": [
+                        "To buy a dictionary.",
+                        "To meet his teacher.",
+                        "To return a library book.",
+                        "To buy some food."
+                      ],
+                      "a": 0,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u23-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "la-u24",
+                  "title": "Conclusion / Inference",
+                  "audioUrl": "",
+                  "script": "Man: Have you seen Anna today?\nWoman: Yes, she was carrying a large suitcase and waiting for a taxi\nNarrator: What can be concluded about Anna?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "q": "What can be concluded about Anna?",
+                      "o": [
+                        "She is going shopping.",
+                        "She is probably going on a trip.",
+                        "She is going to the library.",
+                        "She is waiting for her friend."
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "Short conversation",
+                      "id": "la-u24-q1"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "lb",
+              "type": "conversation",
+              "title": "Part B — Longer Conversations",
+              "directions": "In Part B you will hear longer conversations. After each conversation you will answer several questions about it.",
+              "target": 8,
+              "units": [
+                {
+                  "id": "lb-u1",
+                  "title": "Study group",
+                  "audioUrl": "",
+                  "script": "Woman: Are you coming to the study group tonight?\nMan: I wish I could, but I have a part-time shift until nine.\nWoman: We're meeting at eight in the library. We could also meet again on Saturday.\nMan: Saturday would be perfect. I'm free all day.\nNarrator: Question 1. Why can't the man attend tonight?",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "id": "lb-u1-q1",
+                      "q": "Why can't the man attend the study group tonight?",
+                      "o": [
+                        "He is sick.",
+                        "He has to work.",
+                        "He forgot about it.",
+                        "He needs to travel."
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "Conversation detail"
+                    },
+                    {
+                      "id": "lb-u1-q2",
+                      "q": "What do the speakers decide to do?",
+                      "o": [
+                        "Cancel the group",
+                        "Meet at nine tonight",
+                        "Meet again on Saturday",
+                        "Study separately"
+                      ],
+                      "a": 2,
+                      "e": "",
+                      "topic": "Conversation main idea"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "lc",
+              "type": "talk",
+              "title": "Part C — Talks",
+              "directions": "In Part C you will hear talks, such as a lecture or an announcement. After each talk you will answer several questions about it.",
+              "target": 12,
+              "units": []
+            }
+          ]
+        },
+        "swo": {
+          "directions": "This section measures your ability to recognize language that is appropriate for standard written English. In Part A (Structure), choose the word or phrase that best completes the sentence. In Part B (Written Expression), choose the one underlined word or phrase that must be changed for the sentence to be correct.",
+          "minutes": 25,
+          "parts": [
+            {
+              "id": "sa",
+              "type": "structure",
+              "title": "Part A — Structure",
+              "directions": "Questions 1–15 are incomplete sentences. Choose the one word or phrase that best completes the sentence.",
+              "target": 15,
+              "units": [
+                {
+                  "id": "sa-u1",
+                  "title": "s1",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "id": "sa-u1-q1",
+                      "q": "The committee _____ the final decision yesterday.",
+                      "o": [
+                        "make",
+                        "makes",
+                        "made",
+                        "making"
+                      ],
+                      "a": 2,
+                      "e": "",
+                      "topic": "Verb tense"
+                    }
+                  ]
+                },
+                {
+                  "id": "sa-u2",
+                  "title": "s2",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "id": "sa-u2-q1",
+                      "q": "Neither the students nor the teacher _____ aware of the schedule change.",
+                      "o": [
+                        "were",
+                        "are",
+                        "have",
+                        "was"
+                      ],
+                      "a": 3,
+                      "e": "",
+                      "topic": "Subject-Verb Agreement"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "sb",
+              "type": "error",
+              "title": "Part B — Written Expression",
+              "directions": "Each sentence has four underlined parts, marked (A) to (D). Choose the one underlined part that must be changed for the sentence to be correct.",
+              "target": 25,
+              "units": [
+                {
+                  "id": "sb-u1",
+                  "title": "e1",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "id": "sb-u1-q1",
+                      "q": "The __researcher__ collected the data __careful__, so the results __were__ __reliable__.",
+                      "o": [
+                        "researcher",
+                        "careful",
+                        "were",
+                        "reliable"
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "Adverbs"
+                    }
+                  ]
+                },
+                {
+                  "id": "sb-u2",
+                  "title": "e2",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "questions": [
+                    {
+                      "id": "sb-u2-q1",
+                      "q": "Each of the __students__ __have__ to submit __an__ essay __by__ Friday.",
+                      "o": [
+                        "students",
+                        "have",
+                        "an",
+                        "by"
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "Subject-Verb Agreement"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "reading": {
+          "directions": "In this section you will read several passages. Each passage is followed by questions about it. Answer each question on the basis of what is stated or implied in the passage.",
+          "minutes": 55,
+          "parts": [
+            {
+              "id": "ra",
+              "type": "passage",
+              "title": "Reading Passages",
+              "directions": "Read each passage and answer the questions that follow. Five passages with ten questions each is typical.",
+              "target": 50,
+              "units": [
+                {
+                  "id": "ra-u1",
+                  "title": "Urban trees",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "Urban trees provide benefits that extend beyond their appearance. Their leaves provide shade, reducing the heat absorbed by streets and buildings. Trees also help manage rainwater: some water is intercepted by leaves, while roots improve the soil's ability to absorb rainfall.\n\nHowever, planting trees in cities requires careful planning. A tree that grows well in a park may not be suitable for a narrow sidewalk where roots could damage pavement or underground pipes. Successful urban forestry therefore depends not simply on planting more trees, but on choosing appropriate species and caring for them over time.",
+                  "questions": [
+                    {
+                      "id": "ra-u1-q1",
+                      "q": "What is the main idea of the passage?",
+                      "o": [
+                        "Why cities should remove old trees",
+                        "The benefits of urban trees and the need for careful planning",
+                        "How birds migrate through cities",
+                        "Why all trees grow well on sidewalks"
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "Main idea"
+                    },
+                    {
+                      "id": "ra-u1-q2",
+                      "q": "The word \"intercepted\" in the passage is closest in meaning to",
+                      "o": [
+                        "caught",
+                        "heated",
+                        "destroyed",
+                        "measured"
+                      ],
+                      "a": 0,
+                      "e": "",
+                      "topic": "Vocabulary"
+                    },
+                    {
+                      "id": "ra-u1-q3",
+                      "q": "Why might a tree be unsuitable for a narrow sidewalk?",
+                      "o": [
+                        "It attracts too many birds.",
+                        "Its roots may damage pavement or pipes.",
+                        "It cannot receive sunlight.",
+                        "It stops all traffic."
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "Detail"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "medium": {
+      "sections": {
+        "listening": {
+          "directions": "In this section you will demonstrate your ability to understand conversations and talks in English. Each audio can be played only the number of times shown on the screen. Read each question carefully, then choose the best answer.",
+          "minutes": 40,
+          "parts": [
+            {
+              "id": "la",
+              "type": "short",
+              "title": "Part A — Short Conversations",
+              "directions": "In Part A you will hear short conversations between two people. After each conversation you will hear a question about what was said. Choose the best answer, (A), (B), (C), or (D).",
+              "target": 30,
+              "units": []
+            },
+            {
+              "id": "lb",
+              "type": "conversation",
+              "title": "Part B — Longer Conversations",
+              "directions": "In Part B you will hear longer conversations. After each conversation you will answer several questions about it.",
+              "target": 8,
+              "units": []
+            },
+            {
+              "id": "lc",
+              "type": "talk",
+              "title": "Part C — Talks",
+              "directions": "In Part C you will hear talks, such as a lecture or an announcement. After each talk you will answer several questions about it.",
+              "target": 12,
+              "units": []
+            }
+          ]
+        },
+        "swo": {
+          "directions": "This section measures your ability to recognize language that is appropriate for standard written English. In Part A (Structure), choose the word or phrase that best completes the sentence. In Part B (Written Expression), choose the one underlined word or phrase that must be changed for the sentence to be correct.",
+          "minutes": 25,
+          "parts": [
+            {
+              "id": "sa",
+              "type": "structure",
+              "title": "Part A — Structure",
+              "directions": "Questions 1–15 are incomplete sentences. Choose the one word or phrase that best completes the sentence.",
+              "target": 15,
+              "units": []
+            },
+            {
+              "id": "sb",
+              "type": "error",
+              "title": "Part B — Written Expression",
+              "directions": "Each sentence has four underlined parts, marked (A) to (D). Choose the one underlined part that must be changed for the sentence to be correct.",
+              "target": 25,
+              "units": []
+            }
+          ]
+        },
+        "reading": {
+          "directions": "In this section you will read several passages. Each passage is followed by questions about it. Answer each question on the basis of what is stated or implied in the passage.",
+          "minutes": 55,
+          "parts": [
+            {
+              "id": "ra",
+              "type": "passage",
+              "title": "Reading Passages",
+              "directions": "Read each passage and answer the questions that follow. Five passages with ten questions each is typical.",
+              "target": 50,
+              "units": []
+            }
+          ]
+        }
+      }
+    },
+    "hard": {
+      "sections": {
+        "listening": {
+          "directions": "In this section you will demonstrate your ability to understand conversations and talks in English. Each audio can be played only the number of times shown on the screen. Read each question carefully, then choose the best answer.",
+          "minutes": 40,
+          "parts": [
+            {
+              "id": "la",
+              "type": "short",
+              "title": "Part A — Short Conversations",
+              "directions": "In Part A you will hear short conversations between two people. After each conversation you will hear a question about what was said. Choose the best answer, (A), (B), (C), or (D).",
+              "target": 30,
+              "units": []
+            },
+            {
+              "id": "lb",
+              "type": "conversation",
+              "title": "Part B — Longer Conversations",
+              "directions": "In Part B you will hear longer conversations. After each conversation you will answer several questions about it.",
+              "target": 8,
+              "units": []
+            },
+            {
+              "id": "lc",
+              "type": "talk",
+              "title": "Part C — Talks",
+              "directions": "In Part C you will hear talks, such as a lecture or an announcement. After each talk you will answer several questions about it.",
+              "target": 12,
+              "units": []
+            }
+          ]
+        },
+        "swo": {
+          "directions": "This section measures your ability to recognize language that is appropriate for standard written English. In Part A (Structure), choose the word or phrase that best completes the sentence. In Part B (Written Expression), choose the one underlined word or phrase that must be changed for the sentence to be correct.",
+          "minutes": 25,
+          "parts": [
+            {
+              "id": "sa",
+              "type": "structure",
+              "title": "Part A — Structure",
+              "directions": "Questions 1–15 are incomplete sentences. Choose the one word or phrase that best completes the sentence.",
+              "target": 15,
+              "units": []
+            },
+            {
+              "id": "sb",
+              "type": "error",
+              "title": "Part B — Written Expression",
+              "directions": "Each sentence has four underlined parts, marked (A) to (D). Choose the one underlined part that must be changed for the sentence to be correct.",
+              "target": 25,
+              "units": []
+            }
+          ]
+        },
+        "reading": {
+          "directions": "In this section you will read several passages. Each passage is followed by questions about it. Answer each question on the basis of what is stated or implied in the passage.",
+          "minutes": 55,
+          "parts": [
+            {
+              "id": "ra",
+              "type": "passage",
+              "title": "Reading Passages",
+              "directions": "Read each passage and answer the questions that follow. Five passages with ten questions each is typical.",
+              "target": 50,
+              "units": []
+            }
+          ]
+        }
+      }
+    }
+  }
+}
