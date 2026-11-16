@@ -25,7 +25,8 @@ button,input,select,textarea{font:inherit}button{cursor:pointer}.hidden{display:
 .sub{font-size:12.5px;color:var(--muted);line-height:1.55;margin:0 0 10px}
 .form{display:grid;gap:11px}.form label{display:grid;gap:5px;font-size:12px;font-weight:700;color:#536075}
 .form input,.form textarea,.form select{width:100%;border:1px solid var(--line);border-radius:9px;padding:9px 10px;font-size:13px;background:#fff;color:var(--ink)}
-textarea.code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.55;min-height:260px;resize:vertical;white-space:pre}
+.form>label,.box,.panel{min-width:0}
+textarea.code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.55;min-height:200px;max-height:75vh;max-width:100%;resize:vertical;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;overflow-x:hidden;overflow-y:auto}
 .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .hint{font-size:11.5px;color:var(--muted);font-weight:400;line-height:1.5}
 .tag{display:inline-block;font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:10px;background:#eef1f6;color:#536075}.tag.ok{background:#e6f5f0;color:var(--green)}.tag.bad{background:#fdecea;color:var(--danger)}
@@ -75,6 +76,22 @@ D) It is too long.
 Answer: B
 Topic: Short conversation
 Explain: (opsional, tidak ditampilkan ke mahasiswa)`,
+ listeningNoQ:`### Judul unit (hanya untuk admin)
+Audio: https://link-audio.mp3        ← OPSIONAL. Jika kosong, script dibacakan suara sistem.
+Woman: Have you finished the report?
+Man: Almost. I need to check the data.
+Pause: 2
+Narrator: What does the man imply about the report?
+Pause: 5
+A) It has already been submitted.
+B) It needs a final check.
+C) It was lost.
+D) It is too long.
+Answer: B
+Topic: Short conversation
+
+(Untuk unit dengan beberapa soal, taruh semua script dulu, lalu tulis
+ A) B) C) D) Answer: untuk soal 1, lanjut A) B) C) D) Answer: untuk soal 2, dst.)`,
  swo:`Part A (Structure) — satu soal per blok, pisahkan dengan baris kosong:
 Q: The committee _____ the decision yesterday.
 A) make
@@ -134,13 +151,17 @@ function vSoal(){
  <div class="box"><h3>${X.META[sec].name}</h3><div class="form"><label>Petunjuk sesi (tampil di halaman pengantar)<textarea id="sd" rows="3">${esc(S.directions)}</textarea></label>
  <label>Waktu yang disarankan untuk sesi ini (menit — hanya informasi; timer sebenarnya satu untuk seluruh tes)<input id="sm" type="number" min="1" max="240" value="${S.minutes}" style="max-width:140px"></label>
  <div><button class="btn" data-act="secSave">Simpan sesi</button></div></div></div>
- <details class="box" open><summary>Format penulisan soal — ${X.META[sec].short}</summary><pre>${esc(FORMAT[sec])}</pre>
+ <details class="box" open><summary>Format penulisan soal — ${X.META[sec].short}</summary><pre>${esc(noQ()?FORMAT.listeningNoQ:FORMAT[sec])}</pre>${noQ()?`<p class="hint"><b>Mode Medium/Hard:</b> baris <code>Q:</code> tidak diperlukan. Pertanyaan cukup dibacakan Narrator di script; mahasiswa hanya melihat pilihan A–D. Soal baru dimulai setiap kali pilihan <code>A)</code> muncul lagi. Menulis <code>Q:</code> tetap boleh bila Anda ingin pertanyaan tampil di layar.</p>`:""}
  <p class="hint">Gunakan <code>### Judul</code> untuk memisahkan unit (satu percakapan/pidato/bacaan dengan beberapa soal). Tanpa <code>###</code>, setiap blok soal dianggap satu unit. Urutan penulisan = urutan tampil. Soal diberi nomor otomatis per sesi.${sec==="listening"?" Pembicara yang dikenali: <b>Narrator</b>, <b>Woman</b>, <b>Man</b>.":""}</p></details>
  ${parts}<div class="row"><button class="btn secondary" data-act="partAdd">＋ Tambah part</button></div>`;
+ growAll();
 }
+const noQ=()=>sec==="listening"&&lvl!=="easy";
+function autoGrow(t){t.style.height="auto";t.style.height=Math.min(t.scrollHeight+4,Math.round(innerHeight*0.75))+"px";}
+function growAll(){document.querySelectorAll("textarea.code").forEach(autoGrow);}
 function readPart(i){
  const p=D.levels[lvl].sections[sec].parts[i];
- const r=X.parseUnits($("#pu-"+i).value,p.id);
+ const r=X.parseUnits($("#pu-"+i).value,p.id,{optionalQ:noQ()});
  return {p,r};
 }
 const A={
@@ -225,6 +246,8 @@ function vPublish(){
  $("#imp").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const j=JSON.parse(await f.text());if(!j||!j.levels)throw 0;if(!confirm("Ganti draf di browser ini dengan isi file?"))return;D=X.normalize(j);commit("Dipulihkan");render();}catch(x){alert("File tidak valid.");}e.target.value="";};
 }
 
+document.addEventListener("input",e=>{if(e.target.matches&&e.target.matches("textarea.code"))autoGrow(e.target);});
+addEventListener("resize",growAll);
 document.addEventListener("click",e=>{
  const t=e.target.closest("[data-tab]");if(t){tab=t.dataset.tab;render();return;}
  const b=e.target.closest("[data-act]");if(!b)return;const f=A[b.dataset.act];if(f)f(b.dataset.id);

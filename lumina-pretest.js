@@ -104,7 +104,7 @@ function introHTML(lv){
  var rows=X.SECS.map(function(s){var m=X.META[s];return '<tr><td>'+m.ico+' '+m.name+'</td><td class="n">'+flat.count[s]+'</td><td class="n">'+m.std+'</td><td class="n">~'+cfg.levels[lv].sections[s].minutes+' min</td></tr>';}).join("");
  var dirs=X.SECS.map(function(s){return '<h3>'+X.META[s].ico+' '+X.META[s].name+'</h3><p>'+esc(cfg.levels[lv].sections[s].directions)+'</p>';}).join("");
  var run=ex&&ex.level===lv&&!ex.done?ex:null,saved=(!run&&me&&me.role==="student")?X.loadRun(me.user,lv):null;
- var btn=run||saved?'<button class="btn" data-xact="resume">▶ Resume test</button> <button class="btn secondary" data-xact="restart">Start over</button>':'<button class="btn" data-xact="begin">▶  START TEST</button>';
+ var btn=run||saved?'<button class="btn" data-xact="resume">▶ Resume test</button> <button class="btn secondary" data-xact="restart">Start over</button>':'<button class="btn" data-xact="begin">▶ Start test — the '+st.totalMinutes+'-minute timer begins immediately</button>';
  return '<div class="page-title"><div><div class="kicker">TOEFL PRE-TEST · '+v.name.toUpperCase()+'</div><h2>General Directions</h2><p>Please read carefully before you begin.</p></div><button class="btn secondary small" data-xact="home">← Back</button></div><div class="ex-intro">'+
   '<p>This test measures your ability to understand English as it is used in academic settings. It follows the format of the TOEFL ITP and has three sections. Work through the sections in any order using the question navigator; the timer covers the whole test.</p>'+
   '<div class="tbl-wrap"><table class="tbl"><thead><tr><th>SECTION</th><th class="n">QUESTIONS (THIS TEST)</th><th class="n">STANDARD</th><th class="n">SUGGESTED TIME</th></tr></thead><tbody>'+rows+'<tr class="sec"><td>Total</td><td class="n">'+flat.qs.length+'</td><td class="n">140</td><td class="n">'+st.totalMinutes+' min</td></tr></tbody></table></div>'+
@@ -156,7 +156,7 @@ function renderUnit(){
  if(u.passage)h+='<div class="ex-pass"><div class="pass-body" id="pass-body">'+passHTML(u.passage)+'</div></div>';
  h+=un.qs.map(function(it){
   var a=ex.answers[it.id];
-  return '<article class="question" id="exq-'+it.gi+'"><div class="q-meta">Question '+it.num+' · '+m.short+'</div><div class="q-text">'+qHTML(it)+'</div><div class="options">'+
+  return '<article class="question" id="exq-'+it.gi+'"><div class="q-meta">Question '+it.num+' · '+m.short+'</div>'+(it.q.q?'<div class="q-text">'+qHTML(it)+'</div>':'')+'<div class="options">'+
    it.q.o.map(function(o,j){return '<label class="option"><input type="radio" name="'+esc(it.id)+'" data-qid="'+esc(it.id)+'" value="'+j+'"'+(a===j?" checked":"")+'><span>'+"ABCD"[j]+". "+fmt(esc(o))+'</span></label>';}).join("")+
    '</div><div class="ex-q-foot"><button type="button" class="btn secondary small ex-flag'+(ex.flags[it.id]?" on":"")+'" data-xact="flag" data-id="'+esc(it.id)+'">⚑ '+(ex.flags[it.id]?"Flagged":"Flag for review")+'</button>'+(a!=null?'<button type="button" class="btn secondary small" data-xact="clear" data-id="'+esc(it.id)+'">Clear answer</button>':"")+'</div></article>';
  }).join("");

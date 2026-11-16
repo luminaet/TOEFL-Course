@@ -37,7 +37,8 @@ var PAUSE_RE=/^\[?\s*(?:pause|jeda)\s*[:=]?\s*(\d+(?:[.,]\d+)?)\s*(?:s|sec|secs|
 function pauseSec(v){return Math.min(120,Math.max(0.5,parseFloat(String(v).replace(",","."))||1));}
 var RESERVED=/^(q|question|soal|answer|jawaban|ans|explain|explanation|penjelasan|topic|topik|audio|passage|teks|a|b|c|d)$/i;
 function audioNorm(u){return L.normalizeAudioUrl?L.normalizeAudioUrl(u):String(u||"").trim();}
-function parseUnits(text,partId){
+function parseUnits(text,partId,opts){
+ var optQ=!!(opts&&opts.optionalQ);
  text=String(text||"").replace(/\r/g,"");
  var chunks=[];
  if(/^\s*###/m.test(text)){
@@ -54,12 +55,18 @@ function parseUnits(text,partId){
    if((m=line.match(/^audio\s*[:=]\s*(.*)$/i))){u.audioUrl=audioNorm(m[1]);mode=null;return;}
    if((m=line.match(/^(?:passage|teks)\s*[:=]\s*(.*)$/i))&&!cur){mode="passage";if(m[1])ps.push(m[1]);return;}
    if((m=line.match(/^(?:q|question|soal)\s*[:.)\-]\s*(.*)$/i))){cur={q:m[1],o:["","","",""],a:-1,e:"",topic:""};u.questions.push(cur);mode="q";return;}
+   if(optQ&&(m=line.match(/^([A-D])\s*([).:])\s*(.*)$/i))&&(cur||m[2]!==":")){
+    var oi="ABCD".indexOf(m[1].toUpperCase());
+    if(!cur||cur.a>=0||cur.o[oi]!==""){cur={q:"",o:["","","",""],a:-1,e:"",topic:""};u.questions.push(cur);}
+    cur.o[oi]=m[3].trim();mode=null;return;
+   }
    if(cur&&(m=line.match(/^([A-D])\s*[).:]\s*(.*)$/i))){cur.o["ABCD".indexOf(m[1].toUpperCase())]=m[2].trim();mode=null;return;}
    if(cur&&(m=line.match(/^(?:answer|jawaban|ans)\s*[:=]\s*\(?([A-D])/i))){cur.a="ABCD".indexOf(m[1].toUpperCase());mode=null;return;}
    if(cur&&(m=line.match(/^(?:explain(?:ation)?|penjelasan)\s*[:=]\s*(.*)$/i))){cur.e=m[1];mode="e";return;}
    if(cur&&(m=line.match(/^(?:topic|topik)\s*[:=]\s*(.*)$/i))){cur.topic=m[1];mode=null;return;}
    if(mode==="passage"){ps.push(line);return;}
-   if(!cur&&(m=line.match(PAUSE_RE))){sc.push("Pause: "+pauseSec(m[1]));return;}
+   if((!cur||(optQ&&mode!=="e"&&mode!=="q"))&&(m=line.match(PAUSE_RE))){sc.push("Pause: "+pauseSec(m[1]));return;}
+   if(optQ&&cur&&mode!=="e"&&mode!=="q"&&(m=line.match(/^([A-Za-z][A-Za-z0-9 .]{0,24}):\s*(.+)$/))&&!RESERVED.test(m[1].trim())){sc.push(m[1].trim()+": "+m[2].trim());return;}
    if(!cur&&(m=line.match(/^([A-Za-z][A-Za-z0-9 .]{0,24}):\s*(.+)$/))&&!RESERVED.test(m[1].trim())){sc.push(m[1].trim()+": "+m[2].trim());return;}
    if(cur&&mode==="q"){cur.q+=" "+line;return;}
    if(cur&&mode==="e"){cur.e+=" "+line;return;}
@@ -72,12 +79,12 @@ function parseUnits(text,partId){
   u.questions.forEach(function(q,qi){
    q.q=q.q.trim();
    if(q.o.some(function(x){return !x;})){var segs=[],r=/__(.+?)__/g,mm;while((mm=r.exec(q.q)))segs.push(mm[1]);if(segs.length===4)q.o=segs;}
-   if(!q.q){errors.push(label+", soal "+(qi+1)+": teks soal kosong.");ok=false;}
+   if(!q.q&&!optQ){errors.push(label+", soal "+(qi+1)+": teks soal kosong.");ok=false;}
    else if(q.o.some(function(x){return !x;})){errors.push(label+", soal "+(qi+1)+": pilihan A–D harus lengkap (atau tandai 4 bagian bergaris bawah dengan __kata__).");ok=false;}
    else if(q.a<0){errors.push(label+", soal "+(qi+1)+": baris Answer: A/B/C/D belum ada.");ok=false;}
    q.id=u.id+"-q"+(qi+1);
   });
-  if(!u.questions.length){errors.push(label+": tidak ada soal (baris Q:).");ok=false;}
+  if(!u.questions.length){errors.push(label+": tidak ada soal ("+(optQ?"pilihan A) B) C) D) + Answer:":"baris Q:")+").");ok=false;}
   if(ok)units.push(u);else u.id=partId+"-bad";
  });
  /* ulang id agar berurutan tanpa celah */
@@ -92,7 +99,7 @@ function serializeUnits(units){
   if(u.passage){o.push("Passage: "+u.passage);o.push("");}
   u.questions.forEach(function(q,j){
    if(j>0||!u.passage)o.push("");
-   o.push("Q: "+q.q);
+   if(q.q)o.push("Q: "+q.q);
    q.o.forEach(function(x,k){o.push("ABCD"[k]+") "+x);});
    o.push("Answer: "+"ABCD"[q.a]);
    if(q.topic)o.push("Topic: "+q.topic);
@@ -110,7 +117,7 @@ function cleanQ(q,id){
 function cleanUnit(u,pid,i){
  u=u||{};var id=pid+"-u"+(i+1);
  return {id:id,title:String(u.title||""),audioUrl:String(u.audioUrl||""),script:String(u.script||""),passage:String(u.passage||""),
-  questions:(Array.isArray(u.questions)?u.questions:[]).filter(function(q){return q&&q.q;}).map(function(q,j){return cleanQ(q,id+"-q"+(j+1));})};
+  questions:(Array.isArray(u.questions)?u.questions:[]).filter(function(q){return q&&(q.q||(Array.isArray(q.o)&&q.o.some(Boolean)));}).map(function(q,j){return cleanQ(q,id+"-q"+(j+1));})};
 }
 function cleanPart(p){
  p=p||{};var id=String(p.id||uid("p")).replace(/[^\w\-]/g,"");
