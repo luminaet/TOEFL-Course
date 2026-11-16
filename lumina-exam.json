@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": 1794819945845,
+  "updatedAt": 1794821669659,
   "settings": {
     "totalMinutes": 120,
     "audioPlays": 1,
@@ -46,6 +46,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u1-q1",
                       "q": "What does the man mean?",
                       "o": [
                         "It has already been submitted.",
@@ -55,8 +56,7 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u1-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 },
@@ -68,6 +68,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u2-q1",
                       "q": "What does the woman say about the journals?",
                       "o": [
                         "On the first floor",
@@ -77,8 +78,7 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u2-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 },
@@ -90,6 +90,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u3-q1",
                       "q": "What does the man mean?",
                       "o": [
                         "He will go to the library tomorrow.",
@@ -99,8 +100,7 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u3-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 },
@@ -112,6 +112,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u4-q1",
                       "q": "What does the woman suggest?",
                       "o": [
                         "Opening the window.",
@@ -121,8 +122,7 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u4-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 },
@@ -134,6 +134,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u5-q1",
                       "q": "What does the man mean?",
                       "o": [
                         "He didn't like the movie.",
@@ -143,8 +144,7 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u5-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 },
@@ -156,6 +156,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u6-q1",
                       "q": "What will probably happen?",
                       "o": [
                         "It will rain soon.",
@@ -165,8 +166,7 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u6-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 },
@@ -178,6 +178,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u7-q1",
                       "q": "When should they arrive?",
                       "o": [
                         "At 8:15.",
@@ -187,8 +188,7 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u7-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 },
@@ -200,6 +200,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u8-q1",
                       "q": "Where are the English books?",
                       "o": [
                         "On the first floor.",
@@ -209,8 +210,7 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u8-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 },
@@ -222,6 +222,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u9-q1",
                       "q": "What does the man say about the concert?",
                       "o": [
                         "He thought it was too noisy.",
@@ -231,8 +232,7 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u9-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 },
@@ -244,6 +244,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u10-q1",
                       "q": "Why didn't the woman attend the meeting?",
                       "o": [
                         "She forgot about it.",
@@ -253,8 +254,7 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u10-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 },
@@ -266,6 +266,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u11-q1",
                       "q": "What will the man probably do this weekend?",
                       "o": [
                         "Study at the library.",
@@ -275,8 +276,7 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u11-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 },
@@ -288,6 +288,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u12-q1",
                       "q": "What can we learn about the woman's new apartment?",
                       "o": [
                         "It is smaller than her old apartment.",
@@ -297,8 +298,7 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u12-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 },
@@ -310,6 +310,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u13-q1",
                       "q": "How much did the man pay?",
                       "o": [
                         "One dollar.",
@@ -319,8 +320,7 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u13-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 },
@@ -332,6 +332,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u14-q1",
                       "q": "What will the woman probably do?",
                       "o": [
                         "Close the door.",
@@ -341,8 +342,7 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u14-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 },
@@ -354,6 +354,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u15-q1",
                       "q": "What is the man's sister's occupation?",
                       "o": [
                         "A teacher.",
@@ -363,8 +364,7 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u15-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 },
@@ -376,6 +376,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u16-q1",
                       "q": "What does the woman recommend?",
                       "o": [
                         "Buying a new laptop.",
@@ -385,8 +386,7 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u16-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 },
@@ -398,6 +398,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u17-q1",
                       "q": "What will the man probably do next?",
                       "o": [
                         "Read the remaining chapters.",
@@ -407,8 +408,7 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u17-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 },
@@ -420,6 +420,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u18-q1",
                       "q": "What is the woman reading about?",
                       "o": [
                         "Indonesian food.",
@@ -429,8 +430,7 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u18-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 },
@@ -442,6 +442,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u19-q1",
                       "q": "What does the man imply?",
                       "o": [
                         "He refuses to help the woman.",
@@ -451,8 +452,7 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u19-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 },
@@ -464,6 +464,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u20-q1",
                       "q": "How frequently does the woman go jogging?",
                       "o": [
                         "Every day.",
@@ -473,8 +474,7 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u20-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 },
@@ -486,6 +486,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u21-q1",
                       "q": "What did the man do first this morning?",
                       "o": [
                         "He ate breakfast.",
@@ -495,8 +496,7 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u21-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 },
@@ -508,6 +508,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u22-q1",
                       "q": "What does the woman advise the man to do?",
                       "o": [
                         "Cancel his presentation.",
@@ -517,8 +518,7 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u22-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 },
@@ -530,6 +530,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u23-q1",
                       "q": "What does the man mean?",
                       "o": [
                         "He enjoys waking up early.",
@@ -539,8 +540,7 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u23-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 },
@@ -552,6 +552,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u24-q1",
                       "q": "What does the woman say about the post office?",
                       "o": [
                         "It is very far away.",
@@ -561,8 +562,7 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u24-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 },
@@ -574,6 +574,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u25-q1",
                       "q": "Why is the man going to the bookstore?",
                       "o": [
                         "To buy a dictionary.",
@@ -583,8 +584,7 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u25-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 },
@@ -596,6 +596,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "la-u26-q1",
                       "q": "What can be concluded about Anna?",
                       "o": [
                         "She is going shopping.",
@@ -605,8 +606,7 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Short conversation",
-                      "id": "la-u26-q1"
+                      "topic": "Short conversation"
                     }
                   ]
                 }
@@ -627,6 +627,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "lb-u1-q1",
                       "q": "Why can't the man attend the study group tonight?",
                       "o": [
                         "He is sick.",
@@ -636,10 +637,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Conversation detail",
-                      "id": "lb-u1-q1"
+                      "topic": "Conversation detail"
                     },
                     {
+                      "id": "lb-u1-q2",
                       "q": "What do the speakers decide to do?",
                       "o": [
                         "Cancel the group",
@@ -649,8 +650,7 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "Conversation main idea",
-                      "id": "lb-u1-q2"
+                      "topic": "Conversation main idea"
                     }
                   ]
                 },
@@ -662,6 +662,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "lb-u2-q1",
                       "q": "Where can the woman find books about English grammar?",
                       "o": [
                         "On the first floor.",
@@ -671,10 +672,10 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "",
-                      "id": "lb-u2-q1"
+                      "topic": ""
                     },
                     {
+                      "id": "lb-u2-q2",
                       "q": "How long the woman will borrow the book?",
                       "o": [
                         "14 days",
@@ -684,10 +685,10 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "",
-                      "id": "lb-u2-q2"
+                      "topic": ""
                     },
                     {
+                      "id": "lb-u2-q3",
                       "q": "What does the woman need to bring when borrowing books?",
                       "o": [
                         "Her student card.",
@@ -697,8 +698,7 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "",
-                      "id": "lb-u2-q3"
+                      "topic": ""
                     }
                   ]
                 },
@@ -710,6 +710,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "lb-u3-q1",
                       "q": "Why does the man call the woman?",
                       "o": [
                         "To cancel an appointment.",
@@ -719,10 +720,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "",
-                      "id": "lb-u3-q1"
+                      "topic": ""
                     },
                     {
+                      "id": "lb-u3-q2",
                       "q": "What time is the man's appointment?",
                       "o": [
                         "At 9:30.",
@@ -732,8 +733,7 @@
                       ],
                       "a": 3,
                       "e": "",
-                      "topic": "",
-                      "id": "lb-u3-q2"
+                      "topic": ""
                     }
                   ]
                 },
@@ -745,6 +745,7 @@
                   "passage": "",
                   "questions": [
                     {
+                      "id": "lb-u4-q1",
                       "q": "Where are the speakers planning to go?",
                       "o": [
                         "To the mountains.",
@@ -754,10 +755,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "",
-                      "id": "lb-u4-q1"
+                      "topic": ""
                     },
                     {
+                      "id": "lb-u4-q2",
                       "q": "How will they travel to their destination?",
                       "o": [
                         "By train.",
@@ -767,8 +768,7 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "",
-                      "id": "lb-u4-q2"
+                      "topic": ""
                     }
                   ]
                 }
@@ -820,18 +820,18 @@
                   "id": "lc-u2",
                   "title": "The History of the Telephone",
                   "audioUrl": "",
-                  "script": "Narrator: Listen to a talk about the history of the telephone.\nMan: The telephone is one of the most important inventions in human history. It allows people to communicate with each other over long distances. Alexander Graham Bell is widely credited with inventing the first practical telephone in 1876. In the past, telephones were large and usually stayed in one place. People could only make calls using wires. Today, telephones have become smaller and more advanced. Smartphones allow people not only to make calls but also to send messages, take pictures, and access the internet. The telephone has changed the way people communicate in their daily lives.\nNarrator: Who is widely credited with inventing the first practical telephone?",
+                  "script": "Narrator: Listen to a talk about the history of the telephone.\nMan: The telephone is one of the most important inventions in human history. It allows people to communicate with each other over long distances. Alexander Graham Bell is widely credited with ***inventing*** the first practical telephone in 1876. In the past, telephones were large and usually stayed in one place. People could only make calls using wires. Today, telephones have become smaller and more advanced. Smartphones allow people not only to make calls but also to send messages, take pictures, and access the internet. The telephone has changed the way people communicate in their daily lives.\nNarrator: Who is widely credited with inventing the first practical telephone?",
                   "passage": "",
                   "questions": [
                     {
                       "q": "Who is widely credited with inventing the first practical telephone?",
                       "o": [
-                        "Thomas Edison.",
-                        "Alexander Graham Bell.",
-                        "Albert Einstein.",
-                        "Isaac Newton."
+                        "Maintained",
+                        "Built",
+                        "Managed",
+                        "Found"
                       ],
-                      "a": 1,
+                      "a": 3,
                       "e": "",
                       "topic": "",
                       "id": "lc-u2-q1"
@@ -883,6 +883,19 @@
                       "e": "",
                       "topic": "",
                       "id": "lc-u3-q2"
+                    },
+                    {
+                      "q": "What is not mentioned about the benefits of reading?",
+                      "o": [
+                        "Students will familiar with different words and expressions.",
+                        "Students can learn how to organize sentences and develop ideas.",
+                        "Reading increases knowledge because books contain information about many subjects",
+                        "Students should make regular reading habit."
+                      ],
+                      "a": 3,
+                      "e": "",
+                      "topic": "",
+                      "id": "lc-u3-q3"
                     }
                   ]
                 }
