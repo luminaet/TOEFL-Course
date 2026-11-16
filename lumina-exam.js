@@ -33,6 +33,8 @@ function emptyParts(sec){
 }
 
 /* ---------- parser teks ⇄ unit ---------- */
+var PAUSE_RE=/^\[?\s*(?:pause|jeda)\s*[:=]?\s*(\d+(?:[.,]\d+)?)\s*(?:s|sec|secs|detik|dtk)?\s*\]?$/i;
+function pauseSec(v){return Math.min(120,Math.max(0.5,parseFloat(String(v).replace(",","."))||1));}
 var RESERVED=/^(q|question|soal|answer|jawaban|ans|explain|explanation|penjelasan|topic|topik|audio|passage|teks|a|b|c|d)$/i;
 function audioNorm(u){return L.normalizeAudioUrl?L.normalizeAudioUrl(u):String(u||"").trim();}
 function parseUnits(text,partId){
@@ -57,6 +59,7 @@ function parseUnits(text,partId){
    if(cur&&(m=line.match(/^(?:explain(?:ation)?|penjelasan)\s*[:=]\s*(.*)$/i))){cur.e=m[1];mode="e";return;}
    if(cur&&(m=line.match(/^(?:topic|topik)\s*[:=]\s*(.*)$/i))){cur.topic=m[1];mode=null;return;}
    if(mode==="passage"){ps.push(line);return;}
+   if(!cur&&(m=line.match(PAUSE_RE))){sc.push("Pause: "+pauseSec(m[1]));return;}
    if(!cur&&(m=line.match(/^([A-Za-z][A-Za-z0-9 .]{0,24}):\s*(.+)$/))&&!RESERVED.test(m[1].trim())){sc.push(m[1].trim()+": "+m[2].trim());return;}
    if(cur&&mode==="q"){cur.q+=" "+line;return;}
    if(cur&&mode==="e"){cur.e+=" "+line;return;}
@@ -122,7 +125,7 @@ var SAMPLE={
  ra:"### Urban trees\nPassage: Urban trees provide benefits that extend beyond their appearance. Their leaves provide shade, reducing the heat absorbed by streets and buildings. Trees also help manage rainwater: some water is intercepted by leaves, while roots improve the soil's ability to absorb rainfall.\n\nHowever, planting trees in cities requires careful planning. A tree that grows well in a park may not be suitable for a narrow sidewalk where roots could damage pavement or underground pipes. Successful urban forestry therefore depends not simply on planting more trees, but on choosing appropriate species and caring for them over time.\n\nQ: What is the main idea of the passage?\nA) Why cities should remove old trees\nB) The benefits of urban trees and the need for careful planning\nC) How birds migrate through cities\nD) Why all trees grow well on sidewalks\nAnswer: B\nTopic: Main idea\n\nQ: The word \"intercepted\" in the passage is closest in meaning to\nA) caught\nB) heated\nC) destroyed\nD) measured\nAnswer: A\nTopic: Vocabulary\n\nQ: Why might a tree be unsuitable for a narrow sidewalk?\nA) It attracts too many birds.\nB) Its roots may damage pavement or pipes.\nC) It cannot receive sunlight.\nD) It stops all traffic.\nAnswer: B\nTopic: Detail"
 };
 function defaults(){
- var d={version:1,updatedAt:0,settings:{totalMinutes:120,audioPlays:1,generalNotes:"",voices:JSON.parse(JSON.stringify(DEF_VOICES))},levels:{}};
+ var d={version:1,updatedAt:0,settings:{totalMinutes:120,audioPlays:1,generalNotes:"",lineEvery:5,voices:JSON.parse(JSON.stringify(DEF_VOICES))},levels:{}};
  LEVELS.forEach(function(lv){var o={sections:{}};SECS.forEach(function(s){o.sections[s]={directions:SEC_DIR[s],minutes:META[s].minutes,parts:emptyParts(s)};});d.levels[lv]=o;});
  var e=d.levels.easy.sections;
  [[e.listening.parts[0],SAMPLE.la],[e.listening.parts[1],SAMPLE.lb],[e.swo.parts[0],SAMPLE.sa],[e.swo.parts[1],SAMPLE.sb],[e.reading.parts[0],SAMPLE.ra]].forEach(function(x){x[0].units=parseUnits(x[1],x[0].id).units;});
@@ -132,7 +135,7 @@ function normalize(d){
  d=(d&&typeof d==="object")?d:{};
  if(!d.levels)return normalize(Object.assign(defaults(),{updatedAt:Number(d.updatedAt)||0,settings:d.settings||defaults().settings}));
  var out={version:1,updatedAt:Number(d.updatedAt)||0},s=d.settings||{},ap=Number(s.audioPlays);if(s.audioPlays==null||isNaN(ap))ap=1;
- out.settings={totalMinutes:clamp(Math.round(Number(s.totalMinutes))||120,10,360),audioPlays:clamp(Math.round(ap),0,10),generalNotes:String(s.generalNotes||""),voices:{}};
+ out.settings={totalMinutes:clamp(Math.round(Number(s.totalMinutes))||120,10,360),audioPlays:clamp(Math.round(ap),0,10),generalNotes:String(s.generalNotes||""),lineEvery:(s.lineEvery==null||isNaN(Number(s.lineEvery)))?5:clamp(Math.round(Number(s.lineEvery)),0,20),voices:{}};
  ROLES.forEach(function(r){var v=(s.voices&&s.voices[r])||{},b=DEF_VOICES[r];out.settings.voices[r]={voice:String(v.voice||""),rate:clamp(Number(v.rate)||b.rate,0.5,1.5),pitch:clamp(Number(v.pitch)||b.pitch,0.3,2)};});
  out.levels={};
  LEVELS.forEach(function(lv){
@@ -144,6 +147,15 @@ function normalize(d){
   out.levels[lv]=o;
  });
  return out;
+}
+
+/* ---------- format teks: **tebal**, *miring* ---------- */
+function esc(v){return String(v==null?"":v).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+function fmt(t){
+ return esc(t).replace(/\*\*([^*\s](?:[^*]*?[^*\s])?)\*\*/g,"<strong>$1</strong>").replace(/(^|[^*])\*([^*\s](?:[^*]*?[^*\s])?)\*(?!\*)/g,"$1<em>$2</em>");
+}
+function fmtPassage(t){
+ return String(t||"").split(/\n\s*\n+/).map(function(p){return p.trim();}).filter(Boolean).map(function(p){return "<p>"+fmt(p.replace(/\s*\n\s*/g," "))+"</p>";}).join("");
 }
 
 /* ---------- susun urutan soal ---------- */
@@ -193,12 +205,12 @@ function download(d){
  a.href=u;a.download="lumina-exam.json";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u);},1500);
  try{localStorage.setItem(EXP_KEY,String(Date.now()));}catch(e){}
 }
-function runKey(u,l){return RUN_P+String(u).toLowerCase()+":"+l;}
+function runKey(u,l){return RUN_P+String(u)+":"+l;}
 function loadRun(u,l){try{var r=localStorage.getItem(runKey(u,l));return r?JSON.parse(r):null;}catch(e){return null;}}
 function saveRun(u,l,s){try{localStorage.setItem(runKey(u,l),JSON.stringify(s));}catch(e){}}
 function clearRun(u,l){try{localStorage.removeItem(runKey(u,l));}catch(e){}}
-function getResults(u){try{var r=JSON.parse(localStorage.getItem(RES_P+String(u).toLowerCase())||"[]");return Array.isArray(r)?r:[];}catch(e){return [];}}
-function saveResult(u,res){var a=getResults(u);a.push(res);if(a.length>40)a=a.slice(-40);try{localStorage.setItem(RES_P+String(u).toLowerCase(),JSON.stringify(a));}catch(e){}}
+function getResults(u){try{var r=JSON.parse(localStorage.getItem(RES_P+String(u))||"[]");return Array.isArray(r)?r:[];}catch(e){return [];}}
+function saveResult(u,res){var a=getResults(u);a.push(res);if(a.length>40)a=a.slice(-40);try{localStorage.setItem(RES_P+String(u),JSON.stringify(a));}catch(e){}}
 
 /* ---------- suara (Web Speech API) ---------- */
 var voices=[];
@@ -208,6 +220,7 @@ function listVoices(){loadVoices();return voices.slice();}
 function roleOf(sp){var s=String(sp||"").toLowerCase().trim();if(/^(narrator|announcer)/.test(s))return "narrator";if(/^(woman|female|girl|lady|ms|mrs|miss)/.test(s))return "woman";if(/^(man|male|boy|mr|sir)/.test(s))return "man";return "narrator";}
 function parseScript(script){
  return String(script||"").split(/\n/).map(function(l){return l.trim();}).filter(Boolean).map(function(l){
+  var pm=l.match(PAUSE_RE);if(pm)return {role:"pause",pause:pauseSec(pm[1])};
   var m=l.match(/^([A-Za-z][A-Za-z0-9 .]{0,24}):\s*(.+)$/);
   return m?{role:roleOf(m[1]),text:m[2]}:{role:"narrator",text:l};
  });
@@ -231,7 +244,9 @@ function speakScript(script,cfg,onend){
  function next(){
   if(stopped)return;
   if(i>=items.length){if(onend)onend(true);return;}
-  var it=items[i++],u=new SpeechSynthesisUtterance(it.text),c=(cfg&&cfg[it.role])||{},v=pickVoice(it.role,cfg);
+  var it=items[i++];
+  if(it.role==="pause"){setTimeout(next,it.pause*1000);return;}
+  var u=new SpeechSynthesisUtterance(it.text),c=(cfg&&cfg[it.role])||{},v=pickVoice(it.role,cfg);
   if(v){u.voice=v;u.lang=v.lang;}else u.lang="en-US";
   u.rate=c.rate||0.95;u.pitch=c.pitch||1;
   u.onend=function(){if(!stopped)setTimeout(next,it.role==="narrator"?500:350);};
@@ -242,7 +257,7 @@ function speakScript(script,cfg,onend){
  return {stop:function(){stopped=true;root.speechSynthesis.cancel();}};
 }
 
-root.LuminaExam={LEVELS:LEVELS,SECS:SECS,ROLES:ROLES,META:META,PTYPES:PTYPES,SEC_DIR:SEC_DIR,DEF_VOICES:DEF_VOICES,
+root.LuminaExam={fmt:fmt,fmtPassage:fmtPassage,LEVELS:LEVELS,SECS:SECS,ROLES:ROLES,META:META,PTYPES:PTYPES,SEC_DIR:SEC_DIR,DEF_VOICES:DEF_VOICES,
  uid:uid,emptyParts:emptyParts,parseUnits:parseUnits,serializeUnits:serializeUnits,defaults:defaults,normalize:normalize,flatten:flatten,score:score,scaled:scaled,
  loadDraft:loadDraft,saveDraft:saveDraft,fetchPublished:fetchPublished,loadViewer:loadViewer,getExportedAt:getExportedAt,download:download,
  loadRun:loadRun,saveRun:saveRun,clearRun:clearRun,getResults:getResults,saveResult:saveResult,

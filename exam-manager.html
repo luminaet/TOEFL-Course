@@ -64,7 +64,9 @@ const FORMAT={
 Audio: https://link-audio.mp3        ← OPSIONAL. Jika diisi, file audio dipakai.
 Woman: Have you finished the report?  ← Jika Audio kosong, baris Narrator/Woman/Man
 Man: Almost. I need to check the data.   dibacakan oleh suara sistem.
+Pause: 3                              ← JEDA 3 detik (boleh desimal, mis. Pause: 1.5)
 Narrator: What does the man mean?
+Pause: 5                              ← waktu menjawab 5 detik sebelum unit berikutnya
 Q: What does the man imply?
 A) It is finished.
 B) It needs a final check.
@@ -91,6 +93,7 @@ Passage: Paragraf pertama...
 
 Paragraf kedua (baris kosong = paragraf baru)...
 
+(Tebal: **kata** · Miring: *kata* — mis. untuk soal sinonim: The word *intercepted* ...)
 Q: What is the main idea of the passage?
 A) ...
 B) ...
@@ -123,6 +126,7 @@ function vSoal(){
    <button class="btn danger small" data-act="partDel" data-id="${i}">Hapus part</button></div>
   <div class="form"><div class="grid2"><label>Judul part<input id="pt-${i}" value="${esc(p.title)}"></label><label>Target jumlah soal (panduan)<input id="pg-${i}" type="number" min="0" max="200" value="${p.target}"></label></div>
   <label>Petunjuk (directions) untuk part ini<textarea id="pd-${i}" rows="3">${esc(p.directions)}</textarea></label>
+  <div class="row"><button type="button" class="btn secondary small" data-act="fmtB" data-id="${i}"><b>B</b> Tebal</button><button type="button" class="btn secondary small" data-act="fmtI" data-id="${i}"><i>I</i> Miring</button>${sec==="listening"?`<button type="button" class="btn secondary small" data-act="addPause" data-id="${i}">⏸ Sisipkan jeda…</button>`:""}<span class="hint">Blok kata di kotak soal lalu klik tombol, atau ketik <code>**tebal**</code> / <code>*miring*</code>. Berlaku di bacaan, soal, dan pilihan.</span></div>
   <label>Daftar soal (format teks — lihat contoh format di atas)<textarea class="code" id="pu-${i}" spellcheck="false">${esc(X.serializeUnits(p.units))}</textarea></label>
   <div class="row"><button class="btn" data-act="partSave" data-id="${i}">Simpan part</button>${sec==="listening"?`<button class="btn secondary" data-act="testAudio" data-id="${i}">▶ Tes unit pertama</button><button class="btn secondary small" data-act="testStop">■ Stop</button>`:""}</div></div></div>`;
  }).join("");
@@ -164,6 +168,8 @@ const A={
   else audioCtl=X.speakScript(u.script,D.settings.voices);
  },
  testStop(){stopTest();},
+ addPause(i){const v=prompt("Jeda berapa detik? (0.5 – 120)","3");if(v===null)return;const n=Math.min(120,Math.max(0.5,parseFloat(String(v).replace(",","."))||0));if(!n){alert("Masukkan angka detik, mis. 3");return;}const t=$("#pu-"+i);let p=t.selectionStart;const txt=t.value;const ls=txt.lastIndexOf("\n",p-1)+1;const ins="Pause: "+n+"\n";t.value=txt.slice(0,ls)+ins+txt.slice(ls);t.focus();t.setSelectionRange(ls+ins.length,ls+ins.length);toast("Jeda "+n+" detik disisipkan");},
+ fmtB(i){wrapSel(i,"**");},fmtI(i){wrapSel(i,"*");},
  export(){X.download(D);banner();toast("File diunduh");},
  async pull(){const p=await X.fetchPublished();if(!p){alert("lumina-exam.json tidak ditemukan di server.");return;}if(!confirm("Ganti draf di browser ini dengan versi dari server?"))return;D=p;commit("Diambil dari server");render();},
  reset(){if(!confirm("Kembalikan semua soal Pre-Test ke contoh awal? Tidak bisa dibatalkan."))return;const keep=D.settings;D=X.defaults();D.settings=keep;commit("Dikembalikan");render();},
@@ -177,9 +183,10 @@ const A={
  setSave(){
   D.settings.totalMinutes=Math.min(360,Math.max(10,Math.round(Number($("#s-tot").value))||120));
   D.settings.audioPlays=Math.min(10,Math.max(0,Math.round(Number($("#s-ap").value))));if(isNaN(D.settings.audioPlays))D.settings.audioPlays=1;
-  D.settings.generalNotes=$("#s-notes").value.trim();commit("Pengaturan tersimpan");
+  D.settings.generalNotes=$("#s-notes").value.trim();D.settings.lineEvery=Math.min(20,Math.max(0,Math.round(Number($("#s-le").value))||0));commit("Pengaturan tersimpan");
  }
 };
+function wrapSel(i,m){const t=$("#pu-"+i),s=t.selectionStart,e=t.selectionEnd;if(s===e){alert("Blok dulu kata yang ingin ditandai.");return;}t.value=t.value.slice(0,s)+m+t.value.slice(s,e)+m+t.value.slice(e);t.focus();t.setSelectionRange(s+m.length,e+m.length);}
 function readVoice(r){return {voice:$("#v-"+r).value,rate:Number($("#r-"+r).value),pitch:Number($("#p-"+r).value)};}
 
 /* ---------- PENGATURAN ---------- */
@@ -188,6 +195,7 @@ function vSettings(){
  $("#view").innerHTML=`<div class="box"><h3>Pengaturan ujian</h3><div class="form">
  <label>Durasi total (menit)<input id="s-tot" type="number" min="10" max="360" value="${s.totalMinutes}" style="max-width:140px"><span class="hint">Satu hitung mundur untuk ketiga sesi. Standar TOEFL ITP ±115 menit; default 120.</span></label>
  <label>Batas putar audio per unit (0 = tanpa batas)<input id="s-ap" type="number" min="0" max="10" value="${s.audioPlays}" style="max-width:140px"><span class="hint">Pada TOEFL asli audio hanya diputar 1 kali. Admin yang melihat pratinjau selalu tanpa batas.</span></label>
+ <label>Nomor baris bacaan setiap … baris (0 = tanpa nomor)<input id="s-le" type="number" min="0" max="20" value="${s.lineEvery}" style="max-width:140px"><span class="hint">Mis. 5 → tampil 5, 10, 15, … di sisi kiri bacaan, seperti TOEFL asli.</span></label>
  <label>Catatan tambahan di halaman pengantar (opsional)<textarea id="s-notes" rows="3" placeholder="mis. Siapkan headphone. Kerjakan di ruangan tenang.">${esc(s.generalNotes)}</textarea></label>
  <div><button class="btn" data-act="setSave">Simpan</button></div></div></div>
  <div class="note"><b>Struktur standar TOEFL ITP:</b> Listening 50 soal (Part A 30 percakapan pendek, Part B 8 percakapan panjang, Part C 12 pidato/ceramah) · Structure &amp; Written Expression 40 soal (15 + 25) · Reading 50 soal (5 bacaan × 10). Sistem penilaian di halaman mahasiswa: skor skala 31–68 per sesi (perkiraan linear), total = rata-rata × 10 (310–680). Petunjuk tiap sesi/part diedit di tab <b>Soal per level</b>.</div>`;

@@ -503,14 +503,14 @@ function vAccounts(){
  `</tbody></table></div></div>
  <div class="box"><h3>Tambah akun</h3><form class="form" id="acc-form" autocomplete="off">
   <div class="grid2"><label>Nama lengkap<input id="ac-name" required></label><label>Peran<select id="ac-role"><option value="student">Mahasiswa</option><option value="admin">Admin</option></select></label></div>
-  <div class="grid2"><label>Username<input id="ac-user" required placeholder="huruf kecil/angka, min. 3" autocomplete="off"></label><label>Password<input id="ac-pass" type="text" required minlength="6" placeholder="min. 6 karakter" autocomplete="off"></label></div>
+  <div class="grid2"><label>Username<input id="ac-user" required placeholder="huruf/angka, min. 3 (huruf besar-kecil dibedakan)" autocomplete="off"></label><label>Password<input id="ac-pass" type="text" required minlength="6" placeholder="min. 6 karakter" autocomplete="off"></label></div>
   <div><button class="btn" type="submit">＋ Tambah akun</button></div></form>
   <details style="margin-top:14px"><summary style="cursor:pointer;font-size:12.5px;font-weight:700;color:#536075">Tambah banyak mahasiswa sekaligus</summary>
    <form class="form" id="accbulk-form" style="margin-top:10px"><label>Satu baris satu mahasiswa: <code>Nama lengkap | username | password</code><textarea id="accbulk" rows="5" placeholder="Budi Santoso | budi | rahasia123&#10;Siti Aminah | siti | rahasia456"></textarea></label><div><button class="btn" type="submit">＋ Tambah semua</button></div></form></details></div>`;
  $("#view").innerHTML=h;
  const addAcc=(name,user,pass,role)=>{
-  user=user.trim().toLowerCase();
-  if(!/^[a-z0-9._-]{3,30}$/.test(user))return "Username “"+user+"” tidak valid (huruf kecil, angka, titik, strip, underscore; 3–30 karakter).";
+  user=user.trim();
+  if(!/^[A-Za-z0-9._-]{3,30}$/.test(user))return "Username “"+user+"” tidak valid (huruf, angka, titik, strip, underscore; 3–30 karakter).";
   if(pass.length<6)return "Password untuk “"+user+"” minimal 6 karakter.";
   if(L.findAccount(D,user))return "Username “"+user+"” sudah dipakai.";
   D.accounts.push({user,name:name.trim()||user,role,hash:L.hashPassword(user,pass),createdAt:Date.now()});return "";
@@ -564,7 +564,7 @@ function vRecap(){
    try{
     const j=JSON.parse(await f.text());
     if(!j||j.type!=="lumina-progress"||!j.user)throw 0;
-    const u=String(j.user).toLowerCase(),old=rc[u]?L.cleanProg(rc[u].progress):L.cleanProg(null);
+    const u=String(j.user),old=rc[u]?L.cleanProg(rc[u].progress):L.cleanProg(null);
     rc[u]={name:String(j.name||u),exportedAt:Number(j.exportedAt)||Date.now(),progress:L.mergeProg(old,L.cleanProg(j.progress))};ok++;
    }catch(err){bad++;}
   }

@@ -25,7 +25,17 @@ css.textContent=
 ".ex-q-foot{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:8px;flex-wrap:wrap}"+
 ".ex-flag.on{background:#fdecea;color:#b3261e}"+
 ".ex-total{font-size:48px;font-weight:850;color:var(--red);line-height:1}"+
-"@media(max-width:900px){.ex-grid{grid-template-columns:1fr}.ex-nav{position:static;max-height:none}.ex-bar{top:80px}}";
+"@media(max-width:900px){.ex-grid{grid-template-columns:1fr}.ex-nav{position:static;max-height:none}.ex-bar{top:80px}}"+
+".ex-pass{position:sticky;top:112px;z-index:15;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 6px 16px #26334b18;max-height:38vh;overflow:auto;margin-bottom:14px;padding:12px 14px}"+
+".pass-body{position:relative;padding-left:40px;font-size:14px}.pass-body p{margin:0 0 12px;line-height:26px;color:#2d3646}.pass-body p:last-of-type{margin-bottom:0}"+
+".pass-body .ln{position:absolute;left:0;width:30px;text-align:right;font-size:11px;font-weight:800;color:#8993a4;line-height:26px;pointer-events:none}"+
+".pass-body:before{content:'';position:absolute;left:35px;top:0;bottom:0;width:1px;background:var(--line)}"+
+"body.exam-mode{padding-top:56px;padding-bottom:12px}body.exam-mode .hero{padding:5px max(4vw,16px)}body.exam-mode .hero .eyebrow,body.exam-mode .hero p{display:none}body.exam-mode .hero h1{font-size:17px;margin:0}body.exam-mode .brand{height:38px}body.exam-mode .logo-img{height:38px}"+
+"body.exam-mode footer,body.exam-mode .sidebar{display:none}body.exam-mode .shell{grid-template-columns:1fr;margin:10px auto 20px}body.exam-mode .ex-bar{top:56px}body.exam-mode .ex-nav{top:124px;max-height:calc(100vh - 140px)}body.exam-mode .ex-pass{top:118px}"+
+"body.exam-mode .ex-bar{padding:6px 12px;margin-bottom:8px;top:56px;box-shadow:0 -8px 0 #fff,0 4px 12px #26334b10}body.exam-mode .ex-timer{font-size:18px;padding:4px 10px}body.exam-mode .ex-pass{top:106px;margin-bottom:10px;box-shadow:0 -6px 0 #fff,0 6px 16px #26334b18}body.exam-mode .ex-nav{top:106px;max-height:calc(100vh - 120px)}"+
+"body.exam-mode .panel{padding:12px 14px}body.exam-mode .ex-dir{margin-bottom:8px;padding:6px 10px}body.exam-mode .audio-box{padding:8px 12px;margin-bottom:8px}body.exam-mode .audio-box p{display:none}"+
+"body.exam-mode .question{padding:11px 14px;margin-bottom:8px}body.exam-mode .q-meta{margin-bottom:4px}body.exam-mode .q-text{margin-bottom:7px;line-height:1.5}body.exam-mode .options{gap:5px}body.exam-mode .option{padding:6px 10px;line-height:1.4}body.exam-mode .ex-q-foot{margin-top:7px}body.exam-mode .ex-q-foot .btn{padding:5px 9px}"+
+"@media(max-width:900px){body.exam-mode .ex-nav{position:static;max-height:none}body.exam-mode .ex-pass{max-height:34vh}}";
 document.head.appendChild(css);
 var sec=document.createElement("section");sec.id="exam";sec.className="panel page hidden";sec.innerHTML='<div id="exam-body"></div>';
 document.querySelector("main.content").appendChild(sec);
@@ -34,12 +44,27 @@ if(cmsBtn){var b=document.createElement("button");b.type="button";b.dataset.role
 
 /* tetap menandai menu Pre-Test saat halaman ujian terbuka */
 var _show=showPage;
-showPage=function(id){_show(id);if(id==="exam")document.querySelectorAll(".nav button[data-page]").forEach(function(b){b.classList.toggle("active",b.dataset.page==="pretest");});};
+showPage=function(id){
+ document.body.classList.toggle("exam-mode",(id==="exam"&&view==="run"&&!!ex&&!ex.done)||id==="run");
+ _show(id);if(id==="exam")document.querySelectorAll(".nav button[data-page]").forEach(function(b){b.classList.toggle("active",b.dataset.page==="pretest");});};
 
 /* ---------- util ---------- */
 function fmtClock(sec){sec=Math.max(0,sec);var h=Math.floor(sec/3600),m=Math.floor(sec%3600/60),s=sec%60;return h+":"+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");}
 function fmtMin(sec){return Math.floor(sec/60)+" min "+String(sec%60).padStart(2,"0")+" s";}
 function dateTxt(ts){return new Date(ts).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"});}
+function fmt(t){return String(t).replace(/\*\*([^*\s](?:[^*]*?[^*\s])?)\*\*/g,"<strong>$1</strong>").replace(/(^|[^*])\*([^*\s](?:[^*]*?[^*\s])?)\*(?!\*)/g,"$1<em>$2</em>");}
+function passHTML(txt){return String(txt||"").split(/\n\s*\n/).map(function(p){p=p.replace(/\s*\n\s*/g," ").trim();return p?"<p>"+fmt(esc(p))+"</p>":"";}).join("");}
+function numberLines(){
+ var body=$("pass-body");if(!body||!ex||!body.offsetHeight)return;
+ Array.prototype.forEach.call(body.querySelectorAll(".ln"),function(n){n.remove();});
+ var every=ex.cfg.settings.lineEvery;if(!every)return;
+ var lh=26,g=0;
+ Array.prototype.forEach.call(body.querySelectorAll("p"),function(p){
+  var lines=Math.max(1,Math.round(p.offsetHeight/lh));
+  for(var i=0;i<lines;i++){g++;if(g%every===0){var s=document.createElement("span");s.className="ln";s.textContent=g;s.style.top=(p.offsetTop+i*lh)+"px";body.appendChild(s);}}
+ });
+}
+window.addEventListener("resize",function(){if(ex&&!ex.done)numberLines();});
 function curUnit(){return ex.flat.units[ex.idx];}
 function answeredCount(sc){return ex.flat.qs.filter(function(q){return (!sc||q.section===sc)&&ex.answers[q.id]!=null;}).length;}
 function persist(){if(ex.preview||ex.done)return;X.saveRun(ex.user,ex.level,{answers:ex.answers,flags:ex.flags,plays:ex.plays,idx:ex.idx,startedAt:ex.startedAt,endAt:ex.endAt});}
@@ -79,7 +104,7 @@ function introHTML(lv){
  var rows=X.SECS.map(function(s){var m=X.META[s];return '<tr><td>'+m.ico+' '+m.name+'</td><td class="n">'+flat.count[s]+'</td><td class="n">'+m.std+'</td><td class="n">~'+cfg.levels[lv].sections[s].minutes+' min</td></tr>';}).join("");
  var dirs=X.SECS.map(function(s){return '<h3>'+X.META[s].ico+' '+X.META[s].name+'</h3><p>'+esc(cfg.levels[lv].sections[s].directions)+'</p>';}).join("");
  var run=ex&&ex.level===lv&&!ex.done?ex:null,saved=(!run&&me&&me.role==="student")?X.loadRun(me.user,lv):null;
- var btn=run||saved?'<button class="btn" data-xact="resume">▶ Resume test</button> <button class="btn secondary" data-xact="restart">Start over</button>':'<button class="btn" data-xact="begin">▶ Start test</button>';
+ var btn=run||saved?'<button class="btn" data-xact="resume">▶ Resume test</button> <button class="btn secondary" data-xact="restart">Start over</button>':'<button class="btn" data-xact="begin">▶ Start test — the '+st.totalMinutes+'-minute timer begins immediately</button>';
  return '<div class="page-title"><div><div class="kicker">TOEFL PRE-TEST · '+v.name.toUpperCase()+'</div><h2>General Directions</h2><p>Please read carefully before you begin.</p></div><button class="btn secondary small" data-xact="home">← Back</button></div><div class="ex-intro">'+
   '<p>This test measures your ability to understand English as it is used in academic settings. It follows the format of the TOEFL ITP and has three sections. Work through the sections in any order using the question navigator; the timer covers the whole test.</p>'+
   '<div class="tbl-wrap"><table class="tbl"><thead><tr><th>SECTION</th><th class="n">QUESTIONS (THIS TEST)</th><th class="n">STANDARD</th><th class="n">SUGGESTED TIME</th></tr></thead><tbody>'+rows+'<tr class="sec"><td>Total</td><td class="n">'+flat.qs.length+'</td><td class="n">140</td><td class="n">'+st.totalMinutes+' min</td></tr></tbody></table></div>'+
@@ -111,34 +136,34 @@ R.exam=function(){
  renderShell();
 };
 function renderShell(){
- $("exam-body").innerHTML='<div class="ex-bar"><div><b>Pre-Test · '+LEVEL[ex.level].name+'</b>'+(ex.preview?' <span class="pill">preview</span>':"")+' <span class="sk-meta" id="ex-prog"></span></div><div class="row"><span class="ex-timer" id="ex-timer">--:--:--</span><button class="btn small" data-xact="submit">Submit test</button></div></div>'+
+ $("exam-body").innerHTML='<div class="ex-bar"><div><b>Pre-Test · '+LEVEL[ex.level].name+'</b>'+(ex.preview?' <span class="pill">preview</span>':"")+' <span class="sk-meta" id="ex-prog"></span></div><div class="row"><span class="ex-timer" id="ex-timer">--:--:--</span><button class="btn secondary small" data-xact="home" title="Back to the Pre-Test menu (the timer keeps running)">⌂ Menu</button><button class="btn small" data-xact="submit">Submit test</button></div></div>'+
   '<div class="ex-grid"><div id="ex-main"></div><aside class="ex-nav" id="ex-nav"></aside></div>';
  renderUnit();tick();
 }
 function qHTML(it){
  var t=esc(it.q.q);
  if(it.partType==="error"){var k=0;t=t.replace(/__(.+?)__/g,function(m,x){return '<u>'+x+'</u><sup>('+"ABCD"[k++]+')</sup>';});}
- return t;
+ return fmt(t);
 }
 function renderUnit(){
  stopAudio();
  var un=curUnit(),u=un.unit,p=un.part,m=X.META[un.section],h='<div class="row" style="margin-bottom:8px"><span class="pill" style="background:'+m.color+'22;color:'+m.color+'">'+m.ico+' '+m.short+'</span><b style="font-size:13px">'+esc(p.title)+'</b></div>';
- if(p.directions)h+='<details class="ex-dir"'+(un.first?" open":"")+'><summary>Directions</summary><div>'+esc(p.directions)+'</div></details>';
+ if(p.directions)h+='<details class="ex-dir"><summary'+(un.first?' style="color:var(--red)"':'')+'>Directions'+(un.first?' (new part — click to read)':'')+'</summary><div>'+esc(p.directions)+'</div></details>';
  if(un.section==="listening"){
   if(u.audioUrl||u.script)h+='<div class="audio-box"><div class="row"><button class="btn" id="ex-play" data-xact="play">▶ Play audio</button><button class="btn secondary small" data-xact="stop">■ Stop</button><span class="sk-meta" id="ex-plays"></span></div><p>Listen carefully, then answer the question(s) below.</p></div>';
   else h+='<div class="notice">No audio has been provided for this item.</div>';
  }
- if(u.passage)h+='<div class="material" style="margin-bottom:14px"><div class="cm-body" style="margin-top:0">'+L.textToHTML(u.passage)+'</div></div>';
+ if(u.passage)h+='<div class="ex-pass"><div class="pass-body" id="pass-body">'+passHTML(u.passage)+'</div></div>';
  h+=un.qs.map(function(it){
   var a=ex.answers[it.id];
   return '<article class="question" id="exq-'+it.gi+'"><div class="q-meta">Question '+it.num+' · '+m.short+'</div><div class="q-text">'+qHTML(it)+'</div><div class="options">'+
-   it.q.o.map(function(o,j){return '<label class="option"><input type="radio" name="'+esc(it.id)+'" data-qid="'+esc(it.id)+'" value="'+j+'"'+(a===j?" checked":"")+'><span>'+"ABCD"[j]+". "+esc(o)+'</span></label>';}).join("")+
+   it.q.o.map(function(o,j){return '<label class="option"><input type="radio" name="'+esc(it.id)+'" data-qid="'+esc(it.id)+'" value="'+j+'"'+(a===j?" checked":"")+'><span>'+"ABCD"[j]+". "+fmt(esc(o))+'</span></label>';}).join("")+
    '</div><div class="ex-q-foot"><button type="button" class="btn secondary small ex-flag'+(ex.flags[it.id]?" on":"")+'" data-xact="flag" data-id="'+esc(it.id)+'">⚑ '+(ex.flags[it.id]?"Flagged":"Flag for review")+'</button>'+(a!=null?'<button type="button" class="btn secondary small" data-xact="clear" data-id="'+esc(it.id)+'">Clear answer</button>':"")+'</div></article>';
  }).join("");
  var last=ex.idx===ex.flat.units.length-1;
  h+='<div class="row" style="justify-content:space-between;margin-top:6px"><button class="btn secondary" data-xact="prev"'+(ex.idx===0?" disabled":"")+'>← Previous</button>'+(last?'<button class="btn" data-xact="submit">Review &amp; submit</button>':'<button class="btn" data-xact="next">Next →</button>')+'</div>';
  $("ex-main").innerHTML=h;
- updatePlays();renderNav();
+ updatePlays();renderNav();numberLines();setTimeout(numberLines,250);
 }
 function renderNav(){
  var un=curUnit(),cur={};un.qs.forEach(function(q){cur[q.id]=1;});
@@ -191,7 +216,7 @@ function submitExam(auto){
  var pg=$("exam");if(pg&&!pg.classList.contains("hidden"))renderResult();
 }
 function renderResult(){
- var r=ex.result,pass=r;
+ document.body.classList.remove("exam-mode");var r=ex.result;
  var secRows=X.SECS.map(function(s){var x=r.sections[s],m=X.META[s];if(!x.total)return "";return '<tr><td>'+m.ico+' '+m.name+'</td><td class="n">'+x.correct+' / '+x.total+'</td><td class="n">'+x.wrong+'</td><td class="n">'+x.blank+'</td><td class="n"><b>'+x.scaled+'</b></td></tr>';}).join("");
  var bars=X.SECS.map(function(s){var x=r.sections[s],m=X.META[s];if(!x.total)return "";var p=Math.round(x.correct/x.total*100);return '<div class="bar-row"><span class="lb">'+m.ico+' '+m.short+'</span><div class="bar-track"><div class="bar-fill" style="width:'+p+'%;background:'+m.color+'"></div></div><b>'+p+'%</b></div>';}).join("");
  var parts=r.parts.map(function(p){return '<tr><td>'+esc(p.title)+'</td><td class="n">'+p.correct+' / '+p.total+'</td><td class="n">'+Math.round(p.correct/p.total*100)+'%</td></tr>';}).join("");

@@ -67,7 +67,7 @@ function sha256(str){
  }
  return h.map(function(x){return (x>>>0).toString(16).padStart(8,"0");}).join("");
 }
-function hashPassword(user,pass){return sha256("lumina|"+String(user).toLowerCase()+"|"+pass);}
+function hashPassword(user,pass){return sha256("lumina|"+String(user)+"|"+pass);}
 
 /* ---------- pembersih HTML (hanya tag aman + warna) ---------- */
 var ALLOWED={B:1,STRONG:1,I:1,EM:1,U:1,S:1,SPAN:1,MARK:1,P:1,BR:1,UL:1,OL:1,LI:1,H3:1,H4:1,A:1,DIV:1,BLOCKQUOTE:1,HR:1,SUB:1,SUP:1};
@@ -262,7 +262,7 @@ function normalize(d){
   });
  }
  out.accounts=(Array.isArray(d.accounts)?d.accounts:[]).filter(function(a){return a&&a.user&&a.hash;}).map(function(a){
-  return {user:String(a.user).toLowerCase(),name:String(a.name||a.user),role:a.role==="admin"?"admin":"student",hash:String(a.hash),createdAt:Number(a.createdAt)||0};
+  return {user:String(a.user).trim(),name:String(a.name||a.user),role:a.role==="admin"?"admin":"student",hash:String(a.hash),createdAt:Number(a.createdAt)||0};
  });
  if(!out.accounts.some(function(a){return a.role==="admin";}))out.accounts.unshift(seedAdmin());
  var st=(d.settings&&typeof d.settings==="object")?d.settings:{};
@@ -321,7 +321,7 @@ function download(d){
 
 /* ---------- akun & sesi ---------- */
 var memSession=null;
-function findAccount(d,user){user=String(user||"").trim().toLowerCase();for(var i=0;i<d.accounts.length;i++){if(d.accounts[i].user===user)return d.accounts[i];}return null;}
+function findAccount(d,user){user=String(user||"").trim();for(var i=0;i<d.accounts.length;i++){if(d.accounts[i].user===user)return d.accounts[i];}return null;}
 function checkLogin(d,user,pass){var a=findAccount(d,user);return(a&&a.hash===hashPassword(a.user,pass))?a:null;}
 /* login halaman latihan: cek ke versi terpublikasi; draf lokal hanya berlaku untuk akun admin */
 function login(user,pass){
@@ -340,7 +340,7 @@ function currentAccount(d){var s=getSession();return s?findAccount(d,s.user):nul
 function isDefaultPassword(a){return !!a&&a.hash===hashPassword(a.user,DEFAULT_ADMIN.pass);}
 
 /* ---------- progres mahasiswa (disimpan per browser) ---------- */
-function progKey(u){return PROG_PREFIX+String(u).toLowerCase();}
+function progKey(u){return PROG_PREFIX+String(u);}
 function cleanProg(p){
  p=(p&&typeof p==="object")?p:{};
  return {
