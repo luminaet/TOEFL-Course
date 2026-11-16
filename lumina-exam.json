@@ -1,10 +1,11 @@
 {
   "version": 1,
-  "updatedAt": 1794817060841,
+  "updatedAt": 1794819945845,
   "settings": {
     "totalMinutes": 120,
     "audioPlays": 1,
     "generalNotes": "",
+    "lineEvery": 5,
     "voices": {
       "narrator": {
         "voice": "",
@@ -364,7 +365,16 @@
                       "e": "",
                       "topic": "Short conversation",
                       "id": "la-u15-q1"
-                    },
+                    }
+                  ]
+                },
+                {
+                  "id": "la-u16",
+                  "title": "Problem and Solution",
+                  "audioUrl": "",
+                  "script": "Man: My laptop won't turn on. I think the battery is empty.\nWoman: Why don't you charge it first?\nNarrator: What does the woman recommend?",
+                  "passage": "",
+                  "questions": [
                     {
                       "q": "What does the woman recommend?",
                       "o": [
@@ -376,8 +386,17 @@
                       "a": 2,
                       "e": "",
                       "topic": "Short conversation",
-                      "id": "la-u15-q2"
-                    },
+                      "id": "la-u16-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "la-u17",
+                  "title": "Problem and Solution",
+                  "audioUrl": "",
+                  "script": "Man: My laptop won't turn on. I think the battery is empty.\nWoman: Why don't you charge it first?\nNarrator: What does the woman recommend?",
+                  "passage": "",
+                  "questions": [
                     {
                       "q": "What will the man probably do next?",
                       "o": [
@@ -389,12 +408,12 @@
                       "a": 0,
                       "e": "",
                       "topic": "Short conversation",
-                      "id": "la-u15-q3"
+                      "id": "la-u17-q1"
                     }
                   ]
                 },
                 {
-                  "id": "la-u16",
+                  "id": "la-u18",
                   "title": "Topic / Main Idea",
                   "audioUrl": "",
                   "script": "Man: What are you reading?\nWoman: It's a book about the history of Indonesia.\nNarrator: What is the woman reading about?",
@@ -411,12 +430,12 @@
                       "a": 2,
                       "e": "",
                       "topic": "Short conversation",
-                      "id": "la-u16-q1"
+                      "id": "la-u18-q1"
                     }
                   ]
                 },
                 {
-                  "id": "la-u17",
+                  "id": "la-u19",
                   "title": "Implied Meaning",
                   "audioUrl": "",
                   "script": "Woman: Can you help me carry these boxes?\nMan: Sure, but let me finish my lunch first.\nNarrator: What does the man imply?",
@@ -433,12 +452,12 @@
                       "a": 1,
                       "e": "",
                       "topic": "Short conversation",
-                      "id": "la-u17-q1"
+                      "id": "la-u19-q1"
                     }
                   ]
                 },
                 {
-                  "id": "la-u18",
+                  "id": "la-u20",
                   "title": "Frequency",
                   "audioUrl": "",
                   "script": "Man: How often do you go jogging?\nWoman: I usually do it three times a week.\nNarrator: How frequently does the woman go jogging?",
@@ -455,12 +474,12 @@
                       "a": 2,
                       "e": "",
                       "topic": "Short conversation",
-                      "id": "la-u18-q1"
+                      "id": "la-u20-q1"
                     }
                   ]
                 },
                 {
-                  "id": "la-u19",
+                  "id": "la-u21",
                   "title": "Sequence of Events",
                   "audioUrl": "",
                   "script": "Woman: Did you have breakfast before coming to campus?\nMan: No, I went straight to the bus stop because I woke up late.\nNarrator: What did the man do first this morning?",
@@ -477,12 +496,12 @@
                       "a": 2,
                       "e": "",
                       "topic": "Short conversation",
-                      "id": "la-u19-q1"
+                      "id": "la-u21-q1"
                     }
                   ]
                 },
                 {
-                  "id": "la-u20",
+                  "id": "la-u22",
                   "title": "Advice",
                   "audioUrl": "",
                   "script": "Man: I have an important presentation tomorrow, but I'm very nervous.\nWoman: You should practice in front of a mirror tonight.\nNarrator: What does the woman advise the man to do?",
@@ -499,12 +518,12 @@
                       "a": 1,
                       "e": "",
                       "topic": "Short conversation",
-                      "id": "la-u20-q1"
+                      "id": "la-u22-q1"
                     }
                   ]
                 },
                 {
-                  "id": "la-u21",
+                  "id": "la-u23",
                   "title": "Negative Agreement",
                   "audioUrl": "",
                   "script": "Woman: I don't like waking up early.\nMan: Neither do I. I prefer sleeping late.\nNarrator: What does the man mean?",
@@ -521,12 +540,12 @@
                       "a": 1,
                       "e": "",
                       "topic": "Short conversation",
-                      "id": "la-u21-q1"
+                      "id": "la-u23-q1"
                     }
                   ]
                 },
                 {
-                  "id": "la-u22",
+                  "id": "la-u24",
                   "title": "Distance",
                   "audioUrl": "",
                   "script": "Man: Is the post office far from here?\nWoman: Not really. It's only a five-minute walk.\nNarrator: What does the woman say about the post office?",
@@ -543,12 +562,12 @@
                       "a": 1,
                       "e": "",
                       "topic": "Short conversation",
-                      "id": "la-u22-q1"
+                      "id": "la-u24-q1"
                     }
                   ]
                 },
                 {
-                  "id": "la-u23",
+                  "id": "la-u25",
                   "title": "Purpose",
                   "audioUrl": "",
                   "script": "Woman: Why are you going to the bookstore?\nMan: I need to buy a dictionary for my English class.\nNarrator: Why is the man going to the bookstore?",
@@ -565,12 +584,12 @@
                       "a": 0,
                       "e": "",
                       "topic": "Short conversation",
-                      "id": "la-u23-q1"
+                      "id": "la-u25-q1"
                     }
                   ]
                 },
                 {
-                  "id": "la-u24",
+                  "id": "la-u26",
                   "title": "Conclusion / Inference",
                   "audioUrl": "",
                   "script": "Man: Have you seen Anna today?\nWoman: Yes, she was carrying a large suitcase and waiting for a taxi\nNarrator: What can be concluded about Anna?",
@@ -587,7 +606,7 @@
                       "a": 1,
                       "e": "",
                       "topic": "Short conversation",
-                      "id": "la-u24-q1"
+                      "id": "la-u26-q1"
                     }
                   ]
                 }
@@ -604,7 +623,7 @@
                   "id": "lb-u1",
                   "title": "Study group",
                   "audioUrl": "",
-                  "script": "Woman: Are you coming to the study group tonight?\nMan: I wish I could, but I have a part-time shift until nine.\nWoman: We're meeting at eight in the library. We could also meet again on Saturday.\nMan: Saturday would be perfect. I'm free all day.\nNarrator: Question 1. Why can't the man attend tonight?",
+                  "script": "Woman: Are you coming to the study group tonight?\nMan: I wish I could, but I have a part-time shift until nine.\nWoman: We're meeting at eight in the library. We could also meet again on Saturday.\nMan: Saturday would be perfect. I'm free all day.\nNarrator: Question 25. Why can't the man attend tonight?",
                   "passage": "",
                   "questions": [
                     {
@@ -639,7 +658,7 @@
                   "id": "lb-u2",
                   "title": "University Library",
                   "audioUrl": "",
-                  "script": "Woman: Excuse me, could you tell me where I can find books about English grammar?\nMan: Sure. You can find them on the third floor, in the language section.\nWoman: Thank you. Can I borrow the books for two weeks?\nMan: Yes, students can borrow up to three books for two weeks.\nWoman: That's great. I need them for my English assignment.\nMan: Don't forget to bring your student card when you borrow the books.\nWoman: Okay. Thank you for your help.\nMan: You're welcome.\nNarrator: Where can the woman find books about English grammar?",
+                  "script": "Woman: Excuse me, could you tell me where I can find books about English grammar?\nMan: Sure. You can find them on the third floor, in the language section.\nWoman: Thank you. Can I borrow the books for two weeks?\nMan: Yes, students can borrow up to three books for two weeks.\nWoman: That's great. I need them for my English assignment.\nMan: Don't forget to bring your student card when you borrow the books.\nWoman: Okay. Thank you for your help.\nMan: You're welcome.\nNarrator: Question number 27. Where can the woman find books about English grammar?",
                   "passage": "",
                   "questions": [
                     {
@@ -656,6 +675,19 @@
                       "id": "lb-u2-q1"
                     },
                     {
+                      "q": "How long the woman will borrow the book?",
+                      "o": [
+                        "14 days",
+                        "2 months",
+                        "too weak",
+                        "2 days"
+                      ],
+                      "a": 0,
+                      "e": "",
+                      "topic": "",
+                      "id": "lb-u2-q2"
+                    },
+                    {
                       "q": "What does the woman need to bring when borrowing books?",
                       "o": [
                         "Her student card.",
@@ -666,7 +698,7 @@
                       "a": 0,
                       "e": "",
                       "topic": "",
-                      "id": "lb-u2-q2"
+                      "id": "lb-u2-q3"
                     }
                   ]
                 },
@@ -770,7 +802,7 @@
                       "id": "lc-u1-q1"
                     },
                     {
-                      "q": "According to the speaker, what may happen if people do not drink enough water?",
+                      "q": "What may happen if people do not drink enough water?",
                       "o": [
                         "They may feel tired.",
                         "They may become stronger.",
@@ -840,7 +872,7 @@
                       "id": "lc-u3-q1"
                     },
                     {
-                      "q": "According to the speaker, how can reading improve writing skills?",
+                      "q": "How can reading improve writing skills?",
                       "o": [
                         "By helping students memorize every book.",
                         "By teaching students to organize sentences and develop ideas.",
