@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": 1794821669659,
+  "updatedAt": 1794822146866,
   "settings": {
     "totalMinutes": 120,
     "audioPlays": 1,
@@ -855,9 +855,22 @@
                   "id": "lc-u3",
                   "title": "The Benefits of Reading Books",
                   "audioUrl": "",
-                  "script": "Narrator: Listen to a short lecture about reading books.\nWoman: Reading books is a useful activity for students. It provides many benefits, especially for those who want to improve their language skills. First, reading helps students learn new vocabulary. When students read regularly, they become familiar with different words and expressions. Second, reading can improve writing skills. Students can learn how to organize sentences and develop ideas by reading different types of texts. Finally, reading also increases knowledge because books contain information about many subjects, such as science, history, and culture. For these reasons, students should make reading a regular habit.\nNarrator: What is one benefit of reading books mentioned by the speaker?",
+                  "script": "Narrator: Listen to a short lecture about reading books.\nWoman: Reading books is a useful activity for students. It provides many benefits, especially for those who want to improve their language skills. First, reading helps students learn new vocabulary. When students read regularly, they become familiar with different words and expressions. Second, reading can improve writing skills. Students can learn how to organize sentences and develop ideas by reading different types of texts. Finally, reading also increases knowledge because books contain information about many subjects, such as science, history, and culture. For these reasons, students should make reading a regular habit.\nNarrator: What is one benefit of reading books mentioned by the speaker?\nNarrator: Who is probably the speaker?",
                   "passage": "",
                   "questions": [
+                    {
+                      "q": "Who is the speaker?",
+                      "o": [
+                        "A students",
+                        "A government",
+                        "A teacher",
+                        "A scientist"
+                      ],
+                      "a": 0,
+                      "e": "",
+                      "topic": "",
+                      "id": "lc-u3-q1"
+                    },
                     {
                       "q": "What is one benefit of reading books mentioned by the speaker?",
                       "o": [
@@ -869,7 +882,7 @@
                       "a": 0,
                       "e": "",
                       "topic": "",
-                      "id": "lc-u3-q1"
+                      "id": "lc-u3-q2"
                     },
                     {
                       "q": "How can reading improve writing skills?",
@@ -882,7 +895,7 @@
                       "a": 1,
                       "e": "",
                       "topic": "",
-                      "id": "lc-u3-q2"
+                      "id": "lc-u3-q3"
                     },
                     {
                       "q": "What is not mentioned about the benefits of reading?",
@@ -895,7 +908,7 @@
                       "a": 3,
                       "e": "",
                       "topic": "",
-                      "id": "lc-u3-q3"
+                      "id": "lc-u3-q4"
                     }
                   ]
                 }
