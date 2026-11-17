@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "updatedAt": 1794926212611,
+  "updatedAt": 1794951596178,
   "materials": [],
   "materialPages": {
     "listening": [
@@ -625,6 +625,23 @@
           "ts": 1794925316881,
           "act": "Akun dibuat",
           "note": "Mahasiswa"
+        }
+      ]
+    },
+    {
+      "user": "FAQIH",
+      "name": "Muh Faqih Adnan",
+      "role": "student",
+      "type": "plus",
+      "hash": "f73a899fdbc05ba37fd4760c1fae06dbd8fcbe985fd5fb819bd27f26277c656e",
+      "createdAt": 1794951596176,
+      "expiresAt": 1810589996176,
+      "active": true,
+      "history": [
+        {
+          "ts": 1794951596177,
+          "act": "Akun dibuat",
+          "note": "Student Plus"
         }
       ]
     }
