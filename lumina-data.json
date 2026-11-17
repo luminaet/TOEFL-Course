@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "updatedAt": 1794802742132,
+  "updatedAt": 1794923798329,
   "materials": [],
   "materialPages": {
     "listening": [
@@ -518,6 +518,50 @@
     {
       "label": "Skill 6 : Coordinating Conjunction",
       "file": "materiswoskill6.html"
+    },
+    {
+      "label": "Skill 7 : Subordinating Conjunction",
+      "file": "materiswoskill7.html"
+    },
+    {
+      "label": "Skill 8 : Correlative Conjunction",
+      "file": "materiswoskill8.html"
+    },
+    {
+      "label": "Skill 9 : Noun Clause",
+      "file": "materiswoskill9.html"
+    },
+    {
+      "label": "Skill 10 : Adjective Clause",
+      "file": "materiswoskill10.html"
+    },
+    {
+      "label": "Skill 11 : AC Reduction",
+      "file": "materiswoskill11.html"
+    },
+    {
+      "label": "Skill 12 : AVC Reduction",
+      "file": "materiswoskill12.html"
+    },
+    {
+      "label": "Skill 13 : Inversion in Question",
+      "file": "materiswokill13.html"
+    },
+    {
+      "label": "Skill 14 : Inversion of Place Expression",
+      "file": "materiswoskill14.html"
+    },
+    {
+      "label": "Skill 15 : Inversion of Negative Expression",
+      "file": "materiswoskill15.html"
+    },
+    {
+      "label": "Skill 16 : Inversion in Conditional Sentence",
+      "file": "materiswoskill16.html"
+    },
+    {
+      "label": "Skill 17 : Inversion in Comparison",
+      "file": "materiswoskill17.html"
     }
   ],
   "skills": {},
@@ -526,21 +570,37 @@
       "user": "admin",
       "name": "Administrator",
       "role": "admin",
+      "type": "admin",
       "hash": "5d2da627c4d2bf1ce45267500ab103da835698f270c08c3e7dce5c111b7eedd5",
-      "createdAt": 0
+      "createdAt": 0,
+      "expiresAt": 0,
+      "active": true,
+      "history": []
     },
     {
       "user": "far24",
       "name": "Faqih Adnan Arrasyid",
       "role": "student",
+      "type": "mahasiswa",
       "hash": "3b82be4d335bb8fcab477d8eef635091bf29970bd3e4909989b3b3d91fd63c9c",
-      "createdAt": 1794800246730
+      "createdAt": 1794800246730,
+      "expiresAt": 1858093199000,
+      "active": true,
+      "history": [
+        {
+          "ts": 1794923798314,
+          "act": "Masa berlaku diatur",
+          "note": "s.d. 17 Nov 2028"
+        }
+      ]
     }
   ],
   "settings": {
     "requireLogin": true,
     "inactiveDays": 2,
     "periodWeeks": 4,
-    "passScore": 70
+    "passScore": 70,
+    "driveBackup": "https://drive.google.com/drive/folders/1oLm05X1naBQ-AUZkULfDeuY7a3T9ej3g?usp=sharing",
+    "drivePhotos": "https://drive.google.com/drive/folders/1oLm05X1naBQ-AUZkULfDeuY7a3T9ej3g?usp=sharing"
   }
 }
