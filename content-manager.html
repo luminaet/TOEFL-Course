@@ -260,7 +260,7 @@ function vHome(){
  const pn=L.MAT_SECTIONS.reduce((n,s)=>n+D.materialPages[s].length,0);
  const qn=Object.keys(D.practice).reduce((n,k)=>n+(findPage(k)?D.practice[k].questions.length:0),0);
  const tn=L.LEVELS.reduce((n,l)=>n+D.pretest[l].questions.length,0);
- const sn=D.accounts.filter(a=>a.role==="student").length;
+ const sn=ACC.filter(a=>a.role==="student").length;
  $("#view").innerHTML=title("RINGKASAN","Selamat datang","Pilih menu di sebelah kiri untuk mengisi atau memperbarui konten web.")+
  `<div class="stats">
   <div class="stat"><b>${pn}</b><span>Halaman skill</span></div>
@@ -497,42 +497,60 @@ function vPretest(){
 const TL=k=>(L.TYPES[k]||{label:k}).label;
 const STT={active:["Aktif","ok"],expired:["Kedaluwarsa","bad"],inactive:["Nonaktif","bad"]};
 const renewable=a=>a.role!=="admin"&&a.type!=="dummy";
+let ACC=[],PFL={},accErr="";
+function loadAcc(){
+ return Promise.all([L.api("listAccounts"),L.api("listProfiles")]).then(r=>{
+  ACC=r[0].accounts||[];PFL={};(r[1].profiles||[]).forEach(p=>{PFL[p.user]=p;});accErr="";
+ }).catch(e=>{accErr=e.message||"Gagal memuat akun.";}).then(()=>{
+  if(!D||["home","accounts","recap"].indexOf(tab)<0||qEdit||$("#app").classList.contains("hidden")||!$("#modal").classList.contains("hidden"))return;
+  const ae=document.activeElement;if(tab==="accounts"&&ae&&ae.closest&&ae.closest("form"))return;
+  render();
+ });
+}
 function vAccounts(){
  const now=Date.now();
  const opts=(sel,adm)=>(adm?[["admin","Admin"]]:[]).concat(L.TYPE_KEYS.map(k=>[k,TL(k)])).map(o=>`<option value="${o[0]}" ${o[0]===sel?"selected":""}>${o[1]}</option>`).join("");
- const rows=D.accounts.map(a=>{
+ const rows=ACC.map(a=>{
   const s=L.accStatus(a,now),t=STT[s]||STT.active;
-  return `<tr><td>${esc(a.name)}</td><td>${esc(a.user)}</td><td><span class="tag ${a.role==="admin"?"admin":""}">${esc(TL(a.type)).toUpperCase()}</span></td><td><span class="tag ${t[1]}">${t[0]}</span></td><td>${a.expiresAt?fmtDate(a.expiresAt):"Selamanya"}</td><td>${fmtDate(a.createdAt)}</td><td><div class="acts"><button class="btn secondary small" data-act="accManage" data-id="${esc(a.user)}">Kelola</button>${renewable(a)?`<button class="btn small" data-act="accExtend" data-id="${esc(a.user)}">+6 bln</button>`:""}<button class="btn secondary small" data-act="accPw" data-id="${esc(a.user)}">Ganti password</button></div></td></tr>`;
+  return `<tr><td>${esc(a.name)}</td><td>${esc(a.user)}</td><td><span class="tag ${a.role==="admin"?"admin":""}">${esc(TL(a.type)).toUpperCase()}</span></td><td><span class="tag ${t[1]}">${t[0]}</span></td><td>${a.expiresAt?fmtDate(a.expiresAt):"Selamanya"}</td><td>${fmtDate(a.createdAt)}</td><td><div class="acts"><button class="btn secondary small" data-act="accManage" data-id="${esc(a.user)}">Kelola</button>${renewable(a)&&a.expiresAt?`<button class="btn small" data-act="accExtend" data-id="${esc(a.user)}">+6 bln</button>`:""}<button class="btn secondary small" data-act="accPw" data-id="${esc(a.user)}">Ganti password</button></div></td></tr>`;
  }).join("");
- $("#view").innerHTML=title("AKUN & LOGIN","Akun & login web","Jenis akun: Admin, Mahasiswa, Student Plus, Customer (masa berlaku 6 bulan), dan Dummy (hanya melihat, tanpa masa berlaku). Akun tidak dihapus; akun yang berakhir tetap tercatat dan bisa diperpanjang.")+
- `<div class="note">🔒 Setelah menambah atau mengubah akun, <b>publikasikan</b> <code>lumina-data.json</code>. Masa berlaku dicek dengan jam perangkat pengguna.</div>
- <div class="box"><h3>Daftar akun (${D.accounts.length})</h3><div style="overflow:auto"><table><thead><tr><th>NAMA</th><th>USERNAME</th><th>JENIS</th><th>STATUS</th><th>BERLAKU S.D.</th><th>DIBUAT</th><th></th></tr></thead><tbody>${rows}</tbody></table></div></div>
+ $("#view").innerHTML=title("AKUN & LOGIN","Akun & login web","Jenis akun: Admin, Mahasiswa, Student Plus, Customer (masa berlaku 6 bulan, bisa dibuat selamanya), dan Dummy (hanya melihat). Akun tidak dihapus; akun yang berakhir tetap tercatat dan bisa diperpanjang.")+
+ (accErr?`<div class="note" style="background:#fff3f4;color:#8f2234">⚠️ ${esc(accErr)} <button class="btn small" data-act="accReload">Coba lagi</button></div>`:"")+
+ `<div class="note">☁️ Akun tersimpan di server (Google Sheet) dan dicek di server, jadi perubahan langsung berlaku tanpa mempublikasikan <code>lumina-data.json</code>.</div>
+ <div class="box"><div class="boxhead"><h3>Daftar akun (${ACC.length})</h3><div class="row"><button class="btn secondary small" data-act="accReload">↻ Muat ulang</button><button class="btn secondary small" data-act="accImport">⬆ Impor akun lama</button></div></div><div style="overflow:auto"><table><thead><tr><th>NAMA</th><th>USERNAME</th><th>JENIS</th><th>STATUS</th><th>BERLAKU S.D.</th><th>DIBUAT</th><th></th></tr></thead><tbody>${rows||'<tr><td colspan="7" class="empty">Belum ada data akun.</td></tr>'}</tbody></table></div></div>
  <div class="box"><h3>Tambah akun</h3><form class="form" id="acc-form" autocomplete="off">
   <div class="grid2"><label>Nama lengkap<input id="ac-name" required></label><label>Jenis akun<select id="ac-type">${opts("mahasiswa",true)}</select></label></div>
   <div class="grid2"><label>Username<input id="ac-user" required placeholder="huruf/angka, min. 3" autocomplete="off"></label><label>Password<input id="ac-pass" type="text" required minlength="6" placeholder="min. 6 karakter" autocomplete="off"></label></div>
+  <label style="display:flex;gap:8px;align-items:center"><input id="ac-fv" type="checkbox" style="width:auto"> Aktif selamanya (tanpa masa berlaku)</label>
   <div><button class="btn" type="submit">＋ Tambah akun</button></div></form>
   <details style="margin-top:14px"><summary style="cursor:pointer;font-size:12.5px;font-weight:700;color:#536075">Tambah banyak akun sekaligus</summary>
    <form class="form" id="accbulk-form" style="margin-top:10px"><label>Satu baris satu akun: <code>Nama | username | password | jenis</code> (jenis opsional: mahasiswa, plus, customer, dummy; default mahasiswa)<textarea id="accbulk" rows="5" placeholder="Budi Santoso | budi | rahasia123&#10;Siti Aminah | siti | rahasia456 | plus"></textarea></label><div><button class="btn" type="submit">＋ Tambah semua</button></div></form></details></div>`;
- const addAcc=(name,user,pass,type)=>{
+ const addAcc=async(name,user,pass,type,fv)=>{
   user=user.trim();
   if(!/^[A-Za-z0-9._-]{3,30}$/.test(user))return "Username “"+user+"” tidak valid (huruf, angka, titik, strip, underscore; 3–30 karakter).";
   if(pass.length<6)return "Password untuk “"+user+"” minimal 6 karakter.";
-  if(L.findAccount(D,user))return "Username “"+user+"” sudah dipakai.";
-  const t=Date.now(),a={user,name:name.trim()||user,role:type==="admin"?"admin":"student",type,hash:L.hashPassword(user,pass),createdAt:t,expiresAt:L.defaultExpiry(type,t),active:true,history:[]};
-  L.logAcc(a,"Akun dibuat",TL(type));D.accounts.push(a);return "";
+  if(ACC.some(a=>a.user===user))return "Username “"+user+"” sudah dipakai.";
+  try{const j=await L.api("createAccount",{name:name.trim()||user,user,type,hash:L.hashPassword(user,pass),forever:!!fv});ACC.push(j.account);return "";}
+  catch(e){return e.message;}
  };
- $("#acc-form").onsubmit=e=>{e.preventDefault();const er=addAcc($("#ac-name").value,$("#ac-user").value,$("#ac-pass").value,$("#ac-type").value);if(er){alert(er);return;}if(commit("Akun ditambahkan"))vAccounts();};
- $("#accbulk-form").onsubmit=e=>{
+ $("#acc-form").onsubmit=async e=>{
+  e.preventDefault();const b=e.target.querySelector("button[type=submit]");b.disabled=true;
+  const er=await addAcc($("#ac-name").value,$("#ac-user").value,$("#ac-pass").value,$("#ac-type").value,$("#ac-fv").checked);
+  b.disabled=false;if(er){alert(er);return;}toast("Akun ditambahkan ✓");vAccounts();
+ };
+ $("#accbulk-form").onsubmit=async e=>{
   e.preventDefault();
   const lines=$("#accbulk").value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
   if(!lines.length){alert("Belum ada baris yang diisi.");return;}
+  const b=e.target.querySelector("button[type=submit]");b.disabled=true;
   const errs=[];let ok=0;
-  lines.forEach(ln=>{
-   const p=ln.split("|").map(x=>x.trim());if(p.length<3){errs.push("Format salah: "+ln);return;}
+  for(const ln of lines){
+   const p=ln.split("|").map(x=>x.trim());if(p.length<3){errs.push("Format salah: "+ln);continue;}
    let type="mahasiswa";if(p.length>=4&&L.TYPE_KEYS.includes(p[p.length-1].toLowerCase()))type=p.pop().toLowerCase();
-   const er=addAcc(p[0],p[1],p.slice(2).join("|"),type);if(er)errs.push(er);else ok++;
-  });
-  if(ok)commit(ok+" akun ditambahkan");
+   const er=await addAcc(p[0],p[1],p.slice(2).join("|"),type,false);if(er)errs.push(er);else ok++;
+  }
+  b.disabled=false;
+  if(ok)toast(ok+" akun ditambahkan ✓");
   if(errs.length)alert(ok+" akun berhasil. Yang gagal:\n\n"+errs.join("\n"));
   vAccounts();
  };
@@ -550,7 +568,7 @@ function collectProgress(){
  return out;
 }
 function vRecap(){
- const data=collectProgress(),now=Date.now(),st=D.settings,students=D.accounts.filter(a=>a.role==="student");
+ const data=collectProgress(),now=Date.now(),st=D.settings,students=ACC.filter(a=>a.role==="student");
  const rows=students.map(a=>{
   const r=data[a.user];
   if(!r||(!r.prog.attempts.length&&!r.prog.visits.length))return `<tr><td>${esc(a.name)}</td><td>${esc(a.user)}</td><td colspan="5" class="hint">Belum ada data — minta mahasiswa mengunduh <b>laporan progres</b> dari halaman Akun Saya, lalu impor di bawah.</td><td></td></tr>`;
@@ -582,7 +600,7 @@ function vRecap(){
 }
 
 function rcDetail(user){
- const r=collectProgress()[user],a=L.findAccount(D,user);if(!r||!a)return;
+ const r=collectProgress()[user],a=ACC.find(x=>x.user===user);if(!r||!a)return;
  const pr=r.prog,st=D.settings,now=Date.now(),pi=L.periodInfo(pr,st,now),pass=st.passScore;
  const STL={mastered:"Tuntas",progress:"Berjalan",studying:"Belajar",none:"Belum mulai"};
  let rows="";
@@ -599,7 +617,7 @@ function rcDetail(user){
 function rcCsv(){
  const data=collectProgress(),now=Date.now(),st=D.settings;
  const lines=[["Nama","Username","Terakhir aktif","Total percobaan","Skill tuntas (periode)","Total skill","Skor periode","Status"]];
- D.accounts.filter(a=>a.role==="student").forEach(a=>{
+ ACC.filter(a=>a.role==="student").forEach(a=>{
   const r=data[a.user];
   if(!r){lines.push([a.name,a.user,"","","","","","Belum ada data"]);return;}
   const pr=r.prog,pi=L.periodInfo(pr,st,now),sm=L.summary(pr,D,pi.start,pi.end),ia=L.inactivity(pr,st,now),last=L.lastActivity(pr);
@@ -733,55 +751,63 @@ const A={
  },
 
  accPw(user){
-  askPassword("Ganti password: "+user,pw=>{const a=L.findAccount(D,user);a.hash=L.hashPassword(a.user,pw);commit("Password diganti");vAccounts();renderBanner();});
+  askPassword("Ganti password: "+user,pw=>{
+   L.api("resetPassword",{user,hash:L.hashPassword(user,pw)}).then(()=>toast("Password diganti ✓")).catch(e=>alert(e.message));
+  });
+ },
+ accReload(){loadAcc().then(()=>toast("Data akun dimuat ulang"));},
+ async accImport(){
+  let list=[];
+  const pub=await L.fetchRawPublished();
+  if(pub&&Array.isArray(pub.accounts))list=list.concat(pub.accounts);
+  try{const raw=JSON.parse(localStorage.getItem(L.KEY)||"null");if(raw&&Array.isArray(raw.accounts))list=list.concat(raw.accounts);}catch(e){}
+  const seen={};list=list.filter(a=>a&&a.user&&a.hash&&!seen[a.user]&&(seen[a.user]=1));
+  if(!list.length){alert("Tidak ada akun lama yang bisa diimpor. (Akun lama dibaca dari lumina-data.json yang sedang online atau dari draf browser ini.)");return;}
+  if(!confirm(list.length+" akun lama ditemukan. Impor ke server? Username yang sudah ada akan dilewati. Password mahasiswa tetap sama."))return;
+  try{const j=await L.api("importAccounts",{accounts:list});toast(j.imported+" akun diimpor ✓");await loadAcc();if(tab==="accounts")vAccounts();}
+  catch(e){alert(e.message);}
  },
  accExtend(user){
- const a=L.findAccount(D,user);if(!a||!renewable(a))return;
- const to=L.addMonths(Math.max(Date.now(),a.expiresAt||0),6);
- if(!confirm("Perpanjang "+a.user+" +6 bulan, sampai "+fmtDate(to)+"?"))return;
- L.logAcc(a,"Diperpanjang 6 bulan","s.d. "+fmtDate(to));a.expiresAt=to;commit("Akun diperpanjang");vAccounts();
-},
-accManage(user){
- const a=L.findAccount(D,user);if(!a)return;
- const adm=a.role==="admin",rc=L.getRecap()[user],pf=rc&&rc.profile?L.cleanProfile(rc.profile):null;
- const dstr=a.expiresAt?new Date(a.expiresAt).toISOString().slice(0,10):"";
- const hist=(a.history||[]).slice(-8).reverse().map(h=>`<div class="hint">${fmtDate(h.ts)} · ${esc(h.act)}${h.note?" — "+esc(h.note):""}</div>`).join("")||'<div class="hint">Belum ada riwayat.</div>';
- const prof=pf&&pf.name?`<div class="box"><h3>Profil (dari laporan mahasiswa)</h3><div class="row">${pf.photo?`<img src="${pf.photo}" style="width:64px;height:64px;border-radius:50%;object-fit:cover"> <a class="btn secondary small" download="foto-${esc(user)}.jpg" href="${pf.photo}">⬇ Foto (unggah ke Drive)</a>`:""}</div>
-  <div class="sub">${esc(pf.name)}<br>${esc(pf.email)} · ${esc(pf.wa)}<br>Pekerjaan: ${esc(pf.job||"—")} · Semester: ${esc(pf.semester||"—")}</div></div>`:`<p class="hint">Belum ada data profil. Impor laporan progres mahasiswa di menu Rekap.</p>`;
- modal(`<h3>${esc(a.name)} <span class="hint">(${esc(a.user)})</span></h3><form class="form" id="am-form">
-  ${adm?"":`<div class="grid2"><label>Jenis akun<select id="am-type">${L.TYPE_KEYS.map(k=>`<option value="${k}" ${k===a.type?"selected":""}>${TL(k)}</option>`).join("")}</select></label><label>Berlaku sampai<input id="am-exp" type="date" value="${dstr}"><span class="hint">Kosong hanya untuk Dummy.</span></label></div>
-  <label style="display:flex;gap:8px;align-items:center"><input id="am-act" type="checkbox" style="width:auto" ${a.active!==false?"checked":""}> Akun aktif</label>`}
-  ${prof}<div><b style="font-size:12px">Riwayat</b>${hist}</div>
-  <div class="row"><button class="btn" type="submit">Simpan</button><button class="btn secondary" type="button" id="am-c">Tutup</button></div></form>`,()=>{
-  $("#am-c").onclick=closeModal;
-  if(!adm)$("#am-type").onchange=()=>{const t=$("#am-type").value;$("#am-exp").value=t==="dummy"?"":new Date(L.defaultExpiry(t)).toISOString().slice(0,10);};
-  $("#am-form").onsubmit=e=>{
-   e.preventDefault();
-   if(!adm){
-    const nt=$("#am-type").value,ds=$("#am-exp").value;let exp=0;
-    if(nt!=="dummy"){if(!ds){alert("Isi tanggal berlaku sampai.");return;}exp=new Date(ds+"T23:59:59").getTime();}
-    if(nt!==a.type)L.logAcc(a,"Jenis diubah",TL(a.type)+" → "+TL(nt));
-    if(nt!=="dummy"&&exp!==a.expiresAt)L.logAcc(a,"Masa berlaku diatur","s.d. "+fmtDate(exp));
-    const act=$("#am-act").checked;if(act!==(a.active!==false))L.logAcc(a,act?"Diaktifkan":"Dinonaktifkan");
-    a.type=nt;a.expiresAt=exp;a.active=act;
-   }
-   closeModal();commit("Akun diperbarui");vAccounts();
-  };
- },true);
-},
-recapDl(){
- const rc=L.getRecap(),arr=Object.keys(rc).map(k=>({type:"lumina-progress",version:1,user:k,name:rc[k].name,exportedAt:rc[k].exportedAt,progress:rc[k].progress,profile:rc[k].profile||null}));
- if(!arr.length){alert("Belum ada data rekap untuk diunduh.");return;}
- const b=new Blob([JSON.stringify(arr,null,2)],{type:"application/json"}),url=URL.createObjectURL(b),el=document.createElement("a");
- el.href=url;el.download="lumina-recap-backup.json";document.body.appendChild(el);el.click();el.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);
-},
- accDel(user){
-  const a=L.findAccount(D,user);
-  if(a.role==="admin"&&D.accounts.filter(x=>x.role==="admin").length<2){alert("Harus ada minimal satu akun admin.");return;}
-  if(!confirm("Hapus akun "+user+"?"))return;
-  D.accounts=D.accounts.filter(x=>x.user!==user);commit("Akun dihapus");vAccounts();
+  const a=ACC.find(x=>x.user===user);if(!a||!renewable(a))return;
+  if(!a.expiresAt){alert("Akun ini aktif selamanya, tidak perlu diperpanjang.");return;}
+  const to=L.addMonths(Math.max(Date.now(),a.expiresAt||0),6);
+  if(!confirm("Perpanjang "+a.user+" +6 bulan, sampai "+fmtDate(to)+"?"))return;
+  L.api("extend",{user,months:6}).then(()=>loadAcc()).then(()=>toast("Akun diperpanjang ✓")).catch(e=>alert(e.message));
  },
-
+ accManage(user){
+  const a=ACC.find(x=>x.user===user);if(!a)return;
+  const adm=a.role==="admin",sp=PFL[user],rc=L.getRecap()[user];
+  const pf=(sp&&sp.name)?sp:(rc&&rc.profile?L.cleanProfile(rc.profile):null);
+  const dstr=a.expiresAt?new Date(a.expiresAt).toISOString().slice(0,10):"";
+  const hist=(a.history||[]).slice(-8).reverse().map(h=>`<div class="hint">${fmtDate(h.ts)} · ${esc(h.act)}${h.note?" — "+esc(h.note):""}</div>`).join("")||'<div class="hint">Belum ada riwayat.</div>';
+  const photo=pf&&pf.photoUrl?`<a class="btn secondary small" href="${esc(pf.photoUrl)}" target="_blank" rel="noopener">🖼 Buka foto di Drive ↗</a>`:(pf&&pf.photo?`<img src="${pf.photo}" style="width:64px;height:64px;border-radius:50%;object-fit:cover">`:"");
+  const prof=pf&&pf.name?`<div class="box"><h3>Profil</h3><div class="row">${photo}</div>
+   <div class="sub">${esc(pf.name)}<br>${esc(pf.email)} · ${esc(pf.wa)}<br>Pekerjaan: ${esc(pf.job||"—")} · Semester: ${esc(pf.semester||"—")}</div></div>`:`<p class="hint">Belum ada data profil dari mahasiswa ini.</p>`;
+  modal(`<h3>${esc(a.name)} <span class="hint">(${esc(a.user)})</span></h3><form class="form" id="am-form">
+   ${adm?'<p class="hint">Akun admin tidak diubah dari sini (ganti password lewat tombol “Ganti password”).</p>':`<div class="grid2"><label>Jenis akun<select id="am-type">${L.TYPE_KEYS.map(k=>`<option value="${k}" ${k===a.type?"selected":""}>${TL(k)}</option>`).join("")}</select></label><label>Berlaku sampai<input id="am-exp" type="date" value="${dstr}"><span class="hint">Diabaikan jika “Aktif selamanya” dicentang.</span></label></div>
+   <label style="display:flex;gap:8px;align-items:center"><input id="am-fv" type="checkbox" style="width:auto" ${!a.expiresAt?"checked":""}> Aktif selamanya (tanpa masa berlaku)</label>
+   <label style="display:flex;gap:8px;align-items:center"><input id="am-act" type="checkbox" style="width:auto" ${a.active!==false?"checked":""}> Akun aktif</label>`}
+   ${prof}<div><b style="font-size:12px">Riwayat</b>${hist}</div>
+   <div class="row">${adm?"":'<button class="btn" type="submit">Simpan</button>'}<button class="btn secondary" type="button" id="am-c">Tutup</button></div></form>`,()=>{
+   $("#am-c").onclick=closeModal;
+   if(!adm)$("#am-type").onchange=()=>{const t=$("#am-type").value;$("#am-fv").checked=(t==="dummy");$("#am-exp").value=t==="dummy"?"":new Date(L.defaultExpiry(t)).toISOString().slice(0,10);};
+   $("#am-form").onsubmit=e=>{
+    e.preventDefault();
+    if(adm){closeModal();return;}
+    const nt=$("#am-type").value,ds=$("#am-exp").value,fv=$("#am-fv").checked||nt==="dummy",act=$("#am-act").checked;
+    const req={user,type:nt,active:act,forever:fv};
+    if(!fv){if(!ds){alert("Isi tanggal berlaku sampai, atau centang Aktif selamanya.");return;}req.expiresAt=new Date(ds+"T23:59:59").getTime();}
+    const b=e.target.querySelector("button[type=submit]");b.disabled=true;
+    L.api("updateAccount",req).then(()=>{closeModal();return loadAcc();}).then(()=>toast("Akun diperbarui ✓")).catch(err=>{b.disabled=false;alert(err.message);});
+   };
+  },true);
+ },
+ recapDl(){
+  const rc=L.getRecap(),arr=Object.keys(rc).map(k=>({type:"lumina-progress",version:1,user:k,name:rc[k].name,exportedAt:rc[k].exportedAt,progress:rc[k].progress,profile:rc[k].profile||null}));
+  if(!arr.length){alert("Belum ada data rekap untuk diunduh.");return;}
+  const b=new Blob([JSON.stringify(arr,null,2)],{type:"application/json"}),url=URL.createObjectURL(b),el=document.createElement("a");
+  el.href=url;el.download="lumina-recap-backup.json";document.body.appendChild(el);el.click();el.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);
+ },
  rcDetail(id){rcDetail(id);},
  rcCsv(){rcCsv();},
  rcClear(){if(!confirm("Hapus semua data progres hasil impor? (Data progres yang tersimpan langsung di browser ini tidak dihapus.)"))return;L.setRecap({});toast("Data impor dihapus");vRecap();},
@@ -825,20 +851,29 @@ function enter(){
  const me=L.currentAccount(D);$("#who").textContent="Masuk sebagai "+(me.name||me.user);
  const h=(location.hash||"").slice(1);
  if(TABS.some(t=>t[0]===h))tab=h;
- buildTabs();render();
+ buildTabs();render();loadAcc();
 }
 $("#login-form").addEventListener("submit",e=>{
  e.preventDefault();
  if(Date.now()<lockUntil){showErr("Terlalu banyak percobaan. Coba lagi dalam "+Math.ceil((lockUntil-Date.now())/1000)+" detik.");return;}
- const a=L.checkLogin(D,$("#login-user").value,$("#login-pass").value);
- if(!a){fails++;$("#login-pass").value="";if(fails>=5){fails=0;lockUntil=Date.now()+30000;showErr("Terlalu banyak percobaan. Coba lagi dalam 30 detik.");}else showErr("Username atau password salah.");return;}
- if(a.role!=="admin"){showErr("Akun ini bukan admin, jadi tidak boleh membuka Content Manager.");return;}
- fails=0;L.setSession(a);e.target.reset();enter();
+ const form=e.target,btn=form.querySelector("button[type=submit]");btn.disabled=true;showErr("");
+ L.remoteLogin($("#login-user").value,$("#login-pass").value).then(a=>{
+  if(a.role!=="admin"){L.setSession(null);showErr("Akun ini bukan admin, jadi tidak boleh membuka Content Manager.");return;}
+  fails=0;L.setSession(a);form.reset();enter();
+ }).catch(err=>{
+  $("#login-pass").value="";
+  if(err.api){fails++;if(fails>=5){fails=0;lockUntil=Date.now()+30000;showErr("Terlalu banyak percobaan. Coba lagi dalam 30 detik.");return;}}
+  showErr(err.message);
+ }).finally(()=>{btn.disabled=false;});
 });
 $("#logout").addEventListener("click",()=>{L.setSession(null);showLogin();});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();});
 window.addEventListener("focus",()=>{if(D&&tab==="materials"&&!matEdit&&!$("#app").classList.contains("hidden")&&$("#modal").classList.contains("hidden")&&!document.activeElement.closest?.("form"))vMaterials();});
-L.load().then(d=>{D=d;const me=L.currentAccount(D);if(me&&me.role==="admin")enter();else showLogin();});
+L.load().then(d=>{
+ D=d;
+ if(!L.getSession()){showLogin();return;}
+ return L.refreshSession().then(me=>{if(me.role==="admin")enter();else showLogin();}).catch(err=>{L.setSession(null);showLogin(err.message);});
+});
 </script>
 </body>
 </html>

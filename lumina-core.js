@@ -17,6 +17,27 @@ var DRIVE_DEFAULT="https://drive.google.com/drive/folders/1oLm05X1naBQ-AUZkULfDe
 var TYPES={admin:{label:"Admin",months:0},mahasiswa:{label:"Mahasiswa",months:6},plus:{label:"Student Plus",months:6},customer:{label:"Customer",months:6},dummy:{label:"Akun Dummy",months:0}};
 var TYPE_KEYS=["mahasiswa","plus","customer","dummy"];
 var PROF_PREFIX="luminaProfile:";
+var API_URL="https://script.google.com/macros/s/AKfycbwi00HITY3aNwMPTp5cjg898T8S74s-rIcPnK3L_BrluQ_yioILk24_3hdAYbEF6VVQJQ/exec",TOKEN_KEY="luminaToken",memToken="";
+function getToken(){try{return sessionStorage.getItem(TOKEN_KEY)||memToken;}catch(e){return memToken;}}
+function setToken(t){memToken=t||"";try{if(t)sessionStorage.setItem(TOKEN_KEY,t);else sessionStorage.removeItem(TOKEN_KEY);}catch(e){}}
+function api(action,payload){
+ var body={};for(var k in (payload||{}))body[k]=payload[k];body.action=action;body.token=getToken();
+ return fetch(API_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(body)})
+  .then(function(r){return r.json();})
+  .catch(function(){throw new Error("Tidak dapat terhubung ke server. Periksa koneksi internet.");})
+  .then(function(j){
+   if(!j||!j.ok){var e=new Error((j&&j.error)||"Permintaan ke server gagal.");e.api=true;e.status=j&&j.status;throw e;}
+   return j;
+  });
+}
+function remoteLogin(user,pass){
+ user=String(user||"").trim();
+ return api("login",{user:user,hash:hashPassword(user,pass)}).then(function(j){setToken(j.token);return j.account;});
+}
+function refreshSession(){return api("me").then(function(j){setSession(j.account);return j.account;});}
+function fetchRawPublished(){
+ return fetch("lumina-data.json?v="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;});
+}
 function okUrl(u){u=String(u||"").trim();return /^https:\/\/\S+$/.test(u)?u:"";}
 function addMonths(ts,n){var d=new Date(ts);d.setMonth(d.getMonth()+n);return d.getTime();}
 function defaultExpiry(type,from){var m=(TYPES[type]||{}).months;return m?addMonths(from||Date.now(),m):0;}
@@ -291,14 +312,7 @@ function normalize(d){
    out.skills[k]={title:String(s.title||""),sections:secs,quiz:Array.isArray(s.quiz)?s.quiz:null,updated:Number(s.updated)||0};
   });
  }
- out.accounts=(Array.isArray(d.accounts)?d.accounts:[]).filter(function(a){return a&&a.user&&a.hash;}).map(function(a){
-  var role=a.role==="admin"?"admin":"student",type=role==="admin"?"admin":(TYPE_KEYS.indexOf(a.type)>=0?a.type:"mahasiswa"),created=Number(a.createdAt)||0;
-  var exp=(a.expiresAt==null||isNaN(Number(a.expiresAt)))?defaultExpiry(type,created||Date.now()):Number(a.expiresAt);
-  if(type==="dummy"||type==="admin")exp=0;
-  var hist=(Array.isArray(a.history)?a.history:[]).filter(function(h){return h&&h.act;}).slice(-50).map(function(h){return {ts:Number(h.ts)||0,act:String(h.act),note:String(h.note||"")};});
-  return {user:String(a.user).trim(),name:String(a.name||a.user),role:role,type:type,hash:String(a.hash),createdAt:created,expiresAt:exp,active:a.active!==false,history:hist};
- });
- if(!out.accounts.some(function(a){return a.role==="admin";}))out.accounts.unshift(seedAdmin());
+ out.accounts=[]; /* akun disimpan di server (Apps Script), bukan di lumina-data.json */
  var st=(d.settings&&typeof d.settings==="object")?d.settings:{};
  out.settings={requireLogin:true,
   inactiveDays:clamp(Math.round(Number(st.inactiveDays))||2,1,30),
@@ -337,7 +351,7 @@ function loadViewer(){
  return fetchPublished().then(function(pub){
   var local=loadLocal(); cache.pub=pub; cache.local=local;
   var s=getSession();
-  if(local&&s){var a=findAccount(local,s.user); if(a&&a.role==="admin"){local.__src="draft";return local;}}
+  if(local&&s){if(s.role==="admin"){local.__src="draft";return local;}}
   var d=pub||local||normalize({});
   d.__src=pub?"published":(local?"draft":"default");
   return d;
@@ -367,10 +381,10 @@ function login(user,pass){
 }
 function getSession(){try{var s=sessionStorage.getItem(SESSION_KEY);return s?JSON.parse(s):memSession;}catch(e){return memSession;}}
 function setSession(a){
- memSession=a?{user:a.user,type:a.type||""}:null;
+ memSession=a?{user:a.user,type:a.type||"",role:a.role||"",name:a.name||a.user,createdAt:a.createdAt||0,expiresAt:a.expiresAt||0,active:a.active!==false}:null;if(!a)setToken("");
  try{if(a)sessionStorage.setItem(SESSION_KEY,JSON.stringify(memSession));else sessionStorage.removeItem(SESSION_KEY);}catch(e){}
 }
-function currentAccount(d){var s=getSession();return s?findAccount(d,s.user):null;}
+function currentAccount(d){var s=getSession();if(!s)return null;if(s.role)return {user:s.user,name:s.name,role:s.role,type:s.type,createdAt:s.createdAt,expiresAt:s.expiresAt,active:s.active,history:[]};return findAccount(d,s.user);}
 function isDefaultPassword(a){return !!a&&a.hash===hashPassword(a.user,DEFAULT_ADMIN.pass);}
 
 /* ---------- progres mahasiswa (disimpan per browser) ---------- */
@@ -451,6 +465,7 @@ function inactivity(prog,st,now){
 
 window.Lumina={
  TYPES:TYPES,TYPE_KEYS:TYPE_KEYS,addMonths:addMonths,defaultExpiry:defaultExpiry,accStatus:accStatus,logAcc:logAcc,cleanProfile:cleanProfile,loadProfile:loadProfile,saveProfile:saveProfile,profileOk:profileOk,sessionType:sessionType,applyDummyLock:applyDummyLock,
+ api:api,remoteLogin:remoteLogin,refreshSession:refreshSession,getToken:getToken,fetchRawPublished:fetchRawPublished,
  KEY:KEY,EXPORT_KEY:EXPORT_KEY,PROG_PREFIX:PROG_PREFIX,DAY:DAY,DEFAULT_ADMIN:DEFAULT_ADMIN,
  SECTIONS:SECTIONS,QSECTIONS:QSECTIONS,MAT_SECTIONS:MAT_SECTIONS,LINK_GROUPS:LINK_GROUPS,LEVELS:LEVELS,SEC_COLOR:SEC_COLOR,
  esc:esc,uid:uid,safeUrl:safeUrl,safeColor:safeColor,normalizeAudioUrl:normalizeAudioUrl,

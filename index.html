@@ -336,6 +336,7 @@ a.sk-title:hover{color:var(--red);text-decoration:underline}
 <script>
 const L=window.Lumina, esc=L.esc, $=id=>document.getElementById(id);
 let cms=null, me=null, run=null, practiceSection="swo";
+let bootMsg="";
 const DAY=L.DAY;
 const SEC={
  listening:{name:"Listening Comprehension",short:"Listening",color:"#16866b",ico:"🎧"},
@@ -480,14 +481,14 @@ R.home=function(){
 R["admin-home"]=function(){
  const qn=skills().reduce((n,s)=>n+qCount(s.id),0);
  const pn=L.LEVELS.reduce((n,l)=>n+cms.pretest[l].questions.length,0);
- const stu=cms.accounts.filter(a=>a.role==="student").length;
+ const stu="…";
  $("admin-body").innerHTML=`
   <div class="page-title"><div><div class="kicker">ADMIN</div><h2>Welcome, ${esc(me.name||me.user)}</h2><p>You can open every student feature from here, and manage content in the Content Manager. Your own attempts are not recorded.</p></div></div>
   <div class="stats">
    <div class="stat"><b>${skills().length}</b><span>Skill pages</span></div>
    <div class="stat"><b>${qn}</b><span>Skill practice questions</span></div>
    <div class="stat"><b>${pn}</b><span>Pre-test questions</span></div>
-   <div class="stat"><b>${stu}</b><span>Student accounts</span></div>
+   <div class="stat"><b id="adm-stu">${stu}</b><span>Student accounts</span></div>
   </div>
   <div class="cards">
    <article class="session-card"><div class="icon">⚙️</div><h3>Content Manager</h3><p>Edit skills, descriptions, questions, pre-tests, accounts, and settings.</p><button class="btn" id="admin-cms">Open Content Manager →</button></article>
@@ -498,6 +499,7 @@ R["admin-home"]=function(){
   <div class="notice" style="margin-top:14px">Data source on this page: <b>${cms.__src==="draft"?"your draft (this browser)":cms.__src==="published"?"published lumina-data.json":"built-in sample data"}</b>. Students always read the published <code>lumina-data.json</code>.</div>`;
  $("admin-cms").onclick=()=>{location.href="content-manager.html";};
  $("admin-recap").onclick=()=>{location.href="content-manager.html#recap";};
+ L.api("listAccounts").then(j=>{const el=$("adm-stu");if(el)el.textContent=j.accounts.filter(a=>a.role==="student").length;}).catch(()=>{const el=$("adm-stu");if(el)el.textContent="—";});
 };
 
 /* ---------- AKUN MAHASISWA / PORTOFOLIO ---------- */
@@ -563,14 +565,15 @@ function profileBox(){
 }
 function bindProfile(){
  const fm=$("pf-form");if(!fm||me.type==="dummy")return;
- let photo=L.loadProfile(me.user).photo;
+ let photo=L.loadProfile(me.user).photo,photoNew=false;
+ if(!L.loadProfile(me.user).email)L.api("getProfile").then(j=>{const sp=j.profile;if(sp&&!$("pf-email").value){$("pf-name").value=sp.name||$("pf-name").value;$("pf-email").value=sp.email||"";$("pf-wa").value=sp.wa||"";$("pf-job").value=sp.job||"";$("pf-sem").value=sp.semester||"";}}).catch(()=>{});
  $("pf-photo").onchange=e=>{
   const f=e.target.files[0];if(!f)return;
   if(!/^image\//.test(f.type)||f.size>1048576){alert("Choose an image of at most 1 MB.");e.target.value="";return;}
   const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{
    const k=Math.min(1,256/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);
    const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);
-   photo=c.toDataURL("image/jpeg",.8);const pv=$("pf-prev");pv.src=photo;pv.style.display="block";};
+   photo=c.toDataURL("image/jpeg",.8);photoNew=true;const pv=$("pf-prev");pv.src=photo;pv.style.display="block";};
    im.onerror=()=>alert("Invalid image.");im.src=r.result;};r.readAsDataURL(f);
  };
  fm.onsubmit=e=>{e.preventDefault();
@@ -578,7 +581,11 @@ function bindProfile(){
   if(!L.profileOk(p)){alert("Name, a valid email, and a WhatsApp number (8–15 digits) are required.");return;}
   if(!L.saveProfile(me.user,p)){alert("Could not save (browser storage full or blocked).");return;}
   $("user-name").textContent=p.name;
-  alert("Profile saved. Click “Download progress” and send the file to your admin so the update reaches them.");
+  const sb=fm.querySelector("button[type=submit]");sb.disabled=true;
+  L.api("saveProfile",{profile:{name:p.name,email:p.email,wa:p.wa,job:p.job,semester:p.semester},photo:photoNew?photo:""})
+   .then(()=>{photoNew=false;alert("Profile saved.");})
+   .catch(err=>alert("Saved on this device, but not yet sent to the server: "+err.message))
+   .finally(()=>{sb.disabled=false;});
  };
 }
 function downloadProgress(){
@@ -766,11 +773,14 @@ function showGate(){$("gate").classList.remove("hidden");stopAllAudio();}
 $("gate-form").addEventListener("submit",e=>{
  e.preventDefault();
  if(Date.now()<gateLock){gateError("Too many failed attempts. Try again in "+Math.ceil((gateLock-Date.now())/1000)+" seconds.");return;}
- const a=L.login($("gate-user").value,$("gate-pass").value);
- if(!a){gateFails++;$("gate-pass").value="";
-  if(gateFails>=5){gateFails=0;gateLock=Date.now()+30000;gateError("Too many failed attempts. Try again in 30 seconds.");}
-  else gateError("Incorrect username or password.");return;}
- gateFails=0;gateError("");L.setSession(a);e.target.reset();boot(true);
+ const form=e.target,btn=form.querySelector("button[type=submit]");btn.disabled=true;gateError("");
+ L.remoteLogin($("gate-user").value,$("gate-pass").value).then(a=>{
+  gateFails=0;L.setSession(a);form.reset();boot(true);
+ }).catch(err=>{
+  $("gate-pass").value="";
+  if(err.api){gateFails++;if(gateFails>=5){gateFails=0;gateLock=Date.now()+30000;gateError("Too many failed attempts. Try again in 30 seconds.");return;}}
+  gateError(err.message||"Login failed.");
+ }).finally(()=>{btn.disabled=false;});
 });
 $("user-logout").addEventListener("click",()=>{
  if(run){clearInterval(run.timer);run=null;}
@@ -782,8 +792,12 @@ $("user-logout").addEventListener("click",()=>{
 /* ---------- mulai ---------- */
 function boot(fresh){
  return L.loadViewer().then(d=>{
-  cms=d;me=L.currentAccount(cms);
-  if(!me){L.setSession(null);applyRole();showGate();document.body.classList.remove("loading");return;}
+  cms=d;
+  if(fresh||!L.getSession())return d;
+  return L.refreshSession().then(()=>d,err=>{L.setSession(null);bootMsg=err.message||"";return d;});
+ }).then(d=>{
+  me=L.currentAccount(cms);
+  if(!me){L.setSession(null);applyRole();showGate();if(bootMsg)gateError(bootMsg);bootMsg="";document.body.classList.remove("loading");return;}
   var stt=L.accStatus(me);
   if(stt!=="active"){L.setSession(null);me=null;applyRole();showGate();
    gateError(stt==="expired"?"Your account has expired. Please contact the admin to renew it.":"Your account is inactive. Please contact the admin.");
