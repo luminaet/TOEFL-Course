@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": 1794822487575,
+  "updatedAt": 1794926736916,
   "settings": {
     "totalMinutes": 120,
     "audioPlays": 1,
@@ -43,6 +43,7 @@
                   "title": "Report",
                   "audioUrl": "",
                   "script": "Woman: Have you finished the report for Professor Allen?\nMan: Almost. I still need to check the figures in the last section.\nNarrator: What does the man mean?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -65,6 +66,7 @@
                   "title": "Library",
                   "audioUrl": "",
                   "script": "Man: Do you know where I can find the journals for my research?\nWoman: They moved them to the second floor of the library last week.\nNarrator: What does the woman say about the journals?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -87,6 +89,7 @@
                   "title": "Unit 3",
                   "audioUrl": "",
                   "script": "Woman: Are you going to the library this afternoon?'\nMan: I can't. I have to finish my homework first.\nNarrator: What does the man mean?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -109,6 +112,7 @@
                   "title": "Suggestion",
                   "audioUrl": "",
                   "script": "Man: It's very hot in this room.\nWoman: Why don't you turn on the air conditioner?\nNarrator: What does the woman suggest?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -131,6 +135,7 @@
                   "title": "Agreement",
                   "audioUrl": "",
                   "script": "Woman: I think this movie is really interesting.\nMan: I agree. I enjoyed every minute of it.\nNarrator: What does the man mean?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -153,6 +158,7 @@
                   "title": "Inference",
                   "audioUrl": "",
                   "script": "Man: Did you bring your umbrella?\nWoman: No, I didn't. But look at those dark clouds!\nNarrator: What will probably happen?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -175,6 +181,7 @@
                   "title": "Time",
                   "audioUrl": "",
                   "script": "Woman: What time does the class begin?\nMan: It starts at nine, but we need to be there fifteen minutes earlier.\nNarrator: When should they arrive?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -197,6 +204,7 @@
                   "title": "Location",
                   "audioUrl": "",
                   "script": "Man: Excuse me, where can I find the English books?\nWoman: They're on the second floor, next to the computer room.\nNarrator: Where are the English books?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -219,6 +227,7 @@
                   "title": "Negative Expression",
                   "audioUrl": "",
                   "script": "Woman: Did you enjoy the concert last night?\nMan: I didn't enjoy it at all. The music was too loud.\nNarrator: What does the man say about the concert?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -241,6 +250,7 @@
                   "title": "Reason / Cause",
                   "audioUrl": "",
                   "script": "Man: Why didn't you come to the meeting yesterday?\nWoman: I had a terrible headache, so I stayed home.\nNarrator: Why didn't the woman attend the meeting?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -263,6 +273,7 @@
                   "title": "Future Plan",
                   "audioUrl": "",
                   "script": "Woman: What are you going to do this weekend?\nMan: I'm planning to visit my grandparents in the village.\nNarrator: What will the man probably do this weekend?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -285,6 +296,7 @@
                   "title": "Comparison",
                   "audioUrl": "",
                   "script": "Man: Is your new apartment bigger than your old one?\nWoman: Yes, it's much larger, and it has two bedrooms.\nNarrator: What can we learn about the woman's new apartment?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -307,6 +319,7 @@
                   "title": "Price / Cost",
                   "audioUrl": "",
                   "script": "Woman: How much did you pay for that notebook?\nMan: It was five dollars, but I got a one-dollar discount.\nNarrator: How much did the man pay?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -329,6 +342,7 @@
                   "title": "Indirect Response",
                   "audioUrl": "",
                   "script": "Man: Would you mind closing the door?\nWoman: Not at all.\nNarrator: What will the woman probably do?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -351,6 +365,7 @@
                   "title": "Occupation",
                   "audioUrl": "",
                   "script": "Woman: I heard your sister works at the hospital. What does she do there?\nMan: She takes care of patients and helps doctors.\nNarrator: What is the man's sister's occupation?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -373,6 +388,7 @@
                   "title": "Problem and Solution",
                   "audioUrl": "",
                   "script": "Man: My laptop won't turn on. I think the battery is empty.\nWoman: Why don't you charge it first?\nNarrator: What does the woman recommend?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -395,6 +411,7 @@
                   "title": "Problem and Solution",
                   "audioUrl": "",
                   "script": "Man: My laptop won't turn on. I think the battery is empty.\nWoman: Why don't you charge it first?\nNarrator: What does the woman recommend?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -417,6 +434,7 @@
                   "title": "Topic / Main Idea",
                   "audioUrl": "",
                   "script": "Man: What are you reading?\nWoman: It's a book about the history of Indonesia.\nNarrator: What is the woman reading about?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -439,6 +457,7 @@
                   "title": "Implied Meaning",
                   "audioUrl": "",
                   "script": "Woman: Can you help me carry these boxes?\nMan: Sure, but let me finish my lunch first.\nNarrator: What does the man imply?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -461,6 +480,7 @@
                   "title": "Frequency",
                   "audioUrl": "",
                   "script": "Man: How often do you go jogging?\nWoman: I usually do it three times a week.\nNarrator: How frequently does the woman go jogging?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -483,6 +503,7 @@
                   "title": "Sequence of Events",
                   "audioUrl": "",
                   "script": "Woman: Did you have breakfast before coming to campus?\nMan: No, I went straight to the bus stop because I woke up late.\nNarrator: What did the man do first this morning?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -505,6 +526,7 @@
                   "title": "Advice",
                   "audioUrl": "",
                   "script": "Man: I have an important presentation tomorrow, but I'm very nervous.\nWoman: You should practice in front of a mirror tonight.\nNarrator: What does the woman advise the man to do?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -527,6 +549,7 @@
                   "title": "Negative Agreement",
                   "audioUrl": "",
                   "script": "Woman: I don't like waking up early.\nMan: Neither do I. I prefer sleeping late.\nNarrator: What does the man mean?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -549,6 +572,7 @@
                   "title": "Distance",
                   "audioUrl": "",
                   "script": "Man: Is the post office far from here?\nWoman: Not really. It's only a five-minute walk.\nNarrator: What does the woman say about the post office?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -571,6 +595,7 @@
                   "title": "Purpose",
                   "audioUrl": "",
                   "script": "Woman: Why are you going to the bookstore?\nMan: I need to buy a dictionary for my English class.\nNarrator: Why is the man going to the bookstore?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -593,6 +618,7 @@
                   "title": "Conclusion / Inference",
                   "audioUrl": "",
                   "script": "Man: Have you seen Anna today?\nWoman: Yes, she was carrying a large suitcase and waiting for a taxi\nNarrator: What can be concluded about Anna?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -624,6 +650,7 @@
                   "title": "Study group",
                   "audioUrl": "",
                   "script": "Woman: Are you coming to the study group tonight?\nMan: I wish I could, but I have a part-time shift until nine.\nWoman: We're meeting at eight in the library. We could also meet again on Saturday.\nMan: Saturday would be perfect. I'm free all day.\nNarrator: Question 25. Why can't the man attend tonight?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -659,6 +686,7 @@
                   "title": "University Library",
                   "audioUrl": "",
                   "script": "Woman: Excuse me, could you tell me where I can find books about English grammar?\nMan: Sure. You can find them on the third floor, in the language section.\nWoman: Thank you. Can I borrow the books for two weeks?\nMan: Yes, students can borrow up to three books for two weeks.\nWoman: That's great. I need them for my English assignment.\nMan: Don't forget to bring your student card when you borrow the books.\nWoman: Okay. Thank you for your help.\nMan: You're welcome.\nNarrator: Question number 27. Where can the woman find books about English grammar?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -707,6 +735,7 @@
                   "title": "Making a Doctor's Appointment",
                   "audioUrl": "",
                   "script": "Man: Good morning. I'd like to make an appointment with the doctor.\nWoman: Certainly. What day would you like to come?\nMan: Is the doctor available tomorrow morning?\nWoman: Let me check. Yes, there is an available appointment at ten thirty.\nMan: That sounds good. How long do I need to wait?\nWoman: Usually, you only need to wait about fifteen minutes.\nMan: Okay. I'll come tomorrow at ten thirty.\nWoman: All right. May I have your name, please?\nMan: My name is David Brown.\nNarrator: Why does the man call the woman?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -742,6 +771,7 @@
                   "title": "Planning a Weekend Trip",
                   "audioUrl": "",
                   "script": "Woman: Do you have any plans for the weekend?\nMan: Not yet. Why?\nWoman: I'm thinking about going to the beach on Saturday. Would you like to come with me?\nMan: That sounds interesting. How will we get there?\nWoman: We can take the bus. It takes about two hours to reach the beach.\nMan: What time should we leave?\nWoman: I think we should leave at seven in the morning.\nMan: Okay. Should I bring anything?\nWoman: Bring some food, water, and your swimming clothes.\nMan: Great! I'm looking forward to it.\nNarrator: Where are the speakers planning to go?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -786,9 +816,11 @@
                   "title": "The Importance of Drinking Water",
                   "audioUrl": "",
                   "script": "Narrator: Listen to a talk about the importance of drinking water.\nWoman: Good morning, everyone. Today, I would like to talk about the importance of drinking water. Water is very important for our bodies. It helps us stay healthy and gives our bodies the energy to do daily activities. Drinking enough water also helps us concentrate better when studying.Most people need about eight glasses of water every day, although the amount may vary depending on their activities and the weather. If we do not drink enough water, we may feel tired and have difficulty concentrating. Therefore, remember to drink water regularly, especially when the weather is hot.\nNarrator: Question 35. What is the main topic of the talk?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
+                      "id": "lc-u1-q1",
                       "q": "Question 35. What is the main topic of the talk?",
                       "o": [
                         "The importance of eating vegetables.",
@@ -798,10 +830,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "",
-                      "id": "lc-u1-q1"
+                      "topic": ""
                     },
                     {
+                      "id": "lc-u1-q2",
                       "q": "What may happen if people do not drink enough water?",
                       "o": [
                         "They may feel tired.",
@@ -811,8 +843,7 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "",
-                      "id": "lc-u1-q2"
+                      "topic": ""
                     }
                   ]
                 },
@@ -821,9 +852,11 @@
                   "title": "The History of the Telephone",
                   "audioUrl": "",
                   "script": "Narrator: Listen to a talk about the history of the telephone.\nMan: The telephone is one of the most important inventions in human history. It allows people to communicate with each other over long distances. Alexander Graham Bell is widely credited with inventing the first practical telephone in 1876. In the past, telephones were large and usually stayed in one place. People could only make calls using wires. Today, telephones have become smaller and more advanced. Smartphones allow people not only to make calls but also to send messages, take pictures, and access the internet. The telephone has changed the way people communicate in their daily lives.\nNarrator: Who is widely credited with inventing the first practical telephone?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
+                      "id": "lc-u2-q1",
                       "q": "When is the first practical telephone invented?",
                       "o": [
                         "In the early of 19th century",
@@ -833,10 +866,10 @@
                       ],
                       "a": 3,
                       "e": "",
-                      "topic": "",
-                      "id": "lc-u2-q1"
+                      "topic": ""
                     },
                     {
+                      "id": "lc-u2-q2",
                       "q": "What can people do with modern smartphones besides making calls?",
                       "o": [
                         "Only listen to music.",
@@ -846,8 +879,7 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "",
-                      "id": "lc-u2-q2"
+                      "topic": ""
                     }
                   ]
                 },
@@ -856,9 +888,11 @@
                   "title": "The Benefits of Reading Books",
                   "audioUrl": "",
                   "script": "Narrator: Listen to a short lecture about reading books.\nWoman: Reading books is a useful activity for students. It provides many benefits, especially for those who want to improve their language skills. First, reading helps students learn new vocabulary. When students read regularly, they become familiar with different words and expressions. Second, reading can improve writing skills. Students can learn how to organize sentences and develop ideas by reading different types of texts. Finally, reading also increases knowledge because books contain information about many subjects, such as science, history, and culture. For these reasons, students should make reading a regular habit.\nNarrator: What is one benefit of reading books mentioned by the speaker?\nNarrator: Who is probably the speaker?",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
+                      "id": "lc-u3-q1",
                       "q": "Who is the speaker?",
                       "o": [
                         "A students",
@@ -868,10 +902,10 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "",
-                      "id": "lc-u3-q1"
+                      "topic": ""
                     },
                     {
+                      "id": "lc-u3-q2",
                       "q": "What is one benefit of reading books mentioned by the speaker?",
                       "o": [
                         "It helps students improve their vocabulary.",
@@ -881,10 +915,10 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "",
-                      "id": "lc-u3-q2"
+                      "topic": ""
                     },
                     {
+                      "id": "lc-u3-q3",
                       "q": "How can reading improve writing skills?",
                       "o": [
                         "By helping students memorize every book.",
@@ -894,10 +928,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "",
-                      "id": "lc-u3-q3"
+                      "topic": ""
                     },
                     {
+                      "id": "lc-u3-q4",
                       "q": "What is not mentioned about the benefits of reading?",
                       "o": [
                         "Students will familiar with different words and expressions.",
@@ -907,8 +941,7 @@
                       ],
                       "a": 3,
                       "e": "",
-                      "topic": "",
-                      "id": "lc-u3-q4"
+                      "topic": ""
                     }
                   ]
                 }
@@ -932,6 +965,7 @@
                   "title": "s1",
                   "audioUrl": "",
                   "script": "",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -954,6 +988,7 @@
                   "title": "s2",
                   "audioUrl": "",
                   "script": "",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -985,6 +1020,7 @@
                   "title": "e1",
                   "audioUrl": "",
                   "script": "",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -1007,6 +1043,7 @@
                   "title": "e2",
                   "audioUrl": "",
                   "script": "",
+                  "note": "",
                   "passage": "",
                   "questions": [
                     {
@@ -1044,6 +1081,7 @@
                   "title": "Urban trees",
                   "audioUrl": "",
                   "script": "",
+                  "note": "",
                   "passage": "Urban trees provide benefits that extend beyond their appearance. Their leaves provide shade, reducing the heat absorbed by streets and buildings. Trees also help manage rainwater: some water is intercepted by leaves, while roots improve the soil's ability to absorb rainfall.\n\nHowever, planting trees in cities requires careful planning. A tree that grows well in a park may not be suitable for a narrow sidewalk where roots could damage pavement or underground pipes. Successful urban forestry therefore depends not simply on planting more trees, but on choosing appropriate species and caring for them over time.",
                   "questions": [
                     {
