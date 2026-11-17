@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "updatedAt": 1794926212611,
+  "updatedAt": 1794951596178,
   "materials": [],
   "materialPages": {
     "listening": [
@@ -565,70 +565,7 @@
     }
   ],
   "skills": {},
-  "accounts": [
-    {
-      "user": "admin",
-      "name": "Administrator",
-      "role": "admin",
-      "type": "admin",
-      "hash": "5d2da627c4d2bf1ce45267500ab103da835698f270c08c3e7dce5c111b7eedd5",
-      "createdAt": 0,
-      "expiresAt": 0,
-      "active": true,
-      "history": []
-    },
-    {
-      "user": "far24",
-      "name": "Faqih Adnan Arrasyid",
-      "role": "student",
-      "type": "mahasiswa",
-      "hash": "3b82be4d335bb8fcab477d8eef635091bf29970bd3e4909989b3b3d91fd63c9c",
-      "createdAt": 1794800246730,
-      "expiresAt": 1858093199000,
-      "active": true,
-      "history": [
-        {
-          "ts": 1794923798314,
-          "act": "Masa berlaku diatur",
-          "note": "s.d. 17 Nov 2028"
-        }
-      ]
-    },
-    {
-      "user": "puputis",
-      "name": "Puput Istiqomah",
-      "role": "student",
-      "type": "mahasiswa",
-      "hash": "48377642e0262bfec5cd14b013dc15938d0f037bd9d9e3d233e1ea3c68c65d4a",
-      "createdAt": 1794925262447,
-      "expiresAt": 1810563662447,
-      "active": true,
-      "history": [
-        {
-          "ts": 1794925262447,
-          "act": "Akun dibuat",
-          "note": "Mahasiswa"
-        }
-      ]
-    },
-    {
-      "user": "Rizqymut",
-      "name": "Rizqi Mutiara N",
-      "role": "student",
-      "type": "mahasiswa",
-      "hash": "ed1746dd675e6aa89a686b3b8a458840c58b274c49d2461e7d6463d4ab65beed",
-      "createdAt": 1794925316881,
-      "expiresAt": 1810563716881,
-      "active": true,
-      "history": [
-        {
-          "ts": 1794925316881,
-          "act": "Akun dibuat",
-          "note": "Mahasiswa"
-        }
-      ]
-    }
-  ],
+  "accounts": [],
   "settings": {
     "requireLogin": true,
     "inactiveDays": 2,
