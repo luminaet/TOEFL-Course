@@ -36,6 +36,16 @@ css.textContent=
 "body.exam-mode .panel{padding:12px 14px}body.exam-mode .ex-dir{margin-bottom:8px;padding:6px 10px}body.exam-mode .audio-box{padding:8px 12px;margin-bottom:8px}body.exam-mode .audio-box p{display:none}"+
 "body.exam-mode .question{padding:11px 14px;margin-bottom:8px}body.exam-mode .q-meta{margin-bottom:4px}body.exam-mode .q-text{margin-bottom:7px;line-height:1.5}body.exam-mode .options{gap:5px}body.exam-mode .option{padding:6px 10px;line-height:1.4}body.exam-mode .ex-q-foot{margin-top:7px}body.exam-mode .ex-q-foot .btn{padding:5px 9px}"+
 "@media(max-width:900px){body.exam-mode .ex-nav{position:static;max-height:none}body.exam-mode .ex-pass{max-height:34vh}}";
+css.textContent+=
+"body.exam-mode #exam .q-text{font-size:13px}"+
+"body.exam-mode #exam .option{font-size:12px}"+
+"body.exam-mode #exam .q-meta{font-size:9.5px}"+
+"body.exam-mode #exam .ex-dir{font-size:11.5px}"+
+"body.exam-mode #exam .ex-flag,body.exam-mode #exam .ex-q-foot .btn{font-size:11px}"+
+"body.exam-mode #exam .pass-body{font-size:12.5px}"+
+"body.exam-mode #exam .pass-body p{line-height:22px;margin-bottom:10px}"+
+"body.exam-mode #exam .pass-body .ln{line-height:22px;font-size:10px}"+
+"body.exam-mode #exam .qb{font-size:11px;height:28px}";
 document.head.appendChild(css);
 var sec=document.createElement("section");sec.id="exam";sec.className="panel page hidden";sec.innerHTML='<div id="exam-body"></div>';
 document.querySelector("main.content").appendChild(sec);
@@ -58,7 +68,7 @@ function numberLines(){
  var body=$("pass-body");if(!body||!ex||!body.offsetHeight)return;
  Array.prototype.forEach.call(body.querySelectorAll(".ln"),function(n){n.remove();});
  var every=ex.cfg.settings.lineEvery;if(!every)return;
- var lh=26,g=0;
+ var lh=22,g=0;
  Array.prototype.forEach.call(body.querySelectorAll("p"),function(p){
   var lines=Math.max(1,Math.round(p.offsetHeight/lh));
   for(var i=0;i<lines;i++){g++;if(g%every===0){var s=document.createElement("span");s.className="ln";s.textContent=g;s.style.top=(p.offsetTop+i*lh)+"px";body.appendChild(s);}}
