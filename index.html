@@ -360,12 +360,13 @@ function applyRole(){
  document.body.classList.toggle("role-admin",role==="admin");document.body.classList.toggle("role-student",role==="student");
  document.querySelectorAll("[data-role]").forEach(el=>el.classList.toggle("hidden",el.dataset.role!==role));
  $("user-chip").classList.toggle("hidden",!me);
- if(me){$("user-name").textContent=me.name||me.user;const t=$("user-role");t.textContent=role==="admin"?"ADMIN":"STUDENT";t.className="role-tag"+(role==="admin"?" admin":"");}
+ if(me){$("user-name").textContent=me.name||me.user;const t=$("user-role");t.textContent=((L.TYPES[me.type]||{label:"Student"}).label).toUpperCase();t.className="role-tag"+(role==="admin"?" admin":"");}
 }
 
 /* ---------- peringatan ---------- */
 function renderAlert(){
  const slot=$("alert-slot");let h="";
+ if(me&&me.type==="dummy"){$("nav-dot").classList.add("hidden");slot.innerHTML='<div class="draft-banner">👁️ <b>Demo account.</b> You can browse the materials and see the features, but you cannot take any practice or test.</div>';return;}
  if(me&&me.role==="student"){
   const a=L.inactivity(L.loadProg(me.user),cms.settings,Date.now());
   $("nav-dot").classList.toggle("hidden",!a.warn);
@@ -509,6 +510,7 @@ R.account=function(){
   </div>
   <div class="box"><h3>Recent activity</h3><p class="sub">&nbsp;</p><div class="act-list">${recent}</div></div>
   <div class="notice no-print" style="margin-top:14px">Your progress is stored in <b>this browser</b>. Use <b>Download progress</b> to send your report to your lecturer or to move to another device (<b>Restore progress</b>).</div>`;
+ const _pt=document.querySelector("#account-body .page-title");if(_pt)_pt.insertAdjacentHTML("afterend",profileBox());bindProfile();
  const imp=$("imp-prog");
  if(imp)imp.onchange=async e=>{
   const f=e.target.files[0];if(!f)return;
@@ -521,6 +523,35 @@ R.account=function(){
   e.target.value="";
  };
 };
+function profileBox(){
+ const p=L.loadProfile(me.user),dm=me.type==="dummy",dis=dm?" disabled":"";
+ const exp=me.expiresAt?fmtDate(me.expiresAt):"no expiry";
+ const f=(id,lb,v,req,ty)=>`<label>${lb}${req?" *":""}<input id="pf-${id}" type="${ty||"text"}" value="${esc(v)}"${dis}></label>`;
+ return `<div class="box" style="margin-bottom:14px"><h3>Profile &amp; account</h3><p class="sub">${esc((L.TYPES[me.type]||{}).label||"")} · valid until <b>${exp}</b>. Fields marked * are required.</p>
+ <form id="pf-form" class="admin-form"><div class="row"><img id="pf-prev" src="${p.photo||""}" alt="" style="width:64px;height:64px;border-radius:50%;object-fit:cover;display:${p.photo?"block":"none"}"><label>Photo (max 1 MB, optional)<input id="pf-photo" type="file" accept="image/*"${dis}></label></div>
+ <div class="cards">${f("name","Full name",p.name||me.name,true)}${f("email","Email",p.email,true,"email")}${f("wa","WhatsApp number",p.wa,true,"tel")}${f("job","Occupation",p.job)}${f("sem","Semester",p.semester)}</div>
+ ${dm?"":'<div><button class="btn" type="submit">Save profile</button></div>'}</form></div>`;
+}
+function bindProfile(){
+ const fm=$("pf-form");if(!fm||me.type==="dummy")return;
+ let photo=L.loadProfile(me.user).photo;
+ $("pf-photo").onchange=e=>{
+  const f=e.target.files[0];if(!f)return;
+  if(!/^image\//.test(f.type)||f.size>1048576){alert("Choose an image of at most 1 MB.");e.target.value="";return;}
+  const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{
+   const k=Math.min(1,256/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);
+   const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);
+   photo=c.toDataURL("image/jpeg",.8);const pv=$("pf-prev");pv.src=photo;pv.style.display="block";};
+   im.onerror=()=>alert("Invalid image.");im.src=r.result;};r.readAsDataURL(f);
+ };
+ fm.onsubmit=e=>{e.preventDefault();
+  const p=L.cleanProfile({name:$("pf-name").value,email:$("pf-email").value,wa:$("pf-wa").value,job:$("pf-job").value,semester:$("pf-sem").value,photo});
+  if(!L.profileOk(p)){alert("Name, a valid email, and a WhatsApp number (8–15 digits) are required.");return;}
+  if(!L.saveProfile(me.user,p)){alert("Could not save (browser storage full or blocked).");return;}
+  $("user-name").textContent=p.name;
+  alert("Profile saved. Click “Download progress” and send the file to your admin so the update reaches them.");
+ };
+}
 function downloadProgress(){
  const blob=new Blob([JSON.stringify(L.exportProgress(me.user,me.name),null,2)],{type:"application/json"});
  const u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download="progress-"+me.user+".json";document.body.appendChild(a);a.click();a.remove();
@@ -679,6 +710,7 @@ document.addEventListener("click",e=>{
  const g=e.target.closest("[data-go]");if(g&&!g.dataset.act){showPage(g.dataset.go);return;}
  const b=e.target.closest("[data-act]");if(!b||b.disabled)return;
  const a=b.dataset.act;
+ if(me&&me.type==="dummy"&&/^(start-skill|start-pretest|run-submit|run-retry|tts|dl-prog)$/.test(a)){alert("Demo accounts can view the pages but cannot take tests.");return;}
  if(a==="go")showPage(b.dataset.go);
  else if(a==="chev")toggleChev(b);
  else if(a==="prac-tab"){practiceSection=b.dataset.id;R.practice();}
@@ -722,9 +754,14 @@ function boot(){
  return L.loadViewer().then(d=>{
   cms=d;me=L.currentAccount(cms);
   if(!me){L.setSession(null);applyRole();showGate();document.body.classList.remove("loading");return;}
+  var stt=L.accStatus(me);
+  if(stt!=="active"){L.setSession(null);me=null;applyRole();showGate();
+   gateError(stt==="expired"?"Your account has expired. Please contact the admin to renew it.":"Your account is inactive. Please contact the admin.");
+   document.body.classList.remove("loading");return;}
   $("gate").classList.add("hidden");
   applyRole();
-  if(me.role==="student")L.ensureProg(me.user,me.createdAt);
+  if(me.type==="dummy"){document.body.classList.add("dummy");L.applyDummyLock();}
+  if(me.role==="student"&&me.type!=="dummy")L.ensureProg(me.user,me.createdAt);
   renderMaterials();
   run=null;
   showPage("home");

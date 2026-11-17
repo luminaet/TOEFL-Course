@@ -48,11 +48,12 @@ function parseUnits(text,partId,opts){
  }
  var units=[],errors=[];
  chunks.forEach(function(ch,ci){
-  var u={id:partId+"-u"+(units.length+1),title:ch.title,audioUrl:"",script:"",passage:"",questions:[]},sc=[],ps=[],cur=null,mode=null,m;
+  var u={id:partId+"-u"+(units.length+1),title:ch.title,audioUrl:"",script:"",passage:"",note:"",questions:[]},sc=[],ps=[],cur=null,mode=null,m;
   ch.lines.forEach(function(raw){
    var line=raw.trim();
    if(!line){if(mode==="passage")ps.push("");else if(mode!=="passage")mode=null;return;}
    if((m=line.match(/^audio\s*[:=]\s*(.*)$/i))){u.audioUrl=audioNorm(m[1]);mode=null;return;}
+   if((m=line.match(/^(?:script ?note|catatan)\s*[:=]\s*(.*)$/i))){u.note=m[1].trim();mode=null;return;}
    if((m=line.match(/^(?:passage|teks)\s*[:=]\s*(.*)$/i))&&!cur){mode="passage";if(m[1])ps.push(m[1]);return;}
    if((m=line.match(/^(?:q|question|soal)\s*[:.)\-]\s*(.*)$/i))){cur={q:m[1],o:["","","",""],a:-1,e:"",topic:""};u.questions.push(cur);mode="q";return;}
    if(optQ&&(m=line.match(/^([A-D])\s*([).:])\s*(.*)$/i))&&(cur||m[2]!==":")){
@@ -96,6 +97,7 @@ function serializeUnits(units){
   var o=["### "+(u.title||"Unit "+(i+1))];
   if(u.audioUrl)o.push("Audio: "+u.audioUrl);
   if(u.script)o.push(u.script);
+  if(u.note)o.push("ScriptNote: "+u.note);
   if(u.passage){o.push("Passage: "+u.passage);o.push("");}
   u.questions.forEach(function(q,j){
    if(j>0||!u.passage)o.push("");
@@ -116,7 +118,7 @@ function cleanQ(q,id){
 }
 function cleanUnit(u,pid,i){
  u=u||{};var id=pid+"-u"+(i+1);
- return {id:id,title:String(u.title||""),audioUrl:String(u.audioUrl||""),script:String(u.script||""),passage:String(u.passage||""),
+ return {id:id,title:String(u.title||""),audioUrl:String(u.audioUrl||""),script:String(u.script||""),note:String(u.note||""),passage:String(u.passage||""),
   questions:(Array.isArray(u.questions)?u.questions:[]).filter(function(q){return q&&(q.q||(Array.isArray(q.o)&&q.o.some(Boolean)));}).map(function(q,j){return cleanQ(q,id+"-q"+(j+1));})};
 }
 function cleanPart(p){

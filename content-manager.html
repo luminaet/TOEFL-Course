@@ -494,39 +494,44 @@ function vPretest(){
 }
 
 /* ---------- AKUN ---------- */
+const TL=k=>(L.TYPES[k]||{label:k}).label;
+const STT={active:["Aktif","ok"],expired:["Kedaluwarsa","bad"],inactive:["Nonaktif","bad"]};
+const renewable=a=>a.role!=="admin"&&a.type!=="dummy";
 function vAccounts(){
- const me=L.currentAccount(D);
- let h=title("AKUN & LOGIN","Akun & login web","Admin: boleh membuka Content Manager dan semua fitur. Mahasiswa: hanya Akun Saya, TOEFL Materials, Latihan per skill, dan Pre-Test.")+
- `<div class="note">🔒 Login <b>selalu wajib</b> agar tampilan admin dan mahasiswa berbeda dan portofolio tercatat per akun. Setelah menambah akun, <b>publikasikan</b> <code>lumina-data.json</code> agar akun bisa dipakai login oleh mahasiswa.</div>
- <div class="box"><h3>Daftar akun</h3><div style="overflow:auto"><table><thead><tr><th>NAMA</th><th>USERNAME</th><th>PERAN</th><th>DIBUAT</th><th></th></tr></thead><tbody>`+
- D.accounts.map(a=>`<tr><td>${esc(a.name)}</td><td>${esc(a.user)}</td><td><span class="tag ${a.role==="admin"?"admin":""}">${a.role==="admin"?"ADMIN":"MAHASISWA"}</span></td><td>${fmtDate(a.createdAt)}</td><td><div class="acts"><button class="btn secondary small" data-act="accPw" data-id="${esc(a.user)}">Ganti password</button>${me&&me.user===a.user?"":`<button class="btn danger small" data-act="accDel" data-id="${esc(a.user)}">Hapus</button>`}</div></td></tr>`).join("")+
- `</tbody></table></div></div>
+ const now=Date.now();
+ const opts=(sel,adm)=>(adm?[["admin","Admin"]]:[]).concat(L.TYPE_KEYS.map(k=>[k,TL(k)])).map(o=>`<option value="${o[0]}" ${o[0]===sel?"selected":""}>${o[1]}</option>`).join("");
+ const rows=D.accounts.map(a=>{
+  const s=L.accStatus(a,now),t=STT[s]||STT.active;
+  return `<tr><td>${esc(a.name)}</td><td>${esc(a.user)}</td><td><span class="tag ${a.role==="admin"?"admin":""}">${esc(TL(a.type)).toUpperCase()}</span></td><td><span class="tag ${t[1]}">${t[0]}</span></td><td>${a.expiresAt?fmtDate(a.expiresAt):"Selamanya"}</td><td>${fmtDate(a.createdAt)}</td><td><div class="acts"><button class="btn secondary small" data-act="accManage" data-id="${esc(a.user)}">Kelola</button>${renewable(a)?`<button class="btn small" data-act="accExtend" data-id="${esc(a.user)}">+6 bln</button>`:""}<button class="btn secondary small" data-act="accPw" data-id="${esc(a.user)}">Ganti password</button></div></td></tr>`;
+ }).join("");
+ $("#view").innerHTML=title("AKUN & LOGIN","Akun & login web","Jenis akun: Admin, Mahasiswa, Student Plus, Customer (masa berlaku 6 bulan), dan Dummy (hanya melihat, tanpa masa berlaku). Akun tidak dihapus; akun yang berakhir tetap tercatat dan bisa diperpanjang.")+
+ `<div class="note">🔒 Setelah menambah atau mengubah akun, <b>publikasikan</b> <code>lumina-data.json</code>. Masa berlaku dicek dengan jam perangkat pengguna.</div>
+ <div class="box"><h3>Daftar akun (${D.accounts.length})</h3><div style="overflow:auto"><table><thead><tr><th>NAMA</th><th>USERNAME</th><th>JENIS</th><th>STATUS</th><th>BERLAKU S.D.</th><th>DIBUAT</th><th></th></tr></thead><tbody>${rows}</tbody></table></div></div>
  <div class="box"><h3>Tambah akun</h3><form class="form" id="acc-form" autocomplete="off">
-  <div class="grid2"><label>Nama lengkap<input id="ac-name" required></label><label>Peran<select id="ac-role"><option value="student">Mahasiswa</option><option value="admin">Admin</option></select></label></div>
-  <div class="grid2"><label>Username<input id="ac-user" required placeholder="huruf/angka, min. 3 (huruf besar-kecil dibedakan)" autocomplete="off"></label><label>Password<input id="ac-pass" type="text" required minlength="6" placeholder="min. 6 karakter" autocomplete="off"></label></div>
+  <div class="grid2"><label>Nama lengkap<input id="ac-name" required></label><label>Jenis akun<select id="ac-type">${opts("mahasiswa",true)}</select></label></div>
+  <div class="grid2"><label>Username<input id="ac-user" required placeholder="huruf/angka, min. 3" autocomplete="off"></label><label>Password<input id="ac-pass" type="text" required minlength="6" placeholder="min. 6 karakter" autocomplete="off"></label></div>
   <div><button class="btn" type="submit">＋ Tambah akun</button></div></form>
-  <details style="margin-top:14px"><summary style="cursor:pointer;font-size:12.5px;font-weight:700;color:#536075">Tambah banyak mahasiswa sekaligus</summary>
-   <form class="form" id="accbulk-form" style="margin-top:10px"><label>Satu baris satu mahasiswa: <code>Nama lengkap | username | password</code><textarea id="accbulk" rows="5" placeholder="Budi Santoso | budi | rahasia123&#10;Siti Aminah | siti | rahasia456"></textarea></label><div><button class="btn" type="submit">＋ Tambah semua</button></div></form></details></div>`;
- $("#view").innerHTML=h;
- const addAcc=(name,user,pass,role)=>{
+  <details style="margin-top:14px"><summary style="cursor:pointer;font-size:12.5px;font-weight:700;color:#536075">Tambah banyak akun sekaligus</summary>
+   <form class="form" id="accbulk-form" style="margin-top:10px"><label>Satu baris satu akun: <code>Nama | username | password | jenis</code> (jenis opsional: mahasiswa, plus, customer, dummy; default mahasiswa)<textarea id="accbulk" rows="5" placeholder="Budi Santoso | budi | rahasia123&#10;Siti Aminah | siti | rahasia456 | plus"></textarea></label><div><button class="btn" type="submit">＋ Tambah semua</button></div></form></details></div>`;
+ const addAcc=(name,user,pass,type)=>{
   user=user.trim();
   if(!/^[A-Za-z0-9._-]{3,30}$/.test(user))return "Username “"+user+"” tidak valid (huruf, angka, titik, strip, underscore; 3–30 karakter).";
   if(pass.length<6)return "Password untuk “"+user+"” minimal 6 karakter.";
   if(L.findAccount(D,user))return "Username “"+user+"” sudah dipakai.";
-  D.accounts.push({user,name:name.trim()||user,role,hash:L.hashPassword(user,pass),createdAt:Date.now()});return "";
+  const t=Date.now(),a={user,name:name.trim()||user,role:type==="admin"?"admin":"student",type,hash:L.hashPassword(user,pass),createdAt:t,expiresAt:L.defaultExpiry(type,t),active:true,history:[]};
+  L.logAcc(a,"Akun dibuat",TL(type));D.accounts.push(a);return "";
  };
- $("#acc-form").onsubmit=e=>{
-  e.preventDefault();
-  const err=addAcc($("#ac-name").value,$("#ac-user").value,$("#ac-pass").value,$("#ac-role").value);
-  if(err){alert(err);return;}
-  if(commit("Akun ditambahkan"))vAccounts();
- };
+ $("#acc-form").onsubmit=e=>{e.preventDefault();const er=addAcc($("#ac-name").value,$("#ac-user").value,$("#ac-pass").value,$("#ac-type").value);if(er){alert(er);return;}if(commit("Akun ditambahkan"))vAccounts();};
  $("#accbulk-form").onsubmit=e=>{
   e.preventDefault();
   const lines=$("#accbulk").value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
   if(!lines.length){alert("Belum ada baris yang diisi.");return;}
   const errs=[];let ok=0;
-  lines.forEach(ln=>{const p=ln.split("|").map(x=>x.trim());if(p.length<3){errs.push("Format salah: "+ln);return;}const er=addAcc(p[0],p[1],p.slice(2).join("|"),"student");if(er)errs.push(er);else ok++;});
+  lines.forEach(ln=>{
+   const p=ln.split("|").map(x=>x.trim());if(p.length<3){errs.push("Format salah: "+ln);return;}
+   let type="mahasiswa";if(p.length>=4&&L.TYPE_KEYS.includes(p[p.length-1].toLowerCase()))type=p.pop().toLowerCase();
+   const er=addAcc(p[0],p[1],p.slice(2).join("|"),type);if(er)errs.push(er);else ok++;
+  });
   if(ok)commit(ok+" akun ditambahkan");
   if(errs.length)alert(ok+" akun berhasil. Yang gagal:\n\n"+errs.join("\n"));
   vAccounts();
@@ -559,19 +564,23 @@ function vRecap(){
   <div class="row"><label class="btn secondary file-label" style="cursor:pointer">Pilih file progres (.json)<input id="rc-imp" type="file" accept="application/json,.json" multiple hidden></label><button class="btn danger small" data-act="rcClear">Hapus semua data impor</button></div></div>
  <div class="note">Skor periode = rata-rata skor terbaik per skill yang sudah dikerjakan pada periode berjalan (${st.periodWeeks} minggu). Skill dianggap tuntas jika skor terbaik ≥ ${st.passScore}%. Mahasiswa dianggap tidak aktif jika tidak membuka materi atau mengerjakan latihan selama ${st.inactiveDays} hari.</div>`;
  $("#rc-imp").onchange=async e=>{
-  const files=[...e.target.files];let ok=0,bad=0;const rc=L.getRecap();
-  for(const f of files){
+  let ok=0,bad=0;const rc=L.getRecap();
+  for(const f of [...e.target.files]){
    try{
-    const j=JSON.parse(await f.text());
-    if(!j||j.type!=="lumina-progress"||!j.user)throw 0;
-    const u=String(j.user),old=rc[u]?L.cleanProg(rc[u].progress):L.cleanProg(null);
-    rc[u]={name:String(j.name||u),exportedAt:Number(j.exportedAt)||Date.now(),progress:L.mergeProg(old,L.cleanProg(j.progress))};ok++;
+    const raw=JSON.parse(await f.text());
+    for(const j of (Array.isArray(raw)?raw:[raw])){
+     if(!j||j.type!=="lumina-progress"||!j.user){bad++;continue;}
+     const u=String(j.user),old=rc[u]?L.cleanProg(rc[u].progress):L.cleanProg(null);
+     const pf=j.profile?L.cleanProfile(j.profile):((rc[u]&&rc[u].profile)||null);
+     rc[u]={name:String(j.name||u),exportedAt:Number(j.exportedAt)||Date.now(),progress:L.mergeProg(old,L.cleanProg(j.progress)),profile:pf};ok++;
+    }
    }catch(err){bad++;}
   }
   if(ok)L.setRecap(rc);
-  e.target.value="";alert(ok+" file diimpor"+(bad?", "+bad+" file tidak valid.":"."));vRecap();
+  e.target.value="";alert(ok+" laporan diimpor"+(bad?", "+bad+" tidak valid.":"."));vRecap();
  };
 }
+
 function rcDetail(user){
  const r=collectProgress()[user],a=L.findAccount(D,user);if(!r||!a)return;
  const pr=r.prog,st=D.settings,now=Date.now(),pi=L.periodInfo(pr,st,now),pass=st.passScore;
@@ -609,6 +618,8 @@ function vSettings(){
   <label>Peringatan berkedip jika mahasiswa tidak aktif selama (hari)<input id="st-in" type="number" min="1" max="30" value="${s.inactiveDays}" style="max-width:140px"><span class="hint">Aktif = membuka materi skill atau mengerjakan latihan. Default 2 hari.</span></label>
   <label>Panjang periode portofolio (minggu)<input id="st-pw" type="number" min="1" max="12" value="${s.periodWeeks}" style="max-width:140px"><span class="hint">Nilai per skill diakumulasi tiap periode (disarankan 4–5 minggu).</span></label>
   <label>Nilai minimum skill dianggap tuntas (%)<input id="st-pass" type="number" min="1" max="100" value="${s.passScore}" style="max-width:140px"></label>
+  <label>Link folder Drive untuk backup data (lumina-data.json)<input id="st-bk" value="${esc(s.driveBackup||"")}" placeholder="https://drive.google.com/drive/folders/…"></label>
+  <label>Link folder Drive untuk foto mahasiswa<input id="st-ph" value="${esc(s.drivePhotos||"")}" placeholder="https://drive.google.com/drive/folders/…"></label>
   <div><button class="btn" data-act="stSave">Simpan pengaturan</button></div></div></div>
  <div class="note">Pengaturan ikut terbawa di <code>lumina-data.json</code>, jadi publikasikan ulang setelah mengubahnya.</div>`;
 }
@@ -620,6 +631,8 @@ function vBackup(){
  <div class="box"><h3>2. Pulihkan dari file</h3><p class="hint" style="font-size:13px">Ganti seluruh data draf di browser ini dengan isi file backup.</p><label class="btn secondary file-label" style="cursor:pointer">Pilih file backup (.json)<input id="imp" type="file" accept="application/json,.json" hidden></label></div>
  <div class="box"><h3>3. Ambil versi yang sudah dipublikasikan</h3><p class="hint" style="font-size:13px">Berguna jika Anda mengedit dari perangkat lain. Mengganti draf di browser ini dengan <code>lumina-data.json</code> yang ada di server.</p><button class="btn secondary" data-act="pull">Ambil dari server</button></div>
  <div class="box"><h3>4. Kembalikan konten contoh</h3><p class="hint" style="font-size:13px">Mengembalikan daftar skill, catatan materi, soal latihan, pre-test, dan tautan ke contoh awal. Akun dan pengaturan tidak berubah.</p><button class="btn danger" data-act="reset">Kembalikan ke contoh awal</button></div>
+ <div class="box"><h3>5. Backup ke Google Drive</h3><p class="hint" style="font-size:13px">1) Unduh <code>lumina-data.json</code> (berisi semua akun beserta riwayatnya). 2) Unduh backup profil &amp; rekap. 3) Unggah keduanya ke folder Drive Anda. Ulangi secara berkala.</p>
+ <div class="row"><button class="btn" data-act="export">⬇ lumina-data.json</button><button class="btn secondary" data-act="recapDl">⬇ Backup profil &amp; rekap</button>${D.settings.driveBackup?`<a class="btn secondary" href="${esc(D.settings.driveBackup)}" target="_blank" rel="noopener">Buka folder Drive ↗</a>`:'<span class="hint">Isi link folder di menu Pengaturan.</span>'}</div></div>
  <div class="note"><b>Catatan keamanan:</b> login ini berjalan di browser dan file <code>lumina-data.json</code> dapat dibuka siapa pun yang tahu alamatnya (password tersimpan dalam bentuk hash, bukan teks biasa, tetapi password lemah tetap bisa ditebak). Gunakan password yang kuat, dan jangan menyimpan data rahasia di web ini.</div>`;
  $("#imp").onchange=async e=>{
   const f=e.target.files[0];if(!f)return;
@@ -722,6 +735,46 @@ const A={
  accPw(user){
   askPassword("Ganti password: "+user,pw=>{const a=L.findAccount(D,user);a.hash=L.hashPassword(a.user,pw);commit("Password diganti");vAccounts();renderBanner();});
  },
+ accExtend(user){
+ const a=L.findAccount(D,user);if(!a||!renewable(a))return;
+ const to=L.addMonths(Math.max(Date.now(),a.expiresAt||0),6);
+ if(!confirm("Perpanjang "+a.user+" +6 bulan, sampai "+fmtDate(to)+"?"))return;
+ L.logAcc(a,"Diperpanjang 6 bulan","s.d. "+fmtDate(to));a.expiresAt=to;commit("Akun diperpanjang");vAccounts();
+},
+accManage(user){
+ const a=L.findAccount(D,user);if(!a)return;
+ const adm=a.role==="admin",rc=L.getRecap()[user],pf=rc&&rc.profile?L.cleanProfile(rc.profile):null;
+ const dstr=a.expiresAt?new Date(a.expiresAt).toISOString().slice(0,10):"";
+ const hist=(a.history||[]).slice(-8).reverse().map(h=>`<div class="hint">${fmtDate(h.ts)} · ${esc(h.act)}${h.note?" — "+esc(h.note):""}</div>`).join("")||'<div class="hint">Belum ada riwayat.</div>';
+ const prof=pf&&pf.name?`<div class="box"><h3>Profil (dari laporan mahasiswa)</h3><div class="row">${pf.photo?`<img src="${pf.photo}" style="width:64px;height:64px;border-radius:50%;object-fit:cover"> <a class="btn secondary small" download="foto-${esc(user)}.jpg" href="${pf.photo}">⬇ Foto (unggah ke Drive)</a>`:""}</div>
+  <div class="sub">${esc(pf.name)}<br>${esc(pf.email)} · ${esc(pf.wa)}<br>Pekerjaan: ${esc(pf.job||"—")} · Semester: ${esc(pf.semester||"—")}</div></div>`:`<p class="hint">Belum ada data profil. Impor laporan progres mahasiswa di menu Rekap.</p>`;
+ modal(`<h3>${esc(a.name)} <span class="hint">(${esc(a.user)})</span></h3><form class="form" id="am-form">
+  ${adm?"":`<div class="grid2"><label>Jenis akun<select id="am-type">${L.TYPE_KEYS.map(k=>`<option value="${k}" ${k===a.type?"selected":""}>${TL(k)}</option>`).join("")}</select></label><label>Berlaku sampai<input id="am-exp" type="date" value="${dstr}"><span class="hint">Kosong hanya untuk Dummy.</span></label></div>
+  <label style="display:flex;gap:8px;align-items:center"><input id="am-act" type="checkbox" style="width:auto" ${a.active!==false?"checked":""}> Akun aktif</label>`}
+  ${prof}<div><b style="font-size:12px">Riwayat</b>${hist}</div>
+  <div class="row"><button class="btn" type="submit">Simpan</button><button class="btn secondary" type="button" id="am-c">Tutup</button></div></form>`,()=>{
+  $("#am-c").onclick=closeModal;
+  if(!adm)$("#am-type").onchange=()=>{const t=$("#am-type").value;$("#am-exp").value=t==="dummy"?"":new Date(L.defaultExpiry(t)).toISOString().slice(0,10);};
+  $("#am-form").onsubmit=e=>{
+   e.preventDefault();
+   if(!adm){
+    const nt=$("#am-type").value,ds=$("#am-exp").value;let exp=0;
+    if(nt!=="dummy"){if(!ds){alert("Isi tanggal berlaku sampai.");return;}exp=new Date(ds+"T23:59:59").getTime();}
+    if(nt!==a.type)L.logAcc(a,"Jenis diubah",TL(a.type)+" → "+TL(nt));
+    if(nt!=="dummy"&&exp!==a.expiresAt)L.logAcc(a,"Masa berlaku diatur","s.d. "+fmtDate(exp));
+    const act=$("#am-act").checked;if(act!==(a.active!==false))L.logAcc(a,act?"Diaktifkan":"Dinonaktifkan");
+    a.type=nt;a.expiresAt=exp;a.active=act;
+   }
+   closeModal();commit("Akun diperbarui");vAccounts();
+  };
+ },true);
+},
+recapDl(){
+ const rc=L.getRecap(),arr=Object.keys(rc).map(k=>({type:"lumina-progress",version:1,user:k,name:rc[k].name,exportedAt:rc[k].exportedAt,progress:rc[k].progress,profile:rc[k].profile||null}));
+ if(!arr.length){alert("Belum ada data rekap untuk diunduh.");return;}
+ const b=new Blob([JSON.stringify(arr,null,2)],{type:"application/json"}),url=URL.createObjectURL(b),el=document.createElement("a");
+ el.href=url;el.download="lumina-recap-backup.json";document.body.appendChild(el);el.click();el.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);
+},
  accDel(user){
   const a=L.findAccount(D,user);
   if(a.role==="admin"&&D.accounts.filter(x=>x.role==="admin").length<2){alert("Harus ada minimal satu akun admin.");return;}
@@ -737,6 +790,8 @@ const A={
   s.inactiveDays=Math.min(30,Math.max(1,Math.round(Number($("#st-in").value))||2));
   s.periodWeeks=Math.min(12,Math.max(1,Math.round(Number($("#st-pw").value))||4));
   s.passScore=Math.min(100,Math.max(1,Math.round(Number($("#st-pass").value))||70));
+  const okU=v=>/^https:\/\/\S+$/.test(v.trim())?v.trim():"";
+  s.driveBackup=okU($("#st-bk").value);s.drivePhotos=okU($("#st-ph").value);
   if(commit("Pengaturan tersimpan"))vSettings();
  },
 

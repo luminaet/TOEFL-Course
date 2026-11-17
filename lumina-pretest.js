@@ -226,9 +226,28 @@ function renderResult(){
   '<div class="box" style="margin-bottom:14px"><h3>Section details</h3><div class="tbl-wrap"><table class="tbl"><thead><tr><th>SECTION</th><th class="n">CORRECT</th><th class="n">WRONG</th><th class="n">UNANSWERED</th><th class="n">SCALED (31–68)</th></tr></thead><tbody>'+secRows+'</tbody></table></div></div>'+
   '<div class="grid-2"><div class="box"><h3>By part</h3><div class="tbl-wrap"><table class="tbl"><thead><tr><th>PART</th><th class="n">CORRECT</th><th class="n">%</th></tr></thead><tbody>'+parts+'</tbody></table></div></div>'+
   (topics?'<div class="box"><h3>By topic</h3><p class="sub">Weakest topics first.</p><div class="tbl-wrap"><table class="tbl"><thead><tr><th>TOPIC</th><th class="n">CORRECT</th><th class="n">%</th></tr></thead><tbody>'+topics+'</tbody></table></div></div>':'<div></div>')+'</div>'+
-  '<div class="notice">Scaled scores are a linear estimate for practice, not an official ETS conversion. The answer key is not shown; review these topics in the skill materials.</div>'+
+  (canReview()?reviewHTML():'<div class="notice">🔒 Answer key, listening scripts and explanations are available for <b>Student Plus</b> accounts.</div>')+'<div class="notice">Scaled scores are a linear estimate for practice, not an official ETS conversion. The answer key is not shown; review these topics in the skill materials.</div>'+
   '<div class="row"><button class="btn" data-xact="home">Back to Pre-Test</button><button class="btn secondary" data-xact="retake">Retake this level</button></div>';
  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function canReview(){return isAdmin()||(me&&me.type==="plus");}
+function reviewHTML(){
+ var h='<div class="box" style="margin-bottom:14px"><h3>🔑 Review (Student Plus)</h3><p class="sub">Listening scripts, answer key, and explanations.</p>';
+ ex.flat.units.forEach(function(un){
+  var u=un.unit,m=X.META[un.section];
+  h+='<div style="border-top:1px solid var(--line);padding-top:12px;margin-top:12px"><div class="row"><span class="pill" style="background:'+m.color+'22;color:'+m.color+'">'+m.ico+' '+m.short+'</span><b style="font-size:13px">'+esc(un.part.title)+(u.title?' · '+esc(u.title):'')+'</b></div>';
+  if(u.script)h+='<div class="q-ctx" style="margin-top:8px"><b>Script</b><br>'+u.script.split("\n").filter(function(l){return !/^pause/i.test(l.trim());}).map(function(l){return fmt(esc(l));}).join("<br>")+'</div>';
+  if(u.note)h+='<div class="explanation show" style="margin-bottom:8px"><strong>Script notes:</strong> '+fmt(esc(u.note))+'</div>';
+  un.qs.forEach(function(it){
+   var a=ex.answers[it.id];
+   h+='<div style="margin:10px 0"><div class="q-text" style="margin-bottom:6px">'+it.num+'. '+(it.q.q?qHTML(it):'<i>(question read in the audio)</i>')+'</div><div class="options">'+
+    it.q.o.map(function(o,j){var c=j===it.q.a?"correct":(a===j?"wrong":"");return '<div class="option '+c+'"><span>'+"ABCD"[j]+". "+fmt(esc(o))+(j===it.q.a?" ✓":"")+(a===j?" (your answer)":"")+'</span></div>';}).join("")+
+    '</div><div class="explanation show"><strong>'+(a===it.q.a?"Correct.":a==null?"Unanswered.":"Incorrect.")+'</strong> '+(it.q.e?fmt(esc(it.q.e)):"<i>Explanation has not been added yet.</i>")+'</div></div>';
+  });
+  h+='</div>';
+ });
+ return h+'</div>';
 }
 
 /* ---------- klik & perubahan ---------- */
@@ -236,6 +255,7 @@ var body=$("exam-body"),pre=$("pretest-body");
 function handle(e){
  var b=e.target.closest("[data-xact]");if(!b||b.disabled)return;
  var a=b.dataset.xact,id=b.dataset.id;
+ if(me&&me.type==="dummy"&&/^(begin|resume|play|submit)$/.test(a)){alert("Demo accounts can view this page but cannot take the test.");return;}
  if(a==="intro"){
   if(ex&&ex.level!==id&&!ex.done&&!confirm("You have another test in progress in this session. Open this level anyway? (Your other test stays saved.)"))return;
   if(!(ex&&ex.level===id&&!ex.done))ex=ex&&ex.done?null:ex;
