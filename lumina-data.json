@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "updatedAt": 1794951596178,
+  "updatedAt": 1794957710085,
   "materials": [],
   "materialPages": {
     "listening": [
@@ -227,7 +227,7 @@
       "passage": "",
       "audioUrl": "",
       "audioScript": "",
-      "minutes": 10,
+      "minutes": 5,
       "questions": [
         {
           "id": "q-mwgh8pv1xcqu8",
@@ -282,6 +282,90 @@
           ],
           "a": 1,
           "e": "'So' introduces the result: careful collection led to reliable results.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwlb0t2j9cqu4",
+          "q": "Rapid technological changes in modern offices _____ many traditional administrative tasks.",
+          "o": [
+            "changing",
+            "changes",
+            "change",
+            "to change"
+          ],
+          "a": 2,
+          "e": "Subject jamak \"changes\" membutuhkan verb plural dasar \"change\"",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwlb6e84h67og",
+          "q": "_____ on the wooden shelf belongs to my grandmother.",
+          "o": [
+            "The ancient dusty book",
+            "Ancient books are",
+            "When the ancient book",
+            "That the ancient book"
+          ],
+          "a": 0,
+          "e": "Kalimat membutuhkan subject tunggal utama sebelum verb tunggal \"belongs\"",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwlb90s3s78lk",
+          "q": "A quiet library in the afternoon _____ a perfect place for studying English grammar.",
+          "o": [
+            "provide",
+            "providing",
+            "provides",
+            "are providing"
+          ],
+          "a": 2,
+          "e": "Subjek tunggal \"A quiet library\" memerlukan verb tunggal \"provides\"",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwlbbnkotfqha",
+          "q": "Running three kilometers every single morning _____ good for cardiovascular health.",
+          "o": [
+            "are",
+            "were",
+            "is",
+            "be"
+          ],
+          "a": 0,
+          "e": "Gerund sebagai subjek dianggap tunggal, sehingga verb-nya adalah is",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwlbeayjd2rh4",
+          "q": "Across the wide green valley _____ a small historical village.",
+          "o": [
+            "lies",
+            "lie",
+            "lying",
+            "is lie"
+          ],
+          "a": 0,
+          "e": "Inversi tempat: subjek tunggal \"a small historical village\" berada di belakang, sehingga verb tunggalnya adalah lies",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwlbgshe4hjth",
+          "q": "Several boxes of chocolate cookies _____ on the kitchen counter.",
+          "o": [
+            "sits",
+            "sitting",
+            "sit",
+            "is sitting"
+          ],
+          "a": 2,
+          "e": "Inti subjek jamak \"Several boxes\" memerlukan verb jamak sit",
           "topic": "",
           "ctx": ""
         }
