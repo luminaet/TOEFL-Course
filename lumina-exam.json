@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": 1794926736916,
+  "updatedAt": 1794927439458,
   "settings": {
     "totalMinutes": 120,
     "audioPlays": 1,
@@ -815,13 +815,12 @@
                   "id": "lc-u1",
                   "title": "The Importance of Drinking Water",
                   "audioUrl": "",
-                  "script": "Narrator: Listen to a talk about the importance of drinking water.\nWoman: Good morning, everyone. Today, I would like to talk about the importance of drinking water. Water is very important for our bodies. It helps us stay healthy and gives our bodies the energy to do daily activities. Drinking enough water also helps us concentrate better when studying.Most people need about eight glasses of water every day, although the amount may vary depending on their activities and the weather. If we do not drink enough water, we may feel tired and have difficulty concentrating. Therefore, remember to drink water regularly, especially when the weather is hot.\nNarrator: Question 35. What is the main topic of the talk?",
-                  "note": "",
+                  "script": "Narrator: Listen to a talk about the importance of drinking water.\nWoman: Good morning, everyone. Today, I would like to talk about the importance of drinking water. Water is very important for our bodies. It helps us stay healthy and gives our bodies the energy to do daily activities. Drinking enough water also helps us concentrate better when studying.Most people need about eight glasses of water every day, although the amount may vary depending on their activities and the weather. If we do not drink enough water, we may feel tired and have difficulty concentrating. Therefore, remember to drink water regularly, especially when the weather is hot.\nNarrator: Question 36. What is the main topic of the talk?",
                   "passage": "",
+                  "note": "",
                   "questions": [
                     {
-                      "id": "lc-u1-q1",
-                      "q": "Question 35. What is the main topic of the talk?",
+                      "q": "What is the main topic of the talk?",
                       "o": [
                         "The importance of eating vegetables.",
                         "The importance of drinking water.",
@@ -830,10 +829,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": ""
+                      "topic": "",
+                      "id": "lc-u1-q1"
                     },
                     {
-                      "id": "lc-u1-q2",
                       "q": "What may happen if people do not drink enough water?",
                       "o": [
                         "They may feel tired.",
@@ -843,7 +842,8 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": ""
+                      "topic": "",
+                      "id": "lc-u1-q2"
                     }
                   ]
                 },
@@ -852,11 +852,10 @@
                   "title": "The History of the Telephone",
                   "audioUrl": "",
                   "script": "Narrator: Listen to a talk about the history of the telephone.\nMan: The telephone is one of the most important inventions in human history. It allows people to communicate with each other over long distances. Alexander Graham Bell is widely credited with inventing the first practical telephone in 1876. In the past, telephones were large and usually stayed in one place. People could only make calls using wires. Today, telephones have become smaller and more advanced. Smartphones allow people not only to make calls but also to send messages, take pictures, and access the internet. The telephone has changed the way people communicate in their daily lives.\nNarrator: Who is widely credited with inventing the first practical telephone?",
-                  "note": "",
                   "passage": "",
+                  "note": "",
                   "questions": [
                     {
-                      "id": "lc-u2-q1",
                       "q": "When is the first practical telephone invented?",
                       "o": [
                         "In the early of 19th century",
@@ -866,10 +865,10 @@
                       ],
                       "a": 3,
                       "e": "",
-                      "topic": ""
+                      "topic": "",
+                      "id": "lc-u2-q1"
                     },
                     {
-                      "id": "lc-u2-q2",
                       "q": "What can people do with modern smartphones besides making calls?",
                       "o": [
                         "Only listen to music.",
@@ -879,7 +878,8 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": ""
+                      "topic": "",
+                      "id": "lc-u2-q2"
                     }
                   ]
                 },
@@ -888,11 +888,10 @@
                   "title": "The Benefits of Reading Books",
                   "audioUrl": "",
                   "script": "Narrator: Listen to a short lecture about reading books.\nWoman: Reading books is a useful activity for students. It provides many benefits, especially for those who want to improve their language skills. First, reading helps students learn new vocabulary. When students read regularly, they become familiar with different words and expressions. Second, reading can improve writing skills. Students can learn how to organize sentences and develop ideas by reading different types of texts. Finally, reading also increases knowledge because books contain information about many subjects, such as science, history, and culture. For these reasons, students should make reading a regular habit.\nNarrator: What is one benefit of reading books mentioned by the speaker?\nNarrator: Who is probably the speaker?",
-                  "note": "",
                   "passage": "",
+                  "note": "",
                   "questions": [
                     {
-                      "id": "lc-u3-q1",
                       "q": "Who is the speaker?",
                       "o": [
                         "A students",
@@ -902,10 +901,10 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": ""
+                      "topic": "",
+                      "id": "lc-u3-q1"
                     },
                     {
-                      "id": "lc-u3-q2",
                       "q": "What is one benefit of reading books mentioned by the speaker?",
                       "o": [
                         "It helps students improve their vocabulary.",
@@ -915,10 +914,10 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": ""
+                      "topic": "",
+                      "id": "lc-u3-q2"
                     },
                     {
-                      "id": "lc-u3-q3",
                       "q": "How can reading improve writing skills?",
                       "o": [
                         "By helping students memorize every book.",
@@ -928,10 +927,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": ""
+                      "topic": "",
+                      "id": "lc-u3-q3"
                     },
                     {
-                      "id": "lc-u3-q4",
                       "q": "What is not mentioned about the benefits of reading?",
                       "o": [
                         "Students will familiar with different words and expressions.",
@@ -941,7 +940,8 @@
                       ],
                       "a": 3,
                       "e": "",
-                      "topic": ""
+                      "topic": "",
+                      "id": "lc-u3-q4"
                     }
                   ]
                 }
