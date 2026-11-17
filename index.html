@@ -190,6 +190,22 @@ a.sk-title:hover{color:var(--red);text-decoration:underline}
 @keyframes riseUp{from{opacity:0;transform:translateY(60px)}to{opacity:1;transform:translateY(0)}}
 .shell.rise{animation:riseUp .7s cubic-bezier(.22,1,.36,1) both}
  
+/* --- profil: tampilan data + jendela edit --- */
+.pf-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px}
+.pf-view{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.pf-av{width:84px;height:84px;border-radius:50%;object-fit:cover;flex:none;border:2px solid var(--line)}
+.pf-ph{display:grid;place-items:center;background:#fae9ed;color:var(--red);font-size:32px;font-weight:800}
+.pf-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 18px;flex:1;min-width:220px}
+.pf-list div{display:grid;gap:2px;min-width:0}
+.pf-list span{font-size:10.5px;letter-spacing:.6px;color:#8993a4;font-weight:700;text-transform:uppercase}
+.pf-list b{font-size:13.5px;word-break:break-word}
+.pf-modal{position:fixed;inset:0;z-index:2000;background:#0008;display:grid;place-items:center;padding:16px;overflow:auto}
+.pf-card{background:#fff;border-radius:16px;padding:20px;width:100%;max-width:560px;max-height:92vh;overflow:auto}
+.pf-card h3{margin:0;font-size:16px}
+.pf-card hr{border:0;border-top:1px solid var(--line);margin:20px 0 16px}
+.pf-note{padding:10px 12px;background:#fff4e6;border:1px solid #f3d9b4;color:#8a5413;border-radius:10px;font-size:12px;line-height:1.5;margin-top:12px}
+@media(max-width:760px){.pf-list{grid-template-columns:1fr}}
+@media print{.pf-modal{display:none!important}}
 @media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.grid-2{grid-template-columns:1fr}.cards.three{grid-template-columns:1fr}}
 @media(max-width:760px){body{padding-top:88px;padding-bottom:50px}.shell{grid-template-columns:1fr;margin-top:16px}.sidebar{position:static;padding:12px}.nav{display:grid;grid-template-columns:repeat(2,1fr)}.sidebar-note{display:none}.cards{grid-template-columns:1fr}.panel{padding:18px}.hero{padding:10px 22px}.sk-desc{padding-left:16px}.bar-row{grid-template-columns:90px 1fr 40px}}
 @media(max-width:420px){body{padding-top:82px}.hero p{font-size:9px}.hero h1{font-size:22px;margin:3px 0}.nav button{font-size:11px;padding:10px 7px}.logo-img{height:44px}}
@@ -554,38 +570,86 @@ R.account=function(){
   e.target.value="";
  };
 };
+function initials(n){return (String(n||"?").trim().charAt(0)||"?").toUpperCase();}
 function profileBox(){
- const p=L.loadProfile(me.user),dm=me.type==="dummy",dis=dm?" disabled":"";
+ const p=L.loadProfile(me.user),dm=me.type==="dummy";
  const exp=me.expiresAt?fmtDate(me.expiresAt):"no expiry";
- const f=(id,lb,v,req,ty)=>`<label>${lb}${req?" *":""}<input id="pf-${id}" type="${ty||"text"}" value="${esc(v)}"${dis}></label>`;
- return `<div class="box" style="margin-bottom:14px"><h3>Profile &amp; account</h3><p class="sub">${esc((L.TYPES[me.type]||{}).label||"")} · valid until <b>${exp}</b>. Fields marked * are required.</p>
- <form id="pf-form" class="admin-form"><div class="row"><img id="pf-prev" src="${p.photo||""}" alt="" style="width:64px;height:64px;border-radius:50%;object-fit:cover;display:${p.photo?"block":"none"}"><label>Photo (max 1 MB, optional)<input id="pf-photo" type="file" accept="image/*"${dis}></label></div>
- <div class="cards">${f("name","Full name",p.name||me.name,true)}${f("email","Email",p.email,true,"email")}${f("wa","WhatsApp number",p.wa,true,"tel")}${f("job","Occupation",p.job)}${f("sem","Semester",p.semester)}</div>
- ${dm?"":'<div><button class="btn" type="submit">Save profile</button></div>'}</form></div>`;
+ const nm=p.name||me.name||me.user;
+ const av=p.photo?`<img class="pf-av" src="${p.photo}" alt="Profile photo">`:`<span class="pf-av pf-ph" aria-hidden="true">${esc(initials(nm))}</span>`;
+ const row=(k,v)=>`<div><span>${k}</span><b>${v?esc(v):"—"}</b></div>`;
+ return `<div class="box" id="pf-box" style="margin-bottom:14px">
+  <div class="pf-head"><div><h3>Profile &amp; account</h3><p class="sub" style="margin:0">${esc((L.TYPES[me.type]||{}).label||"")} · valid until <b>${exp}</b></p></div>${dm?"":'<button class="btn small no-print" type="button" data-act="pf-edit">✏️ Edit</button>'}</div>
+  <div class="pf-view">${av}<div class="pf-list">${row("Full name",nm)}${row("Username",me.user)}${row("Email",p.email)}${row("WhatsApp",p.wa)}${row("Occupation",p.job)}${row("Semester",p.semester)}</div></div>
+  ${(!dm&&!L.profileOk(p))?'<div class="pf-note no-print">Your profile is not complete yet. Click <b>Edit</b> to add your name, email and WhatsApp number.</div>':""}</div>`;
 }
+function refreshProfileBox(){const el=$("pf-box");if(el)el.outerHTML=profileBox();}
 function bindProfile(){
- const fm=$("pf-form");if(!fm||me.type==="dummy")return;
- let photo=L.loadProfile(me.user).photo,photoNew=false;
- if(!L.loadProfile(me.user).email)L.api("getProfile").then(j=>{const sp=j.profile;if(sp&&!$("pf-email").value){$("pf-name").value=sp.name||$("pf-name").value;$("pf-email").value=sp.email||"";$("pf-wa").value=sp.wa||"";$("pf-job").value=sp.job||"";$("pf-sem").value=sp.semester||"";}}).catch(()=>{});
+ if(!me||me.type==="dummy")return;
+ if(L.loadProfile(me.user).email)return;
+ L.api("getProfile").then(j=>{
+  const sp=j.profile;if(!sp)return;
+  const cur=L.loadProfile(me.user);
+  L.saveProfile(me.user,L.cleanProfile({name:sp.name||cur.name,email:sp.email,wa:sp.wa,job:sp.job,semester:sp.semester,photo:sp.photo||cur.photo}));
+  refreshProfileBox();
+ }).catch(()=>{});
+}
+let pfKey=null;
+function closeProfileEdit(){const m=$("pf-modal");if(m)m.remove();if(pfKey){document.removeEventListener("keydown",pfKey);pfKey=null;}}
+function openProfileEdit(){
+ if(!me||me.type==="dummy")return;
+ closeProfileEdit();
+ const p=L.loadProfile(me.user);
+ const f=(id,lb,v,req,ty)=>`<label>${lb}${req?" *":""}<input id="pf-${id}" type="${ty||"text"}" value="${esc(v)}"></label>`;
+ const m=document.createElement("div");m.id="pf-modal";m.className="pf-modal";
+ m.innerHTML=`<div class="pf-card" role="dialog" aria-modal="true" aria-label="Edit profile">
+  <div class="pf-head"><h3>Edit profile</h3><button class="btn secondary small" type="button" data-pf="close">✕ Close</button></div>
+  <form id="pf-form" class="admin-form">
+   <div class="row"><img id="pf-prev" src="${p.photo||""}" alt="" style="width:64px;height:64px;border-radius:50%;object-fit:cover;display:${p.photo?"block":"none"}"><label>Photo (max 1 MB, optional)<input id="pf-photo" type="file" accept="image/*"></label></div>
+   <div class="cards">${f("name","Full name",p.name||me.name,true)}${f("email","Email",p.email,true,"email")}${f("wa","WhatsApp number",p.wa,true,"tel")}${f("job","Occupation",p.job)}${f("sem","Semester",p.semester)}</div>
+   <div><button class="btn" type="submit">Save profile</button></div>
+  </form>
+  <hr>
+  <h3>Change password</h3>
+  <form id="pw-form" class="admin-form" autocomplete="off" style="margin-top:12px">
+   <label>Current password<input id="pw-old" type="password" required autocomplete="current-password"></label>
+   <div class="cards"><label>New password (min. 6 characters)<input id="pw-new" type="password" required minlength="6" autocomplete="new-password"></label><label>Confirm new password<input id="pw-new2" type="password" required minlength="6" autocomplete="new-password"></label></div>
+   <div><button class="btn" type="submit">Change password</button></div>
+  </form></div>`;
+ document.body.appendChild(m);
+ m.addEventListener("click",e=>{if(e.target===m||e.target.closest('[data-pf="close"]'))closeProfileEdit();});
+ pfKey=e=>{if(e.key==="Escape")closeProfileEdit();};document.addEventListener("keydown",pfKey);
+
+ let photo=p.photo,photoNew=false;
  $("pf-photo").onchange=e=>{
-  const f=e.target.files[0];if(!f)return;
-  if(!/^image\//.test(f.type)||f.size>1048576){alert("Choose an image of at most 1 MB.");e.target.value="";return;}
+  const fl=e.target.files[0];if(!fl)return;
+  if(!/^image\//.test(fl.type)||fl.size>1048576){alert("Choose an image of at most 1 MB.");e.target.value="";return;}
   const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{
    const k=Math.min(1,256/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);
    const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0,c.width,c.height);
    photo=c.toDataURL("image/jpeg",.8);photoNew=true;const pv=$("pf-prev");pv.src=photo;pv.style.display="block";};
-   im.onerror=()=>alert("Invalid image.");im.src=r.result;};r.readAsDataURL(f);
+   im.onerror=()=>alert("Invalid image.");im.src=r.result;};r.readAsDataURL(fl);
  };
- fm.onsubmit=e=>{e.preventDefault();
-  const p=L.cleanProfile({name:$("pf-name").value,email:$("pf-email").value,wa:$("pf-wa").value,job:$("pf-job").value,semester:$("pf-sem").value,photo});
-  if(!L.profileOk(p)){alert("Name, a valid email, and a WhatsApp number (8–15 digits) are required.");return;}
-  if(!L.saveProfile(me.user,p)){alert("Could not save (browser storage full or blocked).");return;}
-  $("user-name").textContent=p.name;
-  const sb=fm.querySelector("button[type=submit]");sb.disabled=true;
-  L.api("saveProfile",{profile:{name:p.name,email:p.email,wa:p.wa,job:p.job,semester:p.semester},photo:photoNew?photo:""})
-   .then(()=>{photoNew=false;alert("Profile saved.");})
-   .catch(err=>alert("Saved on this device, but not yet sent to the server: "+err.message))
-   .finally(()=>{sb.disabled=false;});
+ $("pf-form").onsubmit=e=>{
+  e.preventDefault();
+  const np=L.cleanProfile({name:$("pf-name").value,email:$("pf-email").value,wa:$("pf-wa").value,job:$("pf-job").value,semester:$("pf-sem").value,photo});
+  if(!L.profileOk(np)){alert("Name, a valid email, and a WhatsApp number (8–15 digits) are required.");return;}
+  if(!L.saveProfile(me.user,np)){alert("Could not save (browser storage full or blocked).");return;}
+  $("user-name").textContent=np.name;
+  const sb=e.target.querySelector("button[type=submit]");sb.disabled=true;
+  L.api("saveProfile",{profile:{name:np.name,email:np.email,wa:np.wa,job:np.job,semester:np.semester},photo:photoNew?photo:""})
+   .then(()=>{closeProfileEdit();refreshProfileBox();alert("Profile saved.");})
+   .catch(err=>{sb.disabled=false;refreshProfileBox();alert("Saved on this device, but not yet sent to the server: "+err.message);});
+ };
+ $("pw-form").onsubmit=e=>{
+  e.preventDefault();
+  const o=$("pw-old").value,n1=$("pw-new").value,n2=$("pw-new2").value;
+  if(n1.length<6){alert("New password must be at least 6 characters.");return;}
+  if(n1!==n2){alert("New password and confirmation do not match.");return;}
+  if(n1===o){alert("New password must be different from the current one.");return;}
+  const sb=e.target.querySelector("button[type=submit]");sb.disabled=true;
+  L.api("changePassword",{oldHash:L.hashPassword(me.user,o),hash:L.hashPassword(me.user,n1)})
+   .then(()=>{e.target.reset();sb.disabled=false;alert("Password changed. Use your new password the next time you log in.");})
+   .catch(err=>{sb.disabled=false;alert(err.message);});
  };
 }
 function downloadProgress(){
@@ -762,6 +826,7 @@ document.addEventListener("click",e=>{
  }
  else if(a==="tts-stop")stopAllAudio();
  else if(a==="dl-prog")downloadProgress();
+ else if(a==="pf-edit")openProfileEdit();
  else if(a==="print")window.print();
 });
 document.getElementById("open-cms").addEventListener("click",()=>{location.href="content-manager.html";});
