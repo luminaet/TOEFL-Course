@@ -602,7 +602,7 @@ R.practice=function(){
   if(prog&&n){const x=L.skillStats(prog,p.id);meta+=` · ${x.attempts?`best ${x.best}% · ${x.attempts} attempt${x.attempts===1?"":"s"}`:"not attempted"}`;}
   const stt=prog&&n?pill(L.skillStatus(L.skillStats(prog,p.id),pass)):"";
   const u=p.file?L.safeUrl(p.file):"";
-  return `<div class="sk"><div class="sk-head">${bullet(p,i)}<div class="sk-title">${esc(p.label)}<div class="sk-meta">${meta}</div></div>${stt}${u?`<a class="btn secondary small sk-link" data-skill="${esc(p.id)}" href="${esc(u)}"${/^https?:/i.test(u)?' target="_blank" rel="noopener"':""}>📖 Material</a>`:""}<button class="btn small" data-act="start-skill" data-id="${esc(p.id)}" ${n?"":"disabled"}>${n?"Start practice →":"Coming soon"}</button></div></div>`;
+  return `<div class="sk"><div class="sk-head">${bullet(p,i)}<div class="sk-title">${esc(p.label)}<div class="sk-meta">${meta}</div></div>${stt}${u?`<a class="btn secondary small sk-link" data-skill="${esc(p.id)}" href="${esc(u)}"${/^https?:/i.test(u)?' target="_blank" rel="noopener"':""}>📖 Material</a>`:""}<button class="btn small" data-act="start-skill" data-id="${esc(p.id)}" ${n?"":"disabled"}>${n?"START":"Coming soon"}</button></div></div>`;
  }).join("");
  $("practice-body").innerHTML=`<div class="page-title"><div><div class="kicker">SKILL PRACTICE</div><h2>Practice by skill</h2><p>Each skill has its own exercise. Your results are saved to your portfolio.</p></div></div>
   <div class="chips">${chips}</div><div class="sk-list">${list||'<div class="empty">No skills in this section yet.</div>'}</div>`;
