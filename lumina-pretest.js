@@ -42,10 +42,14 @@ css.textContent+=
 "body.exam-mode #exam .q-meta{font-size:9.5px}"+
 "body.exam-mode #exam .ex-dir{font-size:11.5px}"+
 "body.exam-mode #exam .ex-flag,body.exam-mode #exam .ex-q-foot .btn{font-size:11px}"+
-"body.exam-mode #exam .pass-body{font-size:12.5px}"+
-"body.exam-mode #exam .pass-body p{line-height:22px;margin-bottom:10px}"+
+"body.exam-mode #exam .pass-body{font-size:11px}"+
+"body.exam-mode #exam .pass-body p{line-height:22px;margin-bottom:9px}"+
 "body.exam-mode #exam .pass-body .ln{line-height:22px;font-size:10px}"+
 "body.exam-mode #exam .qb{font-size:11px;height:28px}";
+css.textContent+=
+"#exam .pass-body{padding-left:20px}"+
+"#exam .pass-body:before{left:17px}"+
+"#exam .pass-body .ln{width:15px}";
 document.head.appendChild(css);
 var sec=document.createElement("section");sec.id="exam";sec.className="panel page hidden";sec.innerHTML='<div id="exam-body"></div>';
 document.querySelector("main.content").appendChild(sec);
