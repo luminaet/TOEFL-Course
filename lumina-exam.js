@@ -234,35 +234,52 @@ function parseScript(script){
   return m?{role:roleOf(m[1]),text:m[2]}:{role:"narrator",text:l};
  });
 }
-var FEM=/(zira|samantha|female|aria|jenny|susan|karen|moira|tessa|victoria|hazel|allison|libby|sonia|serena|fiona|joanna|salli|kimberly)/i,MAL=/(david|mark|male|daniel|alex|guy|fred|james|george|ryan|thomas|rishi|matthew|joey|brian|arthur)/i;
-function pickVoice(role,cfg){
- loadVoices();var c=(cfg&&cfg[role])||{},v=null;
- if(c.voice)v=voices.filter(function(x){return x.name===c.voice;})[0]||null;
- if(!v){
-  var en=voices.filter(function(x){return /^en/i.test(x.lang);}),us=en.filter(function(x){return /en[-_]US/i.test(x.lang);});if(us.length)en=us;
-  if(role==="woman")v=en.filter(function(x){return FEM.test(x.name);})[0];
-  else if(role==="man")v=en.filter(function(x){return MAL.test(x.name);})[0];
-  else v=en[0];
-  if(!v)v=en[0]||null;
- }
- return v;
+var FEM=/(zira|samantha|female|aria|jenny|susan|karen|moira|tessa|victoria|hazel|allison|libby|sonia|serena|fiona|joanna|salli|kimberly|emma|olivia|nicole|kendra|#female|-x-(sfg|tpc|tpf|iob|iog|iof)\b)/i,
+    MAL=/(david|mark|male|daniel|alex|guy|fred|james|george|ryan|thomas|rishi|matthew|joey|brian|arthur|aaron|eric|#male|-x-(iol|iom|tpd)\b)/i;
+function isFem(v){return FEM.test(v.name);}
+function isMal(v){return MAL.test(v.name)&&!FEM.test(v.name);}
+function enVoices(){
+ loadVoices();
+ var en=voices.filter(function(x){return /^en/i.test(x.lang);}),
+     us=en.filter(function(x){return /en[-_]US/i.test(x.lang);});
+ return us.length?us:en;
 }
+/* Tentukan suara tiap peran SEKALI per pemutaran, supaya Man dan Woman tidak jatuh ke suara yang sama */
+function planVoices(cfg){
+ var en=enVoices();
+ function chosen(r){var n=cfg&&cfg[r]&&cfg[r].voice;return n?(voices.filter(function(x){return x.name===n;})[0]||null):null;}
+ var cw=chosen("woman"),cm=chosen("man"),cn=chosen("narrator");
+ var fem=en.filter(isFem),mal=en.filter(isMal);
+ var w=cw||fem[0]||en.filter(function(x){return !isMal(x);})[0]||en[0]||null;
+ var m=cm||mal[0]||en.filter(function(x){return x!==w&&!isFem(x);})[0]||en.filter(function(x){return x!==w;})[0]||w;
+ var n=cn||en.filter(function(x){return x!==w&&x!==m;})[0]||w;
+ return {woman:w,man:m,narrator:n,same:(w===m),manKnown:!!cm||(!!m&&isMal(m))};
+}
+function pitchFor(role,plan,c){
+ var p=c.pitch||1;
+ if(role==="narrator")return (plan.narrator===plan.woman||plan.narrator===plan.man)?1:p;
+ if(plan.same){return role==="man"?Math.min(p,0.55):Math.max(p,1.25);}   /* satu suara untuk dua peran: bedakan lewat pitch */
+ if(role==="man"&&!plan.manKnown)return Math.min(p,0.7);                   /* suara pria tidak terdeteksi: tetap beratkan */
+ return p;
+}
+function pickVoice(role,cfg){return planVoices(cfg)[role];}
 function speakScript(script,cfg,onend){
  if(!root.speechSynthesis){if(onend)onend(false);return {stop:function(){}};}
- var items=parseScript(script),i=0,stopped=false;
+ var items=parseScript(script),i=0,stopped=false,plan=null;
  function next(){
   if(stopped)return;
   if(i>=items.length){if(onend)onend(true);return;}
   var it=items[i++];
   if(it.role==="pause"){setTimeout(next,it.pause*1000);return;}
-  var u=new SpeechSynthesisUtterance(it.text),c=(cfg&&cfg[it.role])||{},v=pickVoice(it.role,cfg);
+  var u=new SpeechSynthesisUtterance(it.text),c=(cfg&&cfg[it.role])||{},v=plan[it.role];
   if(v){u.voice=v;u.lang=v.lang;}else u.lang="en-US";
-  u.rate=c.rate||0.95;u.pitch=c.pitch||1;
+  u.rate=c.rate||0.95;u.pitch=pitchFor(it.role,plan,c);
   u.onend=function(){if(!stopped)setTimeout(next,it.role==="narrator"?500:350);};
   u.onerror=function(){if(!stopped)next();};
   root.speechSynthesis.speak(u);
  }
- root.speechSynthesis.cancel();setTimeout(next,60);
+ root.speechSynthesis.cancel();
+ setTimeout(function(){plan=planVoices(cfg);next();},60);
  return {stop:function(){stopped=true;root.speechSynthesis.cancel();}};
 }
 
