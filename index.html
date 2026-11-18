@@ -78,7 +78,8 @@ h1{font-size:clamp(23px,3.2vw,34px);margin:4px 0 3px;letter-spacing:.5px}
 footer{position:fixed;left:0;bottom:0;width:100%;height:45px;z-index:1000;text-align:center;background:#2d254e;color:white;padding:5px 12px}
 footer strong{font-size:9px;letter-spacing:1.2px}footer p{font-size:8px;color:#aeb8cc;margin:1px 0 0}
 body.loading .shell,body.loading .hero,body.loading footer{visibility:hidden}
-body.loading{background:linear-gradient(115deg,var(--red-dark),#b52b43 58%,#8c1b30)}
+body.loading{background:var(--bg)}
+body.loading::after{content:"";position:fixed;top:50%;left:50%;width:42px;height:42px;margin:-21px 0 0 -21px;border-radius:50%;border:4px solid #98a1b133;border-top-color:var(--red);animation:spin .9s linear infinite;z-index:10}
 .link-btn{display:inline-block;background:#2563eb;color:#fff;padding:.5rem 1rem;border-radius:.5rem;text-decoration:none;font-weight:600;font-size:.875rem;margin:.4rem .5rem 0 0}
 .material-action{margin-top:1rem}.material-action:empty{display:none}
 .sub-title{font-size:15px;margin:24px 0 2px}
@@ -220,7 +221,7 @@ a.sk-title:hover{color:var(--red);text-decoration:underline}
 </style>
 </head>
 <body class="loading">
-<div id="loader" class="loader" role="status" aria-live="polite">
+<div id="loader" class="loader hidden" role="status" aria-live="polite">
  <div class="spin"></div><p>Sek enteni, dilut maning manjing…</p>
 </div>
 <div id="logout-veil" class="logout-veil hidden" role="status" aria-live="polite">
