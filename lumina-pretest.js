@@ -52,7 +52,7 @@ css.textContent+=
 "#exam .pass-body .ln{width:15px}";
 css.textContent+=
 "@media(min-width:901px){"+
-"#exam .ex-grid{grid-template-columns:minmax(0,640px) 250px;justify-content:center}"+
+"#exam .ex-grid{grid-template-columns:minmax(980px) 250px;justify-content:center}"+
 "}";
 document.head.appendChild(css);
 var sec=document.createElement("section");sec.id="exam";sec.className="panel page hidden";sec.innerHTML='<div id="exam-body"></div>';
