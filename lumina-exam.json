@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": 1794967319991,
+  "updatedAt": 1794971520651,
   "settings": {
     "totalMinutes": 120,
     "audioPlays": 1,
@@ -1066,11 +1066,10 @@
                   "title": "s1",
                   "audioUrl": "",
                   "script": "",
-                  "note": "",
                   "passage": "",
+                  "note": "",
                   "questions": [
                     {
-                      "id": "sa-u1-q1",
                       "q": "The committee _____ the final decision yesterday.",
                       "o": [
                         "make",
@@ -1080,7 +1079,8 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "Verb tense"
+                      "topic": "Verb tense",
+                      "id": "sa-u1-q1"
                     }
                   ]
                 },
@@ -1089,11 +1089,10 @@
                   "title": "s2",
                   "audioUrl": "",
                   "script": "",
-                  "note": "",
                   "passage": "",
+                  "note": "",
                   "questions": [
                     {
-                      "id": "sa-u2-q1",
                       "q": "Neither the students nor the teacher _____ aware of the schedule change.",
                       "o": [
                         "were",
@@ -1103,7 +1102,330 @@
                       ],
                       "a": 3,
                       "e": "",
-                      "topic": "Subject-Verb Agreement"
+                      "topic": "Subject-Verb Agreement",
+                      "id": "sa-u2-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sa-u3",
+                  "title": "s3",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "The professor, along with several research assistants, ______ preparing the experiment.",
+                      "o": [
+                        "are",
+                        "were",
+                        "is",
+                        "have"
+                      ],
+                      "a": 2,
+                      "e": "",
+                      "topic": "",
+                      "id": "sa-u3-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sa-u4",
+                  "title": "s4",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "If the researchers ______ the data more carefully, they would have discovered the error.",
+                      "o": [
+                        "analyze",
+                        "analyzed",
+                        "had analyzed",
+                        "would analyze"
+                      ],
+                      "a": 2,
+                      "e": "",
+                      "topic": "",
+                      "id": "sa-u4-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sa-u5",
+                  "title": "s5",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "Had the company invested more money in technology, it _____ its productivity significantly.",
+                      "o": [
+                        "improves",
+                        "improved",
+                        "would improve",
+                        "would have improved"
+                      ],
+                      "a": 3,
+                      "e": "",
+                      "topic": "",
+                      "id": "sa-u5-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sa-u6",
+                  "title": "s6",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "The number of students participating in the international program _____ increased considerably.",
+                      "o": [
+                        "have",
+                        "has",
+                        "are",
+                        "were"
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "",
+                      "id": "sa-u6-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sa-u7",
+                  "title": "s7",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "The manager asked the employees _____ the report before Friday.",
+                      "o": [
+                        "submit",
+                        "submitted",
+                        "to submit",
+                        "submitting"
+                      ],
+                      "a": 2,
+                      "e": "",
+                      "topic": "",
+                      "id": "sa-u7-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sa-u8",
+                  "title": "s8",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "No sooner _____ the lecture started than the electricity went out.",
+                      "o": [
+                        "has",
+                        "had",
+                        "did",
+                        "was"
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "",
+                      "id": "sa-u8-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sa-u9",
+                  "title": "s9",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "The scholarship is awarded to students _____ demonstrate outstanding academic achievement.",
+                      "o": [
+                        "whose",
+                        "whom",
+                        "which",
+                        "who"
+                      ],
+                      "a": 3,
+                      "e": "",
+                      "topic": "",
+                      "id": "sa-u9-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sa-u10",
+                  "title": "s10",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "_____ the limited availability of laboratory equipment, the researchers managed to complete the experiment.",
+                      "o": [
+                        "Although",
+                        "Despite",
+                        "Because",
+                        "Since"
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "",
+                      "id": "sa-u10-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sa-u11",
+                  "title": "s11",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "Dr. Anderson, _____, has published several articles on environmental science.",
+                      "o": [
+                        "a well-known environmental scientist",
+                        "who is a well-known environmental scientist",
+                        "is a well-known environmental scientist",
+                        "being a well-known environmental scientist"
+                      ],
+                      "a": 0,
+                      "e": "",
+                      "topic": "",
+                      "id": "sa-u11-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sa-u12",
+                  "title": "s12",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "The researcher was interested _____ the historical development of the language _____ its modern applications.",
+                      "o": [
+                        "either – or",
+                        "neither – nor",
+                        "not only – but also",
+                        "whether – or"
+                      ],
+                      "a": 2,
+                      "e": "",
+                      "topic": "",
+                      "id": "sa-u12-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sa-u13",
+                  "title": "s13",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "The lecturer explained _____ the experiment had produced inconsistent results.",
+                      "o": [
+                        "what",
+                        "that",
+                        "which",
+                        "whose"
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "",
+                      "id": "sa-u13-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sa-u14",
+                  "title": "s14",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "_____ the instructions carefully, the students began working on the assignment.",
+                      "o": [
+                        "Reading",
+                        "Having read",
+                        "Read",
+                        "To read"
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "",
+                      "id": "sa-u14-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sa-u15",
+                  "title": "s15",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "_____ had the researchers collected the data than they began analyzing the results.",
+                      "o": [
+                        "No sooner",
+                        "Not only",
+                        "Never",
+                        "Rarely"
+                      ],
+                      "a": 0,
+                      "e": "",
+                      "topic": "",
+                      "id": "sa-u15-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sa-u16",
+                  "title": "s16",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "_____ the research findings available to the public before the final report was published?",
+                      "o": [
+                        "Were",
+                        "Did",
+                        "Have",
+                        "Do"
+                      ],
+                      "a": 0,
+                      "e": "",
+                      "topic": "",
+                      "id": "sa-u16-q1"
                     }
                   ]
                 }
@@ -1121,11 +1443,10 @@
                   "title": "e1",
                   "audioUrl": "",
                   "script": "",
-                  "note": "",
                   "passage": "",
+                  "note": "",
                   "questions": [
                     {
-                      "id": "sb-u1-q1",
                       "q": "The __researcher__ collected the data __careful__, so the results __were__ __reliable__.",
                       "o": [
                         "researcher",
@@ -1135,7 +1456,8 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Adverbs"
+                      "topic": "Adverbs",
+                      "id": "sb-u1-q1"
                     }
                   ]
                 },
@@ -1144,11 +1466,10 @@
                   "title": "e2",
                   "audioUrl": "",
                   "script": "",
-                  "note": "",
                   "passage": "",
+                  "note": "",
                   "questions": [
                     {
-                      "id": "sb-u2-q1",
                       "q": "Each of the __students__ __have__ to submit __an__ essay __by__ Friday.",
                       "o": [
                         "students",
@@ -1158,7 +1479,192 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Subject-Verb Agreement"
+                      "topic": "Subject-Verb Agreement",
+                      "id": "sb-u2-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sb-u3",
+                  "title": "e3",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "The students _who_ study in this classroom _is preparing_ for their final _examination_ _next week_.",
+                      "o": [
+                        "who",
+                        "is preparing",
+                        "for their final examination",
+                        "next week"
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "",
+                      "id": "sb-u3-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sb-u4",
+                  "title": "e4",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "My brother _enjoys_ _to read_ English novels _during his_ free time _at home_.",
+                      "o": [
+                        "enjoys",
+                        "to read",
+                        "during his",
+                        "at home"
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "",
+                      "id": "sb-u4-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sb-u5",
+                  "title": "e5",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "The library _opens_ at eight o'clock _every morning_ and _close_ at five in the afternoon _on weekdays_.",
+                      "o": [
+                        "opens",
+                        "every morning",
+                        "close",
+                        "on weekdays"
+                      ],
+                      "a": 2,
+                      "e": "",
+                      "topic": "",
+                      "id": "sb-u5-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sb-u6",
+                  "title": "e6",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "The information _about_ the new course _are available_ on the university website _for all students_ this _semester_.",
+                      "o": [
+                        "about",
+                        "are available",
+                        "for all students",
+                        "this semester"
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "",
+                      "id": "sb-u6-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sb-u7",
+                  "title": "e7",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "The teacher _explained_ the lesson _carefully_ so that the students _could understood_ it _easily_.",
+                      "o": [
+                        "explained",
+                        "carefully",
+                        "could understood",
+                        "easily"
+                      ],
+                      "a": 2,
+                      "e": "",
+                      "topic": "",
+                      "id": "sb-u7-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sb-u8",
+                  "title": "e8",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "The books _which belong_ to the professor _was placed_ on the table _near_ the _window_ yesterday.",
+                      "o": [
+                        "which belong",
+                        "was placed",
+                        "near",
+                        "window"
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "",
+                      "id": "sb-u8-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sb-u9",
+                  "title": "e9",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "The food _was prepared_ by the students who _participate_ in the _cooking_ competition _last weekend_.",
+                      "o": [
+                        "was prepared",
+                        "participate",
+                        "cooking",
+                        "last weekend"
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "",
+                      "id": "sb-u9-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sb-u10",
+                  "title": "e10",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "The development of new technology _have changed_ the way students _learn English_ _in_ the classroom _today_.",
+                      "o": [
+                        "have changed",
+                        "learn English",
+                        "in",
+                        "today"
+                      ],
+                      "a": 0,
+                      "e": "",
+                      "topic": "",
+                      "id": "sb-u10-q1"
                     }
                   ]
                 }
