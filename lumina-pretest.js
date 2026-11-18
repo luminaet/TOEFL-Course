@@ -54,6 +54,16 @@ css.textContent+=
 "@media(min-width:901px){"+
 "#exam .ex-grid{grid-template-columns:minmax(980px) 250px;justify-content:center}"+
 "}";
+css.textContent+=
+"@media(max-width:900px){"+
+"body.exam-mode #exam .ex-bar{height:40px;padding:0 8px;flex-wrap:nowrap;gap:6px;overflow:hidden}"+
+"body.exam-mode #exam .ex-bar>div:first-child{display:none}"+
+"body.exam-mode #exam .ex-bar .row{width:100%;flex-wrap:nowrap;gap:6px}"+
+"body.exam-mode #exam .ex-bar .row .btn:first-of-type{margin-left:auto}"+
+"body.exam-mode #exam .ex-timer{font-size:15px;padding:3px 8px}"+
+"body.exam-mode #exam .ex-bar .btn{padding:5px 9px;font-size:11px;white-space:nowrap}"+
+"body.exam-mode #exam .ex-pass{top:102px;max-height:30vh;padding:8px 10px}"+
+"}";
 document.head.appendChild(css);
 var sec=document.createElement("section");sec.id="exam";sec.className="panel page hidden";sec.innerHTML='<div id="exam-body"></div>';
 document.querySelector("main.content").appendChild(sec);
