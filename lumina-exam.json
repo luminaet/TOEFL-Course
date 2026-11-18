@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": 1794971885887,
+  "updatedAt": 1794976854344,
   "settings": {
     "totalMinutes": 120,
     "audioPlays": 1,
@@ -1665,6 +1665,328 @@
                       "e": "",
                       "topic": "",
                       "id": "sb-u10-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sb-u11",
+                  "title": "e11",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "____Were__ the university ____to offers__ additional scholarships, more students ____would apply__ ____for the program__.",
+                      "o": [
+                        "Were",
+                        "to offers",
+                        "would apply",
+                        "for the program"
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "",
+                      "id": "sb-u11-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sb-u12",
+                  "title": "e12",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "The new laboratory operates more efficiently ____than do the previous facilities__ ____used by the university__ ____for scientific research__ ____in the past__.",
+                      "o": [
+                        "than do the previous facilities",
+                        "used by the university",
+                        "for scientific research",
+                        "in the past"
+                      ],
+                      "a": 0,
+                      "e": "",
+                      "topic": "",
+                      "id": "sb-u12-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sb-u13",
+                  "title": "e13",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "The professor speaks English more fluently ____than does his students__ ____who have studied abroad__ ____for several years__ ____at the university__.",
+                      "o": [
+                        "than does his students",
+                        "who have studied abroad",
+                        "for several years",
+                        "at the university"
+                      ],
+                      "a": 0,
+                      "e": "",
+                      "topic": "",
+                      "id": "sb-u13-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sb-u14",
+                  "title": "e14",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "The new bridge __was carefully analyze__ by the engineers __before construction began__ __in the following year__ __to ensure its safety__.",
+                      "o": [
+                        "was carefully analyze",
+                        "before construction began",
+                        "in the following year",
+                        "to ensure its safety"
+                      ],
+                      "a": 0,
+                      "e": "",
+                      "topic": "",
+                      "id": "sb-u14-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sb-u15",
+                  "title": "e15",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "The laboratory equipment __must be maintained__ regularly because __they__ can become damaged __if exposed to extreme temperatures__ __for extended periods__.",
+                      "o": [
+                        "must be maintained",
+                        "they",
+                        "if exposed to extreme temperatures",
+                        "for extended periods"
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "",
+                      "id": "sb-u15-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sb-u16",
+                  "title": "e16",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "__Despite__ the weather was cold, the students __continued__ their research __in the laboratory__ __until midnight__.",
+                      "o": [
+                        "Despite",
+                        "continued",
+                        "in the laboratory",
+                        "until midnight"
+                      ],
+                      "a": 0,
+                      "e": "",
+                      "topic": "",
+                      "id": "sb-u16-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sb-u17",
+                  "title": "e17",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "Both the professor __and the research assistants__ __was responsible__ for collecting the data __from the participants__ __during the experiment__.",
+                      "o": [
+                        "and the research assistants",
+                        "was responsible",
+                        "from the participants",
+                        "during the experiment"
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "",
+                      "id": "sb-u17-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sb-u18",
+                  "title": "e18",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "The students were __confusing__ by the complicated instructions __given by__ the instructor __before the experiment__ __began__.",
+                      "o": [
+                        "confusing",
+                        "given by",
+                        "before the experiment",
+                        "began"
+                      ],
+                      "a": 0,
+                      "e": "",
+                      "topic": "",
+                      "id": "sb-u18-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sb-u19",
+                  "title": "e19",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "The committee plans __to evaluate__ the proposal, __to revise__ the budget, and __preparing__ a final report __for the director__.",
+                      "o": [
+                        "to evaluate",
+                        "to revise",
+                        "preparing",
+                        "for the director"
+                      ],
+                      "a": 2,
+                      "e": "",
+                      "topic": "",
+                      "id": "sb-u19-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sb-u20",
+                  "title": "e20",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "The articles __published by the researchers__ __contains__ important findings __about climate change__ __in Southeast Asia__.",
+                      "o": [
+                        "published by the researchers",
+                        "contains",
+                        "about climate change",
+                        "in Southeast Asia"
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "",
+                      "id": "sb-u20-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sb-u21",
+                  "title": "e21",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "The scientist __which__ developed the new technology __received an award__ __from the university__ __last year__.",
+                      "o": [
+                        "which",
+                        "received an award",
+                        "from the university",
+                        "last year"
+                      ],
+                      "a": 0,
+                      "e": "",
+                      "topic": "",
+                      "id": "sb-u21-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sb-u22",
+                  "title": "e22",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "__While walking through the laboratory__, the equipment __was inspected__ __by the technician__ __carefully__.",
+                      "o": [
+                        "While walking through the laboratory",
+                        "was inspected",
+                        "by the technician",
+                        "carefully"
+                      ],
+                      "a": 0,
+                      "e": "",
+                      "topic": "",
+                      "id": "sb-u22-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sb-u23",
+                  "title": "e23",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "The lecturer asked the students __whether had they completed__ __the assignment__ __before the deadline__ __that morning__.",
+                      "o": [
+                        "whether had they completed",
+                        "the assignment",
+                        "before the deadline",
+                        "that morning"
+                      ],
+                      "a": 0,
+                      "e": "",
+                      "topic": "",
+                      "id": "sb-u23-q1"
+                    }
+                  ]
+                },
+                {
+                  "id": "sb-u24",
+                  "title": "e24",
+                  "audioUrl": "",
+                  "script": "",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "Rarely __the researchers have encountered__ such unusual results __during__ their experiments__ __in recent years__.",
+                      "o": [
+                        "the researchers have",
+                        "during",
+                        "their experiments",
+                        "in recent years"
+                      ],
+                      "a": 0,
+                      "e": "",
+                      "topic": "",
+                      "id": "sb-u24-q1"
                     }
                   ]
                 }
