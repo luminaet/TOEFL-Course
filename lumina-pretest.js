@@ -59,14 +59,15 @@ css.textContent+=
 ".pg-short{display:none}"+
 "@media(max-width:900px){"+
 "body.exam-mode #exam .ex-bar{height:40px;padding:0 8px;flex-wrap:nowrap;gap:6px;overflow:hidden}"+
-"body.exam-mode #exam .ex-bar>div:first-child{flex:none}"+
+"body.exam-mode #exam .ex-bar>div:first-child{display:contents}"+
 "body.exam-mode #exam .ex-bar>div:first-child>b,body.exam-mode #exam .ex-bar>div:first-child>.pill{display:none}"+
-"body.exam-mode #exam #ex-prog{font-size:12px;font-weight:800;color:#536075;white-space:nowrap}"+
+"body.exam-mode #exam .ex-bar .row{display:contents}"+
+"body.exam-mode #exam .ex-timer{order:1;font-size:15px;padding:3px 8px}"+
+"body.exam-mode #exam #ex-prog{order:2;margin-left:auto;font-size:12px;font-weight:800;color:#536075;white-space:nowrap}"+
+"body.exam-mode #exam .ex-bar [data-xact='home']{order:3}"+
+"body.exam-mode #exam .ex-bar [data-xact='submit']{order:4}"+
 "body.exam-mode #exam .pg-long{display:none}"+
 "body.exam-mode #exam .pg-short{display:inline}"+
-"body.exam-mode #exam .ex-bar .row{flex:1;min-width:0;flex-wrap:nowrap;gap:6px}"+
-"body.exam-mode #exam .ex-bar .row .btn:first-of-type{margin-left:auto}"+
-"body.exam-mode #exam .ex-timer{font-size:15px;padding:3px 8px}"+
 "body.exam-mode #exam .ex-bar .btn{padding:5px 9px;font-size:11px;white-space:nowrap}"+
 "body.exam-mode #exam .ex-pass{top:102px;max-height:30vh;padding:8px 10px}"+
 "}";
