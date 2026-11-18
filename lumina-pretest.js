@@ -50,6 +50,10 @@ css.textContent+=
 "#exam .pass-body{padding-left:20px}"+
 "#exam .pass-body:before{left:17px}"+
 "#exam .pass-body .ln{width:15px}";
+css.textContent+=
+"@media(min-width:901px){"+
+"#exam .ex-grid{grid-template-columns:minmax(0,640px) 250px;justify-content:center}"+
+"}";
 document.head.appendChild(css);
 var sec=document.createElement("section");sec.id="exam";sec.className="panel page hidden";sec.innerHTML='<div id="exam-body"></div>';
 document.querySelector("main.content").appendChild(sec);
