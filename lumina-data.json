@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "updatedAt": 1795009453440,
+  "updatedAt": 1795010489704,
   "materials": [],
   "materialPages": {
     "listening": [
@@ -494,7 +494,7 @@
           ],
           "a": 2,
           "e": "Subject utama adalah the amount, yang singular. Prepositional phrase of information collected during the investigation memodifikasi noun amount. Oleh karena itu, verb yang digunakan adalah was.",
-          "topic": "Subject-Verb Agreement; Prepositional Phrase as Noun Modifier",
+          "topic": "",
           "ctx": ""
         },
         {
@@ -508,7 +508,7 @@
           ],
           "a": 1,
           "e": "Subject utama adalah each, yang selalu singular dalam pola each of + plural noun. Frasa of the participants in the international seminar tidak menentukan agreement verb. Oleh karena itu, verb yang tepat adalah receives.",
-          "topic": "Subject-Verb Agreement; Each of",
+          "topic": "",
           "ctx": ""
         },
         {
@@ -522,7 +522,7 @@
           ],
           "a": 1,
           "e": "Dalam konteks ini, the majority of the students mengacu pada sejumlah mahasiswa (plural), sehingga verb plural have digunakan. Frasa in the advanced linguistics class memodifikasi noun students.",
-          "topic": "Subject-Verb Agreement; The Majority of",
+          "topic": "",
           "ctx": ""
         },
         {
@@ -536,7 +536,7 @@
           ],
           "a": 3,
           "e": "Subject utama adalah the students (plural). Relative clause who participate in the activities of the student organization menjelaskan students. Verb utama are harus sesuai dengan subject plural.",
-          "topic": "Subject-Verb Agreement; Relative Clause; Noun Modifier",
+          "topic": "",
           "ctx": ""
         },
         {
@@ -550,7 +550,7 @@
           ],
           "a": 2,
           "e": "Subject utama adalah many, yang plural. Frasa of the books in the collection of historical documents menjelaskan many. Verb yang tepat adalah were.",
-          "topic": "Subject-Verb Agreement; Many of",
+          "topic": "",
           "ctx": ""
         },
         {
@@ -564,7 +564,7 @@
           ],
           "a": 0,
           "e": "Kalimat membutuhkan subject dan verb. Several supplementary articles merupakan subject plural, sedangkan are adalah verb. Frasa In addition to the information provided in the textbook merupakan introductory prepositional phrase dan bukan subject kalimat.",
-          "topic": "Sentence Structure; Subject and Verb; Prepositional Phrase",
+          "topic": "",
           "ctx": ""
         },
         {
@@ -578,7 +578,7 @@
           ],
           "a": 2,
           "e": "Subject utama adalah the two methods, yang plural. Frasa of teaching English to young learners memodifikasi noun methods. Verb yang tepat adalah have.",
-          "topic": "Subject-Verb Agreement; Prepositional Phrase as Noun Modifier",
+          "topic": "",
           "ctx": ""
         }
       ]
@@ -600,7 +600,7 @@
           ],
           "a": 0,
           "e": "The inventor of the telephone merupakan appositive phrase yang menjelaskan subject Alexander Graham Bell. Appositive berupa noun phrase dan tidak membutuhkan conjunction atau relative pronoun.",
-          "topic": "Appositive; Noun Phrase",
+          "topic": "",
           "ctx": ""
         },
         {
@@ -614,7 +614,7 @@
           ],
           "a": 0,
           "e": "An experienced educator merupakan appositive yang menjelaskan the principal of the university. Karena appositive hanya memberikan informasi tambahan, subject utama tetap the principal, sehingga verb utama announced tidak berubah.",
-          "topic": "Appositive; Subject-Verb Agreement",
+          "topic": "",
           "ctx": ""
         },
         {
@@ -628,7 +628,7 @@
           ],
           "a": 0,
           "e": "The capital of Indonesia merupakan appositive yang menjelaskan noun Jakarta. Appositive diletakkan setelah subject dan diapit koma. Struktur kalimatnya adalah Jakarta, the capital of Indonesia, is located...",
-          "topic": "Appositive; Appositive Position",
+          "topic": "",
           "ctx": ""
         },
         {
@@ -642,7 +642,7 @@
           ],
           "a": 0,
           "e": "A political satire by George Orwell merupakan appositive phrase yang menjelaskan Animal Farm. Karena appositive berada di antara subject dan verb, frasa tersebut harus diapit oleh koma. Subject utama tetap The novel Animal Farm, sehingga verb became digunakan.",
-          "topic": "Appositive; Appositive between Subject and Verb",
+          "topic": "",
           "ctx": ""
         },
         {
@@ -656,7 +656,7 @@
           ],
           "a": 0,
           "e": "A student of medicine for six years merupakan appositive phrase yang menjelaskan my brother. Appositive berupa noun phrase, bukan finite clause, sehingga tidak memerlukan verb utama tambahan.",
-          "topic": "Appositive; Noun Phrase",
+          "topic": "",
           "ctx": ""
         },
         {
@@ -670,7 +670,7 @@
           ],
           "a": 0,
           "e": "The longest river in the world by volume merupakan appositive yang menjelaskan The Amazon River. Appositive ditempatkan setelah subject dan diapit koma.",
-          "topic": "Appositive; Appositive Phrase",
+          "topic": "",
           "ctx": ""
         },
         {
@@ -684,7 +684,7 @@
           ],
           "a": 0,
           "e": "A famous Indonesian independence leader merupakan appositive phrase yang menjelaskan Soekarno. Subject utama adalah Soekarno, sehingga verb played digunakan untuk melengkapi kalimat.",
-          "topic": "Appositive; Subject and Verb",
+          "topic": "",
           "ctx": ""
         },
         {
@@ -698,7 +698,7 @@
           ],
           "a": 0,
           "e": "An important breakthrough in medical science merupakan appositive yang menjelaskan the discovery of penicillin. Subject utama adalah the discovery, singular, sehingga verb revolutionized tetap digunakan.",
-          "topic": "Appositive; Subject-Verb Agreement",
+          "topic": "",
           "ctx": ""
         },
         {
@@ -712,7 +712,7 @@
           ],
           "a": 0,
           "e": "An expert in second-language learning merupakan appositive noun phrase yang menjelaskan the professor of linguistics. Subject utama adalah the professor, sehingga verb singular has published tepat.",
-          "topic": "Appositive; Subject-Verb Agreement",
+          "topic": "",
           "ctx": ""
         },
         {
@@ -726,7 +726,7 @@
           ],
           "a": 0,
           "e": "The largest planet in the solar system merupakan appositive yang menjelaskan Jupiter. Appositive diletakkan setelah subject dan diapit koma. Subject dan verb utama adalah Jupiter has.",
-          "topic": "Appositive; Appositive Position",
+          "topic": "",
           "ctx": ""
         },
         {
@@ -740,7 +740,7 @@
           ],
           "a": 0,
           "e": "Representatives of several academic departments merupakan appositive yang menjelaskan the committee members. Subject utama adalah committee members, sedangkan appositive tidak memengaruhi verb agreed.",
-          "topic": "Appositive; Appositive Phrase",
+          "topic": "",
           "ctx": ""
         },
         {
@@ -754,7 +754,7 @@
           ],
           "a": 0,
           "e": "A major urban center in West Java merupakan appositive phrase yang menjelaskan the city of Bandung. Appositive berada di antara subject dan verb, sehingga diapit koma. Subject utama adalah the city of Bandung.",
-          "topic": "Appositive; Appositive between Subject and Verb",
+          "topic": "",
           "ctx": ""
         },
         {
@@ -768,7 +768,7 @@
           ],
           "a": 0,
           "e": "The founder of the Indonesian language movement merupakan appositive phrase yang menjelaskan Ki Hajar Dewantara. Subject utama adalah nama tokoh tersebut, sehingga verb contributed melengkapi kalimat.",
-          "topic": "Appositive; Appositive at the Beginning",
+          "topic": "",
           "ctx": ""
         },
         {
@@ -782,7 +782,7 @@
           ],
           "a": 0,
           "e": "Experts in computational linguistics merupakan appositive phrase yang menjelaskan the two researchers. Appositive harus sesuai secara makna dengan noun yang dijelaskan. Karena subject researchers plural, bentuk experts tepat.",
-          "topic": "Appositive; Agreement in Appositive",
+          "topic": "",
           "ctx": ""
         },
         {
@@ -796,7 +796,7 @@
           ],
           "a": 0,
           "e": "A collection of traditional Indonesian stories merupakan appositive phrase yang menjelaskan the book. Subject utama the book singular, sehingga verb contains digunakan.",
-          "topic": "Appositive; Appositive Position",
+          "topic": "",
           "ctx": ""
         }
       ]
