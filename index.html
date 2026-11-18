@@ -548,7 +548,12 @@ R.account=function(){
   const from=pi.since+i*pi.len,to=from+pi.len,at=prog.attempts.filter(a=>a.ts>=from&&a.ts<to),vs=prog.visits.filter(v=>v.ts>=from&&v.ts<to).length,s2=L.summary(prog,cms,from,to);
   hist+=`<tr><td>Period ${i+1}${i===pi.index?' <span class="pill progress">current</span>':""}</td><td>${fmtDate(from)} – ${fmtDate(to-1)}</td><td class="n">${vs}</td><td class="n">${at.length}</td><td class="n">${s2.attempted}</td><td class="n">${pctTxt(s2.score)}</td></tr>`;
  }
- const pre=L.LEVELS.map(l=>{const a=prog.attempts.filter(x=>x.kind==="pretest"&&x.level===l);return `<tr><td>${LEVEL[l].ico} ${LEVEL[l].name} <span class="sk-meta">(${LEVEL[l].id})</span></td><td class="n">${a.length}</td><td class="n">${a.length?pctTxt(a[a.length-1].pct):"—"}</td><td class="n">${a.length?pctTxt(Math.max(...a.map(x=>x.pct))):"—"}</td></tr>`;}).join("");
+const _X=window.LuminaExam,exRes=_X?_X.getResults(me.user):[];
+const pre=L.LEVELS.map(l=>{
+ const a=prog.attempts.filter(x=>x.kind==="pretest"&&x.level===l);
+ const r=exRes.filter(x=>x.level===l).pop();
+ return `<tr><td>${LEVEL[l].ico} ${LEVEL[l].name} <span class="sk-meta">(${LEVEL[l].id})</span></td><td class="n">${a.length}</td><td class="n">${a.length?pctTxt(a[a.length-1].pct):"—"}</td><td class="n">${r&&r.scaledTotal!=null?r.scaledTotal:"—"}</td></tr>`;
+}).join("");
  const recent=prog.attempts.slice().sort((a,b)=>b.ts-a.ts).slice(0,8).map(a=>`<div><span>${esc(attemptLabel(a))}</span><span><b>${a.pct}%</b> · ${fmtDate(a.ts)}</span></div>`).join("")||'<div class="empty">No activity yet.</div>';
  $("account-body").innerHTML=`
   <div class="page-title"><div><div class="kicker">MY ACCOUNT</div><h2>${esc(me.name||me.user)}</h2><p>Username <b>${esc(me.user)}</b> · Member since ${fmtDate(pi.since)}</p></div>
@@ -562,7 +567,7 @@ R.account=function(){
    <div class="tbl-wrap"><table class="tbl"><thead><tr><th>SKILL</th><th class="n">OPENED</th><th class="n">ATTEMPTS</th><th class="n">LATEST</th><th class="n">BEST</th><th class="n">AVG</th><th>STATUS</th></tr></thead><tbody>${rows||'<tr><td colspan="7" class="empty">No skills yet.</td></tr>'}</tbody></table></div></div>
   <div class="grid-2">
    <div class="box"><h3>Period history</h3><p class="sub">Accumulated results from every period.</p><div class="tbl-wrap"><table class="tbl"><thead><tr><th>PERIOD</th><th>DATES</th><th class="n">OPENED</th><th class="n">ATTEMPTS</th><th class="n">SKILLS</th><th class="n">SCORE</th></tr></thead><tbody>${hist}</tbody></table></div></div>
-   <div class="box"><h3>Pre-Test results</h3><p class="sub">&nbsp;</p><div class="tbl-wrap"><table class="tbl"><thead><tr><th>LEVEL</th><th class="n">TRIES</th><th class="n">LATEST</th><th class="n">BEST</th></tr></thead><tbody>${pre}</tbody></table></div></div>
+   <div class="box"><h3>Pre-Test results</h3><p class="sub">&nbsp;</p><div class="tbl-wrap"><table class="tbl"><thead><tr><th>LEVEL</th><th class="n">TRIES</th><th class="n">LATEST</th><th class="n">SCORE</th></tr></thead><tbody>${pre}</tbody></table></div></div>
   </div>
   <div class="box"><h3>Recent activity</h3><p class="sub">&nbsp;</p><div class="act-list">${recent}</div></div>
   <div class="notice no-print" style="margin-top:14px">Your progress is stored in <b>this browser</b>. Use <b>Download progress</b> to send your report to your lecturer or to move to another device (<b>Restore progress</b>).</div>`;
