@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "updatedAt": 1794999754023,
+  "updatedAt": 1795008397012,
   "materials": [],
   "materialPages": {
     "listening": [
@@ -431,6 +431,590 @@
           "a": 1,
           "e": "The passage specifically mentions possible damage from roots.",
           "topic": "",
+          "ctx": ""
+        }
+      ]
+    },
+    "p-mwgh8pv10btdq": {
+      "passage": "",
+      "audioUrl": "",
+      "audioScript": "",
+      "minutes": 5,
+      "questions": [
+        {
+          "id": "q-mwm4qxrq85dop",
+          "q": "The quality of the products manufactured in this factory _____ significantly improved over the past decade.",
+          "o": [
+            "have",
+            "has",
+            "are",
+            "were"
+          ],
+          "a": 1,
+          "e": "Explanation: Subject utama adalah the quality, yang berbentuk singular. Of the products manufactured in this factory merupakan prepositional phrase yang memodifikasi noun quality. Noun products tidak menjadi subject sehingga verb harus singular (has).",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm55sri4xa7g",
+          "q": "The students in the English department _____ required to submit their assignments before Friday.",
+          "o": [
+            "is",
+            "was",
+            "are",
+            "has"
+          ],
+          "a": 2,
+          "e": "",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm55sricgwg3",
+          "q": "The number of participants in the international conference _____ increased considerably this year.",
+          "o": [
+            "have",
+            "are",
+            "has",
+            "were"
+          ],
+          "a": 2,
+          "e": "",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm55srid3z6w",
+          "q": "The amount of information collected during the investigation _____ too large for the researchers to analyze manually.",
+          "o": [
+            "were",
+            "are",
+            "was",
+            "have been"
+          ],
+          "a": 2,
+          "e": "Subject utama adalah the amount, yang singular. Prepositional phrase of information collected during the investigation memodifikasi noun amount. Oleh karena itu, verb yang digunakan adalah was.",
+          "topic": "Subject-Verb Agreement; Prepositional Phrase as Noun Modifier",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm55sri3h35k",
+          "q": "Each of the participants in the international seminar _____ a certificate after completing the program.",
+          "o": [
+            "receive",
+            "receives",
+            "receiving",
+            "have received"
+          ],
+          "a": 1,
+          "e": "Subject utama adalah each, yang selalu singular dalam pola each of + plural noun. Frasa of the participants in the international seminar tidak menentukan agreement verb. Oleh karena itu, verb yang tepat adalah receives.",
+          "topic": "Subject-Verb Agreement; Each of",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm55srisjs3v",
+          "q": "The majority of the students in the advanced linguistics class _____ completed their research proposals.",
+          "o": [
+            "has",
+            "have",
+            "is",
+            "was"
+          ],
+          "a": 1,
+          "e": "Dalam konteks ini, the majority of the students mengacu pada sejumlah mahasiswa (plural), sehingga verb plural have digunakan. Frasa in the advanced linguistics class memodifikasi noun students.",
+          "topic": "Subject-Verb Agreement; The Majority of",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm55srif6ne5",
+          "q": "The students who participate in the activities of the student organization _____ responsible for organizing the annual event.",
+          "o": [
+            "is",
+            "was",
+            "has been",
+            "are"
+          ],
+          "a": 3,
+          "e": "Subject utama adalah the students (plural). Relative clause who participate in the activities of the student organization menjelaskan students. Verb utama are harus sesuai dengan subject plural.",
+          "topic": "Subject-Verb Agreement; Relative Clause; Noun Modifier",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm55sriawvtf",
+          "q": "Many of the books in the collection of historical documents _____ written by prominent Indonesian scholars.",
+          "o": [
+            "was",
+            "is",
+            "were",
+            "has been"
+          ],
+          "a": 2,
+          "e": "Subject utama adalah many, yang plural. Frasa of the books in the collection of historical documents menjelaskan many. Verb yang tepat adalah were.",
+          "topic": "Subject-Verb Agreement; Many of",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm55srie2cg6",
+          "q": "In addition to the information provided in the textbook, _____ useful for understanding the theoretical framework of the study.",
+          "o": [
+            "several supplementary articles are",
+            "the supplementary articles",
+            "supplementary articles",
+            "are supplementary articles"
+          ],
+          "a": 0,
+          "e": "Kalimat membutuhkan subject dan verb. Several supplementary articles merupakan subject plural, sedangkan are adalah verb. Frasa In addition to the information provided in the textbook merupakan introductory prepositional phrase dan bukan subject kalimat.",
+          "topic": "Sentence Structure; Subject and Verb; Prepositional Phrase",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm55sri4lyxp",
+          "q": "The two methods of teaching English to young learners _____ different advantages and disadvantages.",
+          "o": [
+            "has",
+            "having",
+            "have",
+            "is having"
+          ],
+          "a": 2,
+          "e": "Subject utama adalah the two methods, yang plural. Frasa of teaching English to young learners memodifikasi noun methods. Verb yang tepat adalah have.",
+          "topic": "Subject-Verb Agreement; Prepositional Phrase as Noun Modifier",
+          "ctx": ""
+        }
+      ]
+    },
+    "p-mwgh8pv11gltd": {
+      "passage": "",
+      "audioUrl": "",
+      "audioScript": "",
+      "minutes": 7,
+      "questions": [
+        {
+          "id": "q-mwm5c32v9ysf2",
+          "q": "Alexander Graham Bell, _____, is widely recognized for his contributions to the development of the telephone.",
+          "o": [
+            "the inventor of the telephone",
+            "invented the telephone",
+            "who the telephone invented",
+            "the telephone invention"
+          ],
+          "a": 0,
+          "e": "The inventor of the telephone merupakan appositive phrase yang menjelaskan subject Alexander Graham Bell. Appositive berupa noun phrase dan tidak membutuhkan conjunction atau relative pronoun.",
+          "topic": "Appositive; Noun Phrase",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5c32vzp4sk",
+          "q": "The principal of the university, _____, announced the new academic policy yesterday.",
+          "o": [
+            "an experienced educator",
+            "who an experienced educator",
+            "being an experienced educator",
+            "was an experienced educator"
+          ],
+          "a": 0,
+          "e": "An experienced educator merupakan appositive yang menjelaskan the principal of the university. Karena appositive hanya memberikan informasi tambahan, subject utama tetap the principal, sehingga verb utama announced tidak berubah.",
+          "topic": "Appositive; Subject-Verb Agreement",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5c32vol2po",
+          "q": "_____, the capital of Indonesia, is located on the island of Java.",
+          "o": [
+            "Jakarta",
+            "Jakarta it is",
+            "Jakarta which",
+            "Jakarta being"
+          ],
+          "a": 0,
+          "e": "The capital of Indonesia merupakan appositive yang menjelaskan noun Jakarta. Appositive diletakkan setelah subject dan diapit koma. Struktur kalimatnya adalah Jakarta, the capital of Indonesia, is located...",
+          "topic": "Appositive; Appositive Position",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5c32vxvf5k",
+          "q": "The novel _____ became one of the most influential literary works of the twentieth century.",
+          "o": [
+            "Animal Farm, a political satire by George Orwell,",
+            "Animal Farm a political satire by George Orwell",
+            "Animal Farm, was a political satire by George Orwell,",
+            "Animal Farm which a political satire by George Orwell"
+          ],
+          "a": 0,
+          "e": "A political satire by George Orwell merupakan appositive phrase yang menjelaskan Animal Farm. Karena appositive berada di antara subject dan verb, frasa tersebut harus diapit oleh koma. Subject utama tetap The novel Animal Farm, sehingga verb became digunakan.",
+          "topic": "Appositive; Appositive between Subject and Verb",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5c32vg86h4",
+          "q": "My brother, _____, has recently graduated from medical school.",
+          "o": [
+            "a student of medicine for six years",
+            "who a student of medicine for six years",
+            "studying medicine for six years was",
+            "has been a student of medicine for six years"
+          ],
+          "a": 0,
+          "e": "A student of medicine for six years merupakan appositive phrase yang menjelaskan my brother. Appositive berupa noun phrase, bukan finite clause, sehingga tidak memerlukan verb utama tambahan.",
+          "topic": "Appositive; Noun Phrase",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5c32v158wh",
+          "q": "The Amazon River, _____, flows through several South American countries.",
+          "o": [
+            "the longest river in the world by volume",
+            "which the longest river in the world by volume",
+            "is the longest river in the world by volume",
+            "flowing the longest river in the world by volume"
+          ],
+          "a": 0,
+          "e": "The longest river in the world by volume merupakan appositive yang menjelaskan The Amazon River. Appositive ditempatkan setelah subject dan diapit koma.",
+          "topic": "Appositive; Appositive Phrase",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5c32vhou3n",
+          "q": "_____, a famous Indonesian independence leader, played an important role in the struggle for independence.",
+          "o": [
+            "Soekarno",
+            "Soekarno who",
+            "Soekarno was",
+            "Soekarno being"
+          ],
+          "a": 0,
+          "e": "A famous Indonesian independence leader merupakan appositive phrase yang menjelaskan Soekarno. Subject utama adalah Soekarno, sehingga verb played digunakan untuk melengkapi kalimat.",
+          "topic": "Appositive; Subject and Verb",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5c32vkmdzp",
+          "q": "The discovery of penicillin, _____, revolutionized modern medicine.",
+          "o": [
+            "an important breakthrough in medical science",
+            "was an important breakthrough in medical science",
+            "which an important breakthrough in medical science",
+            "being an important breakthrough in medical science"
+          ],
+          "a": 0,
+          "e": "An important breakthrough in medical science merupakan appositive yang menjelaskan the discovery of penicillin. Subject utama adalah the discovery, singular, sehingga verb revolutionized tetap digunakan.",
+          "topic": "Appositive; Subject-Verb Agreement",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5c32v7n2jh",
+          "q": "The professor of linguistics, _____, has published several books on language acquisition.",
+          "o": [
+            "an expert in second-language learning",
+            "who an expert in second-language learning",
+            "is an expert in second-language learning",
+            "expertise in second-language learning"
+          ],
+          "a": 0,
+          "e": "An expert in second-language learning merupakan appositive noun phrase yang menjelaskan the professor of linguistics. Subject utama adalah the professor, sehingga verb singular has published tepat.",
+          "topic": "Appositive; Subject-Verb Agreement",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5c32vth9j0",
+          "q": "_____, the largest planet in the solar system, has dozens of moons.",
+          "o": [
+            "Jupiter",
+            "Jupiter which",
+            "Jupiter being",
+            "Jupiter is"
+          ],
+          "a": 0,
+          "e": "The largest planet in the solar system merupakan appositive yang menjelaskan Jupiter. Appositive diletakkan setelah subject dan diapit koma. Subject dan verb utama adalah Jupiter has.",
+          "topic": "Appositive; Appositive Position",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5c32vnoij6",
+          "q": "The committee members, _____, agreed to revise the proposal.",
+          "o": [
+            "representatives of several academic departments",
+            "representing several academic departments were",
+            "who representatives of several academic departments",
+            "several academic departments"
+          ],
+          "a": 0,
+          "e": "Representatives of several academic departments merupakan appositive yang menjelaskan the committee members. Subject utama adalah committee members, sedangkan appositive tidak memengaruhi verb agreed.",
+          "topic": "Appositive; Appositive Phrase",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5c32vguydc",
+          "q": "The city of Bandung, _____, is known for its educational institutions and creative industries.",
+          "o": [
+            "a major urban center in West Java",
+            "which a major urban center in West Java",
+            "being a major urban center in West Java is",
+            "a major urban center in West Java it"
+          ],
+          "a": 0,
+          "e": "A major urban center in West Java merupakan appositive phrase yang menjelaskan the city of Bandung. Appositive berada di antara subject dan verb, sehingga diapit koma. Subject utama adalah the city of Bandung.",
+          "topic": "Appositive; Appositive between Subject and Verb",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5c32vkbjh9",
+          "q": "_____, the founder of the Indonesian language movement, contributed significantly to the development of Indonesian nationalism.",
+          "o": [
+            "Ki Hajar Dewantara",
+            "Ki Hajar Dewantara who",
+            "Ki Hajar Dewantara was",
+            "Being Ki Hajar Dewantara"
+          ],
+          "a": 0,
+          "e": "The founder of the Indonesian language movement merupakan appositive phrase yang menjelaskan Ki Hajar Dewantara. Subject utama adalah nama tokoh tersebut, sehingga verb contributed melengkapi kalimat.",
+          "topic": "Appositive; Appositive at the Beginning",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5c32vxqlrg",
+          "q": "The two researchers, _____, published their findings in an international journal.",
+          "o": [
+            "experts in computational linguistics",
+            "an expert in computational linguistics",
+            "who experts in computational linguistics",
+            "being experts in computational linguistics published"
+          ],
+          "a": 0,
+          "e": "Experts in computational linguistics merupakan appositive phrase yang menjelaskan the two researchers. Appositive harus sesuai secara makna dengan noun yang dijelaskan. Karena subject researchers plural, bentuk experts tepat.",
+          "topic": "Appositive; Agreement in Appositive",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5c32vkuu03",
+          "q": "_____, a collection of traditional Indonesian stories, contains numerous moral lessons.",
+          "o": [
+            "The book",
+            "The book which",
+            "The book being",
+            "The book it"
+          ],
+          "a": 0,
+          "e": "A collection of traditional Indonesian stories merupakan appositive phrase yang menjelaskan the book. Subject utama the book singular, sehingga verb contains digunakan.",
+          "topic": "Appositive; Appositive Position",
+          "ctx": ""
+        }
+      ]
+    },
+    "p-mwgh8pv1o289q": {
+      "passage": "",
+      "audioUrl": "",
+      "audioScript": "",
+      "minutes": 8,
+      "questions": [
+        {
+          "id": "q-mwm5iiu5san7s",
+          "q": "The students _____ in the language laboratory are preparing for their listening examination.",
+          "o": [
+            "practice",
+            "practicing",
+            "practiced",
+            "are practicing"
+          ],
+          "a": 1,
+          "e": "Practicing in the language laboratory merupakan present participial phrase yang memodifikasi noun students. Frasa tersebut merupakan reduced adjective clause dari students who are practicing. Karena blank memerlukan modifier, bukan main verb, practicing adalah jawaban yang tepat.",
+          "topic": "Present Participle; Noun Modifier; Reduced Adjective Clause",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5iiu5t7lew",
+          "q": "The research findings _____ by the university's faculty members were published in an international journal.",
+          "o": [
+            "analyzing",
+            "analyzed",
+            "were analyzed",
+            "analysis"
+          ],
+          "a": 1,
+          "e": "Analyzed by the university's faculty members merupakan past participial phrase yang memodifikasi noun research findings. Struktur ini merupakan reduced passive adjective clause: the research findings which were analyzed by the university's faculty members. Main verb kalimat adalah were published.",
+          "topic": "Past Participle; Reduced Passive Adjective Clause",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5iiu515eo4",
+          "q": "_____ the effects of climate change, the researchers collected data from several coastal regions.",
+          "o": [
+            "Investigating",
+            "Investigated",
+            "Investigation",
+            "To investigated"
+          ],
+          "a": 0,
+          "e": "Investigating the effects of climate change merupakan present participial phrase yang berfungsi sebagai adverbial, menjelaskan aktivitas yang dilakukan researchers. Subject participial phrase harus sama dengan subject main clause, yaitu the researchers.",
+          "topic": "Present Participle; Adverbial Participial Phrase",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5iiu5ixryv",
+          "q": "The lecture _____ by the visiting professor attracted hundreds of students.",
+          "o": [
+            "delivering",
+            "delivered",
+            "was delivered",
+            "delivery"
+          ],
+          "a": 1,
+          "e": "Delivered by the visiting professor merupakan past participial phrase yang memodifikasi noun lecture. Karena lecture menerima tindakan (disampaikan), digunakan past participle delivered. Main verb kalimat adalah attracted.",
+          "topic": "Past Participle; Noun Modifier",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5iiu5h2hc5",
+          "q": "_____ the instructions carefully, the students were able to complete the experiment successfully.",
+          "o": [
+            "Following",
+            "Followed",
+            "Follow",
+            "To following"
+          ],
+          "a": 0,
+          "e": "Following the instructions carefully merupakan present participial phrase yang berfungsi sebagai adverbial of manner atau circumstances. Subject-nya adalah the students, yang melakukan tindakan mengikuti instruksi.",
+          "topic": "Present Participle; Adverbial Function",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5iiu5hlr4v",
+          "q": "The book _____ on the table contains several useful examples of grammatical structures.",
+          "o": [
+            "lying",
+            "lie",
+            "laid",
+            "is lying"
+          ],
+          "a": 0,
+          "e": "Lying on the table merupakan present participial phrase yang memodifikasi noun book. Kata lying berasal dari verb lie (berada/terletak), bukan lay (meletakkan sesuatu). Main verb kalimat adalah contains.",
+          "topic": "Present Participle; Noun Modifier; Verb Forms",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5iiu59zvhj",
+          "q": "_____ by the sudden announcement, the employees immediately began discussing the new policy.",
+          "o": [
+            "Surprising",
+            "Surprised",
+            "Surprise",
+            "Were surprised"
+          ],
+          "a": 1,
+          "e": "Surprised by the sudden announcement merupakan past participial phrase yang menjelaskan kondisi employees. Employees menerima efek kejutan, sehingga past participle surprised digunakan. Subject main clause adalah the employees.",
+          "topic": "Past Participle; Adjectival Participle",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5iiu593vnk",
+          "q": "The _____ water in the laboratory was immediately discarded because it was contaminated.",
+          "o": [
+            "contaminating",
+            "contaminated",
+            "contamination",
+            "was contaminated"
+          ],
+          "a": 1,
+          "e": "Contaminated merupakan past participle yang berfungsi sebagai adjective, memodifikasi noun water. Water menerima tindakan kontaminasi, sehingga past participle tepat. Blank berada sebelum noun, sebagai attributive adjective.",
+          "topic": "Past Participle; Adjectival Function; Position",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5iiu5pntph",
+          "q": "The woman _____ near the entrance is the director of the research institute.",
+          "o": [
+            "standing",
+            "stood",
+            "is standing",
+            "stand"
+          ],
+          "a": 0,
+          "e": "Standing near the entrance merupakan present participial phrase yang memodifikasi noun the woman. Frasa ini berasal dari the woman who is standing near the entrance. Main verb kalimat adalah is.",
+          "topic": "Present Participle; Reduced Adjective Clause",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5iiu5ybmsg",
+          "q": "_____ the historical documents, the researcher discovered several previously unknown facts about the region.",
+          "o": [
+            "Examined",
+            "Examining",
+            "Examination",
+            "Was examining"
+          ],
+          "a": 1,
+          "e": "Examining the historical documents merupakan present participial phrase yang berfungsi sebagai adverbial. Subject-nya adalah the researcher, yang melakukan tindakan examining. Bentuk examined tidak tepat karena akan memberikan makna pasif.",
+          "topic": "Present Participle; Adverbial Function; Active Voice",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5iiu5r8dg7",
+          "q": "The equipment _____ in the laboratory must be handled with extreme care.",
+          "o": [
+            "using",
+            "used",
+            "use",
+            "is used"
+          ],
+          "a": 1,
+          "e": "Used in the laboratory merupakan past participial phrase yang memodifikasi noun equipment. Equipment menerima tindakan penggunaan, sehingga bentuk pasif used tepat. Main verb kalimat adalah must be handled.",
+          "topic": "Past Participle; Reduced Passive Clause; Noun Modifier",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5iiu59e25u",
+          "q": "_____ by the complexity of the problem, the students requested additional guidance from their instructor.",
+          "o": [
+            "Confusing",
+            "Confused",
+            "Confusion",
+            "Were confused"
+          ],
+          "a": 1,
+          "e": "Confused by the complexity of the problem merupakan past participial phrase yang menjelaskan keadaan students. Students mengalami kebingungan, bukan menyebabkan kebingungan. Oleh karena itu, confused digunakan.",
+          "topic": "Past Participle; Adjectival Participle; Meaning",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5iiu5mz0b8",
+          "q": "The man _____ the documents to the administrative office is a new employee.",
+          "o": [
+            "submitting",
+            "submitted",
+            "submission",
+            "was submitting"
+          ],
+          "a": 0,
+          "e": "Submitting the documents to the administrative office merupakan present participial phrase yang memodifikasi noun the man. Frasa tersebut menjelaskan man yang sedang melakukan tindakan submitting. Main verb kalimat adalah is.",
+          "topic": "Present Participle; Noun Modifier; Reduced Adjective Clause",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5iiu550j71",
+          "q": "The _____ students were asked to leave the examination room immediately.",
+          "o": [
+            "cheating",
+            "cheated",
+            "cheat",
+            "were cheating"
+          ],
+          "a": 0,
+          "e": "Cheating merupakan present participle yang berfungsi sebagai adjective, memodifikasi noun students. Students melakukan tindakan cheating, sehingga present participle digunakan. Blank berada sebelum noun, bukan sebagai main verb.",
+          "topic": "Present Participle; Adjectival Function; Position",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm5m45vhyum2",
+          "q": "The professor's _____ of the students' essays took several hours to complete.",
+          "o": [
+            "evaluating",
+            "evaluated",
+            "evaluation",
+            "evaluate"
+          ],
+          "a": 2,
+          "e": "Blank membutuhkan noun yang berfungsi sebagai subject dari took. Evaluation adalah noun, sedangkan evaluating dapat berfungsi sebagai gerund. Dalam struktur the professor's evaluation of the students' essays, bentuk noun evaluation lebih tepat untuk menyatakan proses atau hasil penilaian. Perhatikan bahwa gerund dan participle sama-sama dapat berbentuk -ing, tetapi fungsinya berbeda.",
+          "topic": "Gerund vs. Participle; Noun Function; Word Form",
           "ctx": ""
         }
       ]
