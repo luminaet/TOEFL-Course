@@ -54,11 +54,17 @@ css.textContent+=
 "@media(min-width:901px){"+
 "#exam .ex-grid{grid-template-columns:minmax(980px) 250px;justify-content:center}"+
 "}";
+
 css.textContent+=
+".pg-short{display:none}"+
 "@media(max-width:900px){"+
 "body.exam-mode #exam .ex-bar{height:40px;padding:0 8px;flex-wrap:nowrap;gap:6px;overflow:hidden}"+
-"body.exam-mode #exam .ex-bar>div:first-child{display:none}"+
-"body.exam-mode #exam .ex-bar .row{width:100%;flex-wrap:nowrap;gap:6px}"+
+"body.exam-mode #exam .ex-bar>div:first-child{flex:none}"+
+"body.exam-mode #exam .ex-bar>div:first-child>b,body.exam-mode #exam .ex-bar>div:first-child>.pill{display:none}"+
+"body.exam-mode #exam #ex-prog{font-size:12px;font-weight:800;color:#536075;white-space:nowrap}"+
+"body.exam-mode #exam .pg-long{display:none}"+
+"body.exam-mode #exam .pg-short{display:inline}"+
+"body.exam-mode #exam .ex-bar .row{flex:1;min-width:0;flex-wrap:nowrap;gap:6px}"+
 "body.exam-mode #exam .ex-bar .row .btn:first-of-type{margin-left:auto}"+
 "body.exam-mode #exam .ex-timer{font-size:15px;padding:3px 8px}"+
 "body.exam-mode #exam .ex-bar .btn{padding:5px 9px;font-size:11px;white-space:nowrap}"+
@@ -205,7 +211,7 @@ function renderNav(){
   return '<h4>'+X.META[s].ico+' '+X.META[s].short+' · '+answeredCount(s)+'/'+list.length+'</h4><div class="qgrid">'+list.map(function(q){return '<button type="button" class="qb'+(ex.answers[q.id]!=null?" a":"")+(ex.flags[q.id]?" f":"")+(cur[q.id]?" c":"")+'" data-xact="jump" data-id="'+q.gi+'" title="Question '+q.num+'">'+q.num+'</button>';}).join("")+'</div>';
  }).join("");
  $("ex-nav").innerHTML=h+'<div class="ex-legend"><span><i style="background:#e6f5f0"></i>Answered</span><span><i style="background:#fff"></i>Not answered</span><span><i style="background:#e0243f"></i>Flagged</span></div>';
- var tot=ex.flat.qs.length,pr=$("ex-prog");if(pr)pr.textContent="· answered "+answeredCount()+" of "+tot;
+ var tot=ex.flat.qs.length,pr=$("ex-prog"),an=answeredCount();if(pr)pr.innerHTML='<span class="pg-long">· answered '+an+' of '+tot+'</span><span class="pg-short">'+an+'/'+tot+'</span>';
 }
 function go(i){if(i<0||i>=ex.flat.units.length)return;ex.idx=i;persist();renderUnit();window.scrollTo({top:0,behavior:"smooth"});}
 
