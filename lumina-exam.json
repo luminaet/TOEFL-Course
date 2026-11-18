@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": 1794963377966,
+  "updatedAt": 1794965824197,
   "settings": {
     "totalMinutes": 120,
     "audioPlays": 1,
@@ -815,10 +815,36 @@
                   "id": "lc-u1",
                   "title": "The Importance of Drinking Water",
                   "audioUrl": "",
-                  "script": "Narrator: Listen to a talk about the importance of drinking water.\nWoman: Good morning, everyone. Today, I would like to talk about the importance of drinking water. Water is very important for our bodies. It helps us stay healthy and gives our bodies the energy to do daily activities. Drinking enough water also helps us concentrate better when studying.Most people need about eight glasses of water every day, although the amount may vary depending on their activities and the weather. If we do not drink enough water, we may feel tired and have difficulty concentrating. Therefore, remember to drink water regularly, especially when the weather is hot.\nNarrator: Question 36. What is the main topic of the talk?",
+                  "script": "Narrator: Listen to a talk about the importance of drinking water.\nWoman: Good morning, everyone. Today, I would like to talk about the importance of drinking water. Water is very important for our bodies. It helps us stay healthy and gives our bodies the energy to do daily activities. Drinking enough water also helps us concentrate better when studying. Most people need about eight glasses of water every day, although the amount may vary depending on their activities and the weather. If we do not drink enough water, we may feel tired and have difficulty concentrating. Therefore, remember to drink water regularly, especially when the weather is hot.\nPause: 3\nNarrator: Question 36. Where does the talk probably takes place?",
                   "passage": "",
                   "note": "",
                   "questions": [
+                    {
+                      "q": "Where does the talk probably takes place?",
+                      "o": [
+                        "In the tv.",
+                        "In a seminar.",
+                        "In a lecture.",
+                        "In a hospital."
+                      ],
+                      "a": 2,
+                      "e": "",
+                      "topic": "",
+                      "id": "lc-u1-q1"
+                    },
+                    {
+                      "q": "How many glasses do we need the water in a day?",
+                      "o": [
+                        "As many as we can.",
+                        "8 glasses.",
+                        "A cup of coffee in a day.",
+                        "More than 8 glasses"
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "",
+                      "id": "lc-u1-q2"
+                    },
                     {
                       "q": "What is the main topic of the talk?",
                       "o": [
@@ -830,7 +856,7 @@
                       "a": 1,
                       "e": "",
                       "topic": "",
-                      "id": "lc-u1-q1"
+                      "id": "lc-u1-q3"
                     },
                     {
                       "q": "What may happen if people do not drink enough water?",
@@ -843,7 +869,7 @@
                       "a": 0,
                       "e": "",
                       "topic": "",
-                      "id": "lc-u1-q2"
+                      "id": "lc-u1-q4"
                     }
                   ]
                 },
@@ -851,7 +877,7 @@
                   "id": "lc-u2",
                   "title": "The History of the Telephone",
                   "audioUrl": "",
-                  "script": "Narrator: Listen to a talk about the history of the telephone.\nMan: The telephone is one of the most important inventions in human history. It allows people to communicate with each other over long distances. Alexander Graham Bell is widely credited with inventing the first practical telephone in 1876. In the past, telephones were large and usually stayed in one place. People could only make calls using wires. Today, telephones have become smaller and more advanced. Smartphones allow people not only to make calls but also to send messages, take pictures, and access the internet. The telephone has changed the way people communicate in their daily lives.\nNarrator: Who is widely credited with inventing the first practical telephone?",
+                  "script": "Narrator: Listen to a talk about the history of the telephone.\nMan: The telephone is one of the most important inventions in human history. It allows people to communicate with each other over long distances. Alexander Graham Bell is widely credited with inventing the first practical telephone in 1876. In the past, telephones were large and usually stayed in one place. People could only make calls using wires. Today, telephones have become smaller and more advanced. Smartphones allow people not only to make calls but also to send messages, take pictures, and access the internet. The telephone has changed the way people communicate in their daily lives.\nPause: 2\nNarrator: Who is widely credited with inventing the first practical telephone?",
                   "passage": "",
                   "note": "",
                   "questions": [
@@ -869,6 +895,19 @@
                       "id": "lc-u2-q1"
                     },
                     {
+                      "q": "How is the feature of early telephone?",
+                      "o": [
+                        "It was advanced technology.",
+                        "Calls can only operate using wires.",
+                        "People are able to send a message.",
+                        "It has internet access."
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "",
+                      "id": "lc-u2-q2"
+                    },
+                    {
                       "q": "What can people do with modern smartphones besides making calls?",
                       "o": [
                         "Only listen to music.",
@@ -879,7 +918,7 @@
                       "a": 2,
                       "e": "",
                       "topic": "",
-                      "id": "lc-u2-q2"
+                      "id": "lc-u2-q3"
                     }
                   ]
                 },
@@ -887,7 +926,7 @@
                   "id": "lc-u3",
                   "title": "The Benefits of Reading Books",
                   "audioUrl": "",
-                  "script": "Narrator: Listen to a short lecture about reading books.\nWoman: Reading books is a useful activity for students. It provides many benefits, especially for those who want to improve their language skills. First, reading helps students learn new vocabulary. When students read regularly, they become familiar with different words and expressions. Second, reading can improve writing skills. Students can learn how to organize sentences and develop ideas by reading different types of texts. Finally, reading also increases knowledge because books contain information about many subjects, such as science, history, and culture. For these reasons, students should make reading a regular habit.\nNarrator: What is one benefit of reading books mentioned by the speaker?\nNarrator: Who is probably the speaker?",
+                  "script": "Narrator: Listen to a short lecture about reading books.\nWoman: Reading books is a useful activity for students. It provides many benefits, especially for those who want to improve their language skills. First, reading helps students learn new vocabulary. When students read regularly, they become familiar with different words and expressions. Second, reading can improve writing skills. Students can learn how to organize sentences and develop ideas by reading different types of texts. Finally, reading also increases knowledge because books contain information about many subjects, such as science, history, and culture. For these reasons, students should make reading a regular habit.\nPause: 3\nNarrator: Who is probably the speaker?",
                   "passage": "",
                   "note": "",
                   "questions": [
@@ -899,7 +938,7 @@
                         "A teacher",
                         "A scientist"
                       ],
-                      "a": 0,
+                      "a": 2,
                       "e": "",
                       "topic": "",
                       "id": "lc-u3-q1"
