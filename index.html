@@ -379,7 +379,7 @@ const setOf=id=>cms.practice[id]||{questions:[],minutes:10,passage:"",audioUrl:"
 const qCount=id=>setOf(id).questions.length;
 const isAdmin=()=>!!me&&me.role==="admin";
 const fmtDate=ts=>new Date(ts).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"});
-const toeflScore=pct=>Math.round(310+(Math.max(0,Math.min(100,pct))/100)*367);
+const pctTxt=v=>v==null?"—":v+"%";
 const pill=s=>`<span class="pill ${s}">${STATUS[s]}</span>`;
 function secOf(id){const s=skills().find(x=>x.id===id);return s?s.section:"";}
 function bullet(p,i){
@@ -562,7 +562,7 @@ R.account=function(){
    <div class="tbl-wrap"><table class="tbl"><thead><tr><th>SKILL</th><th class="n">OPENED</th><th class="n">ATTEMPTS</th><th class="n">LATEST</th><th class="n">BEST</th><th class="n">AVG</th><th>STATUS</th></tr></thead><tbody>${rows||'<tr><td colspan="7" class="empty">No skills yet.</td></tr>'}</tbody></table></div></div>
   <div class="grid-2">
    <div class="box"><h3>Period history</h3><p class="sub">Accumulated results from every period.</p><div class="tbl-wrap"><table class="tbl"><thead><tr><th>PERIOD</th><th>DATES</th><th class="n">OPENED</th><th class="n">ATTEMPTS</th><th class="n">SKILLS</th><th class="n">SCORE</th></tr></thead><tbody>${hist}</tbody></table></div></div>
-   <div class="box"><h3>Pre-Test results</h3><p class="sub">&nbsp;</p><div class="tbl-wrap"><table class="tbl"><thead><tr><th>LEVEL</th><th class="n">TRIES</th><th class="n">LATEST</th><th class="n">SCORE</th></tr></thead><tbody>${pre}</tbody></table></div></div>
+   <div class="box"><h3>Pre-Test results</h3><p class="sub">&nbsp;</p><div class="tbl-wrap"><table class="tbl"><thead><tr><th>LEVEL</th><th class="n">TRIES</th><th class="n">LATEST</th><th class="n">BEST</th></tr></thead><tbody>${pre}</tbody></table></div></div>
   </div>
   <div class="box"><h3>Recent activity</h3><p class="sub">&nbsp;</p><div class="act-list">${recent}</div></div>
   <div class="notice no-print" style="margin-top:14px">Your progress is stored in <b>this browser</b>. Use <b>Download progress</b> to send your report to your lecturer or to move to another device (<b>Restore progress</b>).</div>`;
@@ -856,7 +856,6 @@ $("gate-form").addEventListener("submit",e=>{
   gateError(err.message||"Login failed.");
  }).finally(()=>{btn.disabled=false;});
 });
-
 let loggingOut=false;
 $("user-logout").addEventListener("click",()=>{
  if(loggingOut)return;
