@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": 1794965824197,
+  "updatedAt": 1794967319991,
   "settings": {
     "totalMinutes": 120,
     "audioPlays": 1,
@@ -981,6 +981,68 @@
                       "e": "",
                       "topic": "",
                       "id": "lc-u3-q4"
+                    }
+                  ]
+                },
+                {
+                  "id": "lc-u4",
+                  "title": "Weather and seasons.",
+                  "audioUrl": "",
+                  "script": "Narrator: Listen to a talk about weather and seasons. Man: There are four main seasons in many countries, like Europe: spring, summer, autumn, and winter. Each season has different weather conditions. Spring is usually warm, and many flowers begin to grow. Summer is generally the hottest season, and people often enjoy outdoor activities. In autumn, the weather becomes cooler, and leaves change color before falling from trees. Winter is usually the coldest season, and some countries experience snow. However, not all countries have four seasons. For example, Indonesia has two main seasons: the dry season and the rainy season. The rainy season usually brings more rainfall, while the dry season has less rain.\nPause: 5\nNarrator: How many seasons in Germany?",
+                  "passage": "",
+                  "note": "",
+                  "questions": [
+                    {
+                      "q": "How many seasons in Germany?",
+                      "o": [
+                        "two.",
+                        "Three.",
+                        "Four.",
+                        "Five"
+                      ],
+                      "a": 2,
+                      "e": "",
+                      "topic": "",
+                      "id": "lc-u4-q1"
+                    },
+                    {
+                      "q": "Which season is usually the hottest?",
+                      "o": [
+                        "Spring.",
+                        "Summer.",
+                        "Autumn.",
+                        "Winter."
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "",
+                      "id": "lc-u4-q2"
+                    },
+                    {
+                      "q": "How is is the condition in Autumn?",
+                      "o": [
+                        "The weather is cooler, and the leaves change color.",
+                        "The weather is coolest, and the leaves change color.",
+                        "The weather is warm, and many flowers begin to grow.",
+                        "The weather is warmer, and many flowers begin to grow."
+                      ],
+                      "a": 0,
+                      "e": "",
+                      "topic": "",
+                      "id": "lc-u4-q3"
+                    },
+                    {
+                      "q": "How many main seasons does Indonesia have?",
+                      "o": [
+                        "One.",
+                        "Two.",
+                        "Three.",
+                        "Four."
+                      ],
+                      "a": 1,
+                      "e": "",
+                      "topic": "",
+                      "id": "lc-u4-q4"
                     }
                   ]
                 }
