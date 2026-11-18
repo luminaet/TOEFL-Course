@@ -204,6 +204,12 @@ a.sk-title:hover{color:var(--red);text-decoration:underline}
 .pf-card h3{margin:0;font-size:16px}
 .pf-card hr{border:0;border-top:1px solid var(--line);margin:20px 0 16px}
 .pf-note{padding:10px 12px;background:#fff4e6;border:1px solid #f3d9b4;color:#8a5413;border-radius:10px;font-size:12px;line-height:1.5;margin-top:12px}
+/* --- layar putih transparan saat logout --- */
+.logout-veil{position:fixed;inset:0;z-index:5000;display:grid;place-content:center;justify-items:center;gap:14px;background:#ffffffb8;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);opacity:0;transition:opacity .3s}
+.logout-veil.show{opacity:1}
+.logout-veil .spin{border:5px solid #981f3430;border-top-color:var(--red)}
+.logout-veil p{margin:0;font-size:13px;font-weight:700;color:var(--red);letter-spacing:.4px}
+
 @media(max-width:760px){.pf-list{grid-template-columns:1fr}}
 @media print{.pf-modal{display:none!important}}
 @media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.grid-2{grid-template-columns:1fr}.cards.three{grid-template-columns:1fr}}
@@ -214,7 +220,10 @@ a.sk-title:hover{color:var(--red);text-decoration:underline}
 </head>
 <body class="loading">
 <div id="loader" class="loader hidden" role="status" aria-live="polite">
- <div class="spin"></div><p>Loading, sek enteni…</p>
+ <div class="spin"></div><p>Sek enteni, dilut maning manjing…</p>
+</div>
+<div id="logout-veil" class="logout-veil hidden" role="status" aria-live="polite">
+ <div class="spin"></div><p>Pan metu... Semangat belajare yoo...</p>
 </div>
 
 <!-- LOGIN (wajib: tampilan admin dan mahasiswa berbeda) -->
@@ -847,11 +856,23 @@ $("gate-form").addEventListener("submit",e=>{
   gateError(err.message||"Login failed.");
  }).finally(()=>{btn.disabled=false;});
 });
+
+let loggingOut=false;
 $("user-logout").addEventListener("click",()=>{
- if(run){clearInterval(run.timer);run=null;}
- L.setSession(null);me=null;applyRole();
- document.querySelectorAll(".page").forEach(p=>p.classList.add("hidden"));
- showGate();
+ if(loggingOut)return;
+ loggingOut=true;
+ const veil=$("logout-veil");
+ veil.classList.remove("hidden");
+ requestAnimationFrame(()=>veil.classList.add("show"));
+ setTimeout(()=>{
+  if(run){clearInterval(run.timer);run=null;}
+  if(typeof closeProfileEdit==="function")closeProfileEdit();
+  L.setSession(null);me=null;applyRole();
+  document.querySelectorAll(".page").forEach(p=>p.classList.add("hidden"));
+  showGate();
+  veil.classList.remove("show");
+  setTimeout(()=>{veil.classList.add("hidden");loggingOut=false;},300);
+ },3000);
 });
 
 /* ---------- mulai ---------- */
