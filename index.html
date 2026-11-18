@@ -548,13 +548,7 @@ R.account=function(){
   const from=pi.since+i*pi.len,to=from+pi.len,at=prog.attempts.filter(a=>a.ts>=from&&a.ts<to),vs=prog.visits.filter(v=>v.ts>=from&&v.ts<to).length,s2=L.summary(prog,cms,from,to);
   hist+=`<tr><td>Period ${i+1}${i===pi.index?' <span class="pill progress">current</span>':""}</td><td>${fmtDate(from)} – ${fmtDate(to-1)}</td><td class="n">${vs}</td><td class="n">${at.length}</td><td class="n">${s2.attempted}</td><td class="n">${pctTxt(s2.score)}</td></tr>`;
  }
- const XR=window.LuminaExam?window.LuminaExam.getResults(me.user):[];
- const pre=L.LEVELS.map(l=>{
- const a=prog.attempts.filter(x=>x.kind==="pretest"&&x.level===l);
- const rs=XR.filter(r=>r.level===l&&r.scaledTotal!=null);
- const best=rs.length?Math.max(...rs.map(r=>r.scaledTotal)):null;
- return `<tr><td>${LEVEL[l].ico} ${LEVEL[l].name} <span class="sk-meta">(${LEVEL[l].id})</span></td><td class="n">${a.length}</td><td class="n">${a.length?pctTxt(a[a.length-1].pct):"—"}</td><td class="n">${best==null?"—":"<b>"+best+"</b>"}</td></tr>`;
-}).join("");
+ const pre=L.LEVELS.map(l=>{const a=prog.attempts.filter(x=>x.kind==="pretest"&&x.level===l);return `<tr><td>${LEVEL[l].ico} ${LEVEL[l].name} <span class="sk-meta">(${LEVEL[l].id})</span></td><td class="n">${a.length}</td><td class="n">${a.length?pctTxt(a[a.length-1].pct):"—"}</td><td class="n">${a.length?pctTxt(Math.max(...a.map(x=>x.pct))):"—"}</td></tr>`;}).join("");
  const recent=prog.attempts.slice().sort((a,b)=>b.ts-a.ts).slice(0,8).map(a=>`<div><span>${esc(attemptLabel(a))}</span><span><b>${a.pct}%</b> · ${fmtDate(a.ts)}</span></div>`).join("")||'<div class="empty">No activity yet.</div>';
  $("account-body").innerHTML=`
   <div class="page-title"><div><div class="kicker">MY ACCOUNT</div><h2>${esc(me.name||me.user)}</h2><p>Username <b>${esc(me.user)}</b> · Member since ${fmtDate(pi.since)}</p></div>
