@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "updatedAt": 1795008397012,
+  "updatedAt": 1795009453440,
   "materials": [],
   "materialPages": {
     "listening": [
@@ -839,12 +839,12 @@
           "id": "q-mwm5iiu515eo4",
           "q": "_____ the effects of climate change, the researchers collected data from several coastal regions.",
           "o": [
-            "Investigating",
+            "To investigated",
             "Investigated",
             "Investigation",
-            "To investigated"
+            "Investigating"
           ],
-          "a": 0,
+          "a": 3,
           "e": "Investigating the effects of climate change merupakan present participial phrase yang berfungsi sebagai adverbial, menjelaskan aktivitas yang dilakukan researchers. Subject participial phrase harus sama dengan subject main clause, yaitu the researchers.",
           "topic": "Present Participle; Adverbial Participial Phrase",
           "ctx": ""
@@ -867,12 +867,12 @@
           "id": "q-mwm5iiu5h2hc5",
           "q": "_____ the instructions carefully, the students were able to complete the experiment successfully.",
           "o": [
-            "Following",
+            "To investigated",
             "Followed",
-            "Follow",
+            "Following",
             "To following"
           ],
-          "a": 0,
+          "a": 2,
           "e": "Following the instructions carefully merupakan present participial phrase yang berfungsi sebagai adverbial of manner atau circumstances. Subject-nya adalah the students, yang melakukan tindakan mengikuti instruksi.",
           "topic": "Present Participle; Adverbial Function",
           "ctx": ""
@@ -923,12 +923,12 @@
           "id": "q-mwm5iiu5pntph",
           "q": "The woman _____ near the entrance is the director of the research institute.",
           "o": [
-            "standing",
+            "stand",
             "stood",
             "is standing",
-            "stand"
+            "standing"
           ],
-          "a": 0,
+          "a": 3,
           "e": "Standing near the entrance merupakan present participial phrase yang memodifikasi noun the woman. Frasa ini berasal dari the woman who is standing near the entrance. Main verb kalimat adalah is.",
           "topic": "Present Participle; Reduced Adjective Clause",
           "ctx": ""
@@ -979,12 +979,12 @@
           "id": "q-mwm5iiu5mz0b8",
           "q": "The man _____ the documents to the administrative office is a new employee.",
           "o": [
-            "submitting",
+            "was submitting",
             "submitted",
             "submission",
-            "was submitting"
+            "submitting"
           ],
-          "a": 0,
+          "a": 3,
           "e": "Submitting the documents to the administrative office merupakan present participial phrase yang memodifikasi noun the man. Frasa tersebut menjelaskan man yang sedang melakukan tindakan submitting. Main verb kalimat adalah is.",
           "topic": "Present Participle; Noun Modifier; Reduced Adjective Clause",
           "ctx": ""
@@ -1015,6 +1015,154 @@
           "a": 2,
           "e": "Blank membutuhkan noun yang berfungsi sebagai subject dari took. Evaluation adalah noun, sedangkan evaluating dapat berfungsi sebagai gerund. Dalam struktur the professor's evaluation of the students' essays, bentuk noun evaluation lebih tepat untuk menyatakan proses atau hasil penilaian. Perhatikan bahwa gerund dan participle sama-sama dapat berbentuk -ing, tetapi fungsinya berbeda.",
           "topic": "Gerund vs. Participle; Noun Function; Word Form",
+          "ctx": ""
+        }
+      ]
+    },
+    "p-mwgh8pv1d4i24": {
+      "passage": "",
+      "audioUrl": "",
+      "audioScript": "",
+      "minutes": 8,
+      "questions": [
+        {
+          "id": "q-mwm63domly53m",
+          "q": "The professor encouraged students to read academic journals, _____ participate in research conferences, and publish their findings.",
+          "o": [
+            "but",
+            "or",
+            "yet",
+            "and"
+          ],
+          "a": 3,
+          "e": "Conjunction and menghubungkan tiga parallel verb phrases: read academic journals, participate in research conferences, dan publish their findings. Ketiganya menggunakan base form verb karena mengikuti pola infinitive tanpa to setelah encouraged students to.",
+          "topic": "Coordinating Conjunction; Parallelism; Verb Phrase",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm63domudc4r",
+          "q": "The economic development of a country depends not only on its natural resources _____ on the quality of its human capital.",
+          "o": [
+            "or",
+            "and",
+            "but also",
+            "nor"
+          ],
+          "a": 2,
+          "e": "Pola not only ... but also digunakan untuk menghubungkan dua elemen yang setara. On its natural resources sejajar dengan on the quality of its human capital. Kata but also melengkapi pasangan conjunction not only.",
+          "topic": "Correlative Conjunction; Parallelism; Prepositional Phrase",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm63domyl4py",
+          "q": "The new policy aims to improve the quality of education, ______ administrative costs, and increase student participation.",
+          "o": [
+            "to reduce",
+            "reduction",
+            "reduce",
+            "reducing"
+          ],
+          "a": 2,
+          "e": "And menghubungkan tiga parallel verb phrases: improve, reduce, dan increase. Ketiganya harus menggunakan base form agar struktur sejajar.",
+          "topic": "Coordinating Conjunction; Parallelism; Verb Form",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm63dom11w7d",
+          "q": "The success of the program depends on effective communication, adequate funding, _____ strong institutional support.",
+          "o": [
+            "and",
+            "supporting",
+            "to support",
+            "supported"
+          ],
+          "a": 0,
+          "e": "And menghubungkan tiga parallel noun phrases: effective communication, adequate funding, dan strong institutional support. Ketiganya berfungsi sebagai objek preposition on.",
+          "topic": "Coordinating Conjunction; Parallelism; Noun Phrase",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm63domdwp5j",
+          "q": "_____ the students and the lecturers were required to attend the academic seminar.",
+          "o": [
+            "Either",
+            "Neither",
+            "Not only",
+            "Both"
+          ],
+          "a": 3,
+          "e": "Both ... and digunakan untuk menghubungkan dua subject, yaitu the students dan the lecturers. Karena keduanya plural, verb yang digunakan adalah were.",
+          "topic": "Correlative Conjunction; Subject-Verb Agreement",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm63domordnn",
+          "q": "Learning a foreign language requires memorizing vocabulary, understanding grammatical structures, and _______ pronunciation regularly.",
+          "o": [
+            "to practice",
+            "practiced",
+            "pacticing",
+            "practice"
+          ],
+          "a": 2,
+          "e": "And menghubungkan tiga parallel gerund phrases: memorizing vocabulary, understanding grammatical structures, dan practicing pronunciation regularly. Ketiganya berfungsi sebagai objek dari verb requires.",
+          "topic": "Coordinating Conjunction; Parallelism; Gerund",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm63dom7om2e",
+          "q": "The experiment was repeated several times, _____ the initial results were inconsistent.",
+          "o": [
+            "and",
+            "but",
+            "for",
+            "or"
+          ],
+          "a": 2,
+          "e": "For merupakan coordinating conjunction yang menunjukkan reason atau explanation. Klausa kedua menjelaskan alasan mengapa experiment diulang. Dalam konteks ini, for memiliki fungsi yang mirip dengan because, tetapi secara grammatical menghubungkan independent clauses.",
+          "topic": "Coordinating Conjunction; Logical Relationship; Reason",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm63domlosqi",
+          "q": "The students were expected to analyze the data objectively, interpret the findings accurately, _____ present their conclusions logically.",
+          "o": [
+            "presenting",
+            "and",
+            "to presented",
+            "presented"
+          ],
+          "a": 1,
+          "e": "",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm6596aoi70v",
+          "q": "The principal, together with the teachers and administrative staff, _____ responsible for maintaining the academic standards of the institution.",
+          "o": [
+            "are",
+            "were",
+            "is",
+            "have been"
+          ],
+          "a": 2,
+          "e": "Subject utama adalah the principal, yang singular. Frasa together with the teachers and administrative staff tidak membentuk compound subject dan tidak mengubah agreement. Verb yang tepat adalah is.",
+          "topic": "Subject-Verb Agreement; Compound Modifier; Noun Phrase",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwm6596a550di",
+          "q": "The professor and the research assistant _____ responsible for preparing the presentation and organizing the supporting materials.",
+          "o": [
+            "is",
+            "was",
+            "are",
+            "has been"
+          ],
+          "a": 2,
+          "e": "Subject the professor and the research assistant merupakan compound subject yang dihubungkan dengan and, sehingga plural. Verb yang tepat adalah are. Parallelism juga terlihat pada preparing the presentation dan organizing the supporting materials.",
+          "topic": "Subject-Verb Agreement; Compound Subject; Parallelism",
           "ctx": ""
         }
       ]
