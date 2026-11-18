@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": 1794971520651,
+  "updatedAt": 1794971885887,
   "settings": {
     "totalMinutes": 120,
     "audioPlays": 1,
@@ -816,10 +816,11 @@
                   "title": "The Importance of Drinking Water",
                   "audioUrl": "",
                   "script": "Narrator: Listen to a talk about the importance of drinking water.\nWoman: Good morning, everyone. Today, I would like to talk about the importance of drinking water. Water is very important for our bodies. It helps us stay healthy and gives our bodies the energy to do daily activities. Drinking enough water also helps us concentrate better when studying. Most people need about eight glasses of water every day, although the amount may vary depending on their activities and the weather. If we do not drink enough water, we may feel tired and have difficulty concentrating. Therefore, remember to drink water regularly, especially when the weather is hot.\nPause: 3\nNarrator: Question 36. Where does the talk probably takes place?",
-                  "passage": "",
                   "note": "",
+                  "passage": "",
                   "questions": [
                     {
+                      "id": "lc-u1-q1",
                       "q": "Where does the talk probably takes place?",
                       "o": [
                         "In the tv.",
@@ -829,10 +830,10 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "",
-                      "id": "lc-u1-q1"
+                      "topic": ""
                     },
                     {
+                      "id": "lc-u1-q2",
                       "q": "How many glasses do we need the water in a day?",
                       "o": [
                         "As many as we can.",
@@ -842,10 +843,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "",
-                      "id": "lc-u1-q2"
+                      "topic": ""
                     },
                     {
+                      "id": "lc-u1-q3",
                       "q": "What is the main topic of the talk?",
                       "o": [
                         "The importance of eating vegetables.",
@@ -855,10 +856,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "",
-                      "id": "lc-u1-q3"
+                      "topic": ""
                     },
                     {
+                      "id": "lc-u1-q4",
                       "q": "What may happen if people do not drink enough water?",
                       "o": [
                         "They may feel tired.",
@@ -868,8 +869,7 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "",
-                      "id": "lc-u1-q4"
+                      "topic": ""
                     }
                   ]
                 },
@@ -878,10 +878,11 @@
                   "title": "The History of the Telephone",
                   "audioUrl": "",
                   "script": "Narrator: Listen to a talk about the history of the telephone.\nMan: The telephone is one of the most important inventions in human history. It allows people to communicate with each other over long distances. Alexander Graham Bell is widely credited with inventing the first practical telephone in 1876. In the past, telephones were large and usually stayed in one place. People could only make calls using wires. Today, telephones have become smaller and more advanced. Smartphones allow people not only to make calls but also to send messages, take pictures, and access the internet. The telephone has changed the way people communicate in their daily lives.\nPause: 2\nNarrator: Who is widely credited with inventing the first practical telephone?",
-                  "passage": "",
                   "note": "",
+                  "passage": "",
                   "questions": [
                     {
+                      "id": "lc-u2-q1",
                       "q": "When is the first practical telephone invented?",
                       "o": [
                         "In the early of 19th century",
@@ -891,10 +892,10 @@
                       ],
                       "a": 3,
                       "e": "",
-                      "topic": "",
-                      "id": "lc-u2-q1"
+                      "topic": ""
                     },
                     {
+                      "id": "lc-u2-q2",
                       "q": "How is the feature of early telephone?",
                       "o": [
                         "It was advanced technology.",
@@ -904,10 +905,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "",
-                      "id": "lc-u2-q2"
+                      "topic": ""
                     },
                     {
+                      "id": "lc-u2-q3",
                       "q": "What can people do with modern smartphones besides making calls?",
                       "o": [
                         "Only listen to music.",
@@ -917,8 +918,7 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "",
-                      "id": "lc-u2-q3"
+                      "topic": ""
                     }
                   ]
                 },
@@ -927,10 +927,11 @@
                   "title": "The Benefits of Reading Books",
                   "audioUrl": "",
                   "script": "Narrator: Listen to a short lecture about reading books.\nWoman: Reading books is a useful activity for students. It provides many benefits, especially for those who want to improve their language skills. First, reading helps students learn new vocabulary. When students read regularly, they become familiar with different words and expressions. Second, reading can improve writing skills. Students can learn how to organize sentences and develop ideas by reading different types of texts. Finally, reading also increases knowledge because books contain information about many subjects, such as science, history, and culture. For these reasons, students should make reading a regular habit.\nPause: 3\nNarrator: Who is probably the speaker?",
-                  "passage": "",
                   "note": "",
+                  "passage": "",
                   "questions": [
                     {
+                      "id": "lc-u3-q1",
                       "q": "Who is the speaker?",
                       "o": [
                         "A students",
@@ -940,10 +941,10 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "",
-                      "id": "lc-u3-q1"
+                      "topic": ""
                     },
                     {
+                      "id": "lc-u3-q2",
                       "q": "What is one benefit of reading books mentioned by the speaker?",
                       "o": [
                         "It helps students improve their vocabulary.",
@@ -953,10 +954,10 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "",
-                      "id": "lc-u3-q2"
+                      "topic": ""
                     },
                     {
+                      "id": "lc-u3-q3",
                       "q": "How can reading improve writing skills?",
                       "o": [
                         "By helping students memorize every book.",
@@ -966,10 +967,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "",
-                      "id": "lc-u3-q3"
+                      "topic": ""
                     },
                     {
+                      "id": "lc-u3-q4",
                       "q": "What is not mentioned about the benefits of reading?",
                       "o": [
                         "Students will familiar with different words and expressions.",
@@ -979,8 +980,7 @@
                       ],
                       "a": 3,
                       "e": "",
-                      "topic": "",
-                      "id": "lc-u3-q4"
+                      "topic": ""
                     }
                   ]
                 },
@@ -989,10 +989,11 @@
                   "title": "Weather and seasons.",
                   "audioUrl": "",
                   "script": "Narrator: Listen to a talk about weather and seasons. Man: There are four main seasons in many countries, like Europe: spring, summer, autumn, and winter. Each season has different weather conditions. Spring is usually warm, and many flowers begin to grow. Summer is generally the hottest season, and people often enjoy outdoor activities. In autumn, the weather becomes cooler, and leaves change color before falling from trees. Winter is usually the coldest season, and some countries experience snow. However, not all countries have four seasons. For example, Indonesia has two main seasons: the dry season and the rainy season. The rainy season usually brings more rainfall, while the dry season has less rain.\nPause: 5\nNarrator: How many seasons in Germany?",
-                  "passage": "",
                   "note": "",
+                  "passage": "",
                   "questions": [
                     {
+                      "id": "lc-u4-q1",
                       "q": "How many seasons in Germany?",
                       "o": [
                         "two.",
@@ -1002,10 +1003,10 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "",
-                      "id": "lc-u4-q1"
+                      "topic": ""
                     },
                     {
+                      "id": "lc-u4-q2",
                       "q": "Which season is usually the hottest?",
                       "o": [
                         "Spring.",
@@ -1015,10 +1016,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "",
-                      "id": "lc-u4-q2"
+                      "topic": ""
                     },
                     {
+                      "id": "lc-u4-q3",
                       "q": "How is is the condition in Autumn?",
                       "o": [
                         "The weather is cooler, and the leaves change color.",
@@ -1028,10 +1029,10 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "",
-                      "id": "lc-u4-q3"
+                      "topic": ""
                     },
                     {
+                      "id": "lc-u4-q4",
                       "q": "How many main seasons does Indonesia have?",
                       "o": [
                         "One.",
@@ -1041,8 +1042,7 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "",
-                      "id": "lc-u4-q4"
+                      "topic": ""
                     }
                   ]
                 }
@@ -1066,10 +1066,11 @@
                   "title": "s1",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "",
                   "note": "",
+                  "passage": "",
                   "questions": [
                     {
+                      "id": "sa-u1-q1",
                       "q": "The committee _____ the final decision yesterday.",
                       "o": [
                         "make",
@@ -1079,8 +1080,7 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "Verb tense",
-                      "id": "sa-u1-q1"
+                      "topic": "Verb tense"
                     }
                   ]
                 },
@@ -1089,10 +1089,11 @@
                   "title": "s2",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "",
                   "note": "",
+                  "passage": "",
                   "questions": [
                     {
+                      "id": "sa-u2-q1",
                       "q": "Neither the students nor the teacher _____ aware of the schedule change.",
                       "o": [
                         "were",
@@ -1102,8 +1103,7 @@
                       ],
                       "a": 3,
                       "e": "",
-                      "topic": "Subject-Verb Agreement",
-                      "id": "sa-u2-q1"
+                      "topic": "Subject-Verb Agreement"
                     }
                   ]
                 },
@@ -1112,10 +1112,11 @@
                   "title": "s3",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "",
                   "note": "",
+                  "passage": "",
                   "questions": [
                     {
+                      "id": "sa-u3-q1",
                       "q": "The professor, along with several research assistants, ______ preparing the experiment.",
                       "o": [
                         "are",
@@ -1125,8 +1126,7 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "",
-                      "id": "sa-u3-q1"
+                      "topic": ""
                     }
                   ]
                 },
@@ -1135,10 +1135,11 @@
                   "title": "s4",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "",
                   "note": "",
+                  "passage": "",
                   "questions": [
                     {
+                      "id": "sa-u4-q1",
                       "q": "If the researchers ______ the data more carefully, they would have discovered the error.",
                       "o": [
                         "analyze",
@@ -1148,8 +1149,7 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "",
-                      "id": "sa-u4-q1"
+                      "topic": ""
                     }
                   ]
                 },
@@ -1158,10 +1158,11 @@
                   "title": "s5",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "",
                   "note": "",
+                  "passage": "",
                   "questions": [
                     {
+                      "id": "sa-u5-q1",
                       "q": "Had the company invested more money in technology, it _____ its productivity significantly.",
                       "o": [
                         "improves",
@@ -1171,8 +1172,7 @@
                       ],
                       "a": 3,
                       "e": "",
-                      "topic": "",
-                      "id": "sa-u5-q1"
+                      "topic": ""
                     }
                   ]
                 },
@@ -1181,10 +1181,11 @@
                   "title": "s6",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "",
                   "note": "",
+                  "passage": "",
                   "questions": [
                     {
+                      "id": "sa-u6-q1",
                       "q": "The number of students participating in the international program _____ increased considerably.",
                       "o": [
                         "have",
@@ -1194,8 +1195,7 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "",
-                      "id": "sa-u6-q1"
+                      "topic": ""
                     }
                   ]
                 },
@@ -1204,10 +1204,11 @@
                   "title": "s7",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "",
                   "note": "",
+                  "passage": "",
                   "questions": [
                     {
+                      "id": "sa-u7-q1",
                       "q": "The manager asked the employees _____ the report before Friday.",
                       "o": [
                         "submit",
@@ -1217,8 +1218,7 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "",
-                      "id": "sa-u7-q1"
+                      "topic": ""
                     }
                   ]
                 },
@@ -1227,10 +1227,11 @@
                   "title": "s8",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "",
                   "note": "",
+                  "passage": "",
                   "questions": [
                     {
+                      "id": "sa-u8-q1",
                       "q": "No sooner _____ the lecture started than the electricity went out.",
                       "o": [
                         "has",
@@ -1240,8 +1241,7 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "",
-                      "id": "sa-u8-q1"
+                      "topic": ""
                     }
                   ]
                 },
@@ -1250,10 +1250,11 @@
                   "title": "s9",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "",
                   "note": "",
+                  "passage": "",
                   "questions": [
                     {
+                      "id": "sa-u9-q1",
                       "q": "The scholarship is awarded to students _____ demonstrate outstanding academic achievement.",
                       "o": [
                         "whose",
@@ -1263,8 +1264,7 @@
                       ],
                       "a": 3,
                       "e": "",
-                      "topic": "",
-                      "id": "sa-u9-q1"
+                      "topic": ""
                     }
                   ]
                 },
@@ -1273,10 +1273,11 @@
                   "title": "s10",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "",
                   "note": "",
+                  "passage": "",
                   "questions": [
                     {
+                      "id": "sa-u10-q1",
                       "q": "_____ the limited availability of laboratory equipment, the researchers managed to complete the experiment.",
                       "o": [
                         "Although",
@@ -1286,8 +1287,7 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "",
-                      "id": "sa-u10-q1"
+                      "topic": ""
                     }
                   ]
                 },
@@ -1296,10 +1296,11 @@
                   "title": "s11",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "",
                   "note": "",
+                  "passage": "",
                   "questions": [
                     {
+                      "id": "sa-u11-q1",
                       "q": "Dr. Anderson, _____, has published several articles on environmental science.",
                       "o": [
                         "a well-known environmental scientist",
@@ -1309,8 +1310,7 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "",
-                      "id": "sa-u11-q1"
+                      "topic": ""
                     }
                   ]
                 },
@@ -1319,10 +1319,11 @@
                   "title": "s12",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "",
                   "note": "",
+                  "passage": "",
                   "questions": [
                     {
+                      "id": "sa-u12-q1",
                       "q": "The researcher was interested _____ the historical development of the language _____ its modern applications.",
                       "o": [
                         "either – or",
@@ -1332,8 +1333,7 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "",
-                      "id": "sa-u12-q1"
+                      "topic": ""
                     }
                   ]
                 },
@@ -1342,10 +1342,11 @@
                   "title": "s13",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "",
                   "note": "",
+                  "passage": "",
                   "questions": [
                     {
+                      "id": "sa-u13-q1",
                       "q": "The lecturer explained _____ the experiment had produced inconsistent results.",
                       "o": [
                         "what",
@@ -1355,8 +1356,7 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "",
-                      "id": "sa-u13-q1"
+                      "topic": ""
                     }
                   ]
                 },
@@ -1365,10 +1365,11 @@
                   "title": "s14",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "",
                   "note": "",
+                  "passage": "",
                   "questions": [
                     {
+                      "id": "sa-u14-q1",
                       "q": "_____ the instructions carefully, the students began working on the assignment.",
                       "o": [
                         "Reading",
@@ -1378,8 +1379,7 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "",
-                      "id": "sa-u14-q1"
+                      "topic": ""
                     }
                   ]
                 },
@@ -1388,10 +1388,11 @@
                   "title": "s15",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "",
                   "note": "",
+                  "passage": "",
                   "questions": [
                     {
+                      "id": "sa-u15-q1",
                       "q": "_____ had the researchers collected the data than they began analyzing the results.",
                       "o": [
                         "No sooner",
@@ -1401,8 +1402,7 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "",
-                      "id": "sa-u15-q1"
+                      "topic": ""
                     }
                   ]
                 },
@@ -1411,10 +1411,11 @@
                   "title": "s16",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "",
                   "note": "",
+                  "passage": "",
                   "questions": [
                     {
+                      "id": "sa-u16-q1",
                       "q": "_____ the research findings available to the public before the final report was published?",
                       "o": [
                         "Were",
@@ -1424,8 +1425,7 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "",
-                      "id": "sa-u16-q1"
+                      "topic": ""
                     }
                   ]
                 }
@@ -1493,7 +1493,7 @@
                   "note": "",
                   "questions": [
                     {
-                      "q": "The students _who_ study in this classroom _is preparing_ for their final _examination_ _next week_.",
+                      "q": "The students __who__ study in this classroom __is preparing__ for their final __examination__ __next week__.",
                       "o": [
                         "who",
                         "is preparing",
@@ -1516,7 +1516,7 @@
                   "note": "",
                   "questions": [
                     {
-                      "q": "My brother _enjoys_ _to read_ English novels _during his_ free time _at home_.",
+                      "q": "My brother __enjoys__ __to read__ English novels __during his__ free time __at home__.",
                       "o": [
                         "enjoys",
                         "to read",
@@ -1539,7 +1539,7 @@
                   "note": "",
                   "questions": [
                     {
-                      "q": "The library _opens_ at eight o'clock _every morning_ and _close_ at five in the afternoon _on weekdays_.",
+                      "q": "The library __opens__ at eight o'clock __every morning__ and __close__ at five in the afternoon __on weekdays__.",
                       "o": [
                         "opens",
                         "every morning",
@@ -1562,7 +1562,7 @@
                   "note": "",
                   "questions": [
                     {
-                      "q": "The information _about_ the new course _are available_ on the university website _for all students_ this _semester_.",
+                      "q": "The information __about__ the new course __are available__ on the university website __for all students__ this __semester__.",
                       "o": [
                         "about",
                         "are available",
@@ -1585,7 +1585,7 @@
                   "note": "",
                   "questions": [
                     {
-                      "q": "The teacher _explained_ the lesson _carefully_ so that the students _could understood_ it _easily_.",
+                      "q": "The teacher __explained__ the lesson __carefully__ so that the students __could understood__ it __easily__.",
                       "o": [
                         "explained",
                         "carefully",
@@ -1608,7 +1608,7 @@
                   "note": "",
                   "questions": [
                     {
-                      "q": "The books _which belong_ to the professor _was placed_ on the table _near_ the _window_ yesterday.",
+                      "q": "The books __which belong__ to the professor __was placed__ on the table __near__ the __window__ yesterday.",
                       "o": [
                         "which belong",
                         "was placed",
@@ -1631,7 +1631,7 @@
                   "note": "",
                   "questions": [
                     {
-                      "q": "The food _was prepared_ by the students who _participate_ in the _cooking_ competition _last weekend_.",
+                      "q": "The food __was prepared__ by the students who __participate__ in the __cooking__ competition __last weekend__.",
                       "o": [
                         "was prepared",
                         "participate",
@@ -1654,7 +1654,7 @@
                   "note": "",
                   "questions": [
                     {
-                      "q": "The development of new technology _have changed_ the way students _learn English_ _in_ the classroom _today_.",
+                      "q": "The development of new technology __have changed__ the way students __learn English__ __in__ the classroom __today__.",
                       "o": [
                         "have changed",
                         "learn English",
