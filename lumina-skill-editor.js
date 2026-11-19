@@ -328,7 +328,7 @@ function buildBar(){
   "cd-fg":function(v){selected.style.color=v;},
   "cd-bw":function(v){var n=Number(v);selected.style.borderWidth=n+"px";selected.style.borderStyle=n?"solid":"none";},
   "cd-r":function(v){selected.style.borderRadius=(Number(v)||0)+"px";},
-  "cd-p":function(v){selected.style.padding=(Number(v)||0)+"px";},
+  "cd-p":function(v){var n=(Number(v)||0)+"px";if(/^(TR|THEAD|TBODY|TABLE)$/.test(selected.tagName))Array.prototype.forEach.call(selected.querySelectorAll("td,th"),function(c){c.style.padding=n;});else selected.style.padding=n;},
   "cd-w":function(v){var n=Number(v);if(n>=5&&n<=100)setW(selected,n);},
   "cd-al":function(v){if(!v)return;selected.style.margin=v==="l"?"12px auto 12px 0":(v==="c"?"12px auto":"12px 0 12px auto");},
   "cd-h":function(v){var n=Number(v)||0;if(/^(TR|TD|TH|THEAD|TBODY|TABLE)$/.test(selected.tagName)){selected.style.minHeight="";selected.style.height=n?n+"px":"";} else{selected.style.height="";selected.style.minHeight=n?n+"px":"";}},
@@ -351,7 +351,7 @@ function sync(){
  $("cd-bg").value=hex(cs.backgroundColor);$("cd-bc").value=hex(cs.borderTopColor);$("cd-fg").value=hex(cs.color);
  $("cd-bw").value=String(Math.round(parseFloat(cs.borderTopWidth))||0);
  $("cd-r").value=Math.round(parseFloat(cs.borderTopLeftRadius))||0;
- $("cd-p").value=Math.round(parseFloat(cs.paddingTop))||0;
+ var pc=(selected.tagName==="TR"&&selected.cells[0])?getComputedStyle(selected.cells[0]):cs;$("cd-p").value=Math.round(parseFloat(pc.paddingTop))||0;
  $("cd-w").value=/%$/.test(selected.style.width)?Math.round(parseFloat(selected.style.width)):"";
  $("cd-h").value=parseInt(selected.style.minHeight)||parseInt(selected.style.height)||"";
  $("cd-gap").value=Math.round(parseFloat(cs.columnGap))||"";
