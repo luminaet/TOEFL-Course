@@ -177,6 +177,23 @@ const BUL_COLORS=["#c0192f","#e8590c","#bd7922","#2f9e44","#16866b","#3979ce","#
 let matSection="swo", matEdit=null, matColor="";
 let pracSection="swo", pracSkill=null, ptLevel="easy", qEdit=null, qImport=false;
 
+/* Konfirmasi hapus soal dengan kotak centang "Jangan tanya lagi".
+   skipDelQ hanya di memori → kembali bertanya setelah halaman di-reload. */
+let skipDelQ=false;
+function askDelete(msg,onYes){
+ const old=document.getElementById("del-dlg");if(old)old.remove();
+ const o=document.createElement("div");o.id="del-dlg";
+ o.style.cssText="position:fixed;inset:0;z-index:2147483000;background:#0008;display:grid;place-items:center;padding:16px;font-family:inherit";
+ o.innerHTML='<div style="background:#fff;color:#20283a;border-radius:14px;padding:20px;width:100%;max-width:380px;box-shadow:0 20px 60px #0006"><p style="margin:0 0 14px;font-size:14px;line-height:1.6"></p><label style="display:flex;gap:8px;align-items:center;font-size:13px;margin-bottom:16px;cursor:pointer"><input type="checkbox" id="del-skip"> Jangan tanya lagi (sampai halaman di-reload)</label><div style="display:flex;gap:8px;justify-content:flex-end"><button type="button" id="del-no" style="border:0;border-radius:9px;padding:9px 16px;font-weight:700;background:#eef1f6;color:#435067;cursor:pointer">Batal</button><button type="button" id="del-yes" style="border:0;border-radius:9px;padding:9px 16px;font-weight:700;background:#981f34;color:#fff;cursor:pointer">Hapus</button></div></div>';
+ o.querySelector("p").textContent=msg;
+ const close=()=>{o.remove();document.removeEventListener("keydown",kd);};
+ const kd=e=>{if(e.key==="Escape")close();};
+ document.addEventListener("keydown",kd);
+ o.querySelector("#del-no").onclick=close;
+ o.querySelector("#del-yes").onclick=()=>{if(o.querySelector("#del-skip").checked)skipDelQ=true;close();onYes();};
+ document.body.appendChild(o);o.querySelector("#del-yes").focus();
+}
+
 /* ---------- util ---------- */
 function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("show"),2200);}
 function syncSkills(){const l=L.loadLocal();if(l)D.skills=l.skills;}
@@ -745,10 +762,13 @@ const A={
   else{const x=arr.find(z=>z.id===qEdit);Object.assign(x,item);}
   qEdit=null;if(commit("Soal tersimpan"))render();
  },
- qDel(id){
-  const arr=curQs();if(!arr||!confirm("Hapus soal ini?"))return;autoSaveSet();
-  const i=arr.findIndex(q=>q.id===id);if(i>=0)arr.splice(i,1);commit("Soal dihapus");render();
- },
+qDel(id){
+  if(!curQs())return;
+  const go=()=>{const arr=curQs();if(!arr)return;autoSaveSet();
+   const i=arr.findIndex(q=>q.id===id);if(i>=0)arr.splice(i,1);commit("Soal dihapus");render();};
+  if(skipDelQ)return go();
+  askDelete("Hapus soal ini?",go);
+},
  qUp(id){autoSaveSet();const a=curQs();if(a)moveIn(a,id,-1);commit();render();},
  qDown(id){autoSaveSet();const a=curQs();if(a)moveIn(a,id,1);commit();render();},
 
