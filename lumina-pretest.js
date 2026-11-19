@@ -173,6 +173,8 @@ function tick(){
 R.exam=function(){
  if(view==="intro"||!ex)return;
  if(ex.done)return renderResult();
+ if(ex.submitting){$("exam-body").innerHTML='<div class="empty">Submitting and grading your test… please wait.</div>';return;}
+ if(ex.failed)return renderFailed();
  renderShell();
 };
 function renderShell(){
@@ -243,17 +245,40 @@ function playAudio(){
 
 /* ---------- kirim & hasil ---------- */
 function submitExam(auto){
- if(!ex||ex.done)return;
- stopAudio();ex.done=true;clearInterval(ex.timer);
+ if(!ex||ex.done||ex.submitting)return;
+ stopAudio();
+ if(ex.cfg.keyless)return submitRemote(auto);          /* kunci ada di server */
+ ex.done=true;clearInterval(ex.timer);
  var res=X.score(ex.flat,ex.answers);
  res.level=ex.level;res.ts=Date.now();res.auto=!!auto;res.usedSec=Math.min(ex.cfg.settings.totalMinutes*60,Math.round((Date.now()-ex.startedAt)/1000));
- if(!ex.preview&&ex.user){
-  X.saveResult(ex.user,res);X.clearRun(ex.user,ex.level);
-  L.recordAttempt(ex.user,{kind:"pretest",skill:"",section:"",level:ex.level,score:res.correct,total:res.total,pct:res.pct});
+ finishExam(ex,res);
+}
+function finishExam(E,res){
+ if(!E.preview&&E.user){
+  X.saveResult(E.user,res);X.clearRun(E.user,E.level);
+  L.recordAttempt(E.user,{kind:"pretest",skill:"",section:"",level:E.level,score:res.correct,total:res.total,pct:res.pct});
   try{renderAlert();}catch(e){}
  }
- ex.result=res;
- var pg=$("exam");if(pg&&!pg.classList.contains("hidden"))renderResult();
+ E.result=res;
+ if(ex===E){var pg=$("exam");if(pg&&!pg.classList.contains("hidden"))renderResult();}
+}
+function submitRemote(auto){
+ var E=ex;E.submitting=true;E.failed=null;clearInterval(E.timer);
+ var pg=$("exam");
+ if(pg&&!pg.classList.contains("hidden")){document.body.classList.remove("exam-mode");$("exam-body").innerHTML='<div class="empty">Submitting and grading your test… please wait.</div>';}
+ L.api("gradeExam",{level:E.level,answers:E.answers}).then(function(j){
+  var res=j.result;res.level=E.level;res.ts=Date.now();res.auto=!!auto;
+  res.usedSec=Math.min(E.cfg.settings.totalMinutes*60,Math.round((Date.now()-E.startedAt)/1000));
+  E.review=j.review||null;E.done=true;E.submitting=false;
+  finishExam(E,res);
+ }).catch(function(err){
+  E.submitting=false;E.failed=(err&&err.message)||"Could not reach the server.";
+  if(ex===E){var p2=$("exam");if(p2&&!p2.classList.contains("hidden"))renderFailed();}
+ });
+}
+function renderFailed(){
+ document.body.classList.remove("exam-mode");
+ $("exam-body").innerHTML='<div class="box" style="text-align:center"><h3>Your answers could not be graded yet</h3><p class="sub">'+esc(ex.failed||"")+'</p><p class="sub">Your answers are saved on this device. Check your internet connection and try again.</p><div class="row" style="justify-content:center"><button class="btn" data-xact="retry-submit">Try again</button><button class="btn secondary" data-xact="home">Back to menu</button></div></div>';
 }
 function renderResult(){
  document.body.classList.remove("exam-mode");var r=ex.result;
@@ -271,7 +296,17 @@ function renderResult(){
  window.scrollTo({top:0,behavior:"smooth"});
 }
 
-function canReview(){return isAdmin()||(me&&me.type==="plus");}
+function applyReview(){
+ var rv=ex&&ex.review;if(!rv||ex._rvApplied)return;
+ ex.flat.qs.forEach(function(it){var r=rv.q&&rv.q[it.id];if(r){it.q.a=r[0];it.q.e=r[1];}});
+ ex.flat.units.forEach(function(un){var n=rv.notes&&rv.notes[un.unit.id],s=rv.scripts&&rv.scripts[un.unit.id];if(n)un.unit.note=n;if(s)un.unit.script=s;});
+ ex._rvApplied=true;
+}
+function canReview(){
+ var ok=isAdmin()||(me&&me.type==="plus");
+ if(ok&&ex&&ex.cfg&&ex.cfg.keyless){ok=!!ex.review;if(ok)applyReview();}
+ return ok;
+}
 function reviewHTML(){
  var h='<div class="box" style="margin-bottom:14px"><h3>🔑 Review (Student Plus)</h3><p class="sub">Listening scripts, answer key, and explanations.</p>';
  ex.flat.units.forEach(function(un){
@@ -315,6 +350,7 @@ function handle(e){
  else if(a==="retake"){discardEx();view="intro";$("exam-body").innerHTML=introHTML(window._exLevel);}
  else if(a==="play")playAudio();
  else if(a==="stop")stopAudio();
+ else if(a==="retry-submit")submitExam(false);
  else if(a==="prev")go(ex.idx-1);
  else if(a==="next")go(ex.idx+1);
  else if(a==="jump"){var it=ex.flat.qs[Number(id)];go(it.unit.idx);setTimeout(function(){var el=$("exq-"+it.gi);if(el)el.scrollIntoView({behavior:"smooth",block:"center"});},60);}
