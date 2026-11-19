@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "updatedAt": 1795057898342,
+  "updatedAt": 1795059796695,
   "materials": [],
   "materialPages": {
     "listening": [
@@ -1450,6 +1450,442 @@
           ],
           "a": 0,
           "e": "Following the instructions carefully merupakan participial phrase aktif. Subject yang mengikuti instruksi adalah the participants.",
+          "topic": "",
+          "ctx": ""
+        }
+      ]
+    },
+    "p-mwiqx2bnpgwpf": {
+      "passage": "",
+      "audioUrl": "",
+      "audioScript": "",
+      "minutes": 8,
+      "questions": [
+        {
+          "id": "q-mwmzuli4j2rfc",
+          "q": "_____ the teacher nor the students _____ aware of the schedule changes.",
+          "o": [
+            "Either – are",
+            "Neither – is",
+            "Neither – are",
+            "Either – is"
+          ],
+          "a": 2,
+          "e": "Pola neither ... nor menghubungkan dua subject. Berdasarkan proximity rule, verb mengikuti subject terdekat, yaitu the students (plural), sehingga menggunakan are.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmzuli4y9sdh",
+          "q": "Neither the students nor their lecturer _____ willing to cancel the examination.",
+          "o": [
+            "are",
+            "were",
+            "have",
+            "is"
+          ],
+          "a": 3,
+          "e": "Pada pola neither ... nor, verb mengikuti subject terdekat, yaitu their lecturer (singular). Karena itu, digunakan is.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmzuli4w9tiq",
+          "q": "Both the research findings and the statistical analysis _____ included in the final report.",
+          "o": [
+            "are",
+            "is",
+            "has",
+            "was"
+          ],
+          "a": 0,
+          "e": "Both ... and menghubungkan dua subject dan membentuk compound subject plural. Oleh karena itu, digunakan are.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmzuli4z9eh7",
+          "q": "The university offers _____ financial assistance _____ academic guidance to its international students.",
+          "o": [
+            "either – or",
+            "neither – nor",
+            "not only – but also",
+            "both – and"
+          ],
+          "a": 3,
+          "e": "Both ... and menghubungkan dua noun phrase yang setara: financial assistance dan academic guidance.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmzuli4rov1s",
+          "q": "Not only _____ the research findings, but she also presented several recommendations.",
+          "o": [
+            "she explained",
+            "did she explain",
+            "she did explain",
+            "explained she"
+          ],
+          "a": 1,
+          "e": "Ketika not only diletakkan di awal clause, terjadi subject-auxiliary inversion. Simple past menggunakan auxiliary did, diikuti subject dan verb dasar.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmzuli4nyd0p",
+          "q": "The new policy is intended not only to improve educational quality but also _____ administrative efficiency.",
+          "o": [
+            "improving",
+            "improved",
+            "to improve",
+            "improve"
+          ],
+          "a": 2,
+          "e": "Not only ... but also harus menghubungkan bentuk yang paralel. Karena bagian pertama menggunakan to improve, bagian kedua juga menggunakan to improve.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmzuli4xzfw8",
+          "q": "Not until the final report was published _____ the public understand the actual impact of the research.",
+          "o": [
+            "the public did",
+            "did the public",
+            "the public",
+            "the public has"
+          ],
+          "a": 1,
+          "e": "Not until yang diletakkan di awal kalimat menyebabkan subject-auxiliary inversion pada main clause. Bentuknya did + subject + base verb.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmzuli4cxvm9",
+          "q": "The students must decide whether to conduct the experiment independently or _____ assistance from their lecturer.",
+          "o": [
+            "requesting",
+            "requested",
+            "request",
+            "to request"
+          ],
+          "a": 3,
+          "e": "Bentuk yang paralel adalah to conduct dan to request. Infinitive marker to dapat dihilangkan pada bagian kedua dalam konstruksi tertentu, tetapi harus konsisten dengan struktur yang digunakan. Dalam kalimat ini, to request merupakan pilihan paling jelas.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmzuli473tbm",
+          "q": "The more frequently students practice listening, _____ they become at understanding native speakers.",
+          "o": [
+            "the better",
+            "better",
+            "the best",
+            "the more good"
+          ],
+          "a": 0,
+          "e": "Pola the more ..., the better ... menunjukkan hubungan proporsional. Kedua bagian harus menggunakan comparative form.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmzuli4zfhm6",
+          "q": "The research findings were _____ reliable _____ the previous study's results.",
+          "o": [
+            "as – than",
+            "so – as",
+            "more – as",
+            "as – as"
+          ],
+          "a": 3,
+          "e": "Pola perbandingan setara adalah as + adjective + as. Karena itu, bentuk yang benar adalah as reliable as.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmzuli4b1fix",
+          "q": "The university would rather invest in research facilities _____ spend its budget on unnecessary decorations.",
+          "o": [
+            "than",
+            "to",
+            "as",
+            "rather"
+          ],
+          "a": 0,
+          "e": "Pola would rather + base verb + than + base verb digunakan untuk menyatakan preferensi. Invest paralel dengan spend.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmzuli4fgd7d",
+          "q": "The professor prefers conducting field research _____ relying entirely on laboratory experiments.",
+          "o": [
+            "than",
+            "to",
+            "as",
+            "rather"
+          ],
+          "a": 1,
+          "e": "Pola prefer + gerund + to + gerund digunakan untuk menyatakan preferensi. Conducting harus paralel dengan relying.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmzuli43s2k2",
+          "q": "No sooner _____ the announcement than the students began discussing the examination results.",
+          "o": [
+            "the lecturer had made",
+            "did the lecturer make",
+            "had the lecturer made",
+            "the lecturer made"
+          ],
+          "a": 2,
+          "e": "Pola No sooner ... than memerlukan inversion ketika No sooner berada di awal kalimat. Bentuk past perfect-nya adalah had + subject + V3.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmzyelo6skch",
+          "q": "In discussing injustice, Prof. Uceng prefers presenting documented evidence _____ making unsupported accusations.",
+          "o": [
+            "rather than",
+            "as well as",
+            "no sooner than",
+            "as much as"
+          ],
+          "a": 0,
+          "e": "Rather than menunjukkan pilihan atau kontras. Bentuk yang dihubungkan harus sejajar: presenting dan making sama-sama gerund.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmzyeloywjw7",
+          "q": "The more people understand the history of injustice, _____ they become in recognizing similar problems in society.",
+          "o": [
+            "the most aware",
+            "more aware",
+            "the more aware",
+            "the awareness"
+          ],
+          "a": 2,
+          "e": "Pola the + comparative ..., the + comparative ... menunjukkan hubungan sebanding: semakin ..., semakin ....",
+          "topic": "",
+          "ctx": ""
+        }
+      ]
+    },
+    "p-mwiqyceud8e6y": {
+      "passage": "",
+      "audioUrl": "",
+      "audioScript": "",
+      "minutes": 10,
+      "questions": [
+        {
+          "id": "q-mwn06enhtjmvm",
+          "q": "Historians still debate _____ Tan Malaka developed some of his political ideas.",
+          "o": [
+            "what",
+            "where",
+            "which",
+            "whom"
+          ],
+          "a": 1,
+          "e": "Where Tan Malaka developed ... merupakan noun clause sebagai object dari debate. Where menunjukkan tempat.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwn06enh87xdz",
+          "q": "It is essential that every government _____ the rights of its citizens.",
+          "o": [
+            "protects",
+            "protected",
+            "protecting",
+            "protect"
+          ],
+          "a": 3,
+          "e": "Setelah adjective yang menunjukkan keharusan atau urgensi, seperti essential, important, dan necessary, gunakan pola It is + adjective + that + subject + V1.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwn06enhwaps5",
+          "q": "The main question is _____ the government adequately addressed the people's concerns.",
+          "o": [
+            "what",
+            "whether",
+            "which",
+            "whose"
+          ],
+          "a": 1,
+          "e": "Whether the government adequately addressed ... berfungsi sebagai subject complement setelah linking verb is.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwn06enhsobjh",
+          "q": "Prof. Yusril Mahendra explained _____ students could evaluate government policies critically.",
+          "o": [
+            "how",
+            "what",
+            "which",
+            "whose"
+          ],
+          "a": 0,
+          "e": "How students could evaluate ... menjelaskan cara atau metode dan berfungsi sebagai object dari explained.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwn06enhkldfv",
+          "q": "_____ the historical documents contain accurate information has not yet been established.",
+          "o": [
+            "What",
+            "Whether",
+            "Which",
+            "Whom"
+          ],
+          "a": 1,
+          "e": "Whether the historical documents contain ... merupakan noun clause sebagai subject. Whether menyatakan apakah sesuatu benar atau tidak.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwn06enhc82ex",
+          "q": "The researchers want to know _____ the protesters were demanding from the authorities.",
+          "o": [
+            "what",
+            "where",
+            "when",
+            "whose"
+          ],
+          "a": 0,
+          "e": "What the protesters were demanding merupakan noun clause sebagai object. What menjadi object dari verb were demanding.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwn06enhz5qk4",
+          "q": "Tan Malaka insisted that people _____ equal opportunities regardless of their social backgrounds.",
+          "o": [
+            "have",
+            "has",
+            "had",
+            "having"
+          ],
+          "a": 0,
+          "e": "Setelah insist yang menyatakan tuntutan atau desakan, gunakan subjunctive: that + subject + base verb. Jadi, people have, bukan people has.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwn06enhxsca4",
+          "q": "What the students need _____ a clearer explanation of the historical context.",
+          "o": [
+            "are",
+            "were",
+            "is",
+            "have"
+          ],
+          "a": 2,
+          "e": "Noun clause What the students need berfungsi sebagai subject dan dianggap singular. Karena itu, verb yang tepat adalah is.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwn06enhsdj0z",
+          "q": "Why the government rejected the proposal _____ still unclear to many researchers.",
+          "o": [
+            "remain",
+            "remains",
+            "are remaining",
+            "have remained"
+          ],
+          "a": 1,
+          "e": "Noun clause yang diawali why berfungsi sebagai subject singular sehingga menggunakan remains.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwn06enhpthi7",
+          "q": "The teacher explained that the causes of social inequality _____ complex and interconnected.",
+          "o": [
+            "is",
+            "was",
+            "are",
+            "has"
+          ],
+          "a": 2,
+          "e": "Verb dalam noun clause tetap mengikuti subject di dalam klausa tersebut. Subject the causes plural, sehingga menggunakan are.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwn06enhuvzkw",
+          "q": "The students were asked _____ the historical speech before the class discussion began.",
+          "o": [
+            "summarize",
+            "summarizing",
+            "to summarize",
+            "summarized"
+          ],
+          "a": 2,
+          "e": "Setelah were asked, digunakan infinitive to + V1. Perhatikan bahwa ini bukan noun clause, melainkan pola passive + infinitive. Soal ini menguji kemampuan membedakan noun clause dan konstruksi infinitive.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwn06enhvkotl",
+          "q": "The professor asked the students where _____ the original documents.",
+          "o": [
+            "did they find",
+            "they had found",
+            "had they found",
+            "do they find"
+          ],
+          "a": 1,
+          "e": "Dalam indirect question, susunan kalimat menggunakan subject sebelum verb, bukan inversi seperti pertanyaan langsung. Bentuk yang benar adalah where they had found.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwn07zv5e2zh9",
+          "q": "The lecturer discussed _____ the government had implemented and _____ those policies affected ordinary citizens.",
+          "o": [
+            "what – how",
+            "what – what",
+            "whether – whose",
+            "which – whom"
+          ],
+          "a": 0,
+          "e": "What the government had implemented dan how those policies affected ... merupakan dua noun clause yang sejajar sebagai object dari discussed.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwn07zv59wfmv",
+          "q": "The students wanted to know what caused the conflict, why it continued, and _____ it could be resolved.",
+          "o": [
+            "how",
+            "which",
+            "whom",
+            "whose"
+          ],
+          "a": 0,
+          "e": "Ketiga unsur merupakan noun clause dengan pola wh-word + subject/verb. What, why, dan how membentuk rangkaian pertanyaan tidak langsung yang paralel.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwn090jq9d1gp",
+          "q": "The question of _____ the historical account is reliable remains controversial.",
+          "o": [
+            "whether",
+            "what",
+            "that",
+            "whom"
+          ],
+          "a": 0,
+          "e": "Setelah preposition of, noun clause dapat diawali whether. That tidak lazim digunakan untuk memperkenalkan indirect yes/no question dalam konstruksi ini.",
           "topic": "",
           "ctx": ""
         }
