@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "updatedAt": 1795010489704,
+  "updatedAt": 1795050860714,
   "materials": [],
   "materialPages": {
     "listening": [
@@ -479,7 +479,7 @@
             "were"
           ],
           "a": 2,
-          "e": "",
+          "e": "Menggunakan \"has\" karena subjek intinya adalah \"The number\" (jumlah total) yang bermakna tunggal sebagai satu kesatuan angka statistik. Sementara itu, frasa \"of participants in the international conference\" hanyalah keterangan penjelas, sehingga bentuk jamak pada kata \"participants\" tidak memengaruhi kata kerjanya.",
           "topic": "",
           "ctx": ""
         },
