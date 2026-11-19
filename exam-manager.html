@@ -193,8 +193,13 @@ const A={
  testStop(){stopTest();},
  addPause(i){const v=prompt("Jeda berapa detik? (0.5 – 120)","3");if(v===null)return;const n=Math.min(120,Math.max(0.5,parseFloat(String(v).replace(",","."))||0));if(!n){alert("Masukkan angka detik, mis. 3");return;}const t=$("#pu-"+i);let p=t.selectionStart;const txt=t.value;const ls=txt.lastIndexOf("\n",p-1)+1;const ins="Pause: "+n+"\n";t.value=txt.slice(0,ls)+ins+txt.slice(ls);t.focus();t.setSelectionRange(ls+ins.length,ls+ins.length);toast("Jeda "+n+" detik disisipkan");},
  fmtB(i){wrapSel(i,"**");},fmtI(i){wrapSel(i,"*");},
- export(){X.download(D);banner();toast("File diunduh");},
- async pull(){const p=await X.fetchPublished();if(!p){alert("lumina-exam.json tidak ditemukan di server.");return;}if(!confirm("Ganti draf di browser ini dengan versi dari server?"))return;D=p;commit("Diambil dari server");render();},
+ export(){X.download(D);setTimeout(banner,2500);},
+ backup(){
+  const blob=new Blob([JSON.stringify(D,null,2)],{type:"application/json"}),u=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=u;a.download="lumina-exam-DRAF-berkunci.json";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1500);
+  toast("Cadangan diunduh — simpan di tempat pribadi");
+ },
+ async pull(){const p=await X.fetchPublished();if(!p){alert("lumina-exam.json tidak ditemukan di server.");return;}if(p.keyless){alert("File di server adalah versi publik (tanpa kunci jawaban), jadi tidak boleh menggantikan draf Anda.\nKunci jawaban ada di server dan di draf/cadangan berkunci Anda.");return;}if(!confirm("Ganti draf di browser ini dengan versi dari server?"))return;D=p;commit("Diambil dari server");render();},
  reset(){if(!confirm("Kembalikan semua soal Pre-Test ke contoh awal? Tidak bisa dibatalkan."))return;const keep=D.settings;D=X.defaults();D.settings=keep;commit("Dikembalikan");render();},
  voiceTest(role){
   stopTest();const c=readVoice(role);
@@ -242,10 +247,11 @@ function vVoices(){
 /* ---------- PUBLIKASI ---------- */
 function vPublish(){
  $("#view").innerHTML=`<div class="box"><h3>1. Publikasikan ke mahasiswa</h3><p class="sub">Unduh <code>lumina-exam.json</code> lalu unggah ke folder yang sama dengan <code>index.html</code> (timpa file lama). Mahasiswa membaca file ini; draf di browser ini hanya terlihat oleh admin.</p><button class="btn" data-act="export">⬇ Unduh lumina-exam.json</button></div>
+ <div class="box"><h3>Cadangan draf (dengan kunci jawaban)</h3><p class="sub">Saat Anda menekan Unduh di atas, kunci jawaban, penjelasan, dan catatan script dikirim ke server dan <b>tidak</b> ada di <code>lumina-exam.json</code>. Simpan cadangan draf lengkap ini secara berkala. File ini berisi kunci jawaban: <b>jangan diunggah ke hosting</b>.</p><button class="btn secondary" data-act="backup">⬇ Unduh cadangan draf (dengan kunci)</button></div>
  <div class="box"><h3>2. Pulihkan dari file</h3><label class="btn secondary" style="cursor:pointer">Pilih file (.json)<input id="imp" type="file" accept=".json,application/json" hidden></label></div>
  <div class="box"><h3>3. Ambil versi yang sudah dipublikasikan</h3><button class="btn secondary" data-act="pull">Ambil dari server</button></div>
  <div class="box"><h3>4. Kembalikan contoh awal</h3><button class="btn danger" data-act="reset">Kembalikan ke contoh awal</button></div>`;
- $("#imp").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const j=JSON.parse(await f.text());if(!j||!j.levels)throw 0;if(!confirm("Ganti draf di browser ini dengan isi file?"))return;D=X.normalize(j);commit("Dipulihkan");render();}catch(x){alert("File tidak valid.");}e.target.value="";};
+ $("#imp").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const j=JSON.parse(await f.text());if(!j||!j.levels)throw 0;if(j.keyless){alert("File ini adalah versi publik (tanpa kunci jawaban) dan tidak bisa dipakai memulihkan draf.\nGunakan file cadangan draf berkunci.");e.target.value="";return;}if(!confirm("Ganti draf di browser ini dengan isi file?"))return;D=X.normalize(j);commit("Dipulihkan");render();}catch(x){alert("File tidak valid.");}e.target.value="";};
 }
 
 document.addEventListener("input",e=>{if(e.target.matches&&e.target.matches("textarea.code"))autoGrow(e.target);});
@@ -266,13 +272,22 @@ function enter(){
 $("#lf").addEventListener("submit",e=>{
  e.preventDefault();
  if(Date.now()<lock){err("Terlalu banyak percobaan. Tunggu sebentar.");return;}
- const a=L.checkLogin(core,$("#lu").value,$("#lp").value);
- if(!a){if(++fails>=5){fails=0;lock=Date.now()+30000;}err("Username atau password salah.");return;}
- if(a.role!=="admin"){err("Akun ini bukan admin.");return;}
- fails=0;L.setSession(a);e.target.reset();enter();
+ const form=e.target,btn=form.querySelector("button[type=submit]");btn.disabled=true;err("");
+ L.remoteLogin($("#lu").value,$("#lp").value).then(a=>{
+  if(a.role!=="admin"){L.setSession(null);err("Akun ini bukan admin.");return;}
+  fails=0;L.setSession(a);form.reset();enter();
+ }).catch(ex=>{
+  $("#lp").value="";
+  if(ex.api){if(++fails>=5){fails=0;lock=Date.now()+30000;err("Terlalu banyak percobaan. Tunggu sebentar.");return;}}
+  err(ex.message);
+ }).finally(()=>{btn.disabled=false;});
 });
 $("#logout").addEventListener("click",()=>{L.setSession(null);$("#app").classList.add("hidden");$("#login").classList.remove("hidden");});
-L.load().then(d=>{core=d;const me=L.currentAccount(core);if(me&&me.role==="admin")enter();else $("#login").classList.remove("hidden");});
+L.load().then(d=>{
+ core=d;
+ if(!L.getSession()){$("#login").classList.remove("hidden");return;}
+ return L.refreshSession().then(me=>{if(me.role==="admin")enter();else $("#login").classList.remove("hidden");}).catch(()=>{L.setSession(null);$("#login").classList.remove("hidden");});
+});
 </script>
 </body>
 </html>
