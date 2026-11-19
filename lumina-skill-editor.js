@@ -138,9 +138,22 @@ function showLogin(){
  m.querySelector("#lum-c").onclick=function(){m.remove();};
  m.querySelector("#lum-lf").onsubmit=function(e){
   e.preventDefault();
-  var a=L.checkLogin(cms,m.querySelector("#lum-u").value,m.querySelector("#lum-p").value),er=m.querySelector("#lum-e");
-  if(!a||a.role!=="admin"){fails++;er.textContent=a?"Akun ini bukan admin.":"Username atau password salah.";er.style.display="block";if(fails>=5){m.querySelector("button[type=submit]").disabled=true;er.textContent="Terlalu banyak percobaan. Muat ulang halaman.";}return;}
-  L.setSession(a);m.remove();enterEdit();
+  var er=m.querySelector("#lum-e"),btn=m.querySelector("button[type=submit]");
+  btn.disabled=true;er.style.display="none";
+  L.remoteLogin(m.querySelector("#lum-u").value,m.querySelector("#lum-p").value).then(function(a){
+   if(!a||a.role!=="admin"){
+    L.setSession(null);
+    er.textContent="Akun ini bukan admin.";er.style.display="block";btn.disabled=false;return;
+   }
+   L.setSession(a);m.remove();
+   L.load().then(function(d){cms=d;enterEdit();}).catch(function(){enterEdit();});
+  }).catch(function(err){
+   m.querySelector("#lum-p").value="";
+   if(err&&err.api)fails++;
+   er.textContent=(fails>=5)?"Terlalu banyak percobaan. Muat ulang halaman.":((err&&err.message)||"Username atau password salah.");
+   er.style.display="block";
+   btn.disabled=(fails>=5);
+  });
  };
 }
 
@@ -631,10 +644,14 @@ function enterEdit(){
  toast("Mode edit aktif");
 }
 function setup(){
- if(isAdmin()){
-  if(wantEdit)enterEdit();
-  else{var f=document.createElement("button");f.className="lum-fab";f.textContent="✏️ Edit halaman";f.onclick=enterEdit;document.body.appendChild(f);}
- }else if(wantEdit)showLogin();
+ function go(admin){
+  if(admin){
+   if(wantEdit)enterEdit();
+   else{var f=document.createElement("button");f.className="lum-fab";f.textContent="✏️ Edit halaman";f.onclick=enterEdit;document.body.appendChild(f);}
+  }else if(wantEdit)showLogin();
+ }
+ if(!L.getSession()){go(false);return;}
+ L.refreshSession().then(function(me){go(!!me&&me.role==="admin");}).catch(function(){L.setSession(null);go(false);});
 }
 
 L.load().then(function(d){
