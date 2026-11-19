@@ -623,13 +623,6 @@ function openProfileEdit(){
    <div class="row"><img id="pf-prev" src="${p.photo||""}" alt="" style="width:64px;height:64px;border-radius:50%;object-fit:cover;display:${p.photo?"block":"none"}"><label>Photo (max 1 MB, optional)<input id="pf-photo" type="file" accept="image/*"></label></div>
    <div class="cards">${f("name","Full name",p.name||me.name,true)}${f("email","Email",p.email,true,"email")}${f("wa","WhatsApp number",p.wa,true,"tel")}${f("job","Occupation",p.job)}${f("sem","Semester",p.semester)}</div>
    <div><button class="btn" type="submit">Save profile</button></div>
-  </form>
-  <hr>
-  <h3>Change password</h3>
-  <form id="pw-form" class="admin-form" autocomplete="off" style="margin-top:12px">
-   <label>Current password<input id="pw-old" type="password" required autocomplete="current-password"></label>
-   <div class="cards"><label>New password (min. 6 characters)<input id="pw-new" type="password" required minlength="6" autocomplete="new-password"></label><label>Confirm new password<input id="pw-new2" type="password" required minlength="6" autocomplete="new-password"></label></div>
-   <div><button class="btn" type="submit">Change password</button></div>
   </form></div>`;
  document.body.appendChild(m);
  m.addEventListener("click",e=>{if(e.target===m||e.target.closest('[data-pf="close"]'))closeProfileEdit();});
@@ -656,17 +649,7 @@ function openProfileEdit(){
    .then(()=>{closeProfileEdit();refreshProfileBox();alert("Profile saved.");})
    .catch(err=>{sb.disabled=false;refreshProfileBox();alert("Saved on this device, but not yet sent to the server: "+err.message);});
  };
- $("pw-form").onsubmit=e=>{
-  e.preventDefault();
-  const o=$("pw-old").value,n1=$("pw-new").value,n2=$("pw-new2").value;
-  if(n1.length<6){alert("New password must be at least 6 characters.");return;}
-  if(n1!==n2){alert("New password and confirmation do not match.");return;}
-  if(n1===o){alert("New password must be different from the current one.");return;}
-  const sb=e.target.querySelector("button[type=submit]");sb.disabled=true;
-  L.api("changePassword",{oldHash:L.hashPassword(me.user,o),hash:L.hashPassword(me.user,n1)})
-   .then(()=>{e.target.reset();sb.disabled=false;alert("Password changed. Use your new password the next time you log in.");})
-   .catch(err=>{sb.disabled=false;alert(err.message);});
- };
+
 }
 function downloadProgress(){
  const blob=new Blob([JSON.stringify(L.exportProgress(me.user,me.name),null,2)],{type:"application/json"});
