@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "updatedAt": 1795050860714,
+  "updatedAt": 1795051368785,
   "materials": [],
   "materialPages": {
     "listening": [
@@ -227,7 +227,7 @@
       "passage": "",
       "audioUrl": "",
       "audioScript": "",
-      "minutes": 5,
+      "minutes": 7,
       "questions": [
         {
           "id": "q-mwgh8pv1xcqu8",
@@ -286,6 +286,20 @@
           "ctx": ""
         },
         {
+          "id": "q-mwmv76yhr0hfb",
+          "q": "_____ requires considerable patience and concentration.",
+          "o": [
+            "To solve complex mathematical problems",
+            "Solving complex mathematical problems",
+            "Complex mathematical problems",
+            "When solving complex mathematical problems"
+          ],
+          "a": 1,
+          "e": "Gerund phrase Solving complex mathematical problems berfungsi sebagai subject tunggal, sehingga cocok dengan verb requires.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
           "id": "q-mwlb0t2j9cqu4",
           "q": "Rapid technological changes in modern offices _____ many traditional administrative tasks.",
           "o": [
@@ -328,6 +342,20 @@
           "ctx": ""
         },
         {
+          "id": "q-mwmv76yiof3pc",
+          "q": "_____ are essential for maintaining a healthy environment.",
+          "o": [
+            "To recycle household waste",
+            "Recycling household waste",
+            "Recycle household waste",
+            "Recycling and reusing household materials"
+          ],
+          "a": 3,
+          "e": "Recycling and reusing household materials terdiri atas dua gerund phrase yang dihubungkan dengan and, sehingga membentuk compound subject plural. Verb yang tepat adalah are.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
           "id": "q-mwlbbnkotfqha",
           "q": "Running three kilometers every single morning _____ good for cardiovascular health.",
           "o": [
@@ -356,6 +384,20 @@
           "ctx": ""
         },
         {
+          "id": "q-mwmv76yiak810",
+          "q": "_____ and _____ are considered essential for academic success.",
+          "o": [
+            "Reading / writing",
+            "To read / writing",
+            "Reading / to write",
+            "Read / write"
+          ],
+          "a": 0,
+          "e": "Dua gerund, reading dan writing, yang dihubungkan dengan and membentuk compound subject plural. Oleh karena itu, digunakan are.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
           "id": "q-mwlbgshe4hjth",
           "q": "Several boxes of chocolate cookies _____ on the kitchen counter.",
           "o": [
@@ -366,6 +408,34 @@
           ],
           "a": 2,
           "e": "Inti subjek jamak \"Several boxes\" memerlukan verb jamak sit",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmv76yihggv3",
+          "q": "_____ or _____ is often recommended as an effective way to reduce stress.",
+          "o": [
+            "Walking / swimming",
+            "To walk / swimming",
+            "Walking / to swim",
+            "Walk / swim"
+          ],
+          "a": 0,
+          "e": "Dua gerund yang dihubungkan dengan or membentuk compound subject. Namun, karena alternatif tersebut diperlakukan sebagai satu pilihan kegiatan dalam konteks kalimat ini, verb tunggal is digunakan.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmv76yiatu1u",
+          "q": "_____ the new policy will improve educational quality remains uncertain.",
+          "o": [
+            "If",
+            "Whether",
+            "Because",
+            "Although"
+          ],
+          "a": 1,
+          "e": "Whether the new policy will improve educational quality merupakan noun clause yang berfungsi sebagai subject. Noun clause tersebut diikuti verb singular remains.",
           "topic": "",
           "ctx": ""
         }
