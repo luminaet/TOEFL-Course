@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "updatedAt": 1795069812946,
+  "updatedAt": 1795082040862,
   "materials": [],
   "materialPages": {
     "listening": [
@@ -1886,6 +1886,224 @@
           ],
           "a": 0,
           "e": "Setelah preposition of, noun clause dapat diawali whether. That tidak lazim digunakan untuk memperkenalkan indirect yes/no question dalam konstruksi ini.",
+          "topic": "",
+          "ctx": ""
+        }
+      ]
+    },
+    "p-mwiqzmngf9ea6": {
+      "passage": "",
+      "audioUrl": "",
+      "audioScript": "",
+      "minutes": 8,
+      "questions": [
+        {
+          "id": "q-mwnd5dj0xycis",
+          "q": "Historians often study Tan Malaka, _____ political strategies shaped early anti-colonial movements.",
+          "o": [
+            "who",
+            "whom",
+            "whose",
+            "which"
+          ],
+          "a": 2,
+          "e": "Whose menunjukkan kepemilikan. Whose ideas berarti gagasan milik Tan Malaka.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnd5dj19xkio",
+          "q": "The professor _____ the students invited to the seminar discussed government accountability.",
+          "o": [
+            "whom",
+            "whose",
+            "which",
+            "who"
+          ],
+          "a": 0,
+          "e": "Whom digunakan sebagai object dari verb invited. Subject adjective clause adalah the students.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnd5dj1bly5v",
+          "q": "The historical speech _____ during the independence movement is preserved in the national archive.",
+          "o": [
+            "delivering",
+            "delivered",
+            "delivers",
+            "to deliver"
+          ],
+          "a": 1,
+          "e": "Which was delivered during the independence movement direduksi menjadi delivered during the independence movement. Karena maknanya pasif, gunakan V3.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnd5dj123na5",
+          "q": "Naar de Republiek Indonesia, the book that explains Tan Malaka's government concept, _____ several important historical events.",
+          "o": [
+            "describe",
+            "have described",
+            "describing",
+            "describes"
+          ],
+          "a": 3,
+          "e": "Subject kalimat utama adalah The book, singular. Adjective clause hanya menjelaskan noun tersebut; verb utama harus describes.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnddjnal51we",
+          "q": "Many young activists still read Aksi Massa, a book _____ emphasizes the power of organized people.",
+          "o": [
+            "who",
+            "that",
+            "whom",
+            "where"
+          ],
+          "a": 1,
+          "e": "'That' digunakan sebagai subjek klausa untuk merujuk pada benda ('a book').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnddjnbdfs29",
+          "q": "Biographers interviewed several freedom fighters _____ Tan Malaka had met during his underground resistance.",
+          "o": [
+            "whose",
+            "which",
+            "whom",
+            "where"
+          ],
+          "a": 2,
+          "e": "'Whom' digunakan karena merujuk pada orang ('freedom fighters') yang berposisi sebagai objek kata kerja 'had met'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndf41d8tr9n",
+          "q": "Many young activists still read Aksi Massa, a book _____ emphasizes the power of organized people.",
+          "o": [
+            "who",
+            "that",
+            "whom",
+            "where"
+          ],
+          "a": 1,
+          "e": "'That' digunakan sebagai subjek klausa untuk merujuk pada benda ('a book').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndf41da3l1k",
+          "q": "Several letters _____ by R.A. Kartini to her Dutch friends were later compiled into a famous book.",
+          "o": [
+            "writing",
+            "wrote",
+            "written",
+            "to write"
+          ],
+          "a": 2,
+          "e": "Reduced adjective clause bentuk pasif ('which were written') menggunakan verb-3 ('written').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndf41dyq6w9",
+          "q": "Jepara is the coastal town _____ R.A. Kartini grew up and began advocating for women's education.",
+          "o": [
+            "which",
+            "when",
+            "where",
+            "whose"
+          ],
+          "a": 2,
+          "e": "'Where' merujuk pada keterangan tempat terjadinya peristiwa ('the coastal town').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndf41d1c6ux",
+          "q": "During the seminar, we met a researcher _____ has spent ten years translating colonial archives.",
+          "o": [
+            "whom",
+            "which",
+            "whose",
+            "who"
+          ],
+          "a": 3,
+          "e": "'Who' berfungsi sebagai subjek untuk merujuk pada orang ('a researcher').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndf41dpwzqv",
+          "q": "August 17, 1945 marks a historic day _____ Indonesians finally claimed their sovereignty.",
+          "o": [
+            "when",
+            "where",
+            "which",
+            "whom"
+          ],
+          "a": 0,
+          "e": "'When' digunakan untuk merujuk pada keterangan waktu ('a historic day').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndf41d77ez6",
+          "q": "Anyone _____ wants to understand Tan Malaka's materialist philosophy should explore Madilog.",
+          "o": [
+            "whom",
+            "which",
+            "whose",
+            "who"
+          ],
+          "a": 3,
+          "e": "'Who' merujuk pada kata ganti orang tak tentu ('Anyone') sebagai subjek klausa.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndf41dydf8t",
+          "q": "Scholars frequently debate the main reason _____ colonial authorities exiled Tan Malaka multiple times.",
+          "o": [
+            "where",
+            "why",
+            "when",
+            "which"
+          ],
+          "a": 1,
+          "e": "'Why' digunakan setelah kata benda 'reason' untuk menjelaskan alasan suatu tindakan.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndf41dnprpr",
+          "q": "Reading Habis Gelap Terbitlah Terang, _____ contains Kartini's progressive thoughts, inspires many modern readers.",
+          "o": [
+            "that",
+            "who",
+            "which",
+            "whom"
+          ],
+          "a": 2,
+          "e": "Non-defining adjective clause (diapit koma) untuk benda/judul buku wajib menggunakan 'which', bukan 'that'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndf41dv7l6g",
+          "q": "Biographers interviewed several freedom fighters _____ Tan Malaka had met during his underground resistance.",
+          "o": [
+            "whose",
+            "which",
+            "whom",
+            "where"
+          ],
+          "a": 2,
+          "e": "'Whom' digunakan karena merujuk pada orang ('freedom fighters') yang berposisi sebagai objek kata kerja 'had met'.",
           "topic": "",
           "ctx": ""
         }
