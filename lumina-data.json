@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "updatedAt": 1795082040862,
+  "updatedAt": 1795082887672,
   "materials": [],
   "materialPages": {
     "listening": [
@@ -1764,20 +1764,6 @@
           "ctx": ""
         },
         {
-          "id": "q-mwn06enhz5qk4",
-          "q": "Tan Malaka insisted that people _____ equal opportunities regardless of their social backgrounds.",
-          "o": [
-            "have",
-            "has",
-            "had",
-            "having"
-          ],
-          "a": 0,
-          "e": "Setelah insist yang menyatakan tuntutan atau desakan, gunakan subjunctive: that + subject + base verb. Jadi, people have, bukan people has.",
-          "topic": "",
-          "ctx": ""
-        },
-        {
           "id": "q-mwn06enhxsca4",
           "q": "What the students need _____ a clearer explanation of the historical context.",
           "o": [
@@ -1816,6 +1802,20 @@
           ],
           "a": 2,
           "e": "Verb dalam noun clause tetap mengikuti subject di dalam klausa tersebut. Subject the causes plural, sehingga menggunakan are.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndps594nkut",
+          "q": "Environmental activists strongly recommend that the local government _____ stricter regulations on industrial waste.",
+          "o": [
+            "enforces",
+            "enforced",
+            "enforce",
+            "enforcing"
+          ],
+          "a": 2,
+          "e": "Kata kerja 'recommend' memicu mandative subjunctive, sehingga kata kerja setelah 'that' wajib menggunakan bare infinitive ('enforce') tanpa akhiran -s.",
           "topic": "",
           "ctx": ""
         },
@@ -2104,6 +2104,520 @@
           ],
           "a": 2,
           "e": "'Whom' digunakan karena merujuk pada orang ('freedom fighters') yang berposisi sebagai objek kata kerja 'had met'.",
+          "topic": "",
+          "ctx": ""
+        }
+      ]
+    },
+    "p-mwir0jxhv99ms": {
+      "passage": "",
+      "audioUrl": "",
+      "audioScript": "",
+      "minutes": 10,
+      "questions": [
+        {
+          "id": "q-mwndn4dca322j",
+          "q": "Satellites _____ Earth at low altitudes capture high-resolution images of shrinking glaciers.",
+          "o": [
+            "orbit",
+            "orbited",
+            "orbiting",
+            "are orbiting"
+          ],
+          "a": 2,
+          "e": "Reduced active clause ('which orbit') menggunakan present participle ('orbiting') karena satelit melakukan aksi mengorbit.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndn4dcj8njw",
+          "q": "_____ from recycled ocean plastics, these athletic shoes help reduce marine pollution.",
+          "o": [
+            "Making",
+            "Made",
+            "Were made",
+            "To make"
+          ],
+          "a": 1,
+          "e": "Reduced passive clause di awal kalimat ('Which are made...') menggunakan past participle ('Made') untuk makna pasif.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndn4dc13dn8",
+          "q": "Marine biologists _____ deep-sea ecosystems recently discovered a bioluminescent jellyfish species.",
+          "o": [
+            "explore",
+            "explored",
+            "exploring",
+            "were exploring"
+          ],
+          "a": 2,
+          "e": "Klausa aktif ('who explored') dipersingkat menjadi 'exploring' untuk menerangkan subjek jamak 'Marine biologists'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndn4dcb6z0u",
+          "q": "Mount Merapi, _____ on the border between Central Java and Yogyakarta, remains one of Indonesia's most active volcanoes.",
+          "o": [
+            "locating",
+            "located",
+            "is located",
+            "locates"
+          ],
+          "a": 1,
+          "e": "Non-defining passive clause ('which is located') direduksi menjadi 'located' di antara dua koma.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndn4dcbzhgm",
+          "q": "Electric vehicles _____ by solid-state batteries _____ longer driving ranges than traditional models.",
+          "o": [
+            "powered - offer",
+            "powering - offers",
+            "powered - offers",
+            "powering - offer"
+          ],
+          "a": 0,
+          "e": "Klausa pasif direduksi menjadi 'powered', dan main verb 'offer' menyesuaikan subjek jamak 'Electric vehicles'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndn4dc7nxhl",
+          "q": "Neil Armstrong was the first human _____ onto the lunar surface in July 1969.",
+          "o": [
+            "stepping",
+            "stepped",
+            "to step",
+            "steps"
+          ],
+          "a": 2,
+          "e": "Klausa setelah kata bilangan urut ('the first') direduksi menjadi to-infinitive ('to step').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndn4dcbmkdn",
+          "q": "Passengers _____ for delayed international flights received meal vouchers from the airline.",
+          "o": [
+            "wait",
+            "waited",
+            "waiting",
+            "are waiting"
+          ],
+          "a": 2,
+          "e": "Reduced active clause ('who were waiting') menyisakan present participle ('waiting') setelah kata benda jamak 'Passengers'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndn4dc5jbb8",
+          "q": "_____ an experienced neurosurgeon, Dr. Aris frequently leads complex brain tumor operations.",
+          "o": [
+            "Being",
+            "Been",
+            "Be",
+            "To be"
+          ],
+          "a": 0,
+          "e": "Klausa deskriptif di awal kalimat ('Who is an experienced neurosurgeon...') direduksi menggunakan 'Being'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndn4dcz3yaw",
+          "q": "Fresh vegetables _____ at the local farmers' market _____ free from synthetic pesticides.",
+          "o": [
+            "selling - is",
+            "sold - are",
+            "sold - is",
+            "selling - are"
+          ],
+          "a": 1,
+          "e": "Klausa pasif ('which are sold') menjadi 'sold', diikuti to be jamak 'are' untuk subjek 'Fresh vegetables'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndn4dcbbvfn",
+          "q": "Any applicant _____ with the updated safety protocols may proceed to the practical test.",
+          "o": [
+            "familiar",
+            "familiarizing",
+            "is familiar",
+            "familiarizes"
+          ],
+          "a": 0,
+          "e": "Klausa 'who is familiar' direduksi dengan menghilangkan 'who is', sehingga langsung menyisakan kata sifat 'familiar'.",
+          "topic": "",
+          "ctx": ""
+        }
+      ]
+    },
+    "p-mwir23822kqpe": {
+      "passage": "",
+      "audioUrl": "",
+      "audioScript": "",
+      "minutes": 5,
+      "questions": [
+        {
+          "id": "q-mwndtjnp8k2d8",
+          "q": "Tourists often feel dizzy while _____ steep mountain trails at high altitudes without proper acclimatization.",
+          "o": [
+            "climb",
+            "climbed",
+            "climbing",
+            "were climbing"
+          ],
+          "a": 2,
+          "e": "Klausa waktu aktif setelah 'while' ('while they are climbing') menggunakan verb-ing ('climbing').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndtjnpdjbak",
+          "q": "Ancient manuscripts remain fragile even after _____ inside climate-controlled glass display cases.",
+          "o": [
+            "placing",
+            "placed",
+            "place",
+            "are placed"
+          ],
+          "a": 1,
+          "e": "Reduksi klausa pasif setelah 'after' ('after they are placed') menggunakan past participle ('placed').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndtjnptcsy8",
+          "q": "_____ his medical residency in Surabaya, Dr. Bagas volunteered at several rural health clinics.",
+          "o": [
+            "Having completed",
+            "Completed",
+            "Complete",
+            "Was completing"
+          ],
+          "a": 0,
+          "e": "Menunjukkan aksi pertama sudah selesai tuntas sebelum aksi kedua ('After he had completed...'), menggunakan 'Having completed'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndtjnp0rk9b",
+          "q": "Autonomous drones navigate dense forests smoothly, _____ obstacles with real-time infrared sensors.",
+          "o": [
+            "avoid",
+            "avoided",
+            "avoiding",
+            "are avoiding"
+          ],
+          "a": 2,
+          "e": "Participial phrase di akhir kalimat untuk menjelaskan cara/proses dari klausa utama menggunakan bentuk aktif 'avoiding'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndtjnptoevz",
+          "q": "Freshly baked sourdough bread develops a crispier crust once _____ on a wire cooling rack.",
+          "o": [
+            "resting",
+            "rested",
+            "rests",
+            "is rested"
+          ],
+          "a": 1,
+          "e": "Klausa waktu pasif setelah 'once' ('once it is rested') dipersingkat menjadi verb-3 ('rested').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndtjnp0khmh",
+          "q": "Software developers refused to launch the application, _____ critical security vulnerabilities during beta testing.",
+          "o": [
+            "not resolving",
+            "having not resolved",
+            "not resolved",
+            "did not resolve"
+          ],
+          "a": 1,
+          "e": "Klausa alasan negatif yang terjadi lebih dulu ('because they had not resolved...') direduksi menjadi 'having not resolved'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndtjnpws4y3",
+          "q": "Rare orchids thrive in highland greenhouses though _____ to occasional drops in nighttime temperature.",
+          "o": [
+            "exposing",
+            "exposed",
+            "expose",
+            "are exposing"
+          ],
+          "a": 1,
+          "e": "Klausa pertentangan pasif setelah 'though' ('though they are exposed') menyisakan past participle ('exposed').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndtjnp6agyo",
+          "q": "Many remote workers report higher productivity since _____ a structured daily morning routine.",
+          "o": [
+            "adopt",
+            "adopted",
+            "adopting",
+            "were adopting"
+          ],
+          "a": 2,
+          "e": "Reduksi klausa aktif setelah konjungsi 'since' ('since they adopted') menggunakan present participle ('adopting').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndtjnplhvez",
+          "q": "Heavy cargo ships must reduce speed upon _____ narrow coastal straits with busy ferry traffic.",
+          "o": [
+            "enter",
+            "entered",
+            "entering",
+            "are entering"
+          ],
+          "a": 2,
+          "e": "Preposisi/konjungsi waktu 'upon' (bermakna 'when' atau 'as soon as') selalu diikuti gerund/present participle ('entering').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndtjnp6s89c",
+          "q": "Young athletes avoid muscle cramps during marathons by _____ electrolyte solutions at every hydration station.",
+          "o": [
+            "drink",
+            "drank",
+            "drinking",
+            "drunk"
+          ],
+          "a": 2,
+          "e": "Konjungsi cara 'by' diikuti bentuk aktif verb-ing ('drinking') sebagai reduksi dari 'by the way they drink'.",
+          "topic": "",
+          "ctx": ""
+        }
+      ]
+    },
+    "p-mwir32izjtaxf": {
+      "passage": "",
+      "audioUrl": "",
+      "audioScript": "",
+      "minutes": 10,
+      "questions": [
+        {
+          "id": "q-mwndy9wgjhntm",
+          "q": "Marine researchers always double-check oxygen tanks before _____ into deep coral reefs.",
+          "o": [
+            "dive",
+            "dived",
+            "diving",
+            "are diving"
+          ],
+          "a": 2,
+          "e": "Reduksi klausa waktu aktif di tengah kalimat setelah 'before' ('before they dive') menggunakan present participle ('diving').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndy9wgola2c",
+          "q": "Solar panels generate electricity more efficiently when _____ directly toward the afternoon sun.",
+          "o": [
+            "angling",
+            "angled",
+            "angle",
+            "are angled"
+          ],
+          "a": 1,
+          "e": "Reduksi klausa pasif ('when they are angled') di bagian akhir kalimat menyisakan past participle ('angled').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndy9wg59hqb",
+          "q": "_____ by local artisans, these woven bamboo baskets sell quickly at international craft fairs.",
+          "o": [
+            "Handcrafting",
+            "Handcrafted",
+            "Were handcrafted",
+            "Having handcrafted"
+          ],
+          "a": 1,
+          "e": "Klausa sebab-akibat pasif di awal kalimat ('Because they are handcrafted...') direduksi menjadi verb-3 ('Handcrafted').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndy9wg5jafv",
+          "q": "Senior editors carefully review every manuscript, _____ factual errors before sending files to print.",
+          "o": [
+            "eliminate",
+            "eliminated",
+            "eliminating",
+            "are eliminating"
+          ],
+          "a": 2,
+          "e": "Klausa hasil/akibat di akhir kalimat ('which eliminates...') direduksi menjadi present participle ('eliminating').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndy9wgtwq1t",
+          "q": "Emergency sirens automatically activate if _____ by sudden seismic tremors above five magnitude.",
+          "o": [
+            "triggering",
+            "triggered",
+            "trigger",
+            "are triggering"
+          ],
+          "a": 1,
+          "e": "Klausa syarat pasif ('if they are triggered') direduksi dengan menghilangkan subjek dan to be, menyisakan 'triggered'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndy9wgab0jv",
+          "q": "Tourists often feel dizzy while _____ steep mountain trails at high altitudes without proper acclimatization.",
+          "o": [
+            "climb",
+            "climbed",
+            "climbing",
+            "were climbing"
+          ],
+          "a": 2,
+          "e": "Klausa waktu aktif setelah 'while' ('while they are climbing') menggunakan verb-ing ('climbing').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndy9wg6v8as",
+          "q": "Ancient manuscripts remain fragile even after _____ inside climate-controlled glass display cases.",
+          "o": [
+            "placing",
+            "placed",
+            "place",
+            "are placed"
+          ],
+          "a": 1,
+          "e": "Reduksi klausa pasif setelah 'after' ('after they are placed') menggunakan past participle ('placed').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndy9wgocuay",
+          "q": "_____ his medical residency in Surabaya, Dr. Bagas volunteered at several rural health clinics.",
+          "o": [
+            "Having completed",
+            "Completed",
+            "Complete",
+            "Was completing"
+          ],
+          "a": 0,
+          "e": "Menunjukkan aksi pertama sudah selesai tuntas sebelum aksi kedua ('After he had completed...'), menggunakan 'Having completed'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndy9wghzqi7",
+          "q": "Autonomous drones navigate dense forests smoothly, _____ obstacles with real-time infrared sensors.",
+          "o": [
+            "avoid",
+            "avoided",
+            "avoiding",
+            "are avoiding"
+          ],
+          "a": 2,
+          "e": "Participial phrase di akhir kalimat untuk menjelaskan cara/proses dari klausa utama menggunakan bentuk aktif 'avoiding'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndy9wghqreo",
+          "q": "Freshly baked sourdough bread develops a crispier crust once _____ on a wire cooling rack.",
+          "o": [
+            "resting",
+            "rested",
+            "rests",
+            "is rested"
+          ],
+          "a": 1,
+          "e": "Klausa waktu pasif setelah 'once' ('once it is rested') dipersingkat menjadi verb-3 ('rested').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndy9wg0up77",
+          "q": "Software developers refused to launch the application, _____ critical security vulnerabilities during beta testing.",
+          "o": [
+            "not resolving",
+            "having not resolved",
+            "not resolved",
+            "did not resolve"
+          ],
+          "a": 1,
+          "e": "Klausa alasan negatif yang terjadi lebih dulu ('because they had not resolved...') direduksi menjadi 'having not resolved'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndy9wgm276x",
+          "q": "Rare orchids thrive in highland greenhouses though _____ to occasional drops in nighttime temperature.",
+          "o": [
+            "exposing",
+            "exposed",
+            "expose",
+            "are exposing"
+          ],
+          "a": 1,
+          "e": "Klausa pertentangan pasif setelah 'though' ('though they are exposed') menyisakan past participle ('exposed').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndy9wgrsj5z",
+          "q": "Many remote workers report higher productivity since _____ a structured daily morning routine.",
+          "o": [
+            "adopt",
+            "adopted",
+            "adopting",
+            "were adopting"
+          ],
+          "a": 2,
+          "e": "Reduksi klausa aktif setelah konjungsi 'since' ('since they adopted') menggunakan present participle ('adopting').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndy9wgiu4v4",
+          "q": "Heavy cargo ships must reduce speed upon _____ narrow coastal straits with busy ferry traffic.",
+          "o": [
+            "enter",
+            "entered",
+            "entering",
+            "are entering"
+          ],
+          "a": 2,
+          "e": "Preposisi/konjungsi waktu 'upon' (bermakna 'when' atau 'as soon as') selalu diikuti gerund/present participle ('entering').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwndy9wgcxpto",
+          "q": "Young athletes avoid muscle cramps during marathons by _____ electrolyte solutions at every hydration station.",
+          "o": [
+            "drink",
+            "drank",
+            "drinking",
+            "drunk"
+          ],
+          "a": 2,
+          "e": "Konjungsi cara 'by' diikuti bentuk aktif verb-ing ('drinking') sebagai reduksi dari 'by the way they drink'.",
           "topic": "",
           "ctx": ""
         }
