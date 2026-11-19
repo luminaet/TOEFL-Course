@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "updatedAt": 1795051368785,
+  "updatedAt": 1795057898342,
   "materials": [],
   "materialPages": {
     "listening": [
@@ -1233,6 +1233,224 @@
           "a": 2,
           "e": "Subject the professor and the research assistant merupakan compound subject yang dihubungkan dengan and, sehingga plural. Verb yang tepat adalah are. Parallelism juga terlihat pada preparing the presentation dan organizing the supporting materials.",
           "topic": "Subject-Verb Agreement; Compound Subject; Parallelism",
+          "ctx": ""
+        }
+      ]
+    },
+    "p-mwiqw1wyinaa7": {
+      "passage": "",
+      "audioUrl": "",
+      "audioScript": "",
+      "minutes": 10,
+      "questions": [
+        {
+          "id": "q-mwmz3pln9lihm",
+          "q": "_____ the economic crisis affected many businesses, the government continued to support small enterprises.",
+          "o": [
+            "Because",
+            "Unless",
+            "Although",
+            "So that"
+          ],
+          "a": 2,
+          "e": "Although menunjukkan pertentangan antara dampak krisis ekonomi dan tindakan pemerintah. Polanya adalah subordinating conjunction + subject + verb.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmz3plnqy03f",
+          "q": "Marsinah continued fighting for workers' rights, _____ threatened by powerful groups.",
+          "o": [
+            "because",
+            "if",
+            "when",
+            "although"
+          ],
+          "a": 3,
+          "e": "Although threatened merupakan reduced adverbial clause dari although she was threatened. Subject pada kedua clause harus merujuk pada orang yang sama.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmz3plnkwlcw",
+          "q": "_____ correctly, the historical documents can provide valuable information about the independence movement.",
+          "o": [
+            "Although handling",
+            "If handled",
+            "Because handling",
+            "Unless handled"
+          ],
+          "a": 1,
+          "e": "If handled merupakan reduced passive adverbial clause dari if they are handled. Maknanya adalah kondisi.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmz3plnzb63u",
+          "q": "_____ the final report, the researchers checked all the statistical calculations.",
+          "o": [
+            "Before submitting",
+            "Although submitted",
+            "Because submit",
+            "Unless submitting"
+          ],
+          "a": 0,
+          "e": "Before submitting merupakan reduced adverbial clause of time. Subject yang melakukan kegiatan submitting harus sama dengan subject pada main clause, yaitu the researchers.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmz3plndf9q8",
+          "q": "_____ regularly, students may have difficulty understanding spoken English.",
+          "o": [
+            "Although they practice",
+            "Because they practice",
+            "Unless they practice",
+            "While they practice"
+          ],
+          "a": 2,
+          "e": "Unless berarti if ... not. Clause tersebut menunjukkan kondisi negatif: jika siswa tidak berlatih secara teratur, mereka mungkin mengalami kesulitan.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmz3plnnphkx",
+          "q": "The president continued working on economic reforms, _____ by the demands of the political situation.",
+          "o": [
+            "because pressured",
+            "if pressuring",
+            "when pressure",
+            "although pressured"
+          ],
+          "a": 3,
+          "e": "Although pressured merupakan reduced passive clause dari although he was pressured. Kata although menunjukkan pertentangan.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmz3plncrwkm",
+          "q": "_____ a young activist, Munir became increasingly concerned about human rights violations.",
+          "o": [
+            "Although",
+            "When",
+            "Because",
+            "Unless"
+          ],
+          "a": 1,
+          "e": "When a young activist merupakan bentuk penghilangan subject dan to be dari when he was a young activist. Frasa tersebut menunjukkan waktu.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmz3plnzkln1",
+          "q": "_____ the historical documents, the researcher discovered several important details about the event.",
+          "o": [
+            "Although examining",
+            "Unless examining",
+            "Because examined",
+            "After examining"
+          ],
+          "a": 3,
+          "e": "After examining merupakan reduced adverbial clause of time. Subject yang melakukan pemeriksaan adalah the researcher.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmz3plns6le1",
+          "q": "_____ by the unexpected announcement, the audience remained silent for several minutes.",
+          "o": [
+            "Although surprising",
+            "If surprised",
+            "While surprising",
+            "Surprised"
+          ],
+          "a": 3,
+          "e": "Surprised merupakan participle phrase tanpa conjunction dan subject. Bentuk lengkapnya dapat berupa Because they were surprised. Subject yang dimaksud adalah the audience.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmz3plnkqf46",
+          "q": "The students completed the assignment _____ additional guidance from their lecturer.",
+          "o": [
+            "although receiving",
+            "without receiving",
+            "because received",
+            "unless receiving"
+          ],
+          "a": 1,
+          "e": "Without receiving merupakan prepositional phrase dengan gerund, bukan reduced adverbial clause. Without menunjukkan ketiadaan suatu tindakan.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmz3plnyv59m",
+          "q": "The students were permitted to enter the laboratory _____ all safety requirements.",
+          "o": [
+            "although meeting",
+            "if met",
+            "provided that they met",
+            "while met"
+          ],
+          "a": 2,
+          "e": "Provided that they met merupakan full adverbial clause of condition. Subject dan verb tetap lengkap; tidak semua adverbial clause harus direduksi.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmz3plnz66d0",
+          "q": "The professor continued explaining the theory, _____ that several students had not understood the previous discussion.",
+          "o": [
+            "although knowing",
+            "if known",
+            "while knowing",
+            "because known"
+          ],
+          "a": 0,
+          "e": "Although knowing merupakan reduksi aktif dari although the professor knew. Subject-nya sama, yaitu the professor.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmz3plnr8ggr",
+          "q": "_____ under the Suramadu Bridge, I take a bath.",
+          "o": [
+            "Fishing",
+            "Fished",
+            "To fishing",
+            "Having fish"
+          ],
+          "a": 0,
+          "e": "Fishing under the Suramadu Bridge merupakan haril dari reduksi. Kalimat lengkapnya adalah After I fish, kemudian konjungsi dan subject di reduksi, verb menjadi Ving.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmz4iudtqwug",
+          "q": "_____ by the unexpected results, the scientists decided to repeat the experiment.",
+          "o": [
+            "Surprising",
+            "To surprise",
+            "Surprised",
+            "Having surprise"
+          ],
+          "a": 2,
+          "e": "Surprised by the unexpected results merupakan participial phrase pasif. Para ilmuwan menerima dampak dari hasil yang mengejutkan.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwmz4iud2amwo",
+          "q": "_____ the instructions carefully, the participants were able to complete the experiment successfully.",
+          "o": [
+            "Following",
+            "Followed",
+            "To follow",
+            "Having follow"
+          ],
+          "a": 0,
+          "e": "Following the instructions carefully merupakan participial phrase aktif. Subject yang mengikuti instruksi adalah the participants.",
+          "topic": "",
           "ctx": ""
         }
       ]
