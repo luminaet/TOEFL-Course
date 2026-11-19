@@ -124,7 +124,7 @@ css.textContent=[
 "#lum-pal .ps:hover{outline:2px solid #14b8a6;outline-offset:1px}",
 "#lum-pal button[data-pc]{background:#1e293b;color:#e2e8f0;border:1px solid #334155;border-radius:7px;height:26px;padding:0 9px;cursor:pointer;font:inherit}",
 "#lum-toast{position:fixed;left:50%;top:70px;transform:translateX(-50%);background:#0f172a;color:#fff;padding:9px 16px;border-radius:9px;font:600 13px system-ui;z-index:100001;opacity:0;transition:.25s;pointer-events:none}",
-"#lum-toast.on{opacity:1}"
+"#lum-toast.on{opacity:1}",
 "main .tab-content [style*='width']:not(td):not(th){max-width:100%!important;box-sizing:border-box}",
 "main .tab-content table{max-width:100%}",
 "@media(max-width:640px){main .tab-content [style*='grid-template-columns']{grid-template-columns:1fr!important}}"
@@ -321,7 +321,7 @@ function buildBar(){
   "cd-r":function(v){selected.style.borderRadius=(Number(v)||0)+"px";},
   "cd-p":function(v){selected.style.padding=(Number(v)||0)+"px";},
   "cd-w":function(v){var n=Number(v);if(n>=5&&n<=100)selected.style.width=n+"%";},
-  "cd-h":function(v){var n=Number(v)||0;selected.style.height="";selected.style.minHeight=n?n+"px":"";},
+  "cd-h":function(v){var n=Number(v)||0;if(/^(TR|TD|TH|THEAD|TBODY|TABLE)$/.test(selected.tagName)){selected.style.minHeight="";selected.style.height=n?n+"px":"";} else{selected.style.height="";selected.style.minHeight=n?n+"px":"";}},
   "cd-gap":function(v){selected.style.gap=(Number(v)||0)+"px";},
   "cd-cols":function(v){
    if(!v)return;
@@ -723,7 +723,7 @@ function enterEdit(){
  if(selected){
   var w=selected.style.width,pw=selected.parentElement?selected.parentElement.clientWidth:0;
   if(/px$/.test(w)&&pw>0)selected.style.width=Math.min(100,Math.round(parseFloat(w)/pw*100))+"%";
-  if(/px$/.test(selected.style.height)){selected.style.minHeight=selected.style.height;selected.style.height="";}
+  if(/px$/.test(selected.style.height)&&!/^(TR|TD|TH|THEAD|TBODY|TABLE)$/.test(selected.tagName)){selected.style.minHeight=selected.style.height;selected.style.height="";}
   sync();snapSoon();
  }
 });
