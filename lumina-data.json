@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "updatedAt": 1795082887672,
+  "updatedAt": 1795084661581,
   "materials": [],
   "materialPages": {
     "listening": [
@@ -2409,215 +2409,1017 @@
       "passage": "",
       "audioUrl": "",
       "audioScript": "",
+      "minutes": 7,
+      "questions": [
+        {
+          "id": "q-mwneeax36r5qh",
+          "q": "Could you clarify how long _____ to reach the remote research station by boat?",
+          "o": [
+            "does it take",
+            "takes it",
+            "did it takes",
+            "it takes"
+          ],
+          "a": 3,
+          "e": "Kalimat ini adalah indirect question ('Could you clarify how long...'), sehingga tidak mengalami inversi dan kembali ke urutan normal Subject + Verb ('it takes').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwneeax3o8uko",
+          "q": "Which local botanist _____ that rare medicinal orchid in the mountains of Central Java last year?",
+          "o": [
+            "did discover",
+            "was discovered",
+            "discovered",
+            "does discover"
+          ],
+          "a": 2,
+          "e": "Karena 'Which local botanist' menanyakan subjek kalimat (subject question), tidak diperlukan kata kerja bantu 'did' dan langsung diikuti Verb-2 ('discovered').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwneeax3twwh5",
+          "q": "Local residents still wonder what _____ the sudden power outage across three districts last night.",
+          "o": [
+            "caused",
+            "did cause",
+            "was caused",
+            "does cause"
+          ],
+          "a": 0,
+          "e": "Dalam embedded subject question ('what caused...'), 'what' berfungsi sebagai subjek sekaligus kata tanya, sehingga langsung diikuti kata kerja ('caused') tanpa inversi.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwneeax3zkdvz",
+          "q": "Do you happen to know whether _____ the updated flight schedule to Surabaya?",
+          "o": [
+            "has the airline released",
+            "the airline has released",
+            "did the airline release",
+            "released the airline"
+          ],
+          "a": 1,
+          "e": "Indirect yes/no question setelah 'whether' tidak menggunakan pola inversi tanya, melainkan susunan pernyataan biasa: Subject ('the airline') + Verb ('has released').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwneeax31h4ui",
+          "q": "Why _____ their laboratory samples before running the final chemical analysis yesterday?",
+          "o": [
+            "the technicians didn't label",
+            "not labeled the technicians",
+            "didn't the technicians label",
+            "didn't labeled the technicians"
+          ],
+          "a": 2,
+          "e": "Direct question dalam bentuk lampau negatif memakai pola inversi: Question Word ('Why') + Auxiliary ('didn't') + Subject ('the technicians') + Verb-1 ('label').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwneeax33l99i",
+          "q": "Conference organizers have not announced yet who _____ the keynote speech tomorrow morning.",
+          "o": [
+            "deliver will",
+            "does deliver",
+            "is delivered",
+            "will deliver"
+          ],
+          "a": 3,
+          "e": "Indirect subject question ('who will deliver...') mempertahankan urutan normal kata tanya sebagai subjek diikuti langsung oleh modal dan kata kerja utama.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwneeax37vkvq",
+          "q": "Nobody could explain why _____ so abruptly during the live press conference.",
+          "o": [
+            "the spokesperson left",
+            "did the spokesperson leave",
+            "left the spokesperson",
+            "does the spokesperson leave"
+          ],
+          "a": 0,
+          "e": "Karena menjadi bagian dari pernyataan tidak langsung ('Nobody could explain why...'), inversi dibatalkan menjadi Subject ('the spokesperson') + Verb ('left').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwneeax33rqt6",
+          "q": "Little _____ that their small community garden would inspire an urban farming movement across the city.",
+          "o": [
+            "the neighbors realized",
+            "realized the neighbors",
+            "the neighbors did realize",
+            "did the neighbors realize"
+          ],
+          "a": 3,
+          "e": "Kata 'Little' bermakna negatif ('tidak menyangka sama sekali') di awal kalimat sehingga memakai pola inversi tanya: 'did' + Subject + Verb-1.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwneeax3nihtj",
+          "q": "At the center of the ancient courtyard _____ a massive stone inscription dating back to the Majapahit era.",
+          "o": [
+            "does stand",
+            "stands",
+            "is stand",
+            "standing"
+          ],
+          "a": 1,
+          "e": "Prepositional phrase penunjuk tempat di awal kalimat memicu full inversion (kata kerja utama 'stands' mendahului subjek tunggal 'a massive stone inscription') tanpa auxiliary 'does'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwneeax3wdif6",
+          "q": "Could anyone tell me whose research paper _____ the first prize at the international symposium?",
+          "o": [
+            "did win",
+            "was won",
+            "won",
+            "does win"
+          ],
+          "a": 2,
+          "e": "'Whose research paper' berperan sebagai subjek dalam embedded question, sehingga tidak menggunakan 'did' maupun inversi dan langsung memakai Verb-2 ('won').",
+          "topic": "",
+          "ctx": ""
+        }
+      ]
+    },
+    "p-mwir4wuh7oq8l": {
+      "passage": "",
+      "audioUrl": "",
+      "audioScript": "",
+      "minutes": 8,
+      "questions": [
+        {
+          "id": "q-mwnekumu550ny",
+          "q": "Among the ancient stone reliefs of Borobudur _____ intricate depictions of ninth-century maritime trade ships.",
+          "o": [
+            "is",
+            "are",
+            "does be",
+            "being"
+          ],
+          "a": 1,
+          "e": "Keterangan tempat di awal tanpa koma memicu full inversion; to be jamak 'are' menyesuaikan subjek jamak di belakangnya ('intricate depictions').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnekumusnf9p",
+          "q": "Inside the humid tropical greenhouse, _____ dozens of endangered pitcher plants from Borneo.",
+          "o": [
+            "cultivate botanists",
+            "do botanists cultivate",
+            "botanists cultivate",
+            "are cultivating botanists"
+          ],
+          "a": 2,
+          "e": "Adanya koma pemisah setelah frasa tempat dan kata kerja transitif dengan objek ('dozens of endangered pitcher plants') membatalkan inversi, sehingga kembali ke urutan normal S + V.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnekumu4wrrh",
+          "q": "Directly beneath the cathedral's main altar _____ a vaulted stone crypt dating back to the Middle Ages.",
+          "o": [
+            "rests",
+            "rest",
+            "does rest",
+            "is rest"
+          ],
+          "a": 0,
+          "e": "Full inversion memindahkan kata kerja intransitif tunggal 'rests' ke depan subjek tunggal 'a vaulted stone crypt' tanpa memunculkan auxiliary 'does'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnekumulkfvr",
+          "q": "Down the winding mountain road _____ when the heavy monsoon rain suddenly flooded the valley.",
+          "o": [
+            "drove they",
+            "did they drive",
+            "they drove",
+            "were driving they"
+          ],
+          "a": 2,
+          "e": "Karena subjeknya adalah kata ganti orang ('they'), aturan inversi tempat tidak berlaku sehingga tetap memakai susunan normal 'they drove'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnekumuy4f6n",
+          "q": "Along the eastern ridge of the canyon _____ several wooden watchtowers built during the colonial period.",
+          "o": [
+            "remains",
+            "remain",
+            "does remain",
+            "remaining"
+          ],
+          "a": 1,
+          "e": "Prepositional phrase tempat tanpa koma memicu inversi; kata kerja jamak 'remain' menyesuaikan subjek jamak 'several wooden watchtowers'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnekumu774zp",
+          "q": "On the mahogany desk in his private study, _____ a handwritten draft of the peace treaty before leaving for Geneva.",
+          "o": [
+            "signed the ambassador",
+            "did the ambassador sign",
+            "the ambassador signed",
+            "was signed the ambassador"
+          ],
+          "a": 2,
+          "e": "Keterangan tempat yang diikuti koma dan kata kerja transitif berobjek ('a handwritten draft') wajib mempertahankan struktur normal Subject + Verb.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnekumu47f0e",
+          "q": "Hanging above the fireplace in the grand dining hall _____ a faded oil portrait of the manor's original owner.",
+          "o": [
+            "was",
+            "were",
+            "did be",
+            "had"
+          ],
+          "a": 0,
+          "e": "Frasa partisipel penunjuk tempat di awal kalimat tanpa koma memicu full inversion; to be tunggal 'was' merujuk pada subjek tunggal 'a faded oil portrait'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnekumuic49h",
+          "q": "Beyond the outer coral reef _____ treacherous ocean currents that frequently challenge experienced divers.",
+          "o": [
+            "lies",
+            "lie",
+            "does lie",
+            "is lie"
+          ],
+          "a": 1,
+          "e": "Keterangan tempat di awal tanpa koma diikuti kata kerja intransitif jamak 'lie' karena subjek setelahnya berbentuk jamak ('treacherous ocean currents').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnekumu2uxxz",
+          "q": "At the edge of the mangrove swamp, _____ water samples every morning to monitor coastal salinity levels.",
+          "o": [
+            "collect researchers",
+            "do researchers collect",
+            "researchers collect",
+            "are collecting researchers"
+          ],
+          "a": 2,
+          "e": "Tanda koma setelah frasa tempat dan keberadaan objek langsung ('water samples') melarang inversi, sehingga menggunakan pola normal Subject ('researchers') + Verb ('collect').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnekumuo1h7e",
+          "q": "Flanking the main entrance of the royal museum _____ two bronze cannons cast in the eighteenth century.",
+          "o": [
+            "stands",
+            "stand",
+            "does stand",
+            "standing"
+          ],
+          "a": 1,
+          "e": "Keterangan posisi tanpa koma memicu full inversion; kata kerja jamak 'stand' menyesuaikan subjek jamak di bagian belakang ('two bronze cannons').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnekumu2pc0z",
+          "q": "Deep inside the limestone cave _____ an underground river whose source remains completely unexplored.",
+          "o": [
+            "flows",
+            "flow",
+            "does flow",
+            "is flow"
+          ],
+          "a": 0,
+          "e": "Inversi tempat tanpa koma memindahkan kata kerja intransitif tunggal 'flows' ke depan subjek tunggal 'an underground river' tanpa auxiliary 'does'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnekumuyzu5p",
+          "q": "In the crowded central market of Solo, _____ traditional batik fabrics dyed with natural indigo pigments.",
+          "o": [
+            "sell local merchants",
+            "do local merchants sell",
+            "local merchants sell",
+            "are selling local merchants"
+          ],
+          "a": 2,
+          "e": "Koma pemisah setelah keterangan tempat dan kata kerja transitif dengan objek ('traditional batik fabrics') membuat kalimat tidak boleh diinversi.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnekumufu75n",
+          "q": "Opposite the newly constructed railway station _____ a row of heritage shophouses converted into independent bookstores.",
+          "o": [
+            "sits",
+            "sit",
+            "does sit",
+            "sitting"
+          ],
+          "a": 0,
+          "e": "Subjek di belakang kata kerja adalah frasa benda tunggal 'a row of heritage shophouses' (inti subjeknya 'a row'), sehingga kata kerja intransitif inversinya berbentuk tunggal ('sits').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnekumu6i5je",
+          "q": "Across the northern plateau of Dieng _____ vast potato farms that supply produce to major cities in Java.",
+          "o": [
+            "stretches",
+            "stretch",
+            "does stretch",
+            "is stretch"
+          ],
+          "a": 1,
+          "e": "Full inversion menggunakan kata kerja jamak 'stretch' untuk menyesuaikan subjek jamak setelahnya ('vast potato farms').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnekumu4adj6",
+          "q": "Behind the locked glass cabinet _____ the rare ceramic vases after the museum closed for renovation.",
+          "o": [
+            "stored the curator",
+            "did the curator store",
+            "the curator stored",
+            "was stored the curator"
+          ],
+          "a": 2,
+          "e": "Meskipun tidak memakai koma di awal, kata kerja 'stored' bersifat transitif dan memiliki objek langsung ('the rare ceramic vases'), sehingga inversi dilarang dan susunan tetap Subject + Verb.",
+          "topic": "",
+          "ctx": ""
+        }
+      ]
+    },
+    "p-mwir5owck1pqc": {
+      "passage": "",
+      "audioUrl": "",
+      "audioScript": "",
+      "minutes": 7,
+      "questions": [
+        {
+          "id": "q-mwnetr4pw8asa",
+          "q": "Seldom _____ such a delicious homemade Rendang outside West Sumatra.",
+          "o": [
+            "I have tasted",
+            "tasted I",
+            "do I tasted",
+            "have I tasted"
+          ],
+          "a": 3,
+          "e": "Kata pembatas negatif 'Seldom' di awal kalimat memicu inversi pola tanya: Auxiliary ('have') + Subject ('I') + Verb-3 ('tasted').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnetr4prn6fd",
+          "q": "Only after checking the weather forecast _____ to pack extra raincoats for the weekend camping trip.",
+          "o": [
+            "did the scouts decide",
+            "the scouts decided",
+            "decided the scouts",
+            "do the scouts decided"
+          ],
+          "a": 0,
+          "e": "Frasa 'Only after + gerund phrase' di awal kalimat mewajibkan inversi pada klausa utama setelahnya ('did the scouts decide').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnetr4plt80w",
+          "q": "No passenger on the morning commuter train _____ about the twenty-minute delay because of the heavy storm.",
+          "o": [
+            "did complain",
+            "complain did",
+            "complained",
+            "was complained"
+          ],
+          "a": 2,
+          "e": "Kata negatif 'No' melekat langsung pada subjek kalimat ('No passenger...'), sehingga susunan tetap normal Subject + Verb ('complained') tanpa inversi.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnetr4p4fjvk",
+          "q": "Not until the barista called my name twice _____ that my iced latte was ready on the counter.",
+          "o": [
+            "I realized",
+            "realized I",
+            "did I realized",
+            "did I realize"
+          ],
+          "a": 3,
+          "e": "Setelah klausa waktu 'Not until...', inversi wajib diletakkan pada klausa utama dengan pola 'did' + Subject ('I') + Verb-1 ('realize').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnetr4p5bprj",
+          "q": "Little _____ that forgetting to set his alarm clock would make him miss the job interview.",
+          "o": [
+            "did Kevin know",
+            "Kevin knew",
+            "knew Kevin",
+            "Kevin did know"
+          ],
+          "a": 0,
+          "e": "Kata 'Little' di awal kalimat bermakna negatif ('tidak menyangka sama sekali') sehingga memicu inversi pola tanya ('did Kevin know').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnetr4pzdbxo",
+          "q": "Under no circumstances _____ your online banking password with anyone claiming to be customer support.",
+          "o": [
+            "you should share",
+            "share you should",
+            "should you share",
+            "do you should share"
+          ],
+          "a": 2,
+          "e": "Frasa larangan mutlak 'Under no circumstances' di awal kalimat menuntut inversi dengan memindahkan modal 'should' ke depan subjek ('you').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnetr4pax2b5",
+          "q": "Hardly _____ the front door when our energetic golden retriever jumped up to greet us.",
+          "o": [
+            "we had unlocked",
+            "had we unlocked",
+            "unlocked we",
+            "did we unlocked"
+          ],
+          "a": 1,
+          "e": "Kata pembatas 'Hardly' di awal kalimat memicu inversi Past Perfect: Auxiliary ('had') + Subject ('we') + Verb-3 ('unlocked').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnetr4p9ovde",
+          "q": "Only when the library closed at nine o'clock _____ packing their laptops to head home.",
+          "o": [
+            "the students started",
+            "started the students",
+            "did the students started",
+            "did the students start"
+          ],
+          "a": 3,
+          "e": "Pada pola 'Only when + klausa waktu', klausa pertama tetap normal ('the library closed'), sedangkan inversi terjadi di klausa utama ('did the students start').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnetr4p1khyr",
+          "q": "Not a single customer in the neighborhood bakery _____ the missing wallet left near the cashier.",
+          "o": [
+            "did notice",
+            "notice did",
+            "noticed",
+            "was noticed"
+          ],
+          "a": 2,
+          "e": "Frasa negatif 'Not a single customer' berperan langsung sebagai subjek kalimat, sehingga tidak terjadi inversi dan langsung diikuti Verb-2 ('noticed').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnetr4pihb26",
+          "q": "Not only _____ the broken kitchen sink, but he also repainted the entire bathroom wall over the weekend.",
+          "o": [
+            "my uncle fixed",
+            "did my uncle fix",
+            "fixed my uncle",
+            "my uncle did fix"
+          ],
+          "a": 1,
+          "e": "Konjungsi korelatif negatif 'Not only' di awal kalimat memicu inversi pada klausa pertama ('did my uncle fix').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnetr4pk2qb4",
+          "q": "Nowhere in this quiet coastal village _____ a twenty-four-hour fast-food restaurant or a shopping mall.",
+          "o": [
+            "can you find",
+            "you can find",
+            "find you can",
+            "do you can find"
+          ],
+          "a": 0,
+          "e": "Keterangan tempat negatif 'Nowhere' di awal kalimat memicu inversi dengan memindahkan modal 'can' ke depan subjek ('you').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnetr4phol7i",
+          "q": "Rarely _____ fast food on weekdays because she prefers cooking fresh vegetables at home.",
+          "o": [
+            "Nadia eats",
+            "eats Nadia",
+            "does Nadia eats",
+            "does Nadia eat"
+          ],
+          "a": 3,
+          "e": "Kata keterangan frekuensi negatif 'Rarely' di awal kalimat mewajibkan inversi Simple Present: 'does' + Subject ('Nadia') + Verb-1 ('eat').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnetr4phccwb",
+          "q": "Neither of the two roommates _____ willing to wash the pile of dirty dishes after Sunday dinner.",
+          "o": [
+            "were",
+            "was",
+            "did be",
+            "being"
+          ],
+          "a": 1,
+          "e": "Kata ganti negatif 'Neither of...' berfungsi sebagai subjek tunggal kalimat itu sendiri, sehingga tidak diinversi dan langsung diikuti to be tunggal 'was'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnetr4p0i5f9",
+          "q": "No sooner _____ his umbrella inside the backpack than a sudden afternoon downpour soaked the street.",
+          "o": [
+            "Leo had folded",
+            "folded Leo",
+            "had Leo folded",
+            "did Leo folded"
+          ],
+          "a": 2,
+          "e": "Frasa negatif 'No sooner... than...' di awal kalimat wajib diinversi menggunakan pola 'had' + Subject ('Leo') + Verb-3 ('folded').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnevns96mg98",
+          "q": "Not until finishing the last bowl of warm chicken soto and _____ the bill _____ how affordable the meal at the traditional market actually was.",
+          "o": [
+            "pay - did the two travelers realize",
+            "paying - the two travelers realized",
+            "paying - did the two travelers realize",
+            "paid - realized the two travelers"
+          ],
+          "a": 2,
+          "e": "Bagian pertama menuntut paralelisme gerund setelah 'Not until' ('finishing... and paying...'), sedangkan bagian kedua memicu inversi pada klausa utama setelah klausa waktu negatif ('did the two travelers realize').",
+          "topic": "",
+          "ctx": ""
+        }
+      ]
+    },
+    "p-mwir6o0y2qavs": {
+      "passage": "",
+      "audioUrl": "",
+      "audioScript": "",
       "minutes": 10,
       "questions": [
         {
-          "id": "q-mwndy9wgjhntm",
-          "q": "Marine researchers always double-check oxygen tanks before _____ into deep coral reefs.",
+          "id": "q-mwnezjfl27ob9",
+          "q": "_____ the morning commuter train arrived ten minutes earlier, Maya would not have missed her flight to Bali.",
           "o": [
-            "dive",
-            "dived",
-            "diving",
-            "are diving"
+            "Were",
+            "Should",
+            "Had",
+            "If"
           ],
           "a": 2,
-          "e": "Reduksi klausa waktu aktif di tengah kalimat setelah 'before' ('before they dive') menggunakan present participle ('diving').",
+          "e": "Bentuk inversi Conditional Type 3 menghilangkan 'If' dan memindahkan 'Had' ke depan subjek ('Had the morning commuter train arrived...').",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwndy9wgola2c",
-          "q": "Solar panels generate electricity more efficiently when _____ directly toward the afternoon sun.",
+          "id": "q-mwnezjfl7idre",
+          "q": "Neither the head chef nor his two kitchen assistants _____ aware that the refrigerator temperature had dropped overnight.",
           "o": [
-            "angling",
-            "angled",
-            "angle",
-            "are angled"
+            "was",
+            "were",
+            "has been",
+            "is"
           ],
           "a": 1,
-          "e": "Reduksi klausa pasif ('when they are angled') di bagian akhir kalimat menyisakan past participle ('angled').",
+          "e": "Pada pola 'Neither... nor...', kata kerja menyesuaikan subjek yang paling dekat dengannya ('his two kitchen assistants' — jamak), sehingga menggunakan 'were'.",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwndy9wg59hqb",
-          "q": "_____ by local artisans, these woven bamboo baskets sell quickly at international craft fairs.",
+          "id": "q-mwnezjfl6hwns",
+          "q": "_____ you happen to pass by the neighborhood bakery on your way home, could you pick up a loaf of whole-wheat bread?",
           "o": [
-            "Handcrafting",
-            "Handcrafted",
-            "Were handcrafted",
-            "Having handcrafted"
-          ],
-          "a": 1,
-          "e": "Klausa sebab-akibat pasif di awal kalimat ('Because they are handcrafted...') direduksi menjadi verb-3 ('Handcrafted').",
-          "topic": "",
-          "ctx": ""
-        },
-        {
-          "id": "q-mwndy9wg5jafv",
-          "q": "Senior editors carefully review every manuscript, _____ factual errors before sending files to print.",
-          "o": [
-            "eliminate",
-            "eliminated",
-            "eliminating",
-            "are eliminating"
+            "Had",
+            "Were",
+            "Should",
+            "Would"
           ],
           "a": 2,
-          "e": "Klausa hasil/akibat di akhir kalimat ('which eliminates...') direduksi menjadi present participle ('eliminating').",
+          "e": "Inversi Conditional Type 1 menggunakan 'Should + Subject + Verb-1' untuk menyatakan kemungkinan yang bisa saja terjadi di masa sekarang/depan.",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwndy9wgtwq1t",
-          "q": "Emergency sirens automatically activate if _____ by sudden seismic tremors above five magnitude.",
+          "id": "q-mwnezjflwsyef",
+          "q": "If Riko _____ his umbrella before leaving the apartment this morning, he wouldn't be soaking wet right now.",
           "o": [
-            "triggering",
-            "triggered",
-            "trigger",
-            "are triggering"
+            "took",
+            "had taken",
+            "takes",
+            "has taken"
           ],
           "a": 1,
-          "e": "Klausa syarat pasif ('if they are triggered') direduksi dengan menghilangkan subjek dan to be, menyisakan 'triggered'.",
+          "e": "Mixed Conditional (masa lalu memengaruhi masa kini): klausa 'If' memakai Past Perfect ('had taken') karena kejadiannya tadi pagi, sedangkan hasilnya memakai 'wouldn't be + right now'.",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwndy9wgab0jv",
-          "q": "Tourists often feel dizzy while _____ steep mountain trails at high altitudes without proper acclimatization.",
+          "id": "q-mwnezjfl3tcbh",
+          "q": "_____ I in your shoes, I would accept the remote internship offer before the company gives it to another applicant.",
           "o": [
-            "climb",
-            "climbed",
-            "climbing",
-            "were climbing"
+            "Was",
+            "Had",
+            "Should",
+            "Were"
+          ],
+          "a": 3,
+          "e": "Inversi Conditional Type 2 menggantikan 'If I were...' menjadi 'Were I...' sebagai bentuk pengandaian yang bertentangan dengan fakta saat ini.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnezjfl7s4fe",
+          "q": "Every single bottle of organic honey displayed on those wooden shelves _____ harvested from local bee farms in Central Java.",
+          "o": [
+            "were",
+            "was",
+            "have been",
+            "are"
+          ],
+          "a": 1,
+          "e": "Frasa diawali 'Every single bottle' dihitung sebagai subjek tunggal, sehingga kata kerja pasifnya menggunakan to be tunggal ('was').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnezjfli3im0",
+          "q": "Had the local weather station _____ an early flood warning, residents along the riverbank could have moved their motorcycles to higher ground.",
+          "o": [
+            "issue",
+            "issuing",
+            "issued",
+            "issues"
           ],
           "a": 2,
-          "e": "Klausa waktu aktif setelah 'while' ('while they are climbing') menggunakan verb-ing ('climbing').",
+          "e": "Dalam pola inversi Conditional Type 3 ('Had + Subject + Verb-3'), kata kerja utama wajib berbentuk Past Participle ('issued').",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwndy9wg6v8as",
-          "q": "Ancient manuscripts remain fragile even after _____ inside climate-controlled glass display cases.",
+          "id": "q-mwnezjfljl3lr",
+          "q": "A series of heavy afternoon thunderstorms _____ caused frequent power outages across several residential neighborhoods this week.",
           "o": [
-            "placing",
-            "placed",
-            "place",
-            "are placed"
+            "have",
+            "has",
+            "were",
+            "are"
           ],
           "a": 1,
-          "e": "Reduksi klausa pasif setelah 'after' ('after they are placed') menggunakan past participle ('placed').",
+          "e": "Inti subjek kalimat adalah kata benda tunggal 'A series' (bukan 'thunderstorms'), sehingga memerlukan kata kerja tunggal 'has'.",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwndy9wgocuay",
-          "q": "_____ his medical residency in Surabaya, Dr. Bagas volunteered at several rural health clinics.",
+          "id": "q-mwnezjflmbboh",
+          "q": "Our weekend camping trip to Mount Prau would have been completely ruined _____ for the waterproof tent we borrowed from Uncle Dimas.",
           "o": [
-            "Having completed",
-            "Completed",
-            "Complete",
-            "Was completing"
+            "had it not been",
+            "if it was not",
+            "were it not",
+            "should it not be"
           ],
           "a": 0,
-          "e": "Menunjukkan aksi pertama sudah selesai tuntas sebelum aksi kedua ('After he had completed...'), menggunakan 'Having completed'.",
+          "e": "Frasa tetap pengandaian lampau 'had it not been for...' (bermakna 'jika bukan karena...') digunakan untuk konteks kejadian masa lalu ('would have been ruined').",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwndy9wghzqi7",
-          "q": "Autonomous drones navigate dense forests smoothly, _____ obstacles with real-time infrared sensors.",
+          "id": "q-mwnezjflkyskv",
+          "q": "Not only the fresh mangoes from Probolinggo but also the sweet honey pineapple _____ sold out within two hours at the Sunday market.",
           "o": [
-            "avoid",
-            "avoided",
-            "avoiding",
-            "are avoiding"
+            "were",
+            "are",
+            "was",
+            "have been"
           ],
           "a": 2,
-          "e": "Participial phrase di akhir kalimat untuk menjelaskan cara/proses dari klausa utama menggunakan bentuk aktif 'avoiding'.",
+          "e": "Pada struktur korelatif 'Not only A but also B', kesesuaian kata kerja mengikuti subjek kedua ('the sweet honey pineapple' — tunggal), sehingga memakai 'was'.",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwndy9wghqreo",
-          "q": "Freshly baked sourdough bread develops a crispier crust once _____ on a wire cooling rack.",
+          "id": "q-mwnezjfl3m6v7",
+          "q": "_____ the cafe's espresso machine to break down during the morning rush hour, baristas are trained to switch immediately to manual pour-over brewing.",
           "o": [
-            "resting",
-            "rested",
-            "rests",
-            "is rested"
+            "Had",
+            "Were",
+            "Should",
+            "Was"
           ],
           "a": 1,
-          "e": "Klausa waktu pasif setelah 'once' ('once it is rested') dipersingkat menjadi verb-3 ('rested').",
+          "e": "Inversi Conditional Type 2 dengan pola 'Were + Subject + to-infinitive' ('Were the cafe's espresso machine to break down...') digunakan untuk situasi hipotesis.",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwndy9wg0up77",
-          "q": "Software developers refused to launch the application, _____ critical security vulnerabilities during beta testing.",
+          "id": "q-mwnezjflqqwnv",
+          "q": "Twenty kilometers _____ a surprisingly short distance to cycle when you ride along a flat coastal road with a cool sea breeze.",
           "o": [
-            "not resolving",
-            "having not resolved",
-            "not resolved",
-            "did not resolve"
+            "are",
+            "were",
+            "is",
+            "have been"
+          ],
+          "a": 2,
+          "e": "Satuan jarak ('Twenty kilometers'), waktu, dan uang dianggap sebagai satu kesatuan tunggal, sehingga menggunakan kata kerja tunggal 'is'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnezjfl2hvfa",
+          "q": "Unless the delivery courier _____ the package before five o'clock, nobody will be at the office to sign the receipt.",
+          "o": [
+            "will deliver",
+            "delivered",
+            "delivers",
+            "would deliver"
+          ],
+          "a": 2,
+          "e": "Kata 'Unless' bermakna 'If... not' dalam Conditional Type 1, sehingga klausa syaratnya menggunakan Simple Present ('delivers') tanpa 'will'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnezjfl6sk1h",
+          "q": "Along the narrow alley behind the traditional market _____ two tiny coffee shops that roast their own beans every morning.",
+          "o": [
+            "sits",
+            "sit",
+            "does sit",
+            "is sitting"
           ],
           "a": 1,
-          "e": "Klausa alasan negatif yang terjadi lebih dulu ('because they had not resolved...') direduksi menjadi 'having not resolved'.",
+          "e": "Inversi keterangan tempat di awal tanpa koma memindahkan kata kerja jamak 'sit' ke depan subjek jamak 'two tiny coffee shops'.",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwndy9wgm276x",
-          "q": "Rare orchids thrive in highland greenhouses though _____ to occasional drops in nighttime temperature.",
+          "id": "q-mwnezjflhyfzj",
+          "q": "Many commuters wish the city government _____ more dedicated bicycle lanes instead of widening main roads for private cars.",
           "o": [
-            "exposing",
-            "exposed",
-            "expose",
-            "are exposing"
+            "builds",
+            "will build",
+            "built",
+            "has built"
+          ],
+          "a": 2,
+          "e": "Kata kerja 'wish' diikuti bentuk lampau ('built') untuk menyatakan harapan terhadap situasi saat ini yang kenyataannya belum terwujud.",
+          "topic": "",
+          "ctx": ""
+        }
+      ]
+    },
+    "p-mwir7n1vi8yms": {
+      "passage": "",
+      "audioUrl": "",
+      "audioScript": "",
+      "minutes": 10,
+      "questions": [
+        {
+          "id": "q-mwnf22zd7ot78",
+          "q": "Brewing specialty coffee with a manual pour-over dripper takes _____ than pressing a single button on an automatic capsule machine.",
+          "o": [
+            "much more patience",
+            "very more patience",
+            "so much patience",
+            "many more patience"
+          ],
+          "a": 0,
+          "e": "Kata benda tak terhitung 'patience' menggunakan 'more' untuk bentuk komparatif dan diperkuat dengan modifier 'much' (bukan 'very' atau 'many').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnf22zd35yu4",
+          "q": "Freshly harvested strawberries from the highlands of Ciwidey are noticeably sweeter than _____ sold in regular city supermarkets.",
+          "o": [
+            "that",
+            "those",
+            "it",
+            "them"
           ],
           "a": 1,
-          "e": "Klausa pertentangan pasif setelah 'though' ('though they are exposed') menyisakan past participle ('exposed').",
+          "e": "Logical comparison mewajibkan perbandingan yang setara; kata ganti jamak 'those' menggantikan kata benda jamak 'strawberries' agar tidak membandingkan buah dengan toko.",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwndy9wgrsj5z",
-          "q": "Many remote workers report higher productivity since _____ a structured daily morning routine.",
+          "id": "q-mwnf22zdh2kn7",
+          "q": "_____ you knead the sourdough bread dough, the airier and chewier its texture becomes after baking.",
           "o": [
-            "adopt",
-            "adopted",
-            "adopting",
-            "were adopting"
+            "The longer",
+            "Longer",
+            "The longest",
+            "As long as"
           ],
-          "a": 2,
-          "e": "Reduksi klausa aktif setelah konjungsi 'since' ('since they adopted') menggunakan present participle ('adopting').",
+          "a": 0,
+          "e": "Pola Double Comparative ('The + comparative..., the + comparative...') digunakan untuk menyatakan hubungan sebab-akibat yang berbanding lurus ('The longer..., the airier...').",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwndy9wgiu4v4",
-          "q": "Heavy cargo ships must reduce speed upon _____ narrow coastal straits with busy ferry traffic.",
+          "id": "q-mwnf22zdr5z9h",
+          "q": "Among all the street food stalls along the night market, Pak Budi's charcoal-grilled satay consistently attracts _____ crowd.",
           "o": [
-            "enter",
-            "entered",
-            "entering",
-            "are entering"
+            "larger",
+            "the larger",
+            "the largest",
+            "most large"
           ],
           "a": 2,
-          "e": "Preposisi/konjungsi waktu 'upon' (bermakna 'when' atau 'as soon as') selalu diikuti gerund/present participle ('entering').",
+          "e": "Karena membandingkan lebih dari dua pilihan ('Among all the street food stalls...'), wajib menggunakan bentuk Superlative ('the largest').",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwndy9wgcxpto",
-          "q": "Young athletes avoid muscle cramps during marathons by _____ electrolyte solutions at every hydration station.",
+          "id": "q-mwnf22zdvkk4w",
+          "q": "Taking the morning express train from Yogyakarta to Solo is nearly _____ driving a private car during weekend traffic.",
           "o": [
-            "drink",
-            "drank",
-            "drinking",
-            "drunk"
+            "twice faster as",
+            "twice as fast as",
+            "as twice fast as",
+            "two times faster as"
+          ],
+          "a": 1,
+          "e": "Pola perbandingan kelipatan (Multiple Comparison) menggunakan rumus 'twice / three times + as + adjective + as' ('twice as fast as').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnf22zdnz4f2",
+          "q": "Of the two refurbished laptops displayed at the electronics fair, the silver ultrabook offers _____ battery life for remote work.",
+          "o": [
+            "the best",
+            "the better",
+            "best",
+            "more better"
+          ],
+          "a": 1,
+          "e": "Saat membandingkan tepat dua benda ('Of the two...'), bahasa Inggris baku menggunakan 'the + comparative' ('the better'), bukan superlative.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnf22zdmstpe",
+          "q": "Many local architects consider traditional Javanese Joglo houses superior _____ modern concrete buildings in terms of natural air circulation.",
+          "o": [
+            "than",
+            "from",
+            "to",
+            "over than"
           ],
           "a": 2,
-          "e": "Konjungsi cara 'by' diikuti bentuk aktif verb-ing ('drinking') sebagai reduksi dari 'by the way they drink'.",
+          "e": "Kata sifat komparatif serapan Latin berakhiran -or ('superior, inferior, senior, junior, prior') selalu dipasangkan dengan preposisi 'to', bukan 'than'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnf22zdv3vpj",
+          "q": "Traveling by bicycle through quiet rural rice fields feels far _____ than sitting inside a crowded commuter bus during rush hour.",
+          "o": [
+            "more relaxing",
+            "relaxing",
+            "most relaxing",
+            "much relaxing"
+          ],
+          "a": 0,
+          "e": "Kata sifat bersuku kata panjang ('relaxing') dalam perbandingan menggunakan 'more' dan dapat dipertegas dengan modifier 'far' ('far more relaxing').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnf22zd3gsnz",
+          "q": "No other coastal city in Central Java has a culinary heritage _____ diverse _____ Semarang's famous lumpia and wingko babat.",
+          "o": [
+            "so - than",
+            "as - as",
+            "more - as",
+            "as - than"
+          ],
+          "a": 1,
+          "e": "Perbandingan setara (Positive/Equal Comparison) menggunakan pasangan korelatif 'as + adjective + as' ('as diverse as').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnf22zd71k56",
+          "q": "Regular hiking in the pine forests of Mount Ungaran requires _____ sturdy trekking shoes than a casual walk around a city park.",
+          "o": [
+            "a lot",
+            "much more",
+            "very",
+            "many more"
+          ],
+          "a": 1,
+          "e": "'Much more' digunakan untuk memperkuat komparatif sebelum frasa benda jamak/tak terhitung untuk menekankan tingkat kebutuhan yang jauh lebih tinggi.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnf22zdz5yww",
+          "q": "_____ we climb up the mountain trail before sunrise, the colder the morning wind feels against our faces.",
+          "o": [
+            "Higher",
+            "The highest",
+            "The higher",
+            "As high as"
+          ],
+          "a": 2,
+          "e": "Double Comparative ('The higher..., the colder...') menunjukkan semakin tinggi pendakian, semakin dingin udara yang dirasakan.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnf22zdxz70v",
+          "q": "Electric motorcycles are becoming _____ popular among university students because charging costs are much lower than buying gasoline.",
+          "o": [
+            "more and most",
+            "more and more",
+            "most and most",
+            "the more and more"
+          ],
+          "a": 1,
+          "e": "Gradual increase (peningkatan bertahap) untuk kata sifat panjang menggunakan pola pengulangan 'more and more + adjective'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnf22zdwwl06",
+          "q": "A glass of warm ginger tea with palm sugar tastes just as soothing on a rainy evening _____ a cup of hot dark chocolate.",
+          "o": [
+            "than",
+            "like",
+            "as",
+            "from"
+          ],
+          "a": 2,
+          "e": "Pola perbandingan setara yang diperkuat dengan 'just' tetap wajib ditutup dengan konjungsi 'as' ('just as soothing... as').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnf22zdj4veo",
+          "q": "Unlike the loud main highway, the winding village road lined with bamboo groves is _____ route to reach the waterfall.",
+          "o": [
+            "by far the most peaceful",
+            "by far more peaceful",
+            "the most peaceful by far than",
+            "much the peaceful"
+          ],
+          "a": 0,
+          "e": "Frasa penegas 'by far' sering dipasangkan sebelum bentuk Superlative ('by far the most peaceful') untuk menonjolkan kualitas paling unggul.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwnf22zdcaulu",
+          "q": "Storing fresh herbs in a glass jar with a little water keeps their leaves crispier than _____ them directly inside a plastic bag.",
+          "o": [
+            "leave",
+            "left",
+            "leaving",
+            "to leaving"
+          ],
+          "a": 2,
+          "e": "Struktur perbandingan harus paralel secara gramatikal; subjek gerund 'Storing fresh herbs...' harus dibandingkan dengan bentuk gerund pula ('leaving them...').",
           "topic": "",
           "ctx": ""
         }
