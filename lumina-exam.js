@@ -112,19 +112,19 @@ function serializeUnits(units){
 }
 
 /* ---------- normalisasi ---------- */
-function cleanQ(q,id){
+function cleanQ(q,id,kl){
  q=q||{};var o=(Array.isArray(q.o)?q.o:[]).slice(0,4).map(String);while(o.length<4)o.push("");
- return {id:id||q.id||uid("q"),q:String(q.q||""),o:o,a:clamp(Math.round(Number(q.a))||0,0,3),e:String(q.e||""),topic:String(q.topic||"")};
+ return {id:id||q.id||uid("q"),q:String(q.q||""),o:o,a:(q.a==null||q.a===""||isNaN(Number(q.a))||Number(q.a)<0)?(kl?-1:0):clamp(Math.round(Number(q.a)),0,3),e:String(q.e||""),topic:String(q.topic||"")};
 }
-function cleanUnit(u,pid,i){
+function cleanUnit(u,pid,i,kl){
  u=u||{};var id=pid+"-u"+(i+1);
  return {id:id,title:String(u.title||""),audioUrl:String(u.audioUrl||""),script:String(u.script||""),note:String(u.note||""),passage:String(u.passage||""),
-  questions:(Array.isArray(u.questions)?u.questions:[]).filter(function(q){return q&&(q.q||(Array.isArray(q.o)&&q.o.some(Boolean)));}).map(function(q,j){return cleanQ(q,id+"-q"+(j+1));})};
+  questions:(Array.isArray(u.questions)?u.questions:[]).filter(function(q){return q&&(q.q||(Array.isArray(q.o)&&q.o.some(Boolean)));}).map(function(q,j){return cleanQ(q,id+"-q"+(j+1),kl);})};
 }
-function cleanPart(p){
+function cleanPart(p,kl){
  p=p||{};var id=String(p.id||uid("p")).replace(/[^\w\-]/g,"");
  return {id:id,type:PTYPES.indexOf(p.type)>=0?p.type:"passage",title:String(p.title||"Part"),directions:String(p.directions||""),
-  target:clamp(Math.round(Number(p.target))||0,0,200),units:(Array.isArray(p.units)?p.units:[]).map(function(u,i){return cleanUnit(u,id,i);}).filter(function(u){return u.questions.length;})};
+  target:clamp(Math.round(Number(p.target))||0,0,200),units:(Array.isArray(p.units)?p.units:[]).map(function(u,i){return cleanUnit(u,id,i,kl);}).filter(function(u){return u.questions.length;})};
 }
 var SAMPLE={
  la:"### Report\nWoman: Have you finished the report for Professor Allen?\nMan: Almost. I still need to check the figures in the last section.\nNarrator: What does the man mean?\nQ: What does the man imply about the report?\nA) It has already been submitted.\nB) It needs a final check.\nC) It was lost.\nD) It is too long.\nAnswer: B\nTopic: Short conversation\n\n### Library\nMan: Do you know where I can find the journals for my research?\nWoman: They moved them to the second floor of the library last week.\nNarrator: What does the woman say about the journals?\nQ: Where are the journals now?\nA) On the first floor\nB) At the front desk\nC) On the second floor\nD) In the professor's office\nAnswer: C\nTopic: Short conversation",
@@ -143,14 +143,14 @@ function defaults(){
 function normalize(d){
  d=(d&&typeof d==="object")?d:{};
  if(!d.levels)return normalize(Object.assign(defaults(),{updatedAt:Number(d.updatedAt)||0,settings:d.settings||defaults().settings}));
- var out={version:1,updatedAt:Number(d.updatedAt)||0},s=d.settings||{},ap=Number(s.audioPlays);if(s.audioPlays==null||isNaN(ap))ap=1;
+ var kl=!!d.keyless,out={version:1,updatedAt:Number(d.updatedAt)||0,keyless:kl},s=d.settings||{},ap=Number(s.audioPlays);if(s.audioPlays==null||isNaN(ap))ap=1;
  out.settings={totalMinutes:clamp(Math.round(Number(s.totalMinutes))||120,10,360),audioPlays:clamp(Math.round(ap),0,10),generalNotes:String(s.generalNotes||""),lineEvery:(s.lineEvery==null||isNaN(Number(s.lineEvery)))?5:clamp(Math.round(Number(s.lineEvery)),0,20),voices:{}};
  ROLES.forEach(function(r){var v=(s.voices&&s.voices[r])||{},b=DEF_VOICES[r];out.settings.voices[r]={voice:String(v.voice||""),rate:clamp(Number(v.rate)||b.rate,0.5,1.5),pitch:clamp(Number(v.pitch)||b.pitch,0.3,2)};});
  out.levels={};
  LEVELS.forEach(function(lv){
   var o={sections:{}},src=(d.levels[lv]&&d.levels[lv].sections)||{};
   SECS.forEach(function(sec){
-   var x=src[sec]||{},parts=Array.isArray(x.parts)&&x.parts.length?x.parts.map(cleanPart):emptyParts(sec);
+   var x=src[sec]||{},parts=Array.isArray(x.parts)&&x.parts.length?x.parts.map(function(p){return cleanPart(p,kl);}):emptyParts(sec);
    o.sections[sec]={directions:String(x.directions||SEC_DIR[sec]),minutes:clamp(Math.round(Number(x.minutes))||META[sec].minutes,1,240),parts:parts};
   });
   out.levels[lv]=o;
@@ -209,10 +209,36 @@ function loadViewer(preferDraft){
  });
 }
 function getExportedAt(){try{return Number(localStorage.getItem(EXP_KEY))||0;}catch(e){return 0;}}
-function download(d){
- var blob=new Blob([JSON.stringify(d,null,2)],{type:"application/json"}),u=URL.createObjectURL(blob),a=document.createElement("a");
+/* Kunci jawaban TIDAK ikut ke file publik: dipisah, lalu dikirim ke server (Apps Script) saat admin menekan Unduh. */
+function stripKey(d){
+ var pub=JSON.parse(JSON.stringify(d)),key={levels:{},notes:{},scripts:{}};
+ LEVELS.forEach(function(lv){
+  var arr=[],notes={},scripts={};
+  SECS.forEach(function(sec){pub.levels[lv].sections[sec].parts.forEach(function(p){p.units.forEach(function(u){
+   if(u.note){notes[u.id]=u.note;u.note="";}
+   if(u.audioUrl&&u.script){scripts[u.id]=u.script;u.script="";}
+   u.questions.forEach(function(q){arr.push({id:q.id,a:q.a,e:q.e||"",sec:sec,pid:p.id,pt:p.title,topic:q.topic||""});q.a=-1;q.e="";});
+  });});});
+  key.levels[lv]=arr;key.notes[lv]=notes;key.scripts[lv]=scripts;
+ });
+ pub.keyless=true;
+ return {pub:pub,key:key};
+}
+function saveFile(pub){
+ var blob=new Blob([JSON.stringify(pub,null,2)],{type:"application/json"}),u=URL.createObjectURL(blob),a=document.createElement("a");
  a.href=u;a.download="lumina-exam.json";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u);},1500);
  try{localStorage.setItem(EXP_KEY,String(Date.now()));}catch(e){}
+}
+function download(d){
+ var missing=0;
+ LEVELS.forEach(function(lv){SECS.forEach(function(sec){d.levels[lv].sections[sec].parts.forEach(function(p){p.units.forEach(function(u){u.questions.forEach(function(q){if(!(q.a>=0&&q.a<=3))missing++;});});});});});
+ if(missing){alert("Ada "+missing+" soal tanpa kunci jawaban, jadi file tidak diunduh.\nPenyebab umum: draf diganti dengan file publik (yang sengaja tanpa kunci). Pulihkan draf dari cadangan Anda.");return;}
+ if(!L.api||!L.getToken||!L.getToken()){alert("Sesi admin tidak ditemukan, jadi kunci jawaban tidak bisa dikirim ke server.\nLogin dulu di halaman utama atau Content Manager (di tab yang sama), lalu buka Exam Manager lagi.");return;}
+ var sk=stripKey(d);
+ L.api("saveExamKey",{key:sk.key}).then(function(j){
+  saveFile(sk.pub);
+  alert("Kunci jawaban ("+j.count+" soal) tersimpan di server.\nFile lumina-exam.json (TANPA kunci) sudah diunduh — unggah ke hosting.");
+ }).catch(function(e){alert("Kunci jawaban gagal disimpan ke server, jadi file TIDAK diunduh.\n"+(e&&e.message||e));});
 }
 function runKey(u,l){return RUN_P+String(u)+":"+l;}
 function loadRun(u,l){try{var r=localStorage.getItem(runKey(u,l));return r?JSON.parse(r):null;}catch(e){return null;}}
