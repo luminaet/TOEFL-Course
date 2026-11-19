@@ -2010,10 +2010,11 @@
                   "title": "Urban trees",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "Urban trees provide benefits that extend beyond their appearance. Their leaves provide shade, reducing the heat absorbed by streets and buildings. Trees also help manage rainwater: some water is ***intercepted*** by leaves, while roots improve the soil's ability to absorb rainfall.\n\nHowever, planting trees in cities requires careful planning. A tree that grows well in a park may not be suitable for a narrow sidewalk where roots could damage pavement or underground pipes. Successful urban forestry therefore depends not simply on planting more trees, but on choosing appropriate species and caring for them over time.",
                   "note": "",
+                  "passage": "Urban trees provide benefits that extend beyond their appearance. Their leaves provide shade, reducing the heat absorbed by streets and buildings. Trees also help manage rainwater: some water is ***intercepted*** by leaves, while roots improve the soil's ability to absorb rainfall.\n\nHowever, planting trees in cities requires careful planning. A tree that grows well in a park may not be suitable for a narrow sidewalk where roots could damage pavement or underground pipes. Successful urban forestry therefore depends not simply on planting more trees, but on choosing appropriate species and caring for them over time.",
                   "questions": [
                     {
+                      "id": "ra-u1-q1",
                       "q": "What is the main idea of the passage?",
                       "o": [
                         "Why cities should remove old trees",
@@ -2023,10 +2024,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Main idea",
-                      "id": "ra-u1-q1"
+                      "topic": "Main idea"
                     },
                     {
+                      "id": "ra-u1-q2",
                       "q": "The word \"intercepted\" in the passage is closest in meaning to",
                       "o": [
                         "caught",
@@ -2036,10 +2037,10 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "Vocabulary",
-                      "id": "ra-u1-q2"
+                      "topic": "Vocabulary"
                     },
                     {
+                      "id": "ra-u1-q3",
                       "q": "Why might a tree be unsuitable for a narrow sidewalk?",
                       "o": [
                         "It attracts too many birds.",
@@ -2049,8 +2050,7 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Detail",
-                      "id": "ra-u1-q3"
+                      "topic": "Detail"
                     }
                   ]
                 },
@@ -2059,10 +2059,11 @@
                   "title": "Tan Malaka and His Ideas",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "Tan Malaka was an Indonesian nationalist who played an important role in the struggle for independence. He was born in West Sumatra in 1897. During his life, he traveled to several countries and studied different political and social ideas. He believed that education was important for improving society. He also wanted Indonesia to become an independent nation.\n\nTan Malaka wrote many books and articles. One of his famous works is Madilog, which discusses materialism, dialectics, and logic. His ideas ***influenced*** many people who wanted to fight against colonialism. However, his political activities sometimes brought him into conflict with other leaders.\n\nTan Malaka died in 1949, but his ideas remain important in Indonesian history. Many people study his writings to understand the development of Indonesian nationalism.",
                   "note": "",
+                  "passage": "Tan Malaka was an Indonesian nationalist who played an important role in the struggle for independence. He was born in West Sumatra in 1897. During his life, he traveled to several countries and studied different political and social ideas. He believed that education was important for improving society. He also wanted Indonesia to become an independent nation.\n\nTan Malaka wrote many books and articles. One of his famous works is Madilog, which discusses materialism, dialectics, and logic. His ideas ***influenced*** many people who wanted to fight against colonialism. However, his political activities sometimes brought him into conflict with other leaders.\n\nTan Malaka died in 1949, but his ideas remain important in Indonesian history. Many people study his writings to understand the development of Indonesian nationalism.",
                   "questions": [
                     {
+                      "id": "ra-u2-q1",
                       "q": "What can be inferred from the passage about Tan Malaka?",
                       "o": [
                         "He never studied political ideas.",
@@ -2072,10 +2073,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Inference",
-                      "id": "ra-u2-q1"
+                      "topic": "Inference"
                     },
                     {
+                      "id": "ra-u2-q2",
                       "q": "What was one of Tan Malaka's famous works?",
                       "o": [
                         "Madilog",
@@ -2085,10 +2086,10 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "Specific Information",
-                      "id": "ra-u2-q2"
+                      "topic": "Specific Information"
                     },
                     {
+                      "id": "ra-u2-q3",
                       "q": "According to the passage, why did Tan Malaka travel to several countries?",
                       "o": [
                         "To become a businessman",
@@ -2098,10 +2099,10 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "Specific Information",
-                      "id": "ra-u2-q3"
+                      "topic": "Specific Information"
                     },
                     {
+                      "id": "ra-u2-q4",
                       "q": "The word \"influenced\" in the passage is closest in meaning to",
                       "o": [
                         "changed or affected",
@@ -2111,10 +2112,10 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "Vocabulary",
-                      "id": "ra-u2-q4"
+                      "topic": "Vocabulary"
                     },
                     {
+                      "id": "ra-u2-q5",
                       "q": "What is the main idea of the passage?",
                       "o": [
                         "Tan Malaka's life and contributions to Indonesian nationalism",
@@ -2124,8 +2125,7 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "Main Idea",
-                      "id": "ra-u2-q5"
+                      "topic": "Main Idea"
                     }
                   ]
                 },
@@ -2134,10 +2134,11 @@
                   "title": "Salman Kancil and Environmental Protection",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "Salman Kancil was a young boy from East Java who became known for his efforts to protect the environment. He opposed illegal sand mining in his village because the activity damaged the land and threatened the local community. Sand mining can cause ***erosion*** and change the natural condition of rivers and nearby areas.\n\nSalman was concerned about the future of his village. He believed that people should protect natural resources for the next generation. His actions attracted public attention and became an example of the courage of young people who speak about environmental problems.\n\nEnvironmental protection requires cooperation between citizens, local governments, and businesses. People can help by reporting illegal activities and supporting responsible use of natural resources.",
                   "note": "",
+                  "passage": "Salman Kancil was a young boy from East Java who became known for his efforts to protect the environment. He opposed illegal sand mining in his village because the activity damaged the land and threatened the local community. Sand mining can cause ***erosion*** and change the natural condition of rivers and nearby areas.\n\nSalman was concerned about the future of his village. He believed that people should protect natural resources for the next generation. His actions attracted public attention and became an example of the courage of young people who speak about environmental problems.\n\nEnvironmental protection requires cooperation between citizens, local governments, and businesses. People can help by reporting illegal activities and supporting responsible use of natural resources.",
                   "questions": [
                     {
+                      "id": "ra-u3-q1",
                       "q": "What activity did Salman Kancil oppose?",
                       "o": [
                         "Fishing in the river",
@@ -2147,10 +2148,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Specific Information",
-                      "id": "ra-u3-q1"
+                      "topic": "Specific Information"
                     },
                     {
+                      "id": "ra-u3-q2",
                       "q": "Why was Salman concerned about sand mining?",
                       "o": [
                         "It made the village more crowded.",
@@ -2160,10 +2161,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Cause and Effect",
-                      "id": "ra-u3-q2"
+                      "topic": "Cause and Effect"
                     },
                     {
+                      "id": "ra-u3-q3",
                       "q": "The word \"erosion\" in the passage refers to",
                       "o": [
                         "the movement of soil or land away",
@@ -2173,10 +2174,10 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "Vocabulary",
-                      "id": "ra-u3-q3"
+                      "topic": "Vocabulary"
                     },
                     {
+                      "id": "ra-u3-q4",
                       "q": "What can be inferred from the passage about young people?",
                       "o": [
                         "They cannot influence environmental issues.",
@@ -2186,10 +2187,10 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "Inference",
-                      "id": "ra-u3-q4"
+                      "topic": "Inference"
                     },
                     {
+                      "id": "ra-u3-q5",
                       "q": "According to the passage, who should cooperate to protect the environment?",
                       "o": [
                         "Only students",
@@ -2199,8 +2200,7 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "Specific Information",
-                      "id": "ra-u3-q5"
+                      "topic": "Specific Information"
                     }
                   ]
                 },
@@ -2209,10 +2209,11 @@
                   "title": "The Bali Bombing and Its Impact",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "In October 2002, a series of bomb attacks occurred in Bali, Indonesia. The attacks took place in areas popular with tourists, including restaurants and nightclubs. Many people were killed or injured, including Indonesian citizens and foreign visitors.\n\nThe ***tragedy*** affected families, businesses, and the tourism industry. Bali was known as a popular holiday destination, but the attacks created fear among visitors. Many hotels, restaurants, and travel businesses experienced difficulties after the incident.\n\nThe bombing also encouraged greater attention to security and cooperation between countries. Indonesia and other nations worked to prevent terrorism and protect public safety. The event remains an important part of Indonesia's modern history.",
                   "note": "",
+                  "passage": "In October 2002, a series of bomb attacks occurred in Bali, Indonesia. The attacks took place in areas popular with tourists, including restaurants and nightclubs. Many people were killed or injured, including Indonesian citizens and foreign visitors.\n\nThe ***tragedy*** affected families, businesses, and the tourism industry. Bali was known as a popular holiday destination, but the attacks created fear among visitors. Many hotels, restaurants, and travel businesses experienced difficulties after the incident.\n\nThe bombing also encouraged greater attention to security and cooperation between countries. Indonesia and other nations worked to prevent terrorism and protect public safety. The event remains an important part of Indonesia's modern history.",
                   "questions": [
                     {
+                      "id": "ra-u4-q1",
                       "q": "When did the Bali bombing occur?",
                       "o": [
                         "October 1998",
@@ -2222,10 +2223,10 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "Specific Information",
-                      "id": "ra-u4-q1"
+                      "topic": "Specific Information"
                     },
                     {
+                      "id": "ra-u4-q2",
                       "q": "What was one effect of the bombing?",
                       "o": [
                         "Tourism businesses experienced difficulties.",
@@ -2235,10 +2236,10 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "Cause and Effect",
-                      "id": "ra-u4-q2"
+                      "topic": "Cause and Effect"
                     },
                     {
+                      "id": "ra-u4-q3",
                       "q": "The word \"tragedy\" in the passage is closest in meaning to",
                       "o": [
                         "celebration",
@@ -2248,10 +2249,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Vocabulary",
-                      "id": "ra-u4-q3"
+                      "topic": "Vocabulary"
                     },
                     {
+                      "id": "ra-u4-q4",
                       "q": "Why did the attacks affect Bali's tourism industry?",
                       "o": [
                         "Visitors became afraid to travel there.",
@@ -2261,10 +2262,10 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "Inference",
-                      "id": "ra-u4-q4"
+                      "topic": "Inference"
                     },
                     {
+                      "id": "ra-u4-q5",
                       "q": "What is the main idea of the passage?",
                       "o": [
                         "Bali's natural attractions",
@@ -2274,8 +2275,7 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "Main Idea",
-                      "id": "ra-u4-q5"
+                      "topic": "Main Idea"
                     }
                   ]
                 },
@@ -2284,10 +2284,11 @@
                   "title": "Reformasi 1998",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "In 1998, Indonesia experienced a major political change known as Reformasi. Before this period, President Suharto had led the country for many years. Economic problems and public dissatisfaction increased during the late 1990s. Many students and citizens demanded political reform.\n\nDemonstrations took place in several cities. Students called for greater freedom, less corruption, and a more democratic government. In May 1998, Suharto ***resigned*** from the presidency. His resignation marked an important beginning of political change in Indonesia.\n\nAfter Reformasi, Indonesia introduced several changes in its political system. People gained greater opportunities to express their opinions, and elections became more competitive. Reformasi continues to influence Indonesian politics today.",
                   "note": "",
+                  "passage": "In 1998, Indonesia experienced a major political change known as Reformasi. Before this period, President Suharto had led the country for many years. Economic problems and public dissatisfaction increased during the late 1990s. Many students and citizens demanded political reform.\n\nDemonstrations took place in several cities. Students called for greater freedom, less corruption, and a more democratic government. In May 1998, Suharto ***resigned*** from the presidency. His resignation marked an important beginning of political change in Indonesia.\n\nAfter Reformasi, Indonesia introduced several changes in its political system. People gained greater opportunities to express their opinions, and elections became more competitive. Reformasi continues to influence Indonesian politics today.",
                   "questions": [
                     {
+                      "id": "ra-u5-q1",
                       "q": "What was Reformasi in Indonesia?",
                       "o": [
                         "A major political change",
@@ -2297,10 +2298,10 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "Main Idea",
-                      "id": "ra-u5-q1"
+                      "topic": "Main Idea"
                     },
                     {
+                      "id": "ra-u5-q2",
                       "q": "Why did many students demonstrate in 1998?",
                       "o": [
                         "They wanted more schools.",
@@ -2310,10 +2311,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Specific Information",
-                      "id": "ra-u5-q2"
+                      "topic": "Specific Information"
                     },
                     {
+                      "id": "ra-u5-q3",
                       "q": "The word \"resigned\" in the passage is closest in meaning to",
                       "o": [
                         "started a new job",
@@ -2323,10 +2324,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Vocabulary",
-                      "id": "ra-u5-q3"
+                      "topic": "Vocabulary"
                     },
                     {
+                      "id": "ra-u5-q4",
                       "q": "What can be inferred about the political situation after Reformasi?",
                       "o": [
                         "Citizens had fewer opportunities to express opinions.",
@@ -2336,10 +2337,10 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "Inference",
-                      "id": "ra-u5-q4"
+                      "topic": "Inference"
                     },
                     {
+                      "id": "ra-u5-q5",
                       "q": "According to the passage, what happened in May 1998?",
                       "o": [
                         "Indonesia held its first election.",
@@ -2349,8 +2350,7 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Specific Information",
-                      "id": "ra-u5-q5"
+                      "topic": "Specific Information"
                     }
                   ]
                 },
@@ -2359,10 +2359,11 @@
                   "title": "The Free Nutritious Meal Program",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "The Free Nutritious Meal Program, commonly known as Makan Bergizi Gratis (MBG), is a government program designed to provide nutritious food to students and other selected groups. The program aims to support children's health and improve their ability to learn at school.\n\nA nutritious meal usually contains carbohydrates, protein, vitamins, and minerals. These nutrients help the body grow and provide energy for daily activities. Students who receive ***adequate*** nutrition may find it easier to concentrate during lessons.\n\nHowever, the program requires careful planning. Food must be prepared safely, delivered on time, and stored at the correct temperature. Schools and food providers need to follow hygiene standards to prevent food contamination. Regular monitoring is also important to ensure that the meals are healthy and safe.",
                   "note": "",
+                  "passage": "The Free Nutritious Meal Program, commonly known as Makan Bergizi Gratis (MBG), is a government program designed to provide nutritious food to students and other selected groups. The program aims to support children's health and improve their ability to learn at school.\n\nA nutritious meal usually contains carbohydrates, protein, vitamins, and minerals. These nutrients help the body grow and provide energy for daily activities. Students who receive ***adequate*** nutrition may find it easier to concentrate during lessons.\n\nHowever, the program requires careful planning. Food must be prepared safely, delivered on time, and stored at the correct temperature. Schools and food providers need to follow hygiene standards to prevent food contamination. Regular monitoring is also important to ensure that the meals are healthy and safe.",
                   "questions": [
                     {
+                      "id": "ra-u6-q1",
                       "q": "What is the main purpose of the MBG program?",
                       "o": [
                         "To provide nutritious food",
@@ -2372,10 +2373,10 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "Main Idea",
-                      "id": "ra-u6-q1"
+                      "topic": "Main Idea"
                     },
                     {
+                      "id": "ra-u6-q2",
                       "q": "According to the passage, which nutrient provides energy for daily activities?",
                       "o": [
                         "Carbohydrates",
@@ -2385,10 +2386,10 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "Specific Information",
-                      "id": "ra-u6-q2"
+                      "topic": "Specific Information"
                     },
                     {
+                      "id": "ra-u6-q3",
                       "q": "The word \"adequate\" in the passage is closest in meaning to",
                       "o": [
                         "expensive",
@@ -2398,10 +2399,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Vocabulary",
-                      "id": "ra-u6-q3"
+                      "topic": "Vocabulary"
                     },
                     {
+                      "id": "ra-u6-q4",
                       "q": "Why is food safety important in the MBG program?",
                       "o": [
                         "It makes food more colorful.",
@@ -2411,10 +2412,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Cause and Effect",
-                      "id": "ra-u6-q4"
+                      "topic": "Cause and Effect"
                     },
                     {
+                      "id": "ra-u6-q5",
                       "q": "What can be inferred from the passage about implementing the program?",
                       "o": [
                         "Providing food is the only necessary task.",
@@ -2424,8 +2425,7 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Inference",
-                      "id": "ra-u6-q5"
+                      "topic": "Inference"
                     }
                   ]
                 },
@@ -2434,10 +2434,11 @@
                   "title": "Plastic Pollution",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "Plastic is widely used because it is light, inexpensive, and strong. People use plastic bags, bottles, food containers, and many other products every day. However, plastic waste has become a serious environmental problem.\n\nMany plastic products are used only once and then thrown away. Some plastic waste enters rivers and oceans. Animals may eat plastic or become trapped in it. Plastic can also break into very small pieces called microplastics, which may remain in the environment for a long time.\n\nPeople can reduce plastic pollution by using ***reusable*** bags and bottles. Recycling is also helpful, but reducing the use of unnecessary plastic is an important first step. Governments and communities can support these efforts through education and waste management programs.",
                   "note": "",
+                  "passage": "Plastic is widely used because it is light, inexpensive, and strong. People use plastic bags, bottles, food containers, and many other products every day. However, plastic waste has become a serious environmental problem.\n\nMany plastic products are used only once and then thrown away. Some plastic waste enters rivers and oceans. Animals may eat plastic or become trapped in it. Plastic can also break into very small pieces called microplastics, which may remain in the environment for a long time.\n\nPeople can reduce plastic pollution by using ***reusable*** bags and bottles. Recycling is also helpful, but reducing the use of unnecessary plastic is an important first step. Governments and communities can support these efforts through education and waste management programs.",
                   "questions": [
                     {
+                      "id": "ra-u7-q1",
                       "q": "Why is plastic widely used?",
                       "o": [
                         "It is light and inexpensive.",
@@ -2447,10 +2448,10 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "Specific Information",
-                      "id": "ra-u7-q1"
+                      "topic": "Specific Information"
                     },
                     {
+                      "id": "ra-u7-q2",
                       "q": "What may happen when plastic waste enters the ocean?",
                       "o": [
                         "It can help fish grow faster.",
@@ -2460,10 +2461,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Cause and Effect",
-                      "id": "ra-u7-q2"
+                      "topic": "Cause and Effect"
                     },
                     {
+                      "id": "ra-u7-q3",
                       "q": "The word \"reusable\" in the passage is closest in meaning to",
                       "o": [
                         "able to be used again",
@@ -2473,10 +2474,10 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "Vocabulary",
-                      "id": "ra-u7-q3"
+                      "topic": "Vocabulary"
                     },
                     {
+                      "id": "ra-u7-q4",
                       "q": "What can people do to reduce plastic pollution?",
                       "o": [
                         "Use more plastic bags.",
@@ -2486,10 +2487,10 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "Specific Information",
-                      "id": "ra-u7-q4"
+                      "topic": "Specific Information"
                     },
                     {
+                      "id": "ra-u7-q5",
                       "q": "What is the main idea of the passage?",
                       "o": [
                         "The production of plastic bottles",
@@ -2499,8 +2500,7 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Main Idea",
-                      "id": "ra-u7-q5"
+                      "topic": "Main Idea"
                     }
                   ]
                 },
@@ -2509,10 +2509,11 @@
                   "title": "Sleep and Student Health",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "Sleep is important for the physical and mental health of university students. During sleep, the body repairs itself and the brain processes information. Students who sleep well may have better concentration and memory.\n\nMany students stay up late to study or use their phones. However, lack of sleep can make them tired and ***reduce*** their ability to focus. It may also affect their mood and academic performance.\n\nHealth experts generally recommend that adults get enough sleep every night. Students can improve their sleep habits by keeping a regular schedule, avoiding caffeine late in the day, and reducing screen time before bed. Good sleep habits can help students feel healthier and perform better.",
                   "note": "",
+                  "passage": "Sleep is important for the physical and mental health of university students. During sleep, the body repairs itself and the brain processes information. Students who sleep well may have better concentration and memory.\n\nMany students stay up late to study or use their phones. However, lack of sleep can make them tired and ***reduce*** their ability to focus. It may also affect their mood and academic performance.\n\nHealth experts generally recommend that adults get enough sleep every night. Students can improve their sleep habits by keeping a regular schedule, avoiding caffeine late in the day, and reducing screen time before bed. Good sleep habits can help students feel healthier and perform better.",
                   "questions": [
                     {
+                      "id": "ra-u8-q1",
                       "q": "What is one benefit of sleep according to the passage?",
                       "o": [
                         "It helps improve memory.",
@@ -2522,10 +2523,10 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "Specific Information",
-                      "id": "ra-u8-q1"
+                      "topic": "Specific Information"
                     },
                     {
+                      "id": "ra-u8-q2",
                       "q": "Why do some students stay up late?",
                       "o": [
                         "They want to avoid sleeping.",
@@ -2535,10 +2536,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Specific Information",
-                      "id": "ra-u8-q2"
+                      "topic": "Specific Information"
                     },
                     {
+                      "id": "ra-u8-q3",
                       "q": "The word \"reduce\" in the passage is closest in meaning to",
                       "o": [
                         "increase",
@@ -2548,10 +2549,10 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "Vocabulary",
-                      "id": "ra-u8-q3"
+                      "topic": "Vocabulary"
                     },
                     {
+                      "id": "ra-u8-q4",
                       "q": "What may happen when students do not get enough sleep?",
                       "o": [
                         "Their concentration may decrease.",
@@ -2561,10 +2562,10 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "Cause and Effect",
-                      "id": "ra-u8-q4"
+                      "topic": "Cause and Effect"
                     },
                     {
+                      "id": "ra-u8-q5",
                       "q": "Which of the following is suggested to improve sleep?",
                       "o": [
                         "Drinking coffee late at night",
@@ -2574,8 +2575,7 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "Specific Information",
-                      "id": "ra-u8-q5"
+                      "topic": "Specific Information"
                     }
                   ]
                 },
@@ -2584,10 +2584,11 @@
                   "title": "Urban Farming in the City",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "Urban farming is the practice of growing plants and raising animals in urban areas. Many people grow vegetables, fruits, and herbs in their gardens, on rooftops, or in small spaces near their homes. Urban farming has become popular in many cities because it provides fresh food and helps people use available land more effectively. Even people who live in apartments can grow plants in containers or small pots.\n\nOne of the main benefits of urban farming is that it gives people access to fresh and healthy food. Vegetables grown at home can be ***harvested*** when they are ready to eat. This means that people do not need to buy all their vegetables from supermarkets. Urban farming can also reduce transportation costs because food does not have to travel long distances from farms to consumers.\n\nUrban farming also brings social benefits. People who work together in community gardens can share knowledge, tools, and seeds. They can learn how to grow different plants and how to take care of the environment. In some neighborhoods, community gardens become places where people meet, talk, and build friendships. Children can also learn about plants, food, and nature through gardening activities.\n\nHowever, urban farming has some challenges. Cities often have limited space, and not all buildings have suitable areas for growing plants. Plants also need enough sunlight, water, and good soil to grow properly. Some urban areas have polluted soil, so people must be careful when choosing places for gardening. Despite these challenges, urban farming continues to develop as a useful activity for city residents.",
                   "note": "",
+                  "passage": "Urban farming is the practice of growing plants and raising animals in urban areas. Many people grow vegetables, fruits, and herbs in their gardens, on rooftops, or in small spaces near their homes. Urban farming has become popular in many cities because it provides fresh food and helps people use available land more effectively. Even people who live in apartments can grow plants in containers or small pots.\n\nOne of the main benefits of urban farming is that it gives people access to fresh and healthy food. Vegetables grown at home can be ***harvested*** when they are ready to eat. This means that people do not need to buy all their vegetables from supermarkets. Urban farming can also reduce transportation costs because food does not have to travel long distances from farms to consumers.\n\nUrban farming also brings social benefits. People who work together in community gardens can share knowledge, tools, and seeds. They can learn how to grow different plants and how to take care of the environment. In some neighborhoods, community gardens become places where people meet, talk, and build friendships. Children can also learn about plants, food, and nature through gardening activities.\n\nHowever, urban farming has some challenges. Cities often have limited space, and not all buildings have suitable areas for growing plants. Plants also need enough sunlight, water, and good soil to grow properly. Some urban areas have polluted soil, so people must be careful when choosing places for gardening. Despite these challenges, urban farming continues to develop as a useful activity for city residents.",
                   "questions": [
                     {
+                      "id": "ra-u9-q1",
                       "q": "What is the main idea of the passage?",
                       "o": [
                         "The history of agriculture in rural areas",
@@ -2597,10 +2598,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Main Idea",
-                      "id": "ra-u9-q1"
+                      "topic": "Main Idea"
                     },
                     {
+                      "id": "ra-u9-q2",
                       "q": "According to the passage, where can people practice urban farming?",
                       "o": [
                         "Only in large agricultural fields",
@@ -2610,10 +2611,10 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "Specific Information",
-                      "id": "ra-u9-q2"
+                      "topic": "Specific Information"
                     },
                     {
+                      "id": "ra-u9-q3",
                       "q": "Why can urban farming reduce transportation costs?",
                       "o": [
                         "Food is grown closer to the consumers.",
@@ -2623,10 +2624,10 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "Cause and Effect",
-                      "id": "ra-u9-q3"
+                      "topic": "Cause and Effect"
                     },
                     {
+                      "id": "ra-u9-q4",
                       "q": "The word \"harvested\" in paragraph 2 is closest in meaning to",
                       "o": [
                         "planted",
@@ -2636,10 +2637,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Vocabulary",
-                      "id": "ra-u9-q4"
+                      "topic": "Vocabulary"
                     },
                     {
+                      "id": "ra-u9-q5",
                       "q": "What can be inferred about community gardens?",
                       "o": [
                         "They are useful only for professional farmers.",
@@ -2649,10 +2650,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Inference",
-                      "id": "ra-u9-q5"
+                      "topic": "Inference"
                     },
                     {
+                      "id": "ra-u9-q6",
                       "q": "Why must people be careful when choosing soil for urban farming?",
                       "o": [
                         "Some urban soil may contain pollution.",
@@ -2662,8 +2663,7 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "Specific Information",
-                      "id": "ra-u9-q6"
+                      "topic": "Specific Information"
                     }
                   ]
                 },
@@ -2672,10 +2672,11 @@
                   "title": "The Importance of Museums",
                   "audioUrl": "",
                   "script": "",
-                  "passage": "",
                   "note": "",
+                  "passage": "",
                   "questions": [
                     {
+                      "id": "ra-u10-q1",
                       "q": "What is the main purpose of museums according to the passage?",
                       "o": [
                         "To sell historical objects to tourists",
@@ -2685,10 +2686,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Main Idea",
-                      "id": "ra-u10-q1"
+                      "topic": "Main Idea"
                     },
                     {
+                      "id": "ra-u10-q2",
                       "q": "Why do teachers take students to museums?",
                       "o": [
                         "To help students learn from real objects",
@@ -2698,10 +2699,10 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "Specific Information",
-                      "id": "ra-u10-q2"
+                      "topic": "Specific Information"
                     },
                     {
+                      "id": "ra-u10-q3",
                       "q": "The word \"preserve\" in paragraph 3 is closest in meaning to",
                       "o": [
                         "destroy",
@@ -2711,10 +2712,10 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Vocabulary",
-                      "id": "ra-u10-q3"
+                      "topic": "Vocabulary"
                     },
                     {
+                      "id": "ra-u10-q4",
                       "q": "What can be inferred about museum workers?",
                       "o": [
                         "They are responsible for protecting valuable objects.",
@@ -2724,10 +2725,10 @@
                       ],
                       "a": 0,
                       "e": "",
-                      "topic": "Inference",
-                      "id": "ra-u10-q4"
+                      "topic": "Inference"
                     },
                     {
+                      "id": "ra-u10-q5",
                       "q": "According to the passage, how can museums support local economies?",
                       "o": [
                         "By reducing the number of tourists",
@@ -2737,10 +2738,10 @@
                       ],
                       "a": 2,
                       "e": "",
-                      "topic": "Cause and Effect",
-                      "id": "ra-u10-q5"
+                      "topic": "Cause and Effect"
                     },
                     {
+                      "id": "ra-u10-q6",
                       "q": "Why do some modern museums use interactive displays and videos?",
                       "o": [
                         "To make visitors leave more quickly",
@@ -2750,8 +2751,7 @@
                       ],
                       "a": 1,
                       "e": "",
-                      "topic": "Specific Information",
-                      "id": "ra-u10-q6"
+                      "topic": "Specific Information"
                     }
                   ]
                 }
