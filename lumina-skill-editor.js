@@ -47,7 +47,7 @@ function dec(s){var t=document.createElement("textarea");t.innerHTML=String(s==n
   "font-weight":/^(normal|bold|[1-9]00)$/,"font-style":/^(normal|italic)$/,
   "text-decoration":/^(none|underline|line-through)([\sa-z0-9().,#%-]*)$/i,
   "text-align":/^(left|right|center|justify)$/,"line-height":/^[\d.]+(px|em|rem|%)?$/,
-  "box-sizing":/^(border-box|content-box)$/,"border-collapse":/^(collapse|separate)$/,
+  "box-sizing":/^(border-box|content-box)$/,"flex":/^(none|auto|[\d.]+(\s+[\d.]+)?(\s+(auto|[\d.]+(px|%)?))?)$/,"border-collapse":/^(collapse|separate)$/,
   "grid-template-columns":/^repeat\(\s*\d{1,2}\s*,\s*minmax\(\s*0(px)?\s*,\s*1fr\s*\)\s*\)$/};
  function styleOf(el){
   var out=[];
@@ -127,7 +127,8 @@ css.textContent=[
 "#lum-toast.on{opacity:1}",
 "main .tab-content [style*='width']:not(td):not(th){max-width:100%!important;box-sizing:border-box}",
 "main .tab-content table{max-width:100%}",
-"@media(max-width:640px){main .tab-content [style*='grid-template-columns']{grid-template-columns:1fr!important}}"
+"@media(max-width:640px){main .tab-content [style*='grid-template-columns']{grid-template-columns:1fr!important}}",
+"@media(max-width:640px){main .tab-content .kotak-teks{width:100%!important;margin-left:0!important;margin-right:0!important}main .tab-content :has(>[style*='flex:']){flex-wrap:wrap}main .tab-content [style*='flex:']{flex:1 1 100%!important;width:100%!important}main .tab-content [style^='width:']:not(td):not(th),main .tab-content [style*=';width:']:not(td):not(th),main .tab-content [style*='; width:']:not(td):not(th){width:100%!important}}"
 ].join("\n");
 document.head.appendChild(css);
 
@@ -250,6 +251,13 @@ function setFg(c){fmt(function(){document.execCommand("styleWithCSS",false,true)
 function setHl(c){fmt(function(){document.execCommand("styleWithCSS",false,true);if(!document.execCommand("hiliteColor",false,c))document.execCommand("backColor",false,c);});}
 function setFont(f){fmt(function(){document.execCommand("styleWithCSS",false,true);document.execCommand("fontName",false,f);},true);}
 
+/* ---------- lebar kotak (aman untuk anak flex, responsif di HP) ---------- */
+function setW(el,n){
+ el.style.width=n+"%";
+ var par=el.parentElement;
+ if(par&&/flex/.test(getComputedStyle(par).display))el.style.flex="0 0 auto";
+}
+
 /* ---------- toolbar ---------- */
 function buildBar(){
  var sw=function(k,c){return '<button type="button" class="sw" data-'+k+'="'+c+'" style="background:'+c+'" title="'+(k==="hl"?"Sorot":"Warna teks")+'"></button>';};
@@ -272,13 +280,14 @@ function buildBar(){
   '<span class="lbl">Sudut</span><input type="number" id="cd-r" min="0" max="80">'+
   '<span class="lbl">Padding</span><input type="number" id="cd-p" min="0" max="80">'+
   '<span class="lbl">Lebar %</span><input type="number" id="cd-w" min="5" max="100">'+
+  '<span class="lbl">Posisi</span><select id="cd-al"><option value="">…</option><option value="l">Kiri</option><option value="c">Tengah</option><option value="r">Kanan</option></select>'+
   '<span class="lbl">Tinggi px</span><input type="number" id="cd-h" min="0" max="2000">'+
   '<span class="lbl">Kolom</span><select id="cd-cols"><option value="">…</option><option value="0">Asli</option><option>1</option><option>2</option><option>3</option><option>4</option></select>'+
   '<span class="lbl">Jarak</span><input type="number" id="cd-gap" min="0" max="80">'+
   '<button data-blk="parent" title="Pilih elemen pembungkus (mis. wadah kolom)">⤴ Induk</button><button data-blk="rst" title="Hapus semua gaya buatan editor pada elemen ini">Reset gaya</button>'+
  '</div>'+
  '<div class="r">'+
-  '<span class="lbl">Kartu</span><button data-blk="dup" title="Gandakan kartu/baris terpilih">⧉ Gandakan</button><button data-blk="up">↑</button><button data-blk="down">↓</button><button data-blk="del" class="dng">🗑 Hapus</button><button data-blk="note">＋ Catatan</button><button data-tb="new">▦ ＋ Tabel</button>'+
+  '<span class="lbl">Kartu</span><button data-blk="dup" title="Gandakan kartu/baris terpilih">⧉ Gandakan</button><button data-blk="up">↑</button><button data-blk="down">↓</button><button data-blk="del" class="dng">🗑 Hapus</button><button data-blk="note">＋ Catatan</button><button data-blk="box" title="Tambah kotak berisi teks">▢ ＋ Kotak teks</button><button data-blk="text" title="Tambah paragraf teks (di dalam kotak terpilih, atau di bawah posisi kursor)">＋ Teks</button><button data-tb="new">▦ ＋ Tabel</button>'+
   '<span class="sep"></span><button data-act="quiz">❓ Soal kuis</button><button data-act="save" class="pri">💾 Simpan</button><button data-act="reset" class="dng" title="Kembalikan ke tampilan asli">↺ Asli</button><button data-act="exit">Keluar</button>'+
  '</div>'+
  '<div class="r" id="lum-r3" hidden>'+
@@ -320,7 +329,8 @@ function buildBar(){
   "cd-bw":function(v){var n=Number(v);selected.style.borderWidth=n+"px";selected.style.borderStyle=n?"solid":"none";},
   "cd-r":function(v){selected.style.borderRadius=(Number(v)||0)+"px";},
   "cd-p":function(v){selected.style.padding=(Number(v)||0)+"px";},
-  "cd-w":function(v){var n=Number(v);if(n>=5&&n<=100)selected.style.width=n+"%";},
+  "cd-w":function(v){var n=Number(v);if(n>=5&&n<=100)setW(selected,n);},
+  "cd-al":function(v){if(!v)return;selected.style.margin=v==="l"?"12px auto 12px 0":(v==="c"?"12px auto":"12px 0 12px auto");},
   "cd-h":function(v){var n=Number(v)||0;if(/^(TR|TD|TH|THEAD|TBODY|TABLE)$/.test(selected.tagName)){selected.style.minHeight="";selected.style.height=n?n+"px":"";} else{selected.style.height="";selected.style.minHeight=n?n+"px":"";}},
   "cd-gap":function(v){selected.style.gap=(Number(v)||0)+"px";},
   "cd-cols":function(v){
@@ -345,7 +355,7 @@ function sync(){
  $("cd-w").value=/%$/.test(selected.style.width)?Math.round(parseFloat(selected.style.width)):"";
  $("cd-h").value=parseInt(selected.style.minHeight)||parseInt(selected.style.height)||"";
  $("cd-gap").value=Math.round(parseFloat(cs.columnGap))||"";
- $("cd-cols").value="";
+ $("cd-cols").value="";$("cd-al").value="";
 }
 
 /* ---------- palet warna ---------- */
@@ -438,6 +448,23 @@ var BLK={
   select(p);
  },
  rst:function(){if(!BLK.need())return;selected.removeAttribute("style");sync();snap();toast("Gaya buatan editor dihapus");},
+ box:function(){
+  var n=document.createElement("div");
+  n.className="kotak-teks";
+  n.setAttribute("style","width:100%;max-width:100%;margin:12px 0;padding:14px;border-width:2px;border-style:solid;border-color:#14b8a6;border-radius:12px;background-color:#f0fdfa;box-sizing:border-box;color:#0f172a");
+  n.innerHTML='<p style="margin:0">Tulis teks di dalam kotak ini…</p>';
+  if(selected&&selected.classList.contains("kotak-teks"))selected.after(n);else placeBlock(n);
+  snap();select(n);n.scrollIntoView({behavior:"smooth",block:"center"});BLK._focus(n.firstChild);
+ },
+ text:function(){
+  var p=document.createElement("p");p.style.margin="8px 0 0";p.textContent="Tulis teks di sini…";
+  if(selected&&!/^(TR|TD|TH|THEAD|TBODY|TABLE)$/.test(selected.tagName)&&!hasQuiz(selected))selected.appendChild(p);
+  else placeBlock(p);
+  snap();BLK._focus(p);
+ },
+ _focus:function(el){
+  try{var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);}catch(e){}
+ },
  note:function(){
   var n=document.createElement("div");
   n.className="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs space-y-1";
@@ -722,7 +749,7 @@ function enterEdit(){
  document.addEventListener("mouseup",function(){
  if(selected){
   var w=selected.style.width,pw=selected.parentElement?selected.parentElement.clientWidth:0;
-  if(/px$/.test(w)&&pw>0)selected.style.width=Math.min(100,Math.round(parseFloat(w)/pw*100))+"%";
+  if(/px$/.test(w)&&pw>0)setW(selected,Math.min(100,Math.round(parseFloat(w)/pw*100)));
   if(/px$/.test(selected.style.height)&&!/^(TR|TD|TH|THEAD|TBODY|TABLE)$/.test(selected.tagName)){selected.style.minHeight=selected.style.height;selected.style.height="";}
   sync();snapSoon();
  }
