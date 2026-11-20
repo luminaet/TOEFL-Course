@@ -1,6 +1,6 @@
 {
   "version": 4,
-  "updatedAt": 1795169213875,
+  "updatedAt": 1795178023756,
   "materials": [],
   "materialPages": {
     "listening": [
@@ -660,212 +660,282 @@
       "minutes": 7,
       "questions": [
         {
-          "id": "q-mwm5c32v9ysf2",
-          "q": "Alexander Graham Bell, _____, is widely recognized for his contributions to the development of the telephone.",
+          "id": "q-mwoykd5hilzpn",
+          "q": "_____, a massive volcanic caldera in North Sumatra, attracts thousands of geological researchers and tourists every year.",
           "o": [
-            "the inventor of the telephone",
-            "invented the telephone",
-            "who the telephone invented",
-            "the telephone invention"
+            "Lake Toba is",
+            "Because Lake Toba",
+            "Lake Toba",
+            "It is Lake Toba"
           ],
-          "a": 0,
-          "e": "The inventor of the telephone merupakan appositive phrase yang menjelaskan subject Alexander Graham Bell. Appositive berupa noun phrase dan tidak membutuhkan conjunction atau relative pronoun.",
+          "a": 2,
+          "e": "Kalimat sudah memiliki main verb ('attracts') dan diapit appositive ('a massive volcanic caldera...'), sehingga bagian rumpang hanya membutuhkan subjek murni ('Lake Toba') tanpa kata kerja tambahan.",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwm5c32vzp4sk",
-          "q": "The principal of the university, _____, announced the new academic policy yesterday.",
+          "id": "q-mwoykd5hwxlgw",
+          "q": "Professor Agus Subyanto, together with his senior graduate students, _____ currently analyzing core samples from the Java Trench.",
           "o": [
-            "an experienced educator",
-            "who an experienced educator",
-            "being an experienced educator",
-            "was an experienced educator"
+            "are",
+            "is",
+            "were",
+            "have been"
           ],
-          "a": 0,
-          "e": "An experienced educator merupakan appositive yang menjelaskan the principal of the university. Karena appositive hanya memberikan informasi tambahan, subject utama tetap the principal, sehingga verb utama announced tidak berubah.",
+          "a": 1,
+          "e": "Frasa penjelas yang diapit koma ('together with his senior graduate students') bersifat parenthetical/appositive dan tidak mengubah jumlah subjek utama tunggal ('Professor Hendra'), sehingga memakai verb tunggal 'is'.",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwm5c32vol2po",
-          "q": "_____, the capital of Indonesia, is located on the island of Java.",
+          "id": "q-mwoykd5huinpn",
+          "q": "Komodo dragons, _____, rely heavily on their keen sense of smell to locate prey from several kilometers away.",
           "o": [
-            "Jakarta",
-            "Jakarta it is",
-            "Jakarta which",
-            "Jakarta being"
+            "are the largest living lizards on Earth",
+            "which the largest living lizards on Earth",
+            "the largest living lizards on Earth",
+            "they are the largest living lizards on Earth"
           ],
-          "a": 0,
-          "e": "The capital of Indonesia merupakan appositive yang menjelaskan noun Jakarta. Appositive diletakkan setelah subject dan diapit koma. Struktur kalimatnya adalah Jakarta, the capital of Indonesia, is located...",
+          "a": 2,
+          "e": "Appositive di antara dua koma berbentuk frasa benda murni ('the largest living lizards on Earth') tanpa subjek atau kata kerja agar tidak terjadi double verb.",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwm5c32vxvf5k",
-          "q": "The novel _____ became one of the most influential literary works of the twentieth century.",
+          "id": "q-mwoykd5hbrqsw",
+          "q": "_____ in 1928 by young nationalists from across the archipelago, the Youth Pledge unified the vision of one Indonesian language.",
           "o": [
-            "Animal Farm, a political satire by George Orwell,",
-            "Animal Farm a political satire by George Orwell",
-            "Animal Farm, was a political satire by George Orwell,",
-            "Animal Farm which a political satire by George Orwell"
+            "Formulating",
+            "Which formulated",
+            "It was formulated",
+            "Formulated"
           ],
-          "a": 0,
-          "e": "A political satire by George Orwell merupakan appositive phrase yang menjelaskan Animal Farm. Karena appositive berada di antara subject dan verb, frasa tersebut harus diapit oleh koma. Subject utama tetap The novel Animal Farm, sehingga verb became digunakan.",
+          "a": 3,
+          "e": "Reduced appositive/participial phrase pasif di awal kalimat ('Which was formulated...') menyisakan past participle ('Formulated') untuk menerangkan 'the Youth Pledge'.",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwm5c32vg86h4",
-          "q": "My brother, _____, has recently graduated from medical school.",
+          "id": "q-mwoykd5hlgc3f",
+          "q": "Borobudur, _____ in Central Java during the Sailendra dynasty, features more than two thousand relief panels.",
           "o": [
-            "a student of medicine for six years",
-            "who a student of medicine for six years",
-            "studying medicine for six years was",
-            "has been a student of medicine for six years"
+            "a ninth-century Mahayana Buddhist monument",
+            "it is a ninth-century Mahayana Buddhist monument",
+            "was a ninth-century Mahayana Buddhist monument",
+            "which a ninth-century Mahayana Buddhist monument"
           ],
           "a": 0,
-          "e": "A student of medicine for six years merupakan appositive phrase yang menjelaskan my brother. Appositive berupa noun phrase, bukan finite clause, sehingga tidak memerlukan verb utama tambahan.",
+          "e": "Posisi di antara dua koma sebelum main verb ('features') diisi oleh frasa nomina appositive murni tanpa kata kerja penghubung.",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwm5c32v158wh",
-          "q": "The Amazon River, _____, flows through several South American countries.",
+          "id": "q-mwoykd5hsodrm",
+          "q": "Marine biologists recently documented Coelacanth, _____ once believed by scientists to have gone extinct millions of years ago.",
           "o": [
-            "the longest river in the world by volume",
-            "which the longest river in the world by volume",
-            "is the longest river in the world by volume",
-            "flowing the longest river in the world by volume"
+            "it is an ancient lobe-finned fish",
+            "an ancient lobe-finned fish",
+            "was an ancient lobe-finned fish",
+            "which an ancient lobe-finned fish"
           ],
-          "a": 0,
-          "e": "The longest river in the world by volume merupakan appositive yang menjelaskan The Amazon River. Appositive ditempatkan setelah subject dan diapit koma.",
+          "a": 1,
+          "e": "Appositive di akhir kalimat yang diikuti reduced passive clause ('[which was] once believed...') berbentuk noun phrase ('an ancient lobe-finned fish').",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwm5c32vhou3n",
-          "q": "_____, a famous Indonesian independence leader, played an important role in the struggle for independence.",
+          "id": "q-mwoykd5hn7lvq",
+          "q": "_____ of traditional Javanese shadow puppetry, dalang performers often narrate epic stories for up to eight consecutive hours.",
           "o": [
-            "Soekarno",
-            "Soekarno who",
-            "Soekarno was",
-            "Soekarno being"
+            "They are master storytellers",
+            "Master storytellers",
+            "Being they are master storytellers",
+            "Who master storytellers"
           ],
-          "a": 0,
-          "e": "A famous Indonesian independence leader merupakan appositive phrase yang menjelaskan Soekarno. Subject utama adalah Soekarno, sehingga verb played digunakan untuk melengkapi kalimat.",
+          "a": 1,
+          "e": "Appositive di awal kalimat sebelum koma harus berupa noun phrase tanpa subjek dan predikat ('Master storytellers...') untuk menerangkan subjek utama 'dalang performers'.",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwm5c32vkmdzp",
-          "q": "The discovery of penicillin, _____, revolutionized modern medicine.",
+          "id": "q-mwoykd5hrt7u0",
+          "q": "Hashim Djojohadikusumo, _____, recently sparked a public debate among conservationists after proposing the relocation of endangered Javan rhinos from Ujung Kulon to Alas Purwo National Park.",
           "o": [
-            "an important breakthrough in medical science",
-            "was an important breakthrough in medical science",
-            "which an important breakthrough in medical science",
-            "being an important breakthrough in medical science"
+            "is Indonesia's Special Envoy for Climate and Energy",
+            "Indonesia's Special Envoy for Climate and Energy",
+            "he is Indonesia's Special Envoy for Climate and Energy",
+            "who Indonesia's Special Envoy for Climate and Energy"
           ],
-          "a": 0,
-          "e": "An important breakthrough in medical science merupakan appositive yang menjelaskan the discovery of penicillin. Subject utama adalah the discovery, singular, sehingga verb revolutionized tetap digunakan.",
+          "a": 1,
+          "e": "Bagian di antara dua koma berfungsi sebagai non-essential appositive yang menjelaskan subjek 'Hashim Djojohadikusumo', sehingga harus berbentuk frasa nomina murni tanpa kata kerja ('Indonesia's Special Envoy for Climate and Energy') sebelum main verb 'sparked'.",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwm5c32v7n2jh",
-          "q": "The professor of linguistics, _____, has published several books on language acquisition.",
+          "id": "q-mwoykd5h2sbng",
+          "q": "Traditional pinisi schooners, _____ by Bugis shipbuilders in South Sulawesi without using modern blueprints, remain seaworthy across open oceans.",
           "o": [
-            "an expert in second-language learning",
-            "who an expert in second-language learning",
-            "is an expert in second-language learning",
-            "expertise in second-language learning"
+            "constructing",
+            "were constructing",
+            "are constructed",
+            "constructed"
           ],
-          "a": 0,
-          "e": "An expert in second-language learning merupakan appositive noun phrase yang menjelaskan the professor of linguistics. Subject utama adalah the professor, sehingga verb singular has published tepat.",
+          "a": 3,
+          "e": "Peringkasan klausa adjektiva pasif di dalam appositive ('which are constructed...') menghilangkan 'which are' dan menyisakan verb-3 ('constructed').",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwm5c32vth9j0",
-          "q": "_____, the largest planet in the solar system, has dozens of moons.",
+          "id": "q-mwoykd5ht6fxm",
+          "q": "Only one species of orangutan, _____, inhabits the tropical rainforests of northern Sumatra.",
           "o": [
-            "Jupiter",
-            "Jupiter which",
-            "Jupiter being",
-            "Jupiter is"
+            "Pongo abelii is",
+            "it is Pongo abelii",
+            "Pongo abelii",
+            "which Pongo abelii"
           ],
-          "a": 0,
-          "e": "The largest planet in the solar system merupakan appositive yang menjelaskan Jupiter. Appositive diletakkan setelah subject dan diapit koma. Subject dan verb utama adalah Jupiter has.",
+          "a": 2,
+          "e": "Nama ilmiah di antara dua koma berfungsi sebagai appositive bagi subjek tunggal 'Only one species of orangutan', diikuti main verb tunggal 'inhabits'.",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwm5c32vnoij6",
-          "q": "The committee members, _____, agreed to revise the proposal.",
+          "id": "q-mwoykd5hlck69",
+          "q": "_____ a pioneer in modern Indonesian literature, Chairil Anwar revolutionized poetry with his raw, individualistic style in the 1940s.",
           "o": [
-            "representatives of several academic departments",
-            "representing several academic departments were",
-            "who representatives of several academic departments",
-            "several academic departments"
+            "Widely regarded as",
+            "He is widely regarded as",
+            "Widely regarding as",
+            "Who is widely regarded as"
           ],
           "a": 0,
-          "e": "Representatives of several academic departments merupakan appositive yang menjelaskan the committee members. Subject utama adalah committee members, sedangkan appositive tidak memengaruhi verb agreed.",
+          "e": "Reduced appositive phrase pasif di awal kalimat ('Who is widely regarded as...') langsung menggunakan past participle ('Widely regarded as') tanpa subjek ulang.",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwm5c32vguydc",
-          "q": "The city of Bandung, _____, is known for its educational institutions and creative industries.",
+          "id": "q-mwoykd5hmoe52",
+          "q": "Three active stratovolcanoes—Mount Merapi, Mount Semeru, and Mount Bromo—_____ closely monitored by volcanologists using seismic sensors.",
           "o": [
-            "a major urban center in West Java",
-            "which a major urban center in West Java",
-            "being a major urban center in West Java is",
-            "a major urban center in West Java it"
+            "is",
+            "are",
+            "was",
+            "has been"
           ],
-          "a": 0,
-          "e": "A major urban center in West Java merupakan appositive phrase yang menjelaskan the city of Bandung. Appositive berada di antara subject dan verb, sehingga diapit koma. Subject utama adalah the city of Bandung.",
+          "a": 1,
+          "e": "Appositive yang diapit tanda pisah (em-dash) menjelaskan subjek jamak di depannya ('Three active stratovolcanoes'), sehingga predikat utamanya memakai 'are'.",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwm5c32vkbjh9",
-          "q": "_____, the founder of the Indonesian language movement, contributed significantly to the development of Indonesian nationalism.",
+          "id": "q-mwoykd5hzv73f",
+          "q": "Gamelan ensembles, _____ of bronze gongs, metallophones, and bamboo flutes, produce complex polyphonic melodies.",
           "o": [
-            "Ki Hajar Dewantara",
-            "Ki Hajar Dewantara who",
-            "Ki Hajar Dewantara was",
-            "Being Ki Hajar Dewantara"
+            "consist",
+            "consisted",
+            "consisting",
+            "are consisting"
           ],
-          "a": 0,
-          "e": "The founder of the Indonesian language movement merupakan appositive phrase yang menjelaskan Ki Hajar Dewantara. Subject utama adalah nama tokoh tersebut, sehingga verb contributed melengkapi kalimat.",
+          "a": 2,
+          "e": "Kata kerja 'consist' selalu bermakna aktif (tidak pernah pasif), sehingga bentuk reduksi appositive-nya ('which consist of...') wajib memakai present participle ('consisting').",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwm5c32vxqlrg",
-          "q": "The two researchers, _____, published their findings in an international journal.",
+          "id": "q-mwoykd5hpedoh",
+          "q": "Jakarta's Old Town, _____, preserves numerous seventeenth-century Dutch colonial buildings around Fatahillah Square.",
           "o": [
-            "experts in computational linguistics",
-            "an expert in computational linguistics",
-            "who experts in computational linguistics",
-            "being experts in computational linguistics published"
+            "formally known as Batavia",
+            "formerly known as Batavia",
+            "it was formerly known as Batavia",
+            "which formerly known as Batavia"
           ],
-          "a": 0,
-          "e": "Experts in computational linguistics merupakan appositive phrase yang menjelaskan the two researchers. Appositive harus sesuai secara makna dengan noun yang dijelaskan. Karena subject researchers plural, bentuk experts tepat.",
+          "a": 1,
+          "e": "Reduced appositive pasif ('which was formerly known as Batavia') dipersingkat menjadi 'formerly known as Batavia' (dengan kata keterangan waktu 'formerly', bukan 'formally').",
           "topic": "",
           "ctx": ""
         },
         {
-          "id": "q-mwm5c32vkuu03",
-          "q": "_____, a collection of traditional Indonesian stories, contains numerous moral lessons.",
+          "id": "q-mwoykd5hud5tf",
+          "q": "_____ to withstand powerful tectonic earthquakes, traditional Nias wooden houses use interlocking pillars without a single iron nail.",
           "o": [
-            "The book",
-            "The book which",
-            "The book being",
-            "The book it"
+            "Designing",
+            "Designed",
+            "They are designed",
+            "Having designed"
+          ],
+          "a": 1,
+          "e": "Peringkasan klausa pasif di awal kalimat sebelum koma ('Because they are designed...') menyisakan past participle ('Designed') yang merujuk pada 'traditional Nias wooden houses'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwoykd5hczuio",
+          "q": "Archaeologists working in the Maros-Pangkep karst area uncovered ancient cave paintings, _____ among the oldest figurative artworks in the world.",
+          "o": [
+            "are",
+            "were",
+            "they are widely considered",
+            "widely considered"
+          ],
+          "a": 3,
+          "e": "Appositive di akhir kalimat yang menerangkan 'ancient cave paintings' berbentuk reduced passive phrase ('[which are] widely considered...').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwoykd5hou27x",
+          "q": "Neither the chief architect nor the structural engineers _____ modified the original dome design, a masterpiece of acoustic engineering.",
+          "o": [
+            "has",
+            "have",
+            "is",
+            "was"
+          ],
+          "a": 1,
+          "e": "Meski di akhir kalimat terdapat appositive tunggal ('a masterpiece...'), kata kerja utama tetap mengikuti subjek terdekat pada pola 'Neither... nor...', yaitu 'the structural engineers' (jamak -> 'have').",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwoykd5ha40y2",
+          "q": "_____ the world's largest flower by weight, Rafflesia arnoldii emits a strong odor to attract pollinating flies in Sumatran rainforests.",
+          "o": [
+            "It is",
+            "Known as",
+            "Knowing as",
+            "Which is known as"
+          ],
+          "a": 1,
+          "e": "Peringkasan appositive pasif di awal kalimat ('Which is known as...') menghilangkan relative pronoun dan to be, menyisakan 'Known as'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwoykd5hwjy92",
+          "q": "Javanese batik tulis, _____, requires weeks of meticulous hand-waxing using a traditional copper tool called a canting.",
+          "o": [
+            "a labor-intensive textile art",
+            "is a labor-intensive textile art",
+            "it is a labor-intensive textile art",
+            "which a labor-intensive textile art"
           ],
           "a": 0,
-          "e": "A collection of traditional Indonesian stories merupakan appositive phrase yang menjelaskan the book. Subject utama the book singular, sehingga verb contains digunakan.",
+          "e": "Appositive berbentuk frasa benda tunggal ('a labor-intensive textile art') disisipkan di antara koma untuk menjelaskan subjek 'Javanese batik tulis' sebelum kata kerja utama 'requires'.",
+          "topic": "",
+          "ctx": ""
+        },
+        {
+          "id": "q-mwoykd5hg9ufb",
+          "q": "Early austronesian navigators, _____ by stars, ocean swells, and migrating birds, successfully crossed vast stretches of the Pacific Ocean.",
+          "o": [
+            "guiding",
+            "were guided",
+            "guided",
+            "guide"
+          ],
+          "a": 1,
+          "e": "Reduced passive appositive ('who were guided by stars...') di tengah kalimat menyisakan past participle ('guided') karena para navigator dipandu oleh bintang.",
           "topic": "",
           "ctx": ""
         }
