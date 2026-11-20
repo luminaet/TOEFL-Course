@@ -231,7 +231,7 @@ function defaults(){
   links:{routine:[]},
   skills:{},
   accounts:[],
-  settings:{requireLogin:true,inactiveDays:2,periodWeeks:4,passScore:70}
+  settings:{requireLogin:true,inactiveDays:5,periodWeeks:4,passScore:70}
  };
 }
 function seedAdmin(){return {user:DEFAULT_ADMIN.user,name:DEFAULT_ADMIN.name,role:"admin",type:"admin",hash:hashPassword(DEFAULT_ADMIN.user,DEFAULT_ADMIN.pass),createdAt:Date.now(),expiresAt:0,active:true,history:[]};}
@@ -315,7 +315,7 @@ function normalize(d){
  out.accounts=[]; /* akun disimpan di server (Apps Script), bukan di lumina-data.json */
  var st=(d.settings&&typeof d.settings==="object")?d.settings:{};
  out.settings={requireLogin:true,
-  inactiveDays:clamp(Math.round(Number(st.inactiveDays))||2,1,30),
+  inactiveDays:clamp(Math.round(Number(st.inactiveDays))||5,1,30),minMaterialSec:clamp(Math.round(Number(st.minMaterialSec))||180,30,3600),minViewSec:clamp(Math.round(Number(st.minViewSec))||120,30,3600),
   periodWeeks:clamp(Math.round(Number(st.periodWeeks))||4,1,12),
   passScore:clamp(Math.round(Number(st.passScore))||70,1,100),driveBackup:okUrl(st.driveBackup==null?DRIVE_DEFAULT:st.driveBackup),drivePhotos:okUrl(st.drivePhotos==null?DRIVE_DEFAULT:st.drivePhotos)};
  return out;
@@ -393,9 +393,10 @@ function cleanProg(p){
  p=(p&&typeof p==="object")?p:{};
  return {
   since:Number(p.since)||0,
+  acts:(Array.isArray(p.acts)?p.acts:[]).filter(function(v){return v&&v.k&&Number(v.ts);}).map(function(v){return {k:String(v.k).slice(0,12),ref:String(v.ref||"").slice(0,60),ts:Number(v.ts)};}),
   visits:(Array.isArray(p.visits)?p.visits:[]).filter(function(v){return v&&v.skill&&Number(v.ts);}).map(function(v){return {skill:String(v.skill),ts:Number(v.ts)};}),
   attempts:(Array.isArray(p.attempts)?p.attempts:[]).filter(function(a){return a&&Number(a.ts)&&Number(a.total)>0;}).map(function(a){
-   return {kind:a.kind==="pretest"?"pretest":"skill",skill:String(a.skill||""),section:String(a.section||""),level:String(a.level||""),score:Number(a.score)||0,total:Number(a.total),pct:Number(a.pct)||0,ts:Number(a.ts)};
+   return {kind:a.kind==="pretest"?"pretest":"skill",skill:String(a.skill||""),section:String(a.section||""),level:String(a.level||""),score:Number(a.score)||0,total:Number(a.total),pct:Number(a.pct)||0,ts:Number(a.ts),answered:(a.answered==null||isNaN(Number(a.answered)))?null:Number(a.answered)};
   })
  };
 }
@@ -413,14 +414,50 @@ function recordAttempt(user,att){
  if(p.attempts.length>3000)p.attempts=p.attempts.slice(-3000);
  saveProg(user,p);
 }
+/* ---------- aktivitas yang memenuhi syarat ---------- */
+function recordAct(user,kind,ref,gap){
+ var p=ensureProg(user),now=Date.now(),g=(gap==null)?120000:gap;ref=String(ref||"");
+ for(var i=p.acts.length-1;i>=0&&now-p.acts[i].ts<g;i--){if(p.acts[i].k===kind&&p.acts[i].ref===ref)return false;}
+ p.acts.push({k:kind,ref:ref,ts:now});if(p.acts.length>3000)p.acts=p.acts.slice(-3000);
+ saveProg(user,p);return true;
+}
+/* menghitung detik AKTIF: tab terlihat dan ada gerakan/ketukan/gulir dalam 2 menit terakhir; memanggil cb tiap kali mencapai "sec" detik */
+function watchActive(sec,cb){
+ var acc=0,last=Date.now(),stopped=false,IDLE=120000,evs=["mousemove","keydown","scroll","touchstart","click","wheel"];
+ function bump(){last=Date.now();}
+ evs.forEach(function(e){window.addEventListener(e,bump,{passive:true,capture:true});});
+ var iv=setInterval(function(){
+  if(stopped||document.visibilityState!=="visible"||Date.now()-last>IDLE)return;
+  acc++;if(acc>=sec){acc=0;try{cb();}catch(e){}}
+ },1000);
+ return function(){stopped=true;clearInterval(iv);evs.forEach(function(e){window.removeEventListener(e,bump,{capture:true});});};
+}
+/* halaman materi (mis. materiswoskill1.html): hitung waktu aktif di halaman itu; tautan ke situs lain tidak bisa diukur */
+function startMaterialWatch(){
+ var strip=function(x){return String(x).split(/[?#]/)[0].split("/").pop().toLowerCase().replace(/\.html?$/,"");};
+ var base=strip(location.pathname);
+ if(!base||/^(index|content-manager|exam-manager)$/.test(base)||/[?&]edit(=|&|$)/.test(location.search))return;
+ var run=function(){
+  var s=getSession();if(!s||s.role!=="student"||s.type==="dummy")return;
+  fetchPublished().then(function(d){
+   if(!d)return;var id="";
+   MAT_SECTIONS.forEach(function(sec){(d.materialPages[sec]||[]).forEach(function(p){if(!id&&p.file&&strip(p.file)===base)id=p.id;});});
+   if(!id)return;
+   watchActive(Math.max(30,d.settings.minMaterialSec||180),function(){recordAct(s.user,"study",id);});
+  });
+ };
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",run);else run();
+}
+startMaterialWatch();
 function mergeProg(a,b){
- var seenV={},seenA={},out={since:0,visits:[],attempts:[]};
+ var seenV={},seenA={},out={since:0,acts:[],visits:[],attempts:[]};
  out.since=(a.since&&b.since)?Math.min(a.since,b.since):(a.since||b.since);
  [a,b].forEach(function(p){
   p.visits.forEach(function(v){var k=v.skill+"|"+v.ts;if(!seenV[k]){seenV[k]=1;out.visits.push(v);}});
+  (p.acts||[]).forEach(function(v){var k="c|"+v.k+"|"+v.ref+"|"+v.ts;if(!seenV[k]){seenV[k]=1;out.acts.push(v);}});
   p.attempts.forEach(function(x){var k=x.kind+"|"+x.skill+"|"+x.level+"|"+x.ts;if(!seenA[k]){seenA[k]=1;out.attempts.push(x);}});
  });
- out.visits.sort(function(x,y){return x.ts-y.ts;}); out.attempts.sort(function(x,y){return x.ts-y.ts;});
+ out.visits.sort(function(x,y){return x.ts-y.ts;}); out.attempts.sort(function(x,y){return x.ts-y.ts;}); out.acts.sort(function(x,y){return x.ts-y.ts;});
  return out;
 }
 function exportProgress(user,name){return {type:"lumina-progress",version:1,user:String(user),name:String(name||user),exportedAt:Date.now(),progress:loadProg(user),profile:loadProfile(user)};}
@@ -446,12 +483,16 @@ function summary(prog,d,from,to){
  sk.forEach(function(s){var x=skillStats(prog,s.id,from,to);if(x.attempts){best.push(x.best);if(x.best>=d.settings.passScore)mastered++;}});
  return {total:sk.length,attempted:best.length,mastered:mastered,score:best.length?Math.round(best.reduce(function(a,b){return a+b;},0)/best.length):null};
 }
+function qualAttempt(a){return a.answered==null||a.answered>=1;}
 function lastActivity(prog){
- var m=0; prog.visits.forEach(function(v){if(v.ts>m)m=v.ts;}); prog.attempts.forEach(function(a){if(a.ts>m)m=a.ts;}); return m;
+ var m=0;
+ (prog.acts||[]).forEach(function(v){if(v.ts>m)m=v.ts;});
+ prog.attempts.forEach(function(a){if(qualAttempt(a)&&a.ts>m)m=a.ts;});
+ return m;
 }
 function dayNum(ts){return Math.floor((ts-new Date(ts).getTimezoneOffset()*60000)/DAY);}
 function streak(prog,now){
- var set={}; prog.visits.forEach(function(v){set[dayNum(v.ts)]=1;}); prog.attempts.forEach(function(a){set[dayNum(a.ts)]=1;});
+ var set={}; (prog.acts||[]).forEach(function(v){set[dayNum(v.ts)]=1;}); prog.attempts.forEach(function(a){if(qualAttempt(a))set[dayNum(a.ts)]=1;});
  var days=Object.keys(set).map(Number).sort(function(a,b){return a-b;}), longest=0,run=0,prev=null;
  days.forEach(function(x){run=(prev!==null&&x===prev+1)?run+1:1;if(run>longest)longest=run;prev=x;});
  var t=dayNum(now),cur=0,c=set[t]?t:t-1;
@@ -474,7 +515,7 @@ window.Lumina={
  load:loadEditor,loadEditor:loadEditor,loadViewer:loadViewer,loadLocal:loadLocal,save:save,hasLocal:hasLocal,fetchPublished:fetchPublished,
  getExportedAt:getExportedAt,download:download,
  findAccount:findAccount,checkLogin:checkLogin,login:login,getSession:getSession,setSession:setSession,currentAccount:currentAccount,isDefaultPassword:isDefaultPassword,
- cleanProg:cleanProg,loadProg:loadProg,saveProg:saveProg,ensureProg:ensureProg,recordVisit:recordVisit,recordAttempt:recordAttempt,mergeProg:mergeProg,
+ cleanProg:cleanProg,loadProg:loadProg,saveProg:saveProg,ensureProg:ensureProg,recordVisit:recordVisit,recordAttempt:recordAttempt,mergeProg:mergeProg,recordAct:recordAct,watchActive:watchActive,
  exportProgress:exportProgress,getRecap:getRecap,setRecap:setRecap,
  periodInfo:periodInfo,skillStats:skillStats,skillStatus:skillStatus,summary:summary,lastActivity:lastActivity,streak:streak,inactivity:inactivity
 };

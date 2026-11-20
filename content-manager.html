@@ -610,7 +610,7 @@ function vRecap(){
   <div style="overflow:auto"><table><thead><tr><th>NAMA</th><th>USERNAME</th><th>TERAKHIR AKTIF</th><th>PERCOBAAN</th><th>SKILL TUNTAS</th><th>SKOR PERIODE</th><th>STATUS</th><th></th></tr></thead><tbody>${rows||'<tr><td colspan="8" class="empty">Belum ada akun mahasiswa.</td></tr>'}</tbody></table></div></div>
  <div class="box"><h3>Impor laporan progres</h3><p class="sub">Pilih satu atau beberapa file <code>progress-username.json</code> yang diunduh mahasiswa dari halaman Akun Saya. Data digabung dengan yang sudah ada.</p>
   <div class="row"><label class="btn secondary file-label" style="cursor:pointer">Pilih file progres (.json)<input id="rc-imp" type="file" accept="application/json,.json" multiple hidden></label><button class="btn danger small" data-act="rcClear">Hapus semua data impor</button></div></div>
- <div class="note">Skor periode = rata-rata skor terbaik per skill yang sudah dikerjakan pada periode berjalan (${st.periodWeeks} minggu). Skill dianggap tuntas jika skor terbaik ≥ ${st.passScore}%. Mahasiswa dianggap tidak aktif jika tidak membuka materi atau mengerjakan latihan selama ${st.inactiveDays} hari.</div>`;
+ <div class="note">Skor periode = rata-rata skor terbaik per skill yang sudah dikerjakan pada periode berjalan (${st.periodWeeks} minggu). Skill dianggap tuntas jika skor terbaik ≥ ${st.passScore}%. Mahasiswa dianggap tidak aktif jika selama ${st.inactiveDays} hari tidak ada aktivitas yang memenuhi syarat: membuka materi aktif ≥ ${Math.round((st.minMaterialSec||180)/60)} menit, mencoba minimal 1 soal, atau berada aktif di bagian lain ≥ ${Math.round((st.minViewSec||120)/60)} menit. Hanya membuka aplikasi tidak dihitung.</div>`;
  $("#rc-imp").onchange=async e=>{
   let ok=0,bad=0;const rc=L.getRecap();
   for(const f of [...e.target.files]){
@@ -663,7 +663,9 @@ function vSettings(){
  const s=D.settings;
  $("#view").innerHTML=title("PENGATURAN","Pengaturan belajar","Aturan yang dipakai untuk portofolio dan peringatan mahasiswa.")+
  `<div class="box"><div class="form">
-  <label>Peringatan berkedip jika mahasiswa tidak aktif selama (hari)<input id="st-in" type="number" min="1" max="30" value="${s.inactiveDays}" style="max-width:140px"><span class="hint">Aktif = membuka materi skill atau mengerjakan latihan. Default 2 hari.</span></label>
+  <label>Peringatan berkedip jika mahasiswa tidak aktif selama (hari)<input id="st-in" type="number" min="1" max="30" value="${s.inactiveDays}" style="max-width:140px"><span class="hint">Hanya aktivitas yang memenuhi syarat di bawah yang dihitung. Hanya membuka aplikasi tidak dihitung. Default 5 hari.</span></label>
+  <label>Syarat membuka materi (menit aktif)<input id="st-mm" type="number" min="1" max="60" value="${Math.round((s.minMaterialSec||180)/60)}" style="max-width:140px"><span class="hint">Materi dihitung jika halamannya dibuka aktif (tab terlihat dan ada gerakan/ketukan) minimal selama ini. Default 3 menit. Berlaku untuk halaman materi di situs ini, bukan tautan ke situs lain.</span></label>
+  <label>Syarat melihat bagian lain (menit aktif)<input id="st-vm" type="number" min="1" max="60" value="${Math.round((s.minViewSec||120)/60)}" style="max-width:140px"><span class="hint">Berada aktif di Materi, Latihan, Pre-Test, atau Akun Saya minimal selama ini. Default 2 menit. Mencoba soal (walau hanya 1 yang dijawab) selalu dihitung.</span></label>
   <label>Panjang periode portofolio (minggu)<input id="st-pw" type="number" min="1" max="12" value="${s.periodWeeks}" style="max-width:140px"><span class="hint">Nilai per skill diakumulasi tiap periode (disarankan 4–5 minggu).</span></label>
   <label>Nilai minimum skill dianggap tuntas (%)<input id="st-pass" type="number" min="1" max="100" value="${s.passScore}" style="max-width:140px"></label>
   <label>Link folder Drive untuk backup data (lumina-data.json)<input id="st-bk" value="${esc(s.driveBackup||"")}" placeholder="https://drive.google.com/drive/folders/…"></label>
@@ -846,7 +848,8 @@ qDel(id){
  rcClear(){if(!confirm("Hapus semua data progres hasil impor? (Data progres yang tersimpan langsung di browser ini tidak dihapus.)"))return;L.setRecap({});toast("Data impor dihapus");vRecap();},
  stSave(){
   const s=D.settings;
-  s.inactiveDays=Math.min(30,Math.max(1,Math.round(Number($("#st-in").value))||2));
+  s.inactiveDays=Math.min(30,Math.max(1,Math.round(Number($("#st-in").value))||5));
+  s.minMaterialSec=Math.min(3600,Math.max(60,Math.round(Number($("#st-mm").value)*60)||180));s.minViewSec=Math.min(3600,Math.max(60,Math.round(Number($("#st-vm").value)*60)||120));
   s.periodWeeks=Math.min(12,Math.max(1,Math.round(Number($("#st-pw").value))||4));
   s.passScore=Math.min(100,Math.max(1,Math.round(Number($("#st-pass").value))||70));
   const okU=v=>/^https:\/\/\S+$/.test(v.trim())?v.trim():"";

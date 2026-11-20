@@ -256,7 +256,8 @@ function submitExam(auto){
 function finishExam(E,res){
  if(!E.preview&&E.user){
   X.saveResult(E.user,res);X.clearRun(E.user,E.level);
-  L.recordAttempt(E.user,{kind:"pretest",skill:"",section:"",level:E.level,score:res.correct,total:res.total,pct:res.pct});
+  var answeredN=0;["listening","swo","reading"].forEach(function(s){var x=res.sections&&res.sections[s];if(x)answeredN+=x.total-x.blank;});
+  L.recordAttempt(E.user,{kind:"pretest",skill:"",section:"",level:E.level,score:res.correct,total:res.total,pct:res.pct,answered:answeredN});
   try{renderAlert();}catch(e){}
  }
  E.result=res;
@@ -366,6 +367,7 @@ body.addEventListener("click",handle);pre.addEventListener("click",handle);
 body.addEventListener("change",function(e){
  var r=e.target.closest("input[data-qid]");if(!r||!ex||ex.done)return;
  ex.answers[r.dataset.qid]=Number(r.value);persist();renderNav();
+ if(me&&me.role==="student"&&me.type!=="dummy"&&!ex.preview){try{L.recordAct(me.user,"try","exam:"+ex.level);renderAlert();}catch(e){}}
  var q=r.closest(".question");if(q&&!q.querySelector('[data-xact="clear"]')){var f=q.querySelector(".ex-q-foot");if(f){var c=document.createElement("button");c.type="button";c.className="btn secondary small";c.dataset.xact="clear";c.dataset.id=r.dataset.qid;c.textContent="Clear answer";f.appendChild(c);}}
 });
 /* peringatan sebelum menutup tab saat ujian berjalan */

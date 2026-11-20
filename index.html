@@ -363,7 +363,7 @@ a.sk-title:hover{color:var(--red);text-decoration:underline}
 <script>
 const L=window.Lumina, esc=L.esc, $=id=>document.getElementById(id);
 let cms=null, me=null, run=null, practiceSection="swo";
-let bootMsg="";
+let bootMsg="",secWatch=null;
 const DAY=L.DAY;
 const SEC={
  listening:{name:"Listening Comprehension",short:"Listening",color:"#16866b",ico:"🎧"},
@@ -397,6 +397,14 @@ function descHTML(p){
 }
 const CHEV='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>';
 
+const WATCH_PAGES=["materials","mat-listening","mat-swo","mat-reading","practice","pretest","account"];
+function watchSection(id){
+ if(secWatch){secWatch();secWatch=null;}
+ if(!me||me.role!=="student"||me.type==="dummy"||WATCH_PAGES.indexOf(id)<0)return;
+ const sec=Math.max(30,(cms.settings&&cms.settings.minViewSec)||120);
+ secWatch=L.watchActive(sec,()=>{if(!me)return;L.recordAct(me.user,"view",id);renderAlert();});
+}
+
 /* ---------- navigasi ---------- */
 const R={};
 function showPage(id){
@@ -409,6 +417,7 @@ function showPage(id){
  else if(id==="run")navId=run?run.origin:"practice";
  document.querySelectorAll(".nav button[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===navId));
  renderAlert();
+ watchSection(id);
  if(R[id])R[id]();
  window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -425,10 +434,10 @@ function renderAlert(){
  const slot=$("alert-slot");let h="";
  if(me&&me.type==="dummy"){$("nav-dot").classList.add("hidden");slot.innerHTML='<div class="draft-banner">👁️ <b>Demo account.</b> You can browse the materials and see the features, but you cannot take any practice or test.</div>';return;}
  if(me&&me.role==="student"){
-  const a=L.inactivity(L.loadProg(me.user),cms.settings,Date.now());
+  const a=L.inactivity(L.loadProg(me.user),cms.settings,Date.now()),mm=Math.max(1,Math.round((cms.settings.minMaterialSec||180)/60));
   $("nav-dot").classList.toggle("hidden",!a.warn);
   if(a.warn){
-   h=`<div class="warn-banner alert-blink" data-act="go" data-go="materials" role="alert"><span class="ico">⚠️</span><span>${a.never?"You haven't started yet. Open a skill material and complete its practice to begin your portfolio.":`You haven't opened a skill material or done any practice for <b>${a.days} day${a.days===1?"":"s"}</b>. Open a skill and complete its practice to keep your portfolio on track.`}</span></div>`;
+   h=`<div class="warn-banner alert-blink" data-act="go" data-go="materials" role="alert"><span class="ico">⚠️</span><span>${a.never?"You haven't started yet. Study a material for at least "+mm+" minutes or try a practice question to begin your portfolio.":`No learning activity has been counted for <b>${a.days} day${a.days===1?"":"s"}</b>. Study a material for at least ${mm} minutes, try a practice question, or explore a section to keep your portfolio on track.`}</span></div>`;
   }
  }else if(isAdmin()&&cms.__src==="draft"&&cms.updatedAt>L.getExportedAt()){
   h=`<div class="draft-banner">👁️ <b>Preview mode.</b> You are seeing your <b>draft</b> from Content Manager. Students still see the published <code>lumina-data.json</code> until you upload the new one.</div>`;
@@ -787,7 +796,7 @@ function submitRun(auto){
  const pct=Math.round(score/n*100),pass=cms.settings.passScore;
  let saved='<p>Admin preview — this result is not saved.</p>';
  if(me&&me.role==="student"){
-  L.recordAttempt(me.user,{kind:run.kind==="skill"?"skill":"pretest",skill:run.kind==="skill"?run.id:"",section:run.section,level:run.level,score,total:n,pct});
+  L.recordAttempt(me.user,{kind:run.kind==="skill"?"skill":"pretest",skill:run.kind==="skill"?run.id:"",section:run.section,level:run.level,score,total:n,pct,answered});
   saved=`<p>Saved to your portfolio.${run.kind==="skill"?(pct>=pass?" 🎉 You mastered this skill!":` Reach ${pass}% to master this skill.`):""}</p>`;
   renderAlert();
  }
@@ -829,6 +838,10 @@ document.addEventListener("click",e=>{
  else if(a==="print")window.print();
 });
 document.getElementById("open-cms").addEventListener("click",()=>{location.href="content-manager.html";});
+document.addEventListener("change",e=>{
+ const r=e.target&&e.target.closest?e.target.closest("#run-questions input[type=radio]"):null;
+ if(r&&run&&me&&me.role==="student"&&me.type!=="dummy"){L.recordAct(me.user,"try",run.kind==="skill"?run.id:"pretest:"+run.level);renderAlert();}
+});
 
 /* ---------- login ---------- */
 let gateFails=0,gateLock=0;
