@@ -98,6 +98,7 @@ css.textContent=[
 "#lum-bar input[type=number]{width:60px;cursor:text}",
 "#lum-bar input[type=color]{width:30px;height:28px;padding:1px;border:1px solid #334155;border-radius:7px;background:#fff;cursor:pointer}",
 "#lum-bar button:hover{background:#334155}",
+"#lum-bar button.on{background:#14b8a6;color:#04201c;border-color:#14b8a6}",
 "#lum-bar button:disabled{opacity:.4;cursor:not-allowed}",
 "#lum-bar .sw{min-width:20px;width:20px;height:20px;padding:0;border-radius:50%}",
 "#lum-bar .sep{width:1px;height:22px;background:#334155;margin:0 3px}",
@@ -105,6 +106,8 @@ css.textContent=[
 "#lum-bar .pri{background:#14b8a6;color:#04201c;border-color:#14b8a6}",
 "#lum-bar .dng{background:#7f1d1d;border-color:#991b1b;color:#fecaca}",
 "#lum-r2,#lum-r3{background:#1b2a47;border-radius:9px;padding:4px 6px}",
+"#lum-fold{display:none}",
+"@media(max-width:700px){#lum-bar{left:0;right:0;bottom:0;transform:none;width:100%;max-width:100%;max-height:19vh;border-radius:12px 12px 0 0;padding:3px 6px;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;overscroll-behavior:contain}#lum-bar .r{gap:3px;margin:2px 0;justify-content:flex-start}#lum-bar button,#lum-bar select,#lum-bar input[type=number]{min-width:26px;height:26px;padding:0 6px;font-size:11px}#lum-bar input[type=number]{width:48px}#lum-bar .sw{min-width:18px;width:18px;height:18px;padding:0}#lum-bar .hint{display:none}#lum-fold{display:block;position:sticky;top:-3px;z-index:3;background:#0f172a;text-align:right;padding:1px 0}#lum-fold button{background:#334155}#lum-bar.fold{max-height:none;overflow:hidden}#lum-bar.fold>*:not(#lum-fold){display:none}}",
 ".lum-fab{position:fixed;right:14px;bottom:14px;z-index:99998;height:36px;box-shadow:0 6px 20px #0006}",
 ".lum-modal{position:fixed;inset:0;background:#0009;z-index:100000;display:grid;place-items:center;padding:16px;font-family:'Plus Jakarta Sans',system-ui,sans-serif}",
 ".lum-card{background:#fff;color:#0f172a;border-radius:14px;padding:20px;width:100%;max-width:640px;max-height:90vh;overflow:auto}",
@@ -225,7 +228,52 @@ function secOf(node){
 }
 function onSelChange(){
  var s=getSelection();
- if(s.rangeCount&&secOf(s.anchorNode)){savedRange=s.getRangeAt(0).cloneRange();setCell(cellOf(s.anchorNode));}
+ if(s.rangeCount&&secOf(s.anchorNode)){savedRange=s.getRangeAt(0).cloneRange();setCell(cellOf(s.anchorNode));if(editing){keepSelVisible();syncTx();}}
+}
+
+/* ---------- kolom font/ukuran/warna ikut menampilkan format teks yang sedang diblok/kursor ---------- */
+function setSelVal(el,val,label){
+ if(!el)return;
+ var found=null;
+ Array.prototype.forEach.call(el.options,function(o){if(!o.dataset.cur&&o.value===val)found=o;});
+ var cur=el.querySelector("option[data-cur]");
+ if(found){if(cur)cur.remove();el.value=val;return;}
+ if(!cur){cur=document.createElement("option");cur.dataset.cur="1";el.appendChild(cur);}
+ cur.value=val;cur.textContent=label;el.value=val;
+}
+function famKey(f){return String(f||"").split(",")[0].replace(/['"]/g,"").trim().toLowerCase();}
+function syncTx(){
+ if(!editing||!savedRange||!$("lum-bar"))return;
+ var n=savedRange.startContainer;
+ if(!savedRange.collapsed&&n.nodeType===3&&savedRange.startOffset>=n.nodeValue.length&&n.nextSibling)n=n.nextSibling;
+ if(n.nodeType===1&&!savedRange.collapsed){var ch=n.childNodes[savedRange.startOffset];while(ch&&ch.nodeType===1&&ch.firstChild)ch=ch.firstChild;if(ch)n=ch;}
+ if(n.nodeType===3)n=n.parentNode;
+ if(!n||!secOf(n))return;
+ var cs=getComputedStyle(n);
+ /* jenis font */
+ var fk=famKey(cs.fontFamily),fo=null,fs=$("tx-font");
+ Array.prototype.forEach.call(fs.options,function(o){if(!o.dataset.cur&&o.value&&famKey(o.value)===fk)fo=o;});
+ setSelVal(fs,fo?fo.value:"\u0001"+fk,fo?"":(fk?fk.replace(/\b\w/g,function(c){return c.toUpperCase();}):"Font…"));
+ /* ukuran */
+ var px=Math.round(parseFloat(cs.fontSize))||0;
+ setSelVal($("tx-size"),String(px),px+" px");
+ /* warna teks */
+ $("tx-fg").value=hex(cs.color);
+ /* sorotan: dari elemen inline terdekat yang punya latar */
+ var hl=null,e=n,sec=secOf(n);
+ while(e&&e!==sec){
+  var c2=getComputedStyle(e);
+  if(c2.display!=="inline")break;
+  if(c2.backgroundColor!=="rgba(0, 0, 0, 0)"&&c2.backgroundColor!=="transparent"){hl=hex(c2.backgroundColor);break;}
+  e=e.parentElement;
+ }
+ if(hl)$("tx-hl").value=hl;
+ /* tombol B/I/U/S & rata teks yang aktif */
+ Array.prototype.forEach.call($("lum-bar").querySelectorAll("button[data-cmd]"),function(b){
+  var c3=b.dataset.cmd;if(c3==="link"||c3==="unlink"||c3==="removeFormat")return;
+  var on=false;try{on=document.queryCommandState(c3);}catch(x){}
+  b.classList.toggle("on",!!on);
+ });
 }
 function fmt(fn,needRange){
  var sec=savedRange?secOf(savedRange.commonAncestorContainer):null;
@@ -233,18 +281,25 @@ function fmt(fn,needRange){
  if(needRange&&savedRange.collapsed){toast("Blok teks yang ingin diubah dulu");return;}
  try{sec.focus({preventScroll:true});}catch(e){sec.focus();}
  var s=getSelection();s.removeAllRanges();s.addRange(savedRange);
- fn();snap();
+ fn();
+ var s2=getSelection();if(s2.rangeCount&&secOf(s2.getRangeAt(0).commonAncestorContainer))savedRange=s2.getRangeAt(0).cloneRange();
+ snap();syncTx();
 }
 function setSize(px){
  fmt(function(){
   document.execCommand("styleWithCSS",false,false);
   document.execCommand("fontSize",false,"7");
   document.execCommand("styleWithCSS",false,true);
+  var spans=[];
   Array.prototype.slice.call(document.querySelectorAll('main font[size="7"]')).forEach(function(f){
    var sp=document.createElement("span");sp.style.fontSize=px+"px";
    while(f.firstChild)sp.appendChild(f.firstChild);
-   f.parentNode.replaceChild(sp,f);
+   f.parentNode.replaceChild(sp,f);spans.push(sp);
   });
+  if(spans.length){ /* pertahankan blok teks setelah ukuran diganti */
+   var rg=document.createRange();rg.setStartBefore(spans[0]);rg.setEndAfter(spans[spans.length-1]);
+   var sl=getSelection();sl.removeAllRanges();sl.addRange(rg);
+  }
  },true);
 }
 function setFg(c){fmt(function(){document.execCommand("styleWithCSS",false,true);document.execCommand("foreColor",false,c);});}
@@ -263,6 +318,7 @@ function buildBar(){
  var sw=function(k,c){return '<button type="button" class="sw" data-'+k+'="'+c+'" style="background:'+c+'" title="'+(k==="hl"?"Sorot":"Warna teks")+'"></button>';};
  var bar=document.createElement("div");bar.id="lum-bar";
  bar.innerHTML=
+ '<div id="lum-fold"><button type="button" data-act="fold" id="lum-foldb">▾ Kecilkan toolbar</button></div>'+
  '<div class="r">'+
   '<button data-act="undo" id="lum-undo" title="Urungkan (Ctrl+Z)">↶</button><button data-act="redo" id="lum-redo" title="Ulangi (Ctrl+Y)">↷</button><span class="sep"></span>'+
   '<button data-cmd="bold"><b>B</b></button><button data-cmd="italic"><i>I</i></button><button data-cmd="underline"><u>U</u></button><button data-cmd="strikeThrough"><s>S</s></button><span class="sep"></span>'+
@@ -297,6 +353,7 @@ function buildBar(){
   '<button data-tb="mergeR">Gabung →</button><button data-tb="mergeD">Gabung ↓</button><button data-tb="split">Pisah sel</button><span class="sep"></span>'+
   '<button data-tb="deltbl" class="dng">🗑 Tabel</button><span class="lbl">Shift+klik sel = atur warna/lebar sel · ⤴ Induk = pilih baris/tabel</span>'+
  '</div>'+
+ '<div class="hint" style="text-align:center;font-size:11px;color:#94a3b8;font-weight:500">Blok teks → atur font/ukuran/warna · klik kartu (garis merah putus-putus) → panel kartu muncul; tarik pojok kanan-bawah untuk mengubah ukuran · Shift+klik = pilih elemen apa pun, ⤴ Induk = pilih pembungkusnya</div>';
  document.body.appendChild(bar);
  bar.addEventListener("mousedown",function(e){if(e.target.closest("button"))e.preventDefault();});
  bar.addEventListener("click",function(e){
@@ -318,7 +375,7 @@ function buildBar(){
  var TX={"tx-font":setFont,"tx-size":setSize,"tx-fg":setFg,"tx-hl":setHl};
  bar.addEventListener("change",function(e){
   var f=TX[e.target.id];
-  if(f){if(e.target.value)f(e.target.value);if(e.target.tagName==="SELECT")e.target.value="";}
+  if(f){var v=e.target.value;if(v&&v.charAt(0)!=="\u0001")f(v);else syncTx();}
  });
  /* kontrol kartu */
  var CP={
@@ -782,8 +839,33 @@ function quizModal(){
   renderQuiz();setScoreText();m.remove();toast("Soal kuis tersimpan ✓");
  };
 }
+
+/* ---------- tampilan HP: toolbar rendah, tidak menabrak menu seleksi bawaan & keyboard ---------- */
+var mq=window.matchMedia?window.matchMedia("(max-width:700px)"):{matches:false};
+function fitBar(){
+ var b=$("lum-bar");if(!b)return;
+ document.body.style.paddingBottom=mq.matches?(b.offsetHeight+110)+"px":"";
+}
+function lift(){ /* naikkan toolbar saat keyboard layar muncul */
+ var b=$("lum-bar");if(!b||!window.visualViewport||!mq.matches){if(b)b.style.bottom="";return;}
+ var v=window.visualViewport,off=Math.max(0,window.innerHeight-v.height-v.offsetTop);
+ b.style.bottom=off+"px";
+}
+var selT=null;
+function keepSelVisible(){ /* seleksi teks jangan tertutup toolbar / header: gulirkan ke area tengah */
+ clearTimeout(selT);
+ selT=setTimeout(function(){
+  if(!editing||!mq.matches)return;
+  var s=getSelection();if(!s.rangeCount||s.isCollapsed||!secOf(s.anchorNode))return;
+  var b=$("lum-bar"),r=s.getRangeAt(0).getBoundingClientRect(),vh=(window.visualViewport?window.visualViewport.height:innerHeight);
+  var bot=vh-(b?b.offsetHeight:0)-70,top=150;
+  if(r.bottom>bot)window.scrollBy(0,Math.min(r.bottom-bot,vh));
+  else if(r.top<top)window.scrollBy(0,-Math.min(top-r.top,vh));
+ },450);
+}
 var ACT={
  undo:function(){step(-1);},redo:function(){step(1);},
+ fold:function(){var b=$("lum-bar");if(!b)return;var f=b.classList.toggle("fold");$("lum-foldb").textContent=f?"▴ Buka toolbar":"▾ Kecilkan toolbar";if(f){var p=$("lum-pal");if(p)p.remove();}fitBar();},
  save:saveAll,quiz:quizModal,
  reset:function(){
   if(!confirm("Kembalikan halaman ini ke tampilan asli? Semua hasil edit halaman ini akan hilang."))return;
@@ -803,7 +885,9 @@ function enterEdit(){
  sections().forEach(function(s){s.contentEditable="true";});
  var qc=document.getElementById("quiz-container");if(qc)qc.contentEditable="false";
  var h1=document.querySelector("header h1");if(h1)h1.contentEditable="true";
- buildBar();
+ buildBar();fitBar();lift();
+ window.addEventListener("resize",function(){fitBar();lift();});
+ if(window.visualViewport){window.visualViewport.addEventListener("resize",lift);window.visualViewport.addEventListener("scroll",lift);}
  document.addEventListener("selectionchange",onSelChange);
  document.addEventListener("input",function(e){if(e.target.closest&&e.target.closest("#lum-bar,.lum-modal"))return;dirty=true;snapSoon();});
  document.addEventListener("click",function(e){
