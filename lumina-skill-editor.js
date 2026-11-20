@@ -107,7 +107,7 @@ css.textContent=[
 "#lum-bar .dng{background:#7f1d1d;border-color:#991b1b;color:#fecaca}",
 "#lum-r2,#lum-r3{background:#1b2a47;border-radius:9px;padding:4px 6px}",
 "#lum-fold{display:none}",
-"@media(max-width:700px){#lum-bar{left:0;right:0;bottom:0;transform:none;width:100%;max-width:100%;box-sizing:border-box;max-height:23vh;border-radius:12px 12px 0 0;padding:3px 6px;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;overscroll-behavior:contain}#lum-bar .r{gap:3px;margin:2px 0;justify-content:flex-start}#lum-bar>.r:nth-child(2){padding-right:34px}#lum-bar button,#lum-bar select,#lum-bar input[type=number]{min-width:26px;height:26px;padding:0 6px;font-size:11px}#lum-bar input[type=number]{width:48px}#lum-bar .sw{min-width:18px;width:18px;height:18px;padding:0}#lum-fold{display:block;position:sticky;top:0;float:right;height:0;z-index:3;overflow:visible}#lum-fold button{width:30px;height:28px;font-size:15px;line-height:1;padding:0;background:#334155;border-color:#475569}#lum-bar.fold{max-height:none;overflow:hidden;min-height:34px}#lum-bar.fold>*:not(#lum-fold){display:none}#lum-bar.fold #lum-fold{float:none;height:auto;text-align:right}}",
+"@media (max-width:700px),(pointer:coarse) and (max-width:1100px){#lum-bar{left:0;right:0;bottom:0;transform:none;width:100%;max-width:100%;box-sizing:border-box;max-height:23vh;border-radius:12px 12px 0 0;padding:3px 6px;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;overscroll-behavior:contain}#lum-bar .r{gap:3px;margin:2px 0;justify-content:flex-start}#lum-bar>.r:nth-child(2){padding-right:34px}#lum-bar button,#lum-bar select,#lum-bar input[type=number]{min-width:26px;height:26px;padding:0 6px;font-size:11px}#lum-bar input[type=number]{width:48px}#lum-bar .sw{min-width:18px;width:18px;height:18px;padding:0}#lum-fold{display:block;position:sticky;top:0;float:right;height:0;z-index:3;overflow:visible}#lum-fold button{width:30px;height:28px;font-size:15px;line-height:1;padding:0;background:#334155;border-color:#475569}#lum-bar.fold{max-height:none;overflow:hidden;min-height:34px}#lum-bar.fold>*:not(#lum-fold){display:none}#lum-bar.fold #lum-fold{float:none;height:auto;text-align:right}}",
 ".lum-fab{position:fixed;right:14px;bottom:14px;z-index:99998;height:36px;box-shadow:0 6px 20px #0006}",
 ".lum-modal{position:fixed;inset:0;background:#0009;z-index:100000;display:grid;place-items:center;padding:16px;font-family:'Plus Jakarta Sans',system-ui,sans-serif}",
 ".lum-card{background:#fff;color:#0f172a;border-radius:14px;padding:20px;width:100%;max-width:640px;max-height:90vh;overflow:auto}",
@@ -317,18 +317,14 @@ function setW(el,n){
 /* ---------- daftar jenis font (g = nama Google Fonts bila perlu dimuat) ---------- */
 var FONTS=[
  ["Sans-serif",[
-  ["Plus Jakarta Sans","'Plus Jakarta Sans', sans-serif",0],["Inter","Inter, sans-serif",1],["Poppins","Poppins, sans-serif",1],["Roboto","Roboto, sans-serif",1],
-  ["Open Sans","'Open Sans', sans-serif",1],["Montserrat","Montserrat, sans-serif",1],["Nunito","Nunito, sans-serif",1],["Lato","Lato, sans-serif",1],
-  ["Arial","Arial, Helvetica, sans-serif",0],["Verdana","Verdana, Geneva, sans-serif",0],["Tahoma","Tahoma, Geneva, sans-serif",0],["Trebuchet MS","'Trebuchet MS', sans-serif",0],["Segoe UI","'Segoe UI', sans-serif",0],["Calibri","Calibri, sans-serif",0],
-  ["Raleway","Raleway, sans-serif",1],["Work Sans","'Work Sans', sans-serif",1],["DM Sans","'DM Sans', sans-serif",1],["Noto Sans","'Noto Sans', sans-serif",1],["Quicksand","Quicksand, sans-serif",1],["Oswald","Oswald, sans-serif",1],["Ubuntu","Ubuntu, sans-serif",1],["Helvetica","Helvetica, Arial, sans-serif",0]]],
+  ["Plus Jakarta Sans","'Plus Jakarta Sans', sans-serif",0],["Poppins","Poppins, sans-serif",1],["Arial","Arial, Helvetica, sans-serif",0],["Verdana","Verdana, Geneva, sans-serif",0],
+  ["Trebuchet MS","'Trebuchet MS', sans-serif",0],["Quicksand","Quicksand, sans-serif",1],["Oswald","Oswald, sans-serif",1]]],
  ["Serif",[
-  ["Georgia","Georgia, serif",0],["Times New Roman","'Times New Roman', serif",0],["Cambria","Cambria, serif",0],["Garamond","Garamond, serif",0],
-  ["Merriweather","Merriweather, serif",1],["Lora","Lora, serif",1],["Playfair Display","'Playfair Display', serif",1],["Source Serif 4","'Source Serif 4', serif",1],
-  ["Libre Baskerville","'Libre Baskerville', serif",1],["Crimson Text","'Crimson Text', serif",1],["Palatino","'Palatino Linotype', Palatino, serif",0],["Book Antiqua","'Book Antiqua', Palatino, serif",0]]],
+  ["Georgia","Georgia, serif",0],["Times New Roman","'Times New Roman', serif",0],["Merriweather","Merriweather, serif",1],["Playfair Display","'Playfair Display', serif",1]]],
  ["Monospace (kode)",[
-  ["Fira Code","'Fira Code', monospace",0],["Source Code Pro","'Source Code Pro', monospace",1],["JetBrains Mono","'JetBrains Mono', monospace",1],["Courier New","'Courier New', monospace",0],["Consolas","Consolas, monospace",0],["IBM Plex Mono","'IBM Plex Mono', monospace",1],["Courier Prime","'Courier Prime', monospace",1]]],
+  ["Fira Code","'Fira Code', monospace",0],["Courier New","'Courier New', monospace",0]]],
  ["Tulisan tangan & judul",[
-  ["Caveat","Caveat, cursive",1],["Pacifico","Pacifico, cursive",1],["Comic Sans MS","'Comic Sans MS', cursive",0],["Bebas Neue","'Bebas Neue', sans-serif",1],["Impact","Impact, sans-serif",0],["Dancing Script","'Dancing Script', cursive",1],["Lobster","Lobster, cursive",1],["Satisfy","Satisfy, cursive",1],["Anton","Anton, sans-serif",1]]]
+  ["Caveat","Caveat, cursive",1],["Pacifico","Pacifico, cursive",1],["Dancing Script","'Dancing Script', cursive",1],["Comic Sans MS","'Comic Sans MS', cursive",0],["Bebas Neue","'Bebas Neue', sans-serif",1]]]
 ];
 function fontSel(){
  var h='<select id="tx-font" title="Jenis font (blok teks dulu)"><option value="">Font…</option>';
@@ -874,7 +870,7 @@ function quizModal(){
 }
 
 /* ---------- tampilan HP: toolbar rendah, tidak menabrak menu seleksi bawaan & keyboard ---------- */
-var mq=window.matchMedia?window.matchMedia("(max-width:700px)"):{matches:false};
+var mq=window.matchMedia?window.matchMedia("(max-width:700px),(pointer:coarse) and (max-width:1100px)"):{matches:false};
 function fitBar(){
  var b=$("lum-bar");if(!b)return;
  document.body.style.paddingBottom=mq.matches?(b.offsetHeight+110)+"px":"";
@@ -953,7 +949,7 @@ function enterEdit(){
  });
  window.addEventListener("beforeunload",function(e){if(dirty){e.preventDefault();e.returnValue="";}});
  snap();dirty=false;updUndo();
- toast("Mode edit aktif");
+ toast("Mode edit aktif · editor v7");
 }
 function setup(){
  function go(admin){
