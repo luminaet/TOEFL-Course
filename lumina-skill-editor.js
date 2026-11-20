@@ -107,7 +107,7 @@ css.textContent=[
 "#lum-bar .dng{background:#7f1d1d;border-color:#991b1b;color:#fecaca}",
 "#lum-r2,#lum-r3{background:#1b2a47;border-radius:9px;padding:4px 6px}",
 "#lum-fold{display:none}",
-"@media(max-width:700px){#lum-bar{left:0;right:0;bottom:0;transform:none;width:100%;max-width:100%;max-height:19vh;border-radius:12px 12px 0 0;padding:3px 6px;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;overscroll-behavior:contain}#lum-bar .r{gap:3px;margin:2px 0;justify-content:flex-start}#lum-bar button,#lum-bar select,#lum-bar input[type=number]{min-width:26px;height:26px;padding:0 6px;font-size:11px}#lum-bar input[type=number]{width:48px}#lum-bar .sw{min-width:18px;width:18px;height:18px;padding:0}#lum-bar .hint{display:none}#lum-fold{display:block;position:sticky;top:-3px;z-index:3;background:#0f172a;text-align:right;padding:1px 0}#lum-fold button{background:#334155}#lum-bar.fold{max-height:none;overflow:hidden}#lum-bar.fold>*:not(#lum-fold){display:none}}",
+"@media(max-width:700px){#lum-bar{left:0;right:0;bottom:0;transform:none;width:100%;max-width:100%;box-sizing:border-box;max-height:23vh;border-radius:12px 12px 0 0;padding:3px 6px;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;overscroll-behavior:contain}#lum-bar .r{gap:3px;margin:2px 0;justify-content:flex-start}#lum-bar>.r:nth-child(2){padding-right:34px}#lum-bar button,#lum-bar select,#lum-bar input[type=number]{min-width:26px;height:26px;padding:0 6px;font-size:11px}#lum-bar input[type=number]{width:48px}#lum-bar .sw{min-width:18px;width:18px;height:18px;padding:0}#lum-fold{display:block;position:sticky;top:0;float:right;height:0;z-index:3;overflow:visible}#lum-fold button{width:30px;height:28px;font-size:15px;line-height:1;padding:0;background:#334155;border-color:#475569}#lum-bar.fold{max-height:none;overflow:hidden;min-height:34px}#lum-bar.fold>*:not(#lum-fold){display:none}#lum-bar.fold #lum-fold{float:none;height:auto;text-align:right}}",
 ".lum-fab{position:fixed;right:14px;bottom:14px;z-index:99998;height:36px;box-shadow:0 6px 20px #0006}",
 ".lum-modal{position:fixed;inset:0;background:#0009;z-index:100000;display:grid;place-items:center;padding:16px;font-family:'Plus Jakarta Sans',system-ui,sans-serif}",
 ".lum-card{background:#fff;color:#0f172a;border-radius:14px;padding:20px;width:100%;max-width:640px;max-height:90vh;overflow:auto}",
@@ -157,7 +157,7 @@ function applySaved(){
   }
  }
  if(typeof renderQuiz==="function")renderQuiz();
- setScoreText();
+ setScoreText();loadFonts(false);
 }
 
 /* ---------- login ---------- */
@@ -313,16 +313,50 @@ function setW(el,n){
  if(par&&/flex/.test(getComputedStyle(par).display))el.style.flex="0 0 auto";
 }
 
+
+/* ---------- daftar jenis font (g = nama Google Fonts bila perlu dimuat) ---------- */
+var FONTS=[
+ ["Sans-serif",[
+  ["Plus Jakarta Sans","'Plus Jakarta Sans', sans-serif",0],["Inter","Inter, sans-serif",1],["Poppins","Poppins, sans-serif",1],["Roboto","Roboto, sans-serif",1],
+  ["Open Sans","'Open Sans', sans-serif",1],["Montserrat","Montserrat, sans-serif",1],["Nunito","Nunito, sans-serif",1],["Lato","Lato, sans-serif",1],
+  ["Arial","Arial, Helvetica, sans-serif",0],["Verdana","Verdana, Geneva, sans-serif",0],["Tahoma","Tahoma, Geneva, sans-serif",0],["Trebuchet MS","'Trebuchet MS', sans-serif",0],["Segoe UI","'Segoe UI', sans-serif",0],["Calibri","Calibri, sans-serif",0],
+  ["Raleway","Raleway, sans-serif",1],["Work Sans","'Work Sans', sans-serif",1],["DM Sans","'DM Sans', sans-serif",1],["Noto Sans","'Noto Sans', sans-serif",1],["Quicksand","Quicksand, sans-serif",1],["Oswald","Oswald, sans-serif",1],["Ubuntu","Ubuntu, sans-serif",1],["Helvetica","Helvetica, Arial, sans-serif",0]]],
+ ["Serif",[
+  ["Georgia","Georgia, serif",0],["Times New Roman","'Times New Roman', serif",0],["Cambria","Cambria, serif",0],["Garamond","Garamond, serif",0],
+  ["Merriweather","Merriweather, serif",1],["Lora","Lora, serif",1],["Playfair Display","'Playfair Display', serif",1],["Source Serif 4","'Source Serif 4', serif",1],
+  ["Libre Baskerville","'Libre Baskerville', serif",1],["Crimson Text","'Crimson Text', serif",1],["Palatino","'Palatino Linotype', Palatino, serif",0],["Book Antiqua","'Book Antiqua', Palatino, serif",0]]],
+ ["Monospace (kode)",[
+  ["Fira Code","'Fira Code', monospace",0],["Source Code Pro","'Source Code Pro', monospace",1],["JetBrains Mono","'JetBrains Mono', monospace",1],["Courier New","'Courier New', monospace",0],["Consolas","Consolas, monospace",0],["IBM Plex Mono","'IBM Plex Mono', monospace",1],["Courier Prime","'Courier Prime', monospace",1]]],
+ ["Tulisan tangan & judul",[
+  ["Caveat","Caveat, cursive",1],["Pacifico","Pacifico, cursive",1],["Comic Sans MS","'Comic Sans MS', cursive",0],["Bebas Neue","'Bebas Neue', sans-serif",1],["Impact","Impact, sans-serif",0],["Dancing Script","'Dancing Script', cursive",1],["Lobster","Lobster, cursive",1],["Satisfy","Satisfy, cursive",1],["Anton","Anton, sans-serif",1]]]
+];
+function fontSel(){
+ var h='<select id="tx-font" title="Jenis font (blok teks dulu)"><option value="">Font…</option>';
+ FONTS.forEach(function(g){
+  h+='<optgroup label="'+g[0]+'">'+g[1].map(function(f){return '<option value="'+f[1]+'" style="font-family:'+f[1]+'">'+f[0]+'</option>';}).join("")+'</optgroup>';
+ });
+ return h+'</select>';
+}
+function loadFonts(all){
+ var json="";try{json=JSON.stringify((cms&&cms.skills&&cms.skills[PID])||{});}catch(e){}
+ var names=[];
+ FONTS.forEach(function(g){g[1].forEach(function(f){if(f[2]&&(all||json.indexOf(f[0])>=0))names.push(f[0]);});});
+ if(!names.length)return;
+ var url="https://fonts.googleapis.com/css2?"+names.map(function(n){return "family="+n.replace(/ /g,"+")+":wght@400;700";}).join("&")+"&display=swap";
+ var l=document.getElementById("lum-gf");
+ if(!l){l=document.createElement("link");l.id="lum-gf";l.rel="stylesheet";document.head.appendChild(l);}
+ if(l.getAttribute("href")!==url)l.setAttribute("href",url);
+}
 /* ---------- toolbar ---------- */
 function buildBar(){
  var sw=function(k,c){return '<button type="button" class="sw" data-'+k+'="'+c+'" style="background:'+c+'" title="'+(k==="hl"?"Sorot":"Warna teks")+'"></button>';};
  var bar=document.createElement("div");bar.id="lum-bar";
  bar.innerHTML=
- '<div id="lum-fold"><button type="button" data-act="fold" id="lum-foldb">▾ Kecilkan toolbar</button></div>'+
+ '<div id="lum-fold"><button type="button" data-act="fold" id="lum-foldb" title="Kecilkan toolbar" aria-label="Kecilkan toolbar">▾</button></div>'+
  '<div class="r">'+
   '<button data-act="undo" id="lum-undo" title="Urungkan (Ctrl+Z)">↶</button><button data-act="redo" id="lum-redo" title="Ulangi (Ctrl+Y)">↷</button><span class="sep"></span>'+
   '<button data-cmd="bold"><b>B</b></button><button data-cmd="italic"><i>I</i></button><button data-cmd="underline"><u>U</u></button><button data-cmd="strikeThrough"><s>S</s></button><span class="sep"></span>'+
-  '<select id="tx-font" title="Jenis font (blok teks dulu)"><option value="">Font…</option><option value="\'Plus Jakarta Sans\', sans-serif">Plus Jakarta Sans</option><option value="Arial, Helvetica, sans-serif">Arial</option><option value="Georgia, serif">Georgia (serif)</option><option value="\'Times New Roman\', serif">Times New Roman</option><option value="\'Courier New\', monospace">Courier (mono)</option></select>'+
+  fontSel()+
   '<select id="tx-size" title="Ukuran font (blok teks dulu)"><option value="">Ukuran…</option>'+[11,12,13,14,16,18,20,24,28,32,40].map(function(n){return '<option value="'+n+'">'+n+' px</option>';}).join("")+'</select><span class="sep"></span>'+
   '<span class="lbl">Warna</span><input type="color" id="tx-fg" value="#dc2626" title="Warna teks bebas"><button data-pal="fg" title="Palet lengkap: hitam, abu-abu, dan warna halaman ini">🎨</button>'+TC.map(function(c){return sw("fg",c);}).join("")+'<button data-fg="inherit" title="Warna asli">✕</button><span class="sep"></span>'+
   '<span class="lbl">Sorot</span><input type="color" id="tx-hl" value="#fff3a3" title="Warna sorot bebas"><button data-pal="hl" title="Palet lengkap untuk sorotan">🎨</button>'+HL.map(function(c){return sw("hl",c);}).join("")+'<button data-hl="transparent" title="Hapus sorotan">✕</button><span class="sep"></span>'+
@@ -352,8 +386,7 @@ function buildBar(){
   '<button data-tb="addcoll">＋ Kolom kiri</button><button data-tb="addcolr">＋ Kolom kanan</button><button data-tb="delcol" class="dng">− Kolom</button><span class="sep"></span>'+
   '<button data-tb="mergeR">Gabung →</button><button data-tb="mergeD">Gabung ↓</button><button data-tb="split">Pisah sel</button><span class="sep"></span>'+
   '<button data-tb="deltbl" class="dng">🗑 Tabel</button><span class="lbl">Shift+klik sel = atur warna/lebar sel · ⤴ Induk = pilih baris/tabel</span>'+
- '</div>'+
- '<div class="hint" style="text-align:center;font-size:11px;color:#94a3b8;font-weight:500">Blok teks → atur font/ukuran/warna · klik kartu (garis merah putus-putus) → panel kartu muncul; tarik pojok kanan-bawah untuk mengubah ukuran · Shift+klik = pilih elemen apa pun, ⤴ Induk = pilih pembungkusnya</div>';
+ '</div>';
  document.body.appendChild(bar);
  bar.addEventListener("mousedown",function(e){if(e.target.closest("button"))e.preventDefault();});
  bar.addEventListener("click",function(e){
@@ -865,7 +898,7 @@ function keepSelVisible(){ /* seleksi teks jangan tertutup toolbar / header: gul
 }
 var ACT={
  undo:function(){step(-1);},redo:function(){step(1);},
- fold:function(){var b=$("lum-bar");if(!b)return;var f=b.classList.toggle("fold");$("lum-foldb").textContent=f?"▴ Buka toolbar":"▾ Kecilkan toolbar";if(f){var p=$("lum-pal");if(p)p.remove();}fitBar();},
+ fold:function(){var b=$("lum-bar");if(!b)return;var f=b.classList.toggle("fold"),x=$("lum-foldb");x.textContent=f?"▴":"▾";x.title=x.ariaLabel=f?"Buka toolbar":"Kecilkan toolbar";if(f){var p=$("lum-pal");if(p)p.remove();}fitBar();},
  save:saveAll,quiz:quizModal,
  reset:function(){
   if(!confirm("Kembalikan halaman ini ke tampilan asli? Semua hasil edit halaman ini akan hilang."))return;
@@ -885,7 +918,7 @@ function enterEdit(){
  sections().forEach(function(s){s.contentEditable="true";});
  var qc=document.getElementById("quiz-container");if(qc)qc.contentEditable="false";
  var h1=document.querySelector("header h1");if(h1)h1.contentEditable="true";
- buildBar();fitBar();lift();
+ loadFonts(true);buildBar();fitBar();lift();
  window.addEventListener("resize",function(){fitBar();lift();});
  if(window.visualViewport){window.visualViewport.addEventListener("resize",lift);window.visualViewport.addEventListener("scroll",lift);}
  document.addEventListener("selectionchange",onSelChange);
