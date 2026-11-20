@@ -287,7 +287,7 @@ function buildBar(){
   '<button data-blk="parent" title="Pilih elemen pembungkus (mis. wadah kolom)">⤴ Induk</button><button data-blk="rst" title="Hapus semua gaya buatan editor pada elemen ini">Reset gaya</button>'+
  '</div>'+
  '<div class="r">'+
-  '<span class="lbl">Kartu</span><button data-blk="dup" title="Gandakan kartu/baris terpilih">⧉ Gandakan</button><button data-blk="up">↑</button><button data-blk="down">↓</button><button data-blk="del" class="dng">🗑 Hapus</button><button data-blk="note">＋ Catatan</button><button data-blk="box" title="Tambah kotak berisi teks">▢ ＋ Kotak teks</button><button data-blk="text" title="Tambah paragraf teks (di dalam kotak terpilih, atau di bawah posisi kursor)">＋ Teks</button><button data-tb="new">▦ ＋ Tabel</button>'+
+  '<span class="lbl">Kartu</span><button data-blk="dup" title="Gandakan kartu/baris terpilih">⧉ Gandakan</button><button data-blk="up">↑</button><button data-blk="down">↓</button><button data-blk="del" class="dng">🗑 Hapus</button><button data-blk="note">＋ Catatan</button><button data-blk="box" title="Tambah kotak berisi teks">▢ ＋ Kotak teks</button><button data-blk="item" title="Tambah kotak bernomor (kotak di dalam kotak, seperti daftar 7 variasi). Dipilih/kursor di dalam satu kotak bernomor → kotak baru dibuat sesudahnya dan nomor otomatis diurutkan ulang">▣ ＋ Kotak bernomor</button><button data-blk="group" title="Tambah kotak pembungkus berjudul yang berisi beberapa kotak bernomor">▤ ＋ Kelompok kotak</button><button data-blk="sample" title="Tambah kotak contoh di dalam kotak bernomor yang sedang dipilih/kursor">▫ ＋ Contoh</button><button data-blk="text" title="Tambah paragraf teks (di dalam kotak terpilih, atau di bawah posisi kursor)">＋ Teks</button><button data-tb="new">▦ ＋ Tabel</button>'+
   '<span class="sep"></span><button data-act="quiz">❓ Soal kuis</button><button data-act="save" class="pri">💾 Simpan</button><button data-act="reset" class="dng" title="Kembalikan ke tampilan asli">↺ Asli</button><button data-act="exit">Keluar</button>'+
  '</div>'+
  '<div class="r" id="lum-r3" hidden>'+
@@ -296,8 +296,9 @@ function buildBar(){
   '<button data-tb="addcoll">＋ Kolom kiri</button><button data-tb="addcolr">＋ Kolom kanan</button><button data-tb="delcol" class="dng">− Kolom</button><span class="sep"></span>'+
   '<button data-tb="mergeR">Gabung →</button><button data-tb="mergeD">Gabung ↓</button><button data-tb="split">Pisah sel</button><span class="sep"></span>'+
   '<button data-tb="deltbl" class="dng">🗑 Tabel</button><span class="lbl">Shift+klik sel = atur warna/lebar sel · ⤴ Induk = pilih baris/tabel</span>'+
- '</div>'
-document.body.appendChild(bar);
+ '</div>'+
+ '<div style="text-align:center;font-size:11px;color:#94a3b8;font-weight:500">Blok teks → atur font/ukuran/warna · klik kartu (garis merah putus-putus) → panel kartu muncul; tarik pojok kanan-bawah untuk mengubah ukuran · Shift+klik = pilih elemen apa pun, ⤴ Induk = pilih pembungkusnya</div>';
+ document.body.appendChild(bar);
  bar.addEventListener("mousedown",function(e){if(e.target.closest("button"))e.preventDefault();});
  bar.addEventListener("click",function(e){
   var b=e.target.closest("button");if(!b||b.disabled)return;
@@ -434,12 +435,55 @@ function select(el){
  selected=el;if(el){el.classList.add("lum-sel");sync();}
  var r2=$("lum-r2");if(r2)r2.hidden=!el;
 }
+
+/* ---------- kotak bernomor (kotak di dalam kotak) ---------- */
+function isItem(el){
+ if(!el||el.nodeType!==1)return false;
+ if(el.classList.contains("kotak-item"))return true;
+ return el.classList.contains("flex")&&el.classList.contains("items-start")&&!!el.firstElementChild&&/^\d{1,3}$/.test(el.firstElementChild.textContent.trim());
+}
+function itemOf(el){
+ var sec=el?secOf(el):null;
+ while(el&&sec&&el!==sec){if(isItem(el))return el;el=el.parentElement;}
+ return null;
+}
+function curItem(){
+ var it=selected?itemOf(selected):null;
+ if(it)return it;
+ if(savedRange&&secOf(savedRange.startContainer)){var n=savedRange.startContainer;if(n.nodeType===3)n=n.parentNode;return itemOf(n);}
+ return null;
+}
+function renum(parent){
+ if(!parent)return;var i=0;
+ Array.prototype.forEach.call(parent.children,function(ch){
+  if(!isItem(ch))return;i++;
+  var b=ch.firstElementChild,old=b.textContent.trim();
+  b.textContent=(old.length>1&&old.charAt(0)==="0"&&i<10)?"0"+i:String(i);
+ });
+}
+function itemHTML(n){
+ return '<div class="kotak-item bg-slate-50 rounded-xl p-3.5 border border-slate-200 hover:border-emerald-400 transition flex items-start gap-3">'+
+  '<span class="kotak-num w-6 h-6 rounded-lg bg-emerald-500 text-white font-bold flex items-center justify-center text-xs shrink-0 mt-0.5">'+n+'</span>'+
+  '<div class="flex-grow space-y-1.5"><div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">'+
+  '<h4 class="font-bold text-slate-900 text-xs md:text-sm">Judul kotak</h4>'+
+  '<span class="bg-emerald-100 text-emerald-800 text-[10px] font-semibold px-2 py-0.5 rounded-full w-max">Label</span></div>'+
+  '<div class="space-y-1.5 text-xs font-mono-code"><div class="bg-white p-2.5 rounded-lg border border-slate-200">• Tulis contoh di sini…</div></div></div></div>';
+}
+function mkItem(n,ref){
+ var d=document.createElement("div");d.innerHTML=itemHTML(n);var it=d.firstChild;
+ if(ref){ /* tiru gaya kotak acuan (warna/garis/sudut) agar serasi */
+  var st=ref.getAttribute("style");if(st)it.setAttribute("style",st);
+  var rc=(ref.getAttribute("class")||"").replace(/\blum-sel\b/g,"").trim();if(rc)it.setAttribute("class",rc.indexOf("kotak-item")<0?rc+" kotak-item":rc);
+  var rb=ref.firstElementChild;if(rb){it.firstElementChild.setAttribute("class",(rb.getAttribute("class")||"").replace(/\blum-sel\b/g,"").trim());var bs=rb.getAttribute("style");if(bs)it.firstElementChild.setAttribute("style",bs);}
+ }
+ return it;
+}
 var BLK={
  need:function(){if(!selected){alert("Klik dulu pada kartu atau baris yang ingin diubah (akan muncul garis merah putus-putus).");return false;}return true;},
- dup:function(){if(!BLK.need())return;if(hasQuiz(selected)){toast("Soal kuis digandakan lewat tombol ❓ Soal kuis → ⧉ Gandakan");return;}var c=selected.cloneNode(true);c.classList.remove("lum-sel");selected.after(c);select(c);snap();toast("Kartu digandakan");},
- up:function(){if(!BLK.need())return;var p=selected.previousElementSibling;if(p){p.before(selected);snap();}},
- down:function(){if(!BLK.need())return;var n=selected.nextElementSibling;if(n){n.after(selected);snap();}},
- del:function(){if(!BLK.need())return;if(hasQuiz(selected)){toast("Wadah kuis tidak bisa dihapus di sini. Hapus soal lewat tombol ❓ Soal kuis");return;}if(!confirm("Hapus kartu/baris yang dipilih?"))return;var s=selected;select(null);s.remove();snap();},
+ dup:function(){if(!BLK.need())return;if(hasQuiz(selected)){toast("Soal kuis digandakan lewat tombol ❓ Soal kuis → ⧉ Gandakan");return;}var c=selected.cloneNode(true);c.classList.remove("lum-sel");selected.after(c);renum(c.parentElement);select(c);snap();toast("Kartu digandakan");},
+ up:function(){if(!BLK.need())return;var p=selected.previousElementSibling;if(p){p.before(selected);renum(selected.parentElement);snap();}},
+ down:function(){if(!BLK.need())return;var n=selected.nextElementSibling;if(n){n.after(selected);renum(selected.parentElement);snap();}},
+ del:function(){if(!BLK.need())return;if(hasQuiz(selected)){toast("Wadah kuis tidak bisa dihapus di sini. Hapus soal lewat tombol ❓ Soal kuis");return;}if(!confirm("Hapus kartu/baris yang dipilih?"))return;var s=selected,pr=s.parentElement;select(null);s.remove();renum(pr);snap();},
  parent:function(){
   if(!BLK.need())return;
   var sec=secOf(selected),p=selected.parentElement;
@@ -454,6 +498,36 @@ var BLK={
   n.innerHTML='<p style="margin:0">Tulis teks di dalam kotak ini…</p>';
   if(selected&&selected.classList.contains("kotak-teks"))selected.after(n);else placeBlock(n);
   snap();select(n);n.scrollIntoView({behavior:"smooth",block:"center"});BLK._focus(n.firstChild);
+ },
+
+ item:function(){
+  var it=curItem(),n;
+  if(it){
+   n=mkItem(1,it);it.after(n);renum(it.parentElement);
+  }else{
+   var list=null,ref=selected;
+   if(!ref&&savedRange&&secOf(savedRange.startContainer)){ref=savedRange.startContainer;if(ref.nodeType===3)ref=ref.parentNode;}
+   if(ref&&ref.closest)list=ref.closest(".kotak-list")||(ref.classList&&ref.classList.contains("kotak-group")?ref.querySelector(".kotak-list"):null);
+   if(list&&secOf(list)){n=mkItem(1);list.appendChild(n);renum(list);}
+   else{BLK.group();return;}
+  }
+  snap();select(n);n.scrollIntoView({behavior:"smooth",block:"center"});toast("Kotak bernomor ditambahkan — nomor diurutkan otomatis");
+ },
+ group:function(){
+  var g=document.createElement("div");
+  g.className="kotak-group bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3";
+  g.innerHTML='<h3 class="text-base font-bold text-slate-900">Judul kelompok kotak</h3><div class="kotak-list space-y-3">'+itemHTML(1)+itemHTML(2)+'</div>';
+  if(selected&&selected.classList.contains("kotak-group"))selected.after(g);else placeBlock(g);
+  snap();select(g);g.scrollIntoView({behavior:"smooth",block:"center"});toast("Kelompok kotak ditambahkan");
+ },
+ sample:function(){
+  var it=curItem();if(!it){toast("Klik di dalam kotak bernomor dulu");return;}
+  var col=it.querySelector(".space-y-1\\.5.text-xs")||it.querySelector(".flex-grow");
+  var b=document.createElement("div");b.className="bg-white p-2.5 rounded-lg border border-slate-200";b.textContent="• Tulis contoh di sini…";
+  if(!col)return;
+  if(col.classList.contains("text-xs"))col.appendChild(b);
+  else{var w=document.createElement("div");w.className="space-y-1.5 text-xs font-mono-code";w.appendChild(b);col.appendChild(w);}
+  snap();BLK._focus(b);
  },
  text:function(){
   var p=document.createElement("p");p.style.margin="8px 0 0";p.textContent="Tulis teks di sini…";
