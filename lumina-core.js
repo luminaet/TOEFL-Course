@@ -14,7 +14,7 @@ var DESC_FMT=["plain","numbered","bullets"];
 var SEC_COLOR={listening:"#16866b",swo:"#bd7922",reading:"#7952b5"};
 var cache={pub:null,local:null};
 var DRIVE_DEFAULT="https://drive.google.com/drive/folders/1oLm05X1naBQ-AUZkULfDeuY7a3T9ej3g?usp=sharing";
-var TYPES={admin:{label:"Admin",months:0},mahasiswa:{label:"Mahasiswa",months:6},plus:{label:"Student Plus",months:6},customer:{label:"Customer",months:6},dummy:{label:"Akun Dummy",months:0}};
+var TYPES={admin:{label:"Admin",months:0},mahasiswa:{label:"Student",months:6},plus:{label:"Student Plus",months:6},customer:{label:"Customer",months:6},dummy:{label:"Akun Dummy",months:0}};
 var TYPE_KEYS=["mahasiswa","plus","customer","dummy"];
 var PROF_PREFIX="luminaProfile:";
 var API_URL="https://script.google.com/macros/s/AKfycbwi00HITY3aNwMPTp5cjg898T8S74s-rIcPnK3L_BrluQ_yioILk24_3hdAYbEF6VVQJQ/exec",TOKEN_KEY="luminaToken",memToken="";
