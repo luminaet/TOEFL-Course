@@ -297,7 +297,6 @@ function buildBar(){
   '<button data-tb="mergeR">Gabung →</button><button data-tb="mergeD">Gabung ↓</button><button data-tb="split">Pisah sel</button><span class="sep"></span>'+
   '<button data-tb="deltbl" class="dng">🗑 Tabel</button><span class="lbl">Shift+klik sel = atur warna/lebar sel · ⤴ Induk = pilih baris/tabel</span>'+
  '</div>'+
- '<div style="text-align:center;font-size:11px;color:#94a3b8;font-weight:500">Blok teks → atur font/ukuran/warna · klik kartu (garis merah putus-putus) → panel kartu muncul; tarik pojok kanan-bawah untuk mengubah ukuran · Shift+klik = pilih elemen apa pun, ⤴ Induk = pilih pembungkusnya</div>';
  document.body.appendChild(bar);
  bar.addEventListener("mousedown",function(e){if(e.target.closest("button"))e.preventDefault();});
  bar.addEventListener("click",function(e){
