@@ -322,9 +322,9 @@ var FONTS=[
  ["Serif",[
   ["Georgia","Georgia, serif",0],["Times New Roman","'Times New Roman', serif",0],["Merriweather","Merriweather, serif",1],["Playfair Display","'Playfair Display', serif",1]]],
  ["Monospace (kode)",[
-  ["Fira Code","'Fira Code', monospace",0],["Courier New","'Courier New', monospace",0]]],
+  ["Fira Code","'Fira Code', monospace",0],["JetBrains Mono","'JetBrains Mono', monospace",1],["Courier New","'Courier New', monospace",0]]],
  ["Tulisan tangan & judul",[
-  ["Caveat","Caveat, cursive",1],["Pacifico","Pacifico, cursive",1],["Dancing Script","'Dancing Script', cursive",1],["Comic Sans MS","'Comic Sans MS', cursive",0],["Bebas Neue","'Bebas Neue', sans-serif",1]]]
+  ["Caveat","Caveat, cursive",1],["Pacifico","Pacifico, cursive",1],["Dancing Script","'Dancing Script', cursive",1],["Lobster","Lobster, cursive",1],["Comic Sans MS","'Comic Sans MS', cursive",0],["Bebas Neue","'Bebas Neue', sans-serif",1]]]
 ];
 function fontSel(){
  var h='<select id="tx-font" title="Jenis font (blok teks dulu)"><option value="">Font…</option>';
@@ -949,8 +949,31 @@ function enterEdit(){
  });
  window.addEventListener("beforeunload",function(e){if(dirty){e.preventDefault();e.returnValue="";}});
  snap();dirty=false;updUndo();
- toast("Mode edit aktif · editor v7");
+ toast("Mode edit aktif · editor v9");
 }
+/* ---------- catat aktivitas belajar siswa (untuk pembekuan otomatis di server) ----------
+   Dihitung: membaca materi aktif ≥ 3 menit di halaman ini, atau menjawab soal kuis (walau satu).
+   Hanya membuka halaman tidak dihitung. Tidak ditampilkan ke siswa. */
+var lastPing=0;
+function pingStudy(){
+ var s=L.getSession();
+ if(editing||!s||s.role!=="student"||s.type==="dummy"||Date.now()-lastPing<300000)return;
+ lastPing=Date.now();L.api("touch").catch(function(){});
+}
+(function(){
+ var acc=0,last=Date.now(),act=Date.now(),done=false;
+ ["scroll","click","keydown","touchstart","touchmove","mousemove"].forEach(function(ev){window.addEventListener(ev,function(){act=Date.now();},{passive:true,capture:true});});
+ setInterval(function(){
+  var now=Date.now(),dt=now-last;last=now;
+  if(done||editing||document.visibilityState!=="visible"||now-act>60000)return; /* tab tersembunyi / diam >1 menit tidak dihitung */
+  acc+=Math.min(dt,5000);
+  if(acc>=180000){done=true;pingStudy();}
+ },2000);
+ if(typeof window.handleSelectOption==="function"&&!window.__lumQ){
+  var orig=window.handleSelectOption;window.__lumQ=1;
+  window.handleSelectOption=function(){try{pingStudy();}catch(e){}return orig.apply(this,arguments);};
+ }
+})();
 function setup(){
  function go(admin){
   if(admin){

@@ -362,8 +362,8 @@ a.sk-title:hover{color:var(--red);text-decoration:underline}
 <script src="lumina-core.js"></script>
 <script>
 const L=window.Lumina, esc=L.esc, $=id=>document.getElementById(id);
-let cms=null, me=null, run=null, practiceSection="swo";
-let bootMsg="",secWatch=null;
+let cms=null, me=null, run=null, practiceSection="swo", freezeAt=0;
+let bootMsg="";
 const DAY=L.DAY;
 const SEC={
  listening:{name:"Listening Comprehension",short:"Listening",color:"#16866b",ico:"🎧"},
@@ -397,19 +397,12 @@ function descHTML(p){
 }
 const CHEV='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>';
 
-const WATCH_PAGES=["materials","mat-listening","mat-swo","mat-reading","practice","pretest","account"];
-function watchSection(id){
- if(secWatch){secWatch();secWatch=null;}
- if(!me||me.role!=="student"||me.type==="dummy"||WATCH_PAGES.indexOf(id)<0)return;
- const sec=Math.max(30,(cms.settings&&cms.settings.minViewSec)||120);
- secWatch=L.watchActive(sec,()=>{if(!me)return;L.recordAct(me.user,"view",id);renderAlert();});
-}
-
 /* ---------- navigasi ---------- */
 const R={};
 function showPage(id){
  if(id==="home"&&isAdmin())id="admin-home";
  if(run&&id!=="run"&&!leaveRun())return;
+ if(id!=="home"&&id!=="admin-home")touchServer();   /* menjelajah fitur = aktivitas belajar */
  document.querySelectorAll(".page").forEach(p=>p.classList.toggle("hidden",p.id!==id));
  let navId=id;
  if(id.indexOf("mat-")===0)navId="materials";
@@ -417,7 +410,6 @@ function showPage(id){
  else if(id==="run")navId=run?run.origin:"practice";
  document.querySelectorAll(".nav button[data-page]").forEach(b=>b.classList.toggle("active",b.dataset.page===navId));
  renderAlert();
- watchSection(id);
  if(R[id])R[id]();
  window.scrollTo({top:0,behavior:"smooth"});
 }
@@ -434,10 +426,16 @@ function renderAlert(){
  const slot=$("alert-slot");let h="";
  if(me&&me.type==="dummy"){$("nav-dot").classList.add("hidden");slot.innerHTML='<div class="draft-banner">👁️ <b>Demo account.</b> You can browse the materials and see the features, but you cannot take any practice or test.</div>';return;}
  if(me&&me.role==="student"){
-  const a=L.inactivity(L.loadProg(me.user),cms.settings,Date.now()),mm=Math.max(1,Math.round((cms.settings.minMaterialSec||180)/60));
+  const a=L.inactivity(L.loadProg(me.user),cms.settings,Date.now());
   $("nav-dot").classList.toggle("hidden",!a.warn);
   if(a.warn){
-   h=`<div class="warn-banner alert-blink" data-act="go" data-go="materials" role="alert"><span class="ico">⚠️</span><span>${a.never?"You haven't started yet. Study a material for at least "+mm+" minutes or try a practice question to begin your portfolio.":`No learning activity has been counted for <b>${a.days} day${a.days===1?"":"s"}</b>. Study a material for at least ${mm} minutes, try a practice question, or explore a section to keep your portfolio on track.`}</span></div>`;
+   h=`<div class="warn-banner alert-blink" data-act="go" data-go="materials" role="alert"><span class="ico">⚠️</span><span>${a.never?"You haven't started yet. Open a skill material and complete its practice to begin your portfolio.":`You haven't opened a skill material or done any practice for <b>${a.days} day${a.days===1?"":"s"}</b>. Open a skill and complete its practice to keep your portfolio on track.`}</span></div>`;
+  }
+  if(me.type==="mahasiswa"){   /* hanya jenis yang bisa dibekukan otomatis */
+   const left=freezeAt?Math.ceil((freezeAt-Date.now())/86400000):0;
+   h+=left>0&&left<=2
+    ?`<div class="warn-banner alert-blink" data-act="go" data-go="materials" role="alert"><span class="ico">⏳</span><span><b>Your account will be frozen in about ${left} day${left===1?"":"s"}</b> if there is no learning activity. Read a skill material and try its practice questions to keep it active.</span></div>`
+    :`<div class="draft-banner" style="background:#fff8e6;border-color:#f0d58a;color:#7a5a00">📚 <b>Keep learning to keep your account active.</b> Read the materials and do the practice questions regularly. Accounts with no learning activity for a few days are frozen automatically, and only the admin can reactivate them.</div>`;
   }
  }else if(isAdmin()&&cms.__src==="draft"&&cms.updatedAt>L.getExportedAt()){
   h=`<div class="draft-banner">👁️ <b>Preview mode.</b> You are seeing your <b>draft</b> from Content Manager. Students still see the published <code>lumina-data.json</code> until you upload the new one.</div>`;
@@ -595,6 +593,13 @@ const pre=L.LEVELS.map(l=>{
   e.target.value="";
  };
 };
+/* Catat aktivitas belajar ke server (dipakai pembekuan otomatis). Maks. sekali per 5 menit per browser. */
+let lastTouch=0;
+function touchServer(){
+ if(!me||me.role!=="student"||me.type==="dummy"||Date.now()-lastTouch<300000)return;
+ lastTouch=Date.now();L.api("touch").catch(()=>{});
+}
+document.addEventListener("change",e=>{if(e.target&&e.target.type==="radio")touchServer();});   /* menjawab soal = aktivitas */
 function initials(n){return (String(n||"?").trim().charAt(0)||"?").toUpperCase();}
 function profileBox(){
  const p=L.loadProfile(me.user),dm=me.type==="dummy";
@@ -625,6 +630,8 @@ function openProfileEdit(){
  closeProfileEdit();
  const p=L.loadProfile(me.user);
  const f=(id,lb,v,req,ty)=>`<label>${lb}${req?" *":""}<input id="pf-${id}" type="${ty||"text"}" value="${esc(v)}"></label>`;
+ /* Akun jenis Mahasiswa tidak boleh mengganti password sendiri (hanya admin). Ubah daftar ini bila perlu. */
+ const canPw=me.type!=="mahasiswa"&&me.type!=="student";
  const m=document.createElement("div");m.id="pf-modal";m.className="pf-modal";
  m.innerHTML=`<div class="pf-card" role="dialog" aria-modal="true" aria-label="Edit profile">
   <div class="pf-head"><h3>Edit profile</h3><button class="btn secondary small" type="button" data-pf="close">✕ Close</button></div>
@@ -632,7 +639,14 @@ function openProfileEdit(){
    <div class="row"><img id="pf-prev" src="${p.photo||""}" alt="" style="width:64px;height:64px;border-radius:50%;object-fit:cover;display:${p.photo?"block":"none"}"><label>Photo (max 1 MB, optional)<input id="pf-photo" type="file" accept="image/*"></label></div>
    <div class="cards">${f("name","Full name",p.name||me.name,true)}${f("email","Email",p.email,true,"email")}${f("wa","WhatsApp number",p.wa,true,"tel")}${f("job","Occupation",p.job)}${f("sem","Semester",p.semester)}</div>
    <div><button class="btn" type="submit">Save profile</button></div>
-  </form></div>`;
+  </form>
+  <hr>
+  ${canPw?`<h3>Change password</h3>
+  <form id="pw-form" class="admin-form" autocomplete="off" style="margin-top:12px">
+   <label>Current password<input id="pw-old" type="password" required autocomplete="current-password"></label>
+   <div class="cards"><label>New password (min. 6 characters)<input id="pw-new" type="password" required minlength="6" autocomplete="new-password"></label><label>Confirm new password<input id="pw-new2" type="password" required minlength="6" autocomplete="new-password"></label></div>
+   <div><button class="btn" type="submit">Change password</button></div>
+  </form>`:`<h3>Password</h3><p class="sub" style="margin:6px 0 0">Your password is managed by the admin. To change or reset it, please contact your admin.</p>`}</div>`;
  document.body.appendChild(m);
  m.addEventListener("click",e=>{if(e.target===m||e.target.closest('[data-pf="close"]'))closeProfileEdit();});
  pfKey=e=>{if(e.key==="Escape")closeProfileEdit();};document.addEventListener("keydown",pfKey);
@@ -658,7 +672,17 @@ function openProfileEdit(){
    .then(()=>{closeProfileEdit();refreshProfileBox();alert("Profile saved.");})
    .catch(err=>{sb.disabled=false;refreshProfileBox();alert("Saved on this device, but not yet sent to the server: "+err.message);});
  };
-
+ if(canPw)$("pw-form").onsubmit=e=>{
+  e.preventDefault();
+  const o=$("pw-old").value,n1=$("pw-new").value,n2=$("pw-new2").value;
+  if(n1.length<6){alert("New password must be at least 6 characters.");return;}
+  if(n1!==n2){alert("New password and confirmation do not match.");return;}
+  if(n1===o){alert("New password must be different from the current one.");return;}
+  const sb=e.target.querySelector("button[type=submit]");sb.disabled=true;
+  L.api("changePassword",{oldHash:L.hashPassword(me.user,o),hash:L.hashPassword(me.user,n1)})
+   .then(()=>{e.target.reset();sb.disabled=false;alert("Password changed. Use your new password the next time you log in.");})
+   .catch(err=>{sb.disabled=false;alert(err.message);});
+ };
 }
 function downloadProgress(){
  const blob=new Blob([JSON.stringify(L.exportProgress(me.user,me.name),null,2)],{type:"application/json"});
@@ -796,7 +820,8 @@ function submitRun(auto){
  const pct=Math.round(score/n*100),pass=cms.settings.passScore;
  let saved='<p>Admin preview — this result is not saved.</p>';
  if(me&&me.role==="student"){
-  L.recordAttempt(me.user,{kind:run.kind==="skill"?"skill":"pretest",skill:run.kind==="skill"?run.id:"",section:run.section,level:run.level,score,total:n,pct,answered});
+  L.recordAttempt(me.user,{kind:run.kind==="skill"?"skill":"pretest",skill:run.kind==="skill"?run.id:"",section:run.section,level:run.level,score,total:n,pct});
+  touchServer();
   saved=`<p>Saved to your portfolio.${run.kind==="skill"?(pct>=pass?" 🎉 You mastered this skill!":` Reach ${pass}% to master this skill.`):""}</p>`;
   renderAlert();
  }
@@ -838,10 +863,6 @@ document.addEventListener("click",e=>{
  else if(a==="print")window.print();
 });
 document.getElementById("open-cms").addEventListener("click",()=>{location.href="content-manager.html";});
-document.addEventListener("change",e=>{
- const r=e.target&&e.target.closest?e.target.closest("#run-questions input[type=radio]"):null;
- if(r&&run&&me&&me.role==="student"&&me.type!=="dummy"){L.recordAct(me.user,"try",run.kind==="skill"?run.id:"pretest:"+run.level);renderAlert();}
-});
 
 /* ---------- login ---------- */
 let gateFails=0,gateLock=0;
@@ -882,7 +903,7 @@ function boot(fresh){
  return L.loadViewer().then(d=>{
   cms=d;
   if(fresh||!L.getSession())return d;
-  return L.refreshSession().then(()=>d,err=>{L.setSession(null);bootMsg=err.message||"";return d;});
+  return L.refreshSession().then(a=>{freezeAt=(a&&a.freezeAt)||0;return d;},err=>{L.setSession(null);bootMsg=err.message||"";return d;});
  }).then(d=>{
   me=L.currentAccount(cms);
   if(!me){L.setSession(null);applyRole();showGate();if(bootMsg)gateError(bootMsg);bootMsg="";document.body.classList.remove("loading");return;}
