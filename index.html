@@ -422,6 +422,13 @@ function applyRole(){
 }
 
 /* ---------- peringatan ---------- */
+/* Catatan "Keep learning…": hanya di dasar Dashboard dan dasar halaman Akun (jenis mahasiswa) */
+function keepNote(){
+ if(!me||me.type!=="mahasiswa")return "";
+ const left=freezeAt?Math.ceil((freezeAt-Date.now())/86400000):0;
+ if(left>0&&left<=2)return "";   /* peringatan "akan dibekukan" sudah tampil di atas */
+ return `<div class="draft-banner no-print" style="background:#fff8e6;border-color:#f0d58a;color:#7a5a00;margin:14px 0 0">📚 <b>Keep learning to keep your account active.</b> Read the materials and do the practice questions regularly. Accounts with no learning activity for a few days are frozen automatically, and only the admin can reactivate them.</div>`;
+}
 function renderAlert(){
  const slot=$("alert-slot");let h="";
  if(me&&me.type==="dummy"){$("nav-dot").classList.add("hidden");slot.innerHTML='<div class="draft-banner">👁️ <b>Demo account.</b> You can browse the materials and see the features, but you cannot take any practice or test.</div>';return;}
@@ -435,7 +442,7 @@ function renderAlert(){
    const left=freezeAt?Math.ceil((freezeAt-Date.now())/86400000):0;
    h+=left>0&&left<=2
     ?`<div class="warn-banner alert-blink" data-act="go" data-go="materials" role="alert"><span class="ico">⏳</span><span><b>Your account will be frozen in about ${left} day${left===1?"":"s"}</b> if there is no learning activity. Read a skill material and try its practice questions to keep it active.</span></div>`
-    :`<div class="draft-banner" style="background:#fff8e6;border-color:#f0d58a;color:#7a5a00">📚 <b>Keep learning to keep your account active.</b> Read the materials and do the practice questions regularly. Accounts with no learning activity for a few days are frozen automatically, and only the admin can reactivate them.</div>`;
+    :"";
   }
  }else if(isAdmin()&&cms.__src==="draft"&&cms.updatedAt>L.getExportedAt()){
   h=`<div class="draft-banner">👁️ <b>Preview mode.</b> You are seeing your <b>draft</b> from Content Manager. Students still see the published <code>lumina-data.json</code> until you upload the new one.</div>`;
@@ -508,7 +515,7 @@ R.home=function(){
     <div style="margin-top:12px"><button class="btn small" data-go="pretest">Open Pre-Test →</button></div></div>
   </div>
   <div class="box"><h3>Achievements</h3><p class="sub">${badges.filter(b=>b.ok).length} of ${badges.length} unlocked</p>
-   <div class="badges">${badges.map(b=>`<div class="badge ${b.ok?"on":"locked"}"><span class="bi">${b.ico}</span><b>${b.name}</b><span>${b.desc}</span></div>`).join("")}</div></div>`;
+   <div class="badges">${badges.map(b=>`<div class="badge ${b.ok?"on":"locked"}"><span class="bi">${b.ico}</span><b>${b.name}</b><span>${b.desc}</span></div>`).join("")}</div></div>${keepNote()}`;
 };
 
 /* ---------- DASHBOARD ADMIN ---------- */
@@ -579,7 +586,7 @@ const pre=L.LEVELS.map(l=>{
    <div class="box"><h3>Pre-Test results</h3><p class="sub">&nbsp;</p><div class="tbl-wrap"><table class="tbl"><thead><tr><th>LEVEL</th><th class="n">TRIES</th><th class="n">LATEST</th><th class="n">SCORE</th></tr></thead><tbody>${pre}</tbody></table></div></div>
   </div>
   <div class="box"><h3>Recent activity</h3><p class="sub">&nbsp;</p><div class="act-list">${recent}</div></div>
-  <div class="notice no-print" style="margin-top:14px">Your progress is stored in <b>this browser</b>. Use <b>Download progress</b> to send your report to your lecturer or to move to another device (<b>Restore progress</b>).</div>`;
+  <div class="notice no-print" style="margin-top:14px">Your progress is stored in <b>this browser</b>. Use <b>Download progress</b> to send your report to your lecturer or to move to another device (<b>Restore progress</b>).</div>${keepNote()}`;
  const _pt=document.querySelector("#account-body .page-title");if(_pt)_pt.insertAdjacentHTML("afterend",profileBox());bindProfile();
  const imp=$("imp-prog");
  if(imp)imp.onchange=async e=>{
