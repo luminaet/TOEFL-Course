@@ -949,31 +949,8 @@ function enterEdit(){
  });
  window.addEventListener("beforeunload",function(e){if(dirty){e.preventDefault();e.returnValue="";}});
  snap();dirty=false;updUndo();
- toast("Mode edit aktif · editor v9");
+ toast("Mode edit aktif · editor v8");
 }
-/* ---------- catat aktivitas belajar siswa (untuk pembekuan otomatis di server) ----------
-   Dihitung: membaca materi aktif ≥ 3 menit di halaman ini, atau menjawab soal kuis (walau satu).
-   Hanya membuka halaman tidak dihitung. Tidak ditampilkan ke siswa. */
-var lastPing=0;
-function pingStudy(){
- var s=L.getSession();
- if(editing||!s||s.role!=="student"||s.type==="dummy"||Date.now()-lastPing<300000)return;
- lastPing=Date.now();L.api("touch").catch(function(){});
-}
-(function(){
- var acc=0,last=Date.now(),act=Date.now(),done=false;
- ["scroll","click","keydown","touchstart","touchmove","mousemove"].forEach(function(ev){window.addEventListener(ev,function(){act=Date.now();},{passive:true,capture:true});});
- setInterval(function(){
-  var now=Date.now(),dt=now-last;last=now;
-  if(done||editing||document.visibilityState!=="visible"||now-act>60000)return; /* tab tersembunyi / diam >1 menit tidak dihitung */
-  acc+=Math.min(dt,5000);
-  if(acc>=180000){done=true;pingStudy();}
- },2000);
- if(typeof window.handleSelectOption==="function"&&!window.__lumQ){
-  var orig=window.handleSelectOption;window.__lumQ=1;
-  window.handleSelectOption=function(){try{pingStudy();}catch(e){}return orig.apply(this,arguments);};
- }
-})();
 function setup(){
  function go(admin){
   if(admin){
