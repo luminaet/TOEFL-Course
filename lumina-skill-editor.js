@@ -42,7 +42,7 @@ function dec(s){var t=document.createElement("textarea");t.innerHTML=String(s==n
  var SZ=/^(auto|0|-?[\d.]+(px|%|em|rem|vw|vh)?)(\s+(auto|0|-?[\d.]+(px|%|em|rem)?)){0,3}$/;
  var STY={"color":C,"background-color":C,"border-color":C,
   "border-style":/^(solid|dashed|dotted|none)$/,"border-width":SZ,"border-radius":SZ,
-  "width":SZ,"max-width":SZ,"height":SZ,"min-height":SZ,"padding":SZ,"margin":SZ,"margin-top":SZ,"margin-bottom":SZ,"gap":SZ,"font-size":SZ,
+  "width":SZ,"max-width":SZ,"height":SZ,"min-height":SZ,"padding":SZ,"margin":SZ,"gap":SZ,"font-size":SZ,
   "font-family":/^[\w\s,'"\-]{1,100}$/,
   "font-weight":/^(normal|bold|[1-9]00)$/,"font-style":/^(normal|italic)$/,
   "text-decoration":/^(none|underline|line-through)([\sa-z0-9().,#%-]*)$/i,
@@ -98,6 +98,7 @@ css.textContent=[
 "#lum-bar input[type=number]{width:60px;cursor:text}",
 "#lum-bar input[type=color]{width:30px;height:28px;padding:1px;border:1px solid #334155;border-radius:7px;background:#fff;cursor:pointer}",
 "#lum-bar button:hover{background:#334155}",
+"#lum-bar button.on{background:#14b8a6;color:#04201c;border-color:#14b8a6}",
 "#lum-bar button:disabled{opacity:.4;cursor:not-allowed}",
 "#lum-bar .sw{min-width:20px;width:20px;height:20px;padding:0;border-radius:50%}",
 "#lum-bar .sep{width:1px;height:22px;background:#334155;margin:0 3px}",
@@ -105,6 +106,8 @@ css.textContent=[
 "#lum-bar .pri{background:#14b8a6;color:#04201c;border-color:#14b8a6}",
 "#lum-bar .dng{background:#7f1d1d;border-color:#991b1b;color:#fecaca}",
 "#lum-r2,#lum-r3{background:#1b2a47;border-radius:9px;padding:4px 6px}",
+"#lum-fold{display:none}",
+"@media (max-width:700px),(pointer:coarse) and (max-width:1100px){#lum-bar{left:0;right:0;bottom:0;transform:none;width:100%;max-width:100%;box-sizing:border-box;max-height:23vh;border-radius:12px 12px 0 0;padding:3px 6px;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;overscroll-behavior:contain}#lum-bar .r{gap:3px;margin:2px 0;justify-content:flex-start}#lum-bar>.r:nth-child(2){padding-right:34px}#lum-bar button,#lum-bar select,#lum-bar input[type=number]{min-width:26px;height:26px;padding:0 6px;font-size:11px}#lum-bar input[type=number]{width:48px}#lum-bar .sw{min-width:18px;width:18px;height:18px;padding:0}#lum-fold{display:block;position:sticky;top:0;float:right;height:0;z-index:3;overflow:visible}#lum-fold button{width:30px;height:28px;font-size:15px;line-height:1;padding:0;background:#334155;border-color:#475569}#lum-bar.fold{max-height:none;overflow:hidden;min-height:34px}#lum-bar.fold>*:not(#lum-fold){display:none}#lum-bar.fold #lum-fold{float:none;height:auto;text-align:right}}",
 ".lum-fab{position:fixed;right:14px;bottom:14px;z-index:99998;height:36px;box-shadow:0 6px 20px #0006}",
 ".lum-modal{position:fixed;inset:0;background:#0009;z-index:100000;display:grid;place-items:center;padding:16px;font-family:'Plus Jakarta Sans',system-ui,sans-serif}",
 ".lum-card{background:#fff;color:#0f172a;border-radius:14px;padding:20px;width:100%;max-width:640px;max-height:90vh;overflow:auto}",
@@ -154,7 +157,7 @@ function applySaved(){
   }
  }
  if(typeof renderQuiz==="function")renderQuiz();
- setScoreText();
+ setScoreText();loadFonts(false);
 }
 
 /* ---------- login ---------- */
@@ -225,7 +228,52 @@ function secOf(node){
 }
 function onSelChange(){
  var s=getSelection();
- if(s.rangeCount&&secOf(s.anchorNode)){savedRange=s.getRangeAt(0).cloneRange();setCell(cellOf(s.anchorNode));}
+ if(s.rangeCount&&secOf(s.anchorNode)){savedRange=s.getRangeAt(0).cloneRange();setCell(cellOf(s.anchorNode));if(editing){keepSelVisible();syncTx();}}
+}
+
+/* ---------- kolom font/ukuran/warna ikut menampilkan format teks yang sedang diblok/kursor ---------- */
+function setSelVal(el,val,label){
+ if(!el)return;
+ var found=null;
+ Array.prototype.forEach.call(el.options,function(o){if(!o.dataset.cur&&o.value===val)found=o;});
+ var cur=el.querySelector("option[data-cur]");
+ if(found){if(cur)cur.remove();el.value=val;return;}
+ if(!cur){cur=document.createElement("option");cur.dataset.cur="1";el.appendChild(cur);}
+ cur.value=val;cur.textContent=label;el.value=val;
+}
+function famKey(f){return String(f||"").split(",")[0].replace(/['"]/g,"").trim().toLowerCase();}
+function syncTx(){
+ if(!editing||!savedRange||!$("lum-bar"))return;
+ var n=savedRange.startContainer;
+ if(!savedRange.collapsed&&n.nodeType===3&&savedRange.startOffset>=n.nodeValue.length&&n.nextSibling)n=n.nextSibling;
+ if(n.nodeType===1&&!savedRange.collapsed){var ch=n.childNodes[savedRange.startOffset];while(ch&&ch.nodeType===1&&ch.firstChild)ch=ch.firstChild;if(ch)n=ch;}
+ if(n.nodeType===3)n=n.parentNode;
+ if(!n||!secOf(n))return;
+ var cs=getComputedStyle(n);
+ /* jenis font */
+ var fk=famKey(cs.fontFamily),fo=null,fs=$("tx-font");
+ Array.prototype.forEach.call(fs.options,function(o){if(!o.dataset.cur&&o.value&&famKey(o.value)===fk)fo=o;});
+ setSelVal(fs,fo?fo.value:"\u0001"+fk,fo?"":(fk?fk.replace(/\b\w/g,function(c){return c.toUpperCase();}):"Font…"));
+ /* ukuran */
+ var px=Math.round(parseFloat(cs.fontSize))||0;
+ setSelVal($("tx-size"),String(px),px+" px");
+ /* warna teks */
+ $("tx-fg").value=hex(cs.color);
+ /* sorotan: dari elemen inline terdekat yang punya latar */
+ var hl=null,e=n,sec=secOf(n);
+ while(e&&e!==sec){
+  var c2=getComputedStyle(e);
+  if(c2.display!=="inline")break;
+  if(c2.backgroundColor!=="rgba(0, 0, 0, 0)"&&c2.backgroundColor!=="transparent"){hl=hex(c2.backgroundColor);break;}
+  e=e.parentElement;
+ }
+ if(hl)$("tx-hl").value=hl;
+ /* tombol B/I/U/S & rata teks yang aktif */
+ Array.prototype.forEach.call($("lum-bar").querySelectorAll("button[data-cmd]"),function(b){
+  var c3=b.dataset.cmd;if(c3==="link"||c3==="unlink"||c3==="removeFormat")return;
+  var on=false;try{on=document.queryCommandState(c3);}catch(x){}
+  b.classList.toggle("on",!!on);
+ });
 }
 function fmt(fn,needRange){
  var sec=savedRange?secOf(savedRange.commonAncestorContainer):null;
@@ -233,18 +281,25 @@ function fmt(fn,needRange){
  if(needRange&&savedRange.collapsed){toast("Blok teks yang ingin diubah dulu");return;}
  try{sec.focus({preventScroll:true});}catch(e){sec.focus();}
  var s=getSelection();s.removeAllRanges();s.addRange(savedRange);
- fn();snap();
+ fn();
+ var s2=getSelection();if(s2.rangeCount&&secOf(s2.getRangeAt(0).commonAncestorContainer))savedRange=s2.getRangeAt(0).cloneRange();
+ snap();syncTx();
 }
 function setSize(px){
  fmt(function(){
   document.execCommand("styleWithCSS",false,false);
   document.execCommand("fontSize",false,"7");
   document.execCommand("styleWithCSS",false,true);
+  var spans=[];
   Array.prototype.slice.call(document.querySelectorAll('main font[size="7"]')).forEach(function(f){
    var sp=document.createElement("span");sp.style.fontSize=px+"px";
    while(f.firstChild)sp.appendChild(f.firstChild);
-   f.parentNode.replaceChild(sp,f);
+   f.parentNode.replaceChild(sp,f);spans.push(sp);
   });
+  if(spans.length){ /* pertahankan blok teks setelah ukuran diganti */
+   var rg=document.createRange();rg.setStartBefore(spans[0]);rg.setEndAfter(spans[spans.length-1]);
+   var sl=getSelection();sl.removeAllRanges();sl.addRange(rg);
+  }
  },true);
 }
 function setFg(c){fmt(function(){document.execCommand("styleWithCSS",false,true);document.execCommand("foreColor",false,c);});}
@@ -258,15 +313,46 @@ function setW(el,n){
  if(par&&/flex/.test(getComputedStyle(par).display))el.style.flex="0 0 auto";
 }
 
+
+/* ---------- daftar jenis font (g = nama Google Fonts bila perlu dimuat) ---------- */
+var FONTS=[
+ ["Sans-serif",[
+  ["Plus Jakarta Sans","'Plus Jakarta Sans', sans-serif",0],["Poppins","Poppins, sans-serif",1],["Arial","Arial, Helvetica, sans-serif",0],["Verdana","Verdana, Geneva, sans-serif",0],
+  ["Trebuchet MS","'Trebuchet MS', sans-serif",0],["Quicksand","Quicksand, sans-serif",1],["Oswald","Oswald, sans-serif",1]]],
+ ["Serif",[
+  ["Georgia","Georgia, serif",0],["Times New Roman","'Times New Roman', serif",0],["Merriweather","Merriweather, serif",1],["Playfair Display","'Playfair Display', serif",1]]],
+ ["Monospace (kode)",[
+  ["Fira Code","'Fira Code', monospace",0],["JetBrains Mono","'JetBrains Mono', monospace",1],["Courier New","'Courier New', monospace",0]]],
+ ["Tulisan tangan & judul",[
+  ["Caveat","Caveat, cursive",1],["Pacifico","Pacifico, cursive",1],["Dancing Script","'Dancing Script', cursive",1],["Lobster","Lobster, cursive",1],["Comic Sans MS","'Comic Sans MS', cursive",0],["Bebas Neue","'Bebas Neue', sans-serif",1]]]
+];
+function fontSel(){
+ var h='<select id="tx-font" title="Jenis font (blok teks dulu)"><option value="">Font…</option>';
+ FONTS.forEach(function(g){
+  h+='<optgroup label="'+g[0]+'">'+g[1].map(function(f){return '<option value="'+f[1]+'" style="font-family:'+f[1]+'">'+f[0]+'</option>';}).join("")+'</optgroup>';
+ });
+ return h+'</select>';
+}
+function loadFonts(all){
+ var json="";try{json=JSON.stringify((cms&&cms.skills&&cms.skills[PID])||{});}catch(e){}
+ var names=[];
+ FONTS.forEach(function(g){g[1].forEach(function(f){if(f[2]&&(all||json.indexOf(f[0])>=0))names.push(f[0]);});});
+ if(!names.length)return;
+ var url="https://fonts.googleapis.com/css2?"+names.map(function(n){return "family="+n.replace(/ /g,"+")+":wght@400;700";}).join("&")+"&display=swap";
+ var l=document.getElementById("lum-gf");
+ if(!l){l=document.createElement("link");l.id="lum-gf";l.rel="stylesheet";document.head.appendChild(l);}
+ if(l.getAttribute("href")!==url)l.setAttribute("href",url);
+}
 /* ---------- toolbar ---------- */
 function buildBar(){
  var sw=function(k,c){return '<button type="button" class="sw" data-'+k+'="'+c+'" style="background:'+c+'" title="'+(k==="hl"?"Sorot":"Warna teks")+'"></button>';};
  var bar=document.createElement("div");bar.id="lum-bar";
  bar.innerHTML=
+ '<div id="lum-fold"><button type="button" data-act="fold" id="lum-foldb" title="Kecilkan toolbar" aria-label="Kecilkan toolbar">▾</button></div>'+
  '<div class="r">'+
   '<button data-act="undo" id="lum-undo" title="Urungkan (Ctrl+Z)">↶</button><button data-act="redo" id="lum-redo" title="Ulangi (Ctrl+Y)">↷</button><span class="sep"></span>'+
   '<button data-cmd="bold"><b>B</b></button><button data-cmd="italic"><i>I</i></button><button data-cmd="underline"><u>U</u></button><button data-cmd="strikeThrough"><s>S</s></button><span class="sep"></span>'+
-  '<select id="tx-font" title="Jenis font (blok teks dulu)"><option value="">Font…</option><option value="\'Plus Jakarta Sans\', sans-serif">Plus Jakarta Sans</option><option value="Arial, Helvetica, sans-serif">Arial</option><option value="Georgia, serif">Georgia (serif)</option><option value="\'Times New Roman\', serif">Times New Roman</option><option value="\'Courier New\', monospace">Courier (mono)</option></select>'+
+  fontSel()+
   '<select id="tx-size" title="Ukuran font (blok teks dulu)"><option value="">Ukuran…</option>'+[11,12,13,14,16,18,20,24,28,32,40].map(function(n){return '<option value="'+n+'">'+n+' px</option>';}).join("")+'</select><span class="sep"></span>'+
   '<span class="lbl">Warna</span><input type="color" id="tx-fg" value="#dc2626" title="Warna teks bebas"><button data-pal="fg" title="Palet lengkap: hitam, abu-abu, dan warna halaman ini">🎨</button>'+TC.map(function(c){return sw("fg",c);}).join("")+'<button data-fg="inherit" title="Warna asli">✕</button><span class="sep"></span>'+
   '<span class="lbl">Sorot</span><input type="color" id="tx-hl" value="#fff3a3" title="Warna sorot bebas"><button data-pal="hl" title="Palet lengkap untuk sorotan">🎨</button>'+HL.map(function(c){return sw("hl",c);}).join("")+'<button data-hl="transparent" title="Hapus sorotan">✕</button><span class="sep"></span>'+
@@ -284,12 +370,10 @@ function buildBar(){
   '<span class="lbl">Tinggi px</span><input type="number" id="cd-h" min="0" max="2000">'+
   '<span class="lbl">Kolom</span><select id="cd-cols"><option value="">…</option><option value="0">Asli</option><option>1</option><option>2</option><option>3</option><option>4</option></select>'+
   '<span class="lbl">Jarak</span><input type="number" id="cd-gap" min="0" max="80">'+
-  '<span class="lbl">Spasi baris</span><select id="cd-lh"><option value="">…</option><option value="0">Asli</option><option>1.2</option><option>1.4</option><option>1.5</option><option>1.6</option><option>1.8</option><option>2</option></select>'+
-  '<span class="lbl">Jarak bawah</span><input type="number" id="cd-mb" min="0" max="120" title="Jarak di bawah kartu/paragraf terpilih (px)">'+
-  '<button data-blk="parent" title="Pilih elemen pembungkus (mis. wadah kolom)">⤴ Induk</button><button data-blk="rst" title="Hapus semua gaya buatan editor pada elemen ini">Reset gaya</button><button data-blk="clean" title="Rapikan format hasil tempelan (font/ukuran campur, spasi ganda, baris kosong) pada kartu terpilih; bila tidak ada yang dipilih, seluruh tab">🧹 Rapikan tempelan</button>'+
+  '<button data-blk="parent" title="Pilih elemen pembungkus (mis. wadah kolom)">⤴ Induk</button><button data-blk="rst" title="Hapus semua gaya buatan editor pada elemen ini">Reset gaya</button>'+
  '</div>'+
  '<div class="r">'+
-  '<span class="lbl">Kartu</span><button data-blk="dup" title="Gandakan kartu/baris terpilih">⧉ Gandakan</button><button data-blk="up">↑</button><button data-blk="down">↓</button><button data-blk="del" class="dng">🗑 Hapus</button><button data-blk="note">＋ Catatan</button><button data-blk="box" title="Tambah kotak berisi teks">▢ ＋ Kotak teks</button><button data-blk="text" title="Tambah paragraf teks (di dalam kotak terpilih, atau di bawah posisi kursor)">＋ Teks</button><button data-tb="new">▦ ＋ Tabel</button>'+
+  '<span class="lbl">Kartu</span><button data-blk="dup" title="Gandakan kartu/baris terpilih">⧉ Gandakan</button><button data-blk="up">↑</button><button data-blk="down">↓</button><button data-blk="del" class="dng">🗑 Hapus</button><button data-blk="note">＋ Catatan</button><button data-blk="box" title="Tambah kotak berisi teks">▢ ＋ Kotak teks</button><button data-blk="item" title="Tambah kotak bernomor (kotak di dalam kotak, seperti daftar 7 variasi). Dipilih/kursor di dalam satu kotak bernomor → kotak baru dibuat sesudahnya dan nomor otomatis diurutkan ulang">▣ ＋ Kotak bernomor</button><button data-blk="group" title="Tambah kotak pembungkus berjudul yang berisi beberapa kotak bernomor">▤ ＋ Kelompok kotak</button><button data-blk="sample" title="Tambah kotak contoh di dalam kotak bernomor yang sedang dipilih/kursor">▫ ＋ Contoh</button><button data-blk="text" title="Tambah paragraf teks (di dalam kotak terpilih, atau di bawah posisi kursor)">＋ Teks</button><button data-tb="new">▦ ＋ Tabel</button>'+
   '<span class="sep"></span><button data-act="quiz">❓ Soal kuis</button><button data-act="save" class="pri">💾 Simpan</button><button data-act="reset" class="dng" title="Kembalikan ke tampilan asli">↺ Asli</button><button data-act="exit">Keluar</button>'+
  '</div>'+
  '<div class="r" id="lum-r3" hidden>'+
@@ -298,8 +382,7 @@ function buildBar(){
   '<button data-tb="addcoll">＋ Kolom kiri</button><button data-tb="addcolr">＋ Kolom kanan</button><button data-tb="delcol" class="dng">− Kolom</button><span class="sep"></span>'+
   '<button data-tb="mergeR">Gabung →</button><button data-tb="mergeD">Gabung ↓</button><button data-tb="split">Pisah sel</button><span class="sep"></span>'+
   '<button data-tb="deltbl" class="dng">🗑 Tabel</button><span class="lbl">Shift+klik sel = atur warna/lebar sel · ⤴ Induk = pilih baris/tabel</span>'+
- '</div>'+
- '<div style="text-align:center;font-size:11px;color:#94a3b8;font-weight:500">Blok teks → atur font/ukuran/warna · klik kartu (garis merah putus-putus) → panel kartu muncul; tarik pojok kanan-bawah untuk mengubah ukuran · Shift+klik = pilih elemen apa pun, ⤴ Induk = pilih pembungkusnya</div>';
+ '</div>';
  document.body.appendChild(bar);
  bar.addEventListener("mousedown",function(e){if(e.target.closest("button"))e.preventDefault();});
  bar.addEventListener("click",function(e){
@@ -321,7 +404,7 @@ function buildBar(){
  var TX={"tx-font":setFont,"tx-size":setSize,"tx-fg":setFg,"tx-hl":setHl};
  bar.addEventListener("change",function(e){
   var f=TX[e.target.id];
-  if(f){if(e.target.value)f(e.target.value);if(e.target.tagName==="SELECT")e.target.value="";}
+  if(f){var v=e.target.value;if(v&&v.charAt(0)!=="\u0001")f(v);else syncTx();}
  });
  /* kontrol kartu */
  var CP={
@@ -335,8 +418,6 @@ function buildBar(){
   "cd-al":function(v){if(!v)return;selected.style.margin=v==="l"?"12px auto 12px 0":(v==="c"?"12px auto":"12px 0 12px auto");},
   "cd-h":function(v){var n=Number(v)||0;if(/^(TR|TD|TH|THEAD|TBODY|TABLE)$/.test(selected.tagName)){selected.style.minHeight="";selected.style.height=n?n+"px":"";} else{selected.style.height="";selected.style.minHeight=n?n+"px":"";}},
   "cd-gap":function(v){selected.style.gap=(Number(v)||0)+"px";},
-  "cd-lh":function(v){if(!v)return;selected.style.lineHeight=(v==="0")?"":v;},
-  "cd-mb":function(v){selected.style.marginBottom=(v===""||isNaN(Number(v)))?"":(Number(v)+"px");},
   "cd-cols":function(v){
    if(!v)return;
    if(v==="0"){selected.style.gridTemplateColumns="";return;}
@@ -359,7 +440,7 @@ function sync(){
  $("cd-w").value=/%$/.test(selected.style.width)?Math.round(parseFloat(selected.style.width)):"";
  $("cd-h").value=parseInt(selected.style.minHeight)||parseInt(selected.style.height)||"";
  $("cd-gap").value=Math.round(parseFloat(cs.columnGap))||"";
- $("cd-cols").value="";$("cd-al").value="";$("cd-lh").value="";$("cd-mb").value=/px$/.test(selected.style.marginBottom)?parseInt(selected.style.marginBottom):"";
+ $("cd-cols").value="";$("cd-al").value="";
 }
 
 /* ---------- palet warna ---------- */
@@ -439,12 +520,55 @@ function select(el){
  selected=el;if(el){el.classList.add("lum-sel");sync();}
  var r2=$("lum-r2");if(r2)r2.hidden=!el;
 }
+
+/* ---------- kotak bernomor (kotak di dalam kotak) ---------- */
+function isItem(el){
+ if(!el||el.nodeType!==1)return false;
+ if(el.classList.contains("kotak-item"))return true;
+ return el.classList.contains("flex")&&el.classList.contains("items-start")&&!!el.firstElementChild&&/^\d{1,3}$/.test(el.firstElementChild.textContent.trim());
+}
+function itemOf(el){
+ var sec=el?secOf(el):null;
+ while(el&&sec&&el!==sec){if(isItem(el))return el;el=el.parentElement;}
+ return null;
+}
+function curItem(){
+ var it=selected?itemOf(selected):null;
+ if(it)return it;
+ if(savedRange&&secOf(savedRange.startContainer)){var n=savedRange.startContainer;if(n.nodeType===3)n=n.parentNode;return itemOf(n);}
+ return null;
+}
+function renum(parent){
+ if(!parent)return;var i=0;
+ Array.prototype.forEach.call(parent.children,function(ch){
+  if(!isItem(ch))return;i++;
+  var b=ch.firstElementChild,old=b.textContent.trim();
+  b.textContent=(old.length>1&&old.charAt(0)==="0"&&i<10)?"0"+i:String(i);
+ });
+}
+function itemHTML(n){
+ return '<div class="kotak-item bg-slate-50 rounded-xl p-3.5 border border-slate-200 hover:border-emerald-400 transition flex items-start gap-3">'+
+  '<span class="kotak-num w-6 h-6 rounded-lg bg-emerald-500 text-white font-bold flex items-center justify-center text-xs shrink-0 mt-0.5">'+n+'</span>'+
+  '<div class="flex-grow space-y-1.5"><div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">'+
+  '<h4 class="font-bold text-slate-900 text-xs md:text-sm">Judul kotak</h4>'+
+  '<span class="bg-emerald-100 text-emerald-800 text-[10px] font-semibold px-2 py-0.5 rounded-full w-max">Label</span></div>'+
+  '<div class="space-y-1.5 text-xs font-mono-code"><div class="bg-white p-2.5 rounded-lg border border-slate-200">• Tulis contoh di sini…</div></div></div></div>';
+}
+function mkItem(n,ref){
+ var d=document.createElement("div");d.innerHTML=itemHTML(n);var it=d.firstChild;
+ if(ref){ /* tiru gaya kotak acuan (warna/garis/sudut) agar serasi */
+  var st=ref.getAttribute("style");if(st)it.setAttribute("style",st);
+  var rc=(ref.getAttribute("class")||"").replace(/\blum-sel\b/g,"").trim();if(rc)it.setAttribute("class",rc.indexOf("kotak-item")<0?rc+" kotak-item":rc);
+  var rb=ref.firstElementChild;if(rb){it.firstElementChild.setAttribute("class",(rb.getAttribute("class")||"").replace(/\blum-sel\b/g,"").trim());var bs=rb.getAttribute("style");if(bs)it.firstElementChild.setAttribute("style",bs);}
+ }
+ return it;
+}
 var BLK={
  need:function(){if(!selected){alert("Klik dulu pada kartu atau baris yang ingin diubah (akan muncul garis merah putus-putus).");return false;}return true;},
- dup:function(){if(!BLK.need())return;if(hasQuiz(selected)){toast("Soal kuis digandakan lewat tombol ❓ Soal kuis → ⧉ Gandakan");return;}var c=selected.cloneNode(true);c.classList.remove("lum-sel");selected.after(c);select(c);snap();toast("Kartu digandakan");},
- up:function(){if(!BLK.need())return;var p=selected.previousElementSibling;if(p){p.before(selected);snap();}},
- down:function(){if(!BLK.need())return;var n=selected.nextElementSibling;if(n){n.after(selected);snap();}},
- del:function(){if(!BLK.need())return;if(hasQuiz(selected)){toast("Wadah kuis tidak bisa dihapus di sini. Hapus soal lewat tombol ❓ Soal kuis");return;}if(!confirm("Hapus kartu/baris yang dipilih?"))return;var s=selected;select(null);s.remove();snap();},
+ dup:function(){if(!BLK.need())return;if(hasQuiz(selected)){toast("Soal kuis digandakan lewat tombol ❓ Soal kuis → ⧉ Gandakan");return;}var c=selected.cloneNode(true);c.classList.remove("lum-sel");selected.after(c);renum(c.parentElement);select(c);snap();toast("Kartu digandakan");},
+ up:function(){if(!BLK.need())return;var p=selected.previousElementSibling;if(p){p.before(selected);renum(selected.parentElement);snap();}},
+ down:function(){if(!BLK.need())return;var n=selected.nextElementSibling;if(n){n.after(selected);renum(selected.parentElement);snap();}},
+ del:function(){if(!BLK.need())return;if(hasQuiz(selected)){toast("Wadah kuis tidak bisa dihapus di sini. Hapus soal lewat tombol ❓ Soal kuis");return;}if(!confirm("Hapus kartu/baris yang dipilih?"))return;var s=selected,pr=s.parentElement;select(null);s.remove();renum(pr);snap();},
  parent:function(){
   if(!BLK.need())return;
   var sec=secOf(selected),p=selected.parentElement;
@@ -452,42 +576,6 @@ var BLK={
   select(p);
  },
  rst:function(){if(!BLK.need())return;selected.removeAttribute("style");sync();snap();toast("Gaya buatan editor dihapus");},
- clean:function(){
-  var root=selected||document.querySelector("main .tab-content:not(.hidden)");
-  if(!root)return;
-  if(hasQuiz(root)&&root.id==="quiz-container"){toast("Kotak kuis tidak dirapikan di sini");return;}
-  var INL=/^(SPAN|EM|I|STRONG|B|U|A|MARK|SUB|SUP|SMALL)$/;
-  var JUNK=/^(?=[A-Za-z]*[a-z])(?=[A-Za-z]*[A-Z])[A-Za-z]{3,9}$/;     /* class acak hasil tempelan, mis. zhvwWe */
-  var els=Array.prototype.slice.call(root.querySelectorAll("*")).filter(function(e){return !e.closest("#quiz-container");});
-  var cnt={};els.forEach(function(e){var f=e.style&&e.style.fontSize;if(f)cnt[f]=(cnt[f]||0)+1;});
-  var mode="",mx=0;Object.keys(cnt).forEach(function(k){if(cnt[k]>mx){mx=cnt[k];mode=k;}});
-  els.forEach(function(e){
-   Array.prototype.slice.call(e.classList).forEach(function(c){if(JUNK.test(c))e.classList.remove(c);});
-   if(!e.classList.length)e.removeAttribute("class");
-   if(INL.test(e.tagName)){
-    e.style.fontFamily="";e.style.margin="";
-    if(e.style.textDecoration==="none")e.style.textDecoration="";
-    if(e.style.fontSize&&mode)e.style.fontSize=mode;          /* samakan ukuran font */
-   }
-   if(e.getAttribute("style")===""||e.getAttribute("style")==="null")e.removeAttribute("style");
-  });
-  /* elemen inline yang hanya berisi spasi → satu spasi biasa */
-  els.forEach(function(e){
-   if(e.isConnected&&/^(EM|I|SPAN|STRONG|B|U)$/.test(e.tagName)&&!e.children.length&&e.textContent&&/^[\s\u00a0]+$/.test(e.textContent)){e.replaceWith(document.createTextNode(" "));}
-  });
-  /* span tanpa atribut dibuka bungkusnya */
-  els.slice().reverse().forEach(function(e){
-   if(e.isConnected&&e.tagName==="SPAN"&&!e.attributes.length&&e.parentNode){while(e.firstChild)e.parentNode.insertBefore(e.firstChild,e);e.remove();}
-  });
-  root.normalize();
-  /* NBSP → spasi biasa, spasi ganda → satu */
-  var tw=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),nodes=[],n;
-  while((n=tw.nextNode()))nodes.push(n);
-  nodes.forEach(function(t){if(t.parentNode&&t.parentNode.closest&&t.parentNode.closest("pre,code,#quiz-container"))return;t.nodeValue=t.nodeValue.replace(/\u00a0/g," ").replace(/ {2,}/g," ");});
-  /* <br> penutup di akhir baris dihapus (penyebab jarak baris tak rata) */
-  for(var pass=0;pass<3;pass++)Array.prototype.slice.call(root.querySelectorAll("br")).forEach(function(b){if(!b.closest("#quiz-container")&&!b.nextSibling&&b.parentNode&&b.parentNode!==root)b.remove();});
-  snap();toast("Format tempelan dirapikan");
- },
  box:function(){
   var n=document.createElement("div");
   n.className="kotak-teks";
@@ -495,6 +583,36 @@ var BLK={
   n.innerHTML='<p style="margin:0">Tulis teks di dalam kotak ini…</p>';
   if(selected&&selected.classList.contains("kotak-teks"))selected.after(n);else placeBlock(n);
   snap();select(n);n.scrollIntoView({behavior:"smooth",block:"center"});BLK._focus(n.firstChild);
+ },
+
+ item:function(){
+  var it=curItem(),n;
+  if(it){
+   n=mkItem(1,it);it.after(n);renum(it.parentElement);
+  }else{
+   var list=null,ref=selected;
+   if(!ref&&savedRange&&secOf(savedRange.startContainer)){ref=savedRange.startContainer;if(ref.nodeType===3)ref=ref.parentNode;}
+   if(ref&&ref.closest)list=ref.closest(".kotak-list")||(ref.classList&&ref.classList.contains("kotak-group")?ref.querySelector(".kotak-list"):null);
+   if(list&&secOf(list)){n=mkItem(1);list.appendChild(n);renum(list);}
+   else{BLK.group();return;}
+  }
+  snap();select(n);n.scrollIntoView({behavior:"smooth",block:"center"});toast("Kotak bernomor ditambahkan — nomor diurutkan otomatis");
+ },
+ group:function(){
+  var g=document.createElement("div");
+  g.className="kotak-group bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3";
+  g.innerHTML='<h3 class="text-base font-bold text-slate-900">Judul kelompok kotak</h3><div class="kotak-list space-y-3">'+itemHTML(1)+itemHTML(2)+'</div>';
+  if(selected&&selected.classList.contains("kotak-group"))selected.after(g);else placeBlock(g);
+  snap();select(g);g.scrollIntoView({behavior:"smooth",block:"center"});toast("Kelompok kotak ditambahkan");
+ },
+ sample:function(){
+  var it=curItem();if(!it){toast("Klik di dalam kotak bernomor dulu");return;}
+  var col=it.querySelector(".space-y-1\\.5.text-xs")||it.querySelector(".flex-grow");
+  var b=document.createElement("div");b.className="bg-white p-2.5 rounded-lg border border-slate-200";b.textContent="• Tulis contoh di sini…";
+  if(!col)return;
+  if(col.classList.contains("text-xs"))col.appendChild(b);
+  else{var w=document.createElement("div");w.className="space-y-1.5 text-xs font-mono-code";w.appendChild(b);col.appendChild(w);}
+  snap();BLK._focus(b);
  },
  text:function(){
   var p=document.createElement("p");p.style.margin="8px 0 0";p.textContent="Tulis teks di sini…";
@@ -750,8 +868,33 @@ function quizModal(){
   renderQuiz();setScoreText();m.remove();toast("Soal kuis tersimpan ✓");
  };
 }
+
+/* ---------- tampilan HP: toolbar rendah, tidak menabrak menu seleksi bawaan & keyboard ---------- */
+var mq=window.matchMedia?window.matchMedia("(max-width:700px),(pointer:coarse) and (max-width:1100px)"):{matches:false};
+function fitBar(){
+ var b=$("lum-bar");if(!b)return;
+ document.body.style.paddingBottom=mq.matches?(b.offsetHeight+110)+"px":"";
+}
+function lift(){ /* naikkan toolbar saat keyboard layar muncul */
+ var b=$("lum-bar");if(!b||!window.visualViewport||!mq.matches){if(b)b.style.bottom="";return;}
+ var v=window.visualViewport,off=Math.max(0,window.innerHeight-v.height-v.offsetTop);
+ b.style.bottom=off+"px";
+}
+var selT=null;
+function keepSelVisible(){ /* seleksi teks jangan tertutup toolbar / header: gulirkan ke area tengah */
+ clearTimeout(selT);
+ selT=setTimeout(function(){
+  if(!editing||!mq.matches)return;
+  var s=getSelection();if(!s.rangeCount||s.isCollapsed||!secOf(s.anchorNode))return;
+  var b=$("lum-bar"),r=s.getRangeAt(0).getBoundingClientRect(),vh=(window.visualViewport?window.visualViewport.height:innerHeight);
+  var bot=vh-(b?b.offsetHeight:0)-70,top=150;
+  if(r.bottom>bot)window.scrollBy(0,Math.min(r.bottom-bot,vh));
+  else if(r.top<top)window.scrollBy(0,-Math.min(top-r.top,vh));
+ },450);
+}
 var ACT={
  undo:function(){step(-1);},redo:function(){step(1);},
+ fold:function(){var b=$("lum-bar");if(!b)return;var f=b.classList.toggle("fold"),x=$("lum-foldb");x.textContent=f?"▴":"▾";x.title=x.ariaLabel=f?"Buka toolbar":"Kecilkan toolbar";if(f){var p=$("lum-pal");if(p)p.remove();}fitBar();},
  save:saveAll,quiz:quizModal,
  reset:function(){
   if(!confirm("Kembalikan halaman ini ke tampilan asli? Semua hasil edit halaman ini akan hilang."))return;
@@ -771,7 +914,9 @@ function enterEdit(){
  sections().forEach(function(s){s.contentEditable="true";});
  var qc=document.getElementById("quiz-container");if(qc)qc.contentEditable="false";
  var h1=document.querySelector("header h1");if(h1)h1.contentEditable="true";
- buildBar();
+ loadFonts(true);buildBar();fitBar();lift();
+ window.addEventListener("resize",function(){fitBar();lift();});
+ if(window.visualViewport){window.visualViewport.addEventListener("resize",lift);window.visualViewport.addEventListener("scroll",lift);}
  document.addEventListener("selectionchange",onSelChange);
  document.addEventListener("input",function(e){if(e.target.closest&&e.target.closest("#lum-bar,.lum-modal"))return;dirty=true;snapSoon();});
  document.addEventListener("click",function(e){
@@ -804,8 +949,31 @@ function enterEdit(){
  });
  window.addEventListener("beforeunload",function(e){if(dirty){e.preventDefault();e.returnValue="";}});
  snap();dirty=false;updUndo();
- toast("Mode edit aktif");
+ toast("Mode edit aktif · editor v9");
 }
+/* ---------- catat aktivitas belajar siswa (untuk pembekuan otomatis di server) ----------
+   Dihitung: membaca materi aktif ≥ 3 menit di halaman ini, atau menjawab soal kuis (walau satu).
+   Hanya membuka halaman tidak dihitung. Tidak ditampilkan ke siswa. */
+var lastPing=0;
+function pingStudy(){
+ var s=L.getSession();
+ if(editing||!s||s.role!=="student"||s.type==="dummy"||Date.now()-lastPing<300000)return;
+ lastPing=Date.now();L.api("touch").catch(function(){});
+}
+(function(){
+ var acc=0,last=Date.now(),act=Date.now(),done=false;
+ ["scroll","click","keydown","touchstart","touchmove","mousemove"].forEach(function(ev){window.addEventListener(ev,function(){act=Date.now();},{passive:true,capture:true});});
+ setInterval(function(){
+  var now=Date.now(),dt=now-last;last=now;
+  if(done||editing||document.visibilityState!=="visible"||now-act>60000)return; /* tab tersembunyi / diam >1 menit tidak dihitung */
+  acc+=Math.min(dt,5000);
+  if(acc>=180000){done=true;pingStudy();}
+ },2000);
+ if(typeof window.handleSelectOption==="function"&&!window.__lumQ){
+  var orig=window.handleSelectOption;window.__lumQ=1;
+  window.handleSelectOption=function(){try{pingStudy();}catch(e){}return orig.apply(this,arguments);};
+ }
+})();
 function setup(){
  function go(admin){
   if(admin){
