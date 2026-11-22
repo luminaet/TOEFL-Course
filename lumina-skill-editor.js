@@ -107,6 +107,7 @@ css.textContent=[
 "#lum-bar .dng{background:#7f1d1d;border-color:#991b1b;color:#fecaca}",
 "#lum-r2,#lum-r3{background:#1b2a47;border-radius:9px;padding:4px 6px}",
 "#lum-fold{display:none}",
+"::highlight(lum-sel){background-color:rgba(59,130,246,.38);color:inherit}",
 "@media (max-width:700px),(pointer:coarse) and (max-width:1100px){#lum-bar{left:0;right:0;bottom:0;transform:none;width:100%;max-width:100%;box-sizing:border-box;max-height:23vh;border-radius:12px 12px 0 0;padding:3px 6px;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;overscroll-behavior:contain}#lum-bar .r{gap:3px;margin:2px 0;justify-content:flex-start}#lum-bar>.r:nth-child(2){padding-right:34px}#lum-bar button,#lum-bar select,#lum-bar input[type=number]{min-width:26px;height:26px;padding:0 6px;font-size:11px}#lum-bar input[type=number]{width:48px}#lum-bar .sw{min-width:18px;width:18px;height:18px;padding:0}#lum-fold{display:block;position:sticky;top:0;float:right;height:0;z-index:3;overflow:visible}#lum-fold button{width:30px;height:28px;font-size:15px;line-height:1;padding:0;background:#334155;border-color:#475569}#lum-bar.fold{max-height:none;overflow:hidden;min-height:34px}#lum-bar.fold>*:not(#lum-fold){display:none}#lum-bar.fold #lum-fold{float:none;height:auto;text-align:right}}",
 ".lum-fab{position:fixed;right:14px;bottom:14px;z-index:99998;height:36px;box-shadow:0 6px 20px #0006}",
 ".lum-modal{position:fixed;inset:0;background:#0009;z-index:100000;display:grid;place-items:center;padding:16px;font-family:'Plus Jakarta Sans',system-ui,sans-serif}",
@@ -226,9 +227,23 @@ function secOf(node){
  var s=node.closest&&node.closest(".tab-content");
  return(s&&s.closest("main")&&!node.closest("#quiz-container"))?s:null;
 }
+/* Blok teks tetap terlihat walau HP menyembunyikan seleksi asli saat toolbar disentuh
+   (memakai CSS Custom Highlight; browser lama tetap bekerja, hanya efek visualnya tidak ada). */
+function updateHl(){
+ if(!window.CSS||!CSS.highlights||typeof Highlight==="undefined")return;
+ try{
+  if(editing&&savedRange&&!savedRange.collapsed&&secOf(savedRange.commonAncestorContainer))CSS.highlights.set("lum-sel",new Highlight(savedRange));
+  else CSS.highlights.delete("lum-sel");
+ }catch(e){}
+}
+document.addEventListener("pointerdown",function(e){ /* klik di luar teks & toolbar = lepas blok */
+ if(!editing||!savedRange||!e.target||!e.target.closest)return;
+ if(e.target.closest("#lum-bar,#lum-pal,.lum-card,#lum-dlg")||secOf(e.target))return;
+ savedRange=null;updateHl();
+},true);
 function onSelChange(){
  var s=getSelection();
- if(s.rangeCount&&secOf(s.anchorNode)){savedRange=s.getRangeAt(0).cloneRange();setCell(cellOf(s.anchorNode));if(editing){keepSelVisible();syncTx();}}
+ if(s.rangeCount&&secOf(s.anchorNode)){savedRange=s.getRangeAt(0).cloneRange();setCell(cellOf(s.anchorNode));if(editing){keepSelVisible();syncTx();}updateHl();}
 }
 
 /* ---------- kolom font/ukuran/warna ikut menampilkan format teks yang sedang diblok/kursor ---------- */
@@ -286,7 +301,7 @@ function fmt(fn,needRange){
  var s=getSelection();s.removeAllRanges();s.addRange(savedRange);
  fn();
  var s2=getSelection();if(s2.rangeCount&&secOf(s2.getRangeAt(0).commonAncestorContainer))savedRange=s2.getRangeAt(0).cloneRange();
- snap();syncTx();
+ snap();syncTx();updateHl();
 }
 function setSize(px){
  fmt(function(){
@@ -981,7 +996,7 @@ function enterEdit(){
  });
  window.addEventListener("beforeunload",function(e){if(dirty){e.preventDefault();e.returnValue="";}});
  snap();dirty=false;updUndo();
- toast("Mode edit aktif · editor v10");
+ toast("Mode edit aktif · editor v11");
 }
 /* ---------- catat aktivitas belajar siswa (untuk pembekuan otomatis di server) ----------
    Dihitung: membaca materi aktif ≥ 3 menit di halaman ini, atau menjawab soal kuis (walau satu).
