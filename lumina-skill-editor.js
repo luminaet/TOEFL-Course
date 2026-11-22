@@ -257,6 +257,9 @@ function syncTx(){
  /* ukuran */
  var px=Math.round(parseFloat(cs.fontSize))||0;
  setSelVal($("tx-size"),String(px),px+" px");
+ /* spasi baris */
+ var bk=blockOfNode(n)||n,cb=getComputedStyle(bk),fz=parseFloat(cb.fontSize)||16,lv=cb.lineHeight,rt=(lv==="normal")?1.2:parseFloat(lv)/fz;
+ rt=Math.round(rt*100)/100;if(rt>0)setSelVal($("tx-lh"),String(rt),rt+"×");
  /* warna teks */
  $("tx-fg").value=hex(cs.color);
  /* sorotan: dari elemen inline terdekat yang punya latar */
@@ -304,6 +307,34 @@ function setSize(px){
 }
 function setFg(c){fmt(function(){document.execCommand("styleWithCSS",false,true);document.execCommand("foreColor",false,c);});}
 function setHl(c){fmt(function(){document.execCommand("styleWithCSS",false,true);if(!document.execCommand("hiliteColor",false,c))document.execCommand("backColor",false,c);});}
+/* ---------- jarak spasi antar baris (line-height) ---------- */
+function blockOfNode(n){
+ var sec=secOf(n);if(n&&n.nodeType===3)n=n.parentNode;
+ while(n&&n!==sec&&n.nodeType===1){
+  var d=getComputedStyle(n).display;
+  if(d!=="inline"&&d!=="contents"&&d!=="none")return n;
+  n=n.parentElement;
+ }
+ return null;
+}
+function setLh(v){
+ fmt(function(){
+  var r=savedRange,blocks=[];
+  function add(b){if(b&&blocks.indexOf(b)<0)blocks.push(b);}
+  if(r.collapsed)add(blockOfNode(r.startContainer));
+  else{
+   var root=r.commonAncestorContainer;if(root.nodeType===3)root=root.parentNode;
+   var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),t;
+   while((t=w.nextNode())){if(t.nodeValue.trim()&&r.intersectsNode(t))add(blockOfNode(t));}
+   if(!blocks.length)add(blockOfNode(r.startContainer));
+  }
+  if(!blocks.length){toast("Letakkan kursor di dalam paragraf dulu");return;}
+  blocks.forEach(function(b){
+   if(v==="auto")b.style.removeProperty("line-height");else b.style.lineHeight=v;
+   if(!b.getAttribute("style"))b.removeAttribute("style");
+  });
+ });
+}
 function setFont(f){fmt(function(){document.execCommand("styleWithCSS",false,true);document.execCommand("fontName",false,f);},true);}
 
 /* ---------- lebar kotak (aman untuk anak flex, responsif di HP) ---------- */
@@ -356,6 +387,7 @@ function buildBar(){
   '<select id="tx-size" title="Ukuran font (blok teks dulu)"><option value="">Ukuran…</option>'+[11,12,13,14,16,18,20,24,28,32,40].map(function(n){return '<option value="'+n+'">'+n+' px</option>';}).join("")+'</select><span class="sep"></span>'+
   '<span class="lbl">Warna</span><input type="color" id="tx-fg" value="#dc2626" title="Warna teks bebas"><button data-pal="fg" title="Palet lengkap: hitam, abu-abu, dan warna halaman ini">🎨</button>'+TC.map(function(c){return sw("fg",c);}).join("")+'<button data-fg="inherit" title="Warna asli">✕</button><span class="sep"></span>'+
   '<span class="lbl">Sorot</span><input type="color" id="tx-hl" value="#fff3a3" title="Warna sorot bebas"><button data-pal="hl" title="Palet lengkap untuk sorotan">🎨</button>'+HL.map(function(c){return sw("hl",c);}).join("")+'<button data-hl="transparent" title="Hapus sorotan">✕</button><span class="sep"></span>'+
+  '<span class="lbl">Spasi</span><select id="tx-lh" title="Jarak spasi antar baris (letakkan kursor di paragraf atau blok beberapa paragraf)"><option value="auto">Asli</option>'+["1","1.15","1.3","1.5","1.75","2","2.5","3"].map(function(n){return '<option value="'+n+'">'+n+'×</option>';}).join("")+'</select><span class="sep"></span>'+
   '<button data-cmd="justifyLeft" title="Rata kiri">⬅</button><button data-cmd="justifyCenter" title="Tengah">⬌</button><button data-cmd="justifyRight" title="Rata kanan">➡</button><span class="sep"></span>'+
   '<button data-cmd="insertUnorderedList">• Poin</button><button data-cmd="insertOrderedList">1. Nomor</button><button data-cmd="link">🔗</button><button data-cmd="unlink" title="Hapus link">⛓✕</button><button data-cmd="removeFormat" title="Bersihkan format teks">Tx</button>'+
  '</div>'+
@@ -401,7 +433,7 @@ function buildBar(){
   }else fmt(function(){document.execCommand("styleWithCSS",false,true);document.execCommand(c,false,null);});
  });
  /* kontrol teks (pakai "change" agar pemilih warna tidak menutup sendiri) */
- var TX={"tx-font":setFont,"tx-size":setSize,"tx-fg":setFg,"tx-hl":setHl};
+ var TX={"tx-font":setFont,"tx-size":setSize,"tx-lh":setLh,"tx-fg":setFg,"tx-hl":setHl};
  bar.addEventListener("change",function(e){
   var f=TX[e.target.id];
   if(f){var v=e.target.value;if(v&&v.charAt(0)!=="\u0001")f(v);else syncTx();}
@@ -949,8 +981,31 @@ function enterEdit(){
  });
  window.addEventListener("beforeunload",function(e){if(dirty){e.preventDefault();e.returnValue="";}});
  snap();dirty=false;updUndo();
- toast("Mode edit aktif · editor v8");
+ toast("Mode edit aktif · editor v10");
 }
+/* ---------- catat aktivitas belajar siswa (untuk pembekuan otomatis di server) ----------
+   Dihitung: membaca materi aktif ≥ 3 menit di halaman ini, atau menjawab soal kuis (walau satu).
+   Hanya membuka halaman tidak dihitung. Tidak ditampilkan ke siswa. */
+var lastPing=0;
+function pingStudy(){
+ var s=L.getSession();
+ if(editing||!s||s.role!=="student"||s.type==="dummy"||Date.now()-lastPing<300000)return;
+ lastPing=Date.now();L.api("touch").catch(function(){});
+}
+(function(){
+ var acc=0,last=Date.now(),act=Date.now(),done=false;
+ ["scroll","click","keydown","touchstart","touchmove","mousemove"].forEach(function(ev){window.addEventListener(ev,function(){act=Date.now();},{passive:true,capture:true});});
+ setInterval(function(){
+  var now=Date.now(),dt=now-last;last=now;
+  if(done||editing||document.visibilityState!=="visible"||now-act>60000)return; /* tab tersembunyi / diam >1 menit tidak dihitung */
+  acc+=Math.min(dt,5000);
+  if(acc>=180000){done=true;pingStudy();}
+ },2000);
+ if(typeof window.handleSelectOption==="function"&&!window.__lumQ){
+  var orig=window.handleSelectOption;window.__lumQ=1;
+  window.handleSelectOption=function(){try{pingStudy();}catch(e){}return orig.apply(this,arguments);};
+ }
+})();
 function setup(){
  function go(admin){
   if(admin){
