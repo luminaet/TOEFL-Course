@@ -34,6 +34,7 @@ function remoteLogin(user,pass){
  user=String(user||"").trim();
  return api("login",{user:user,hash:hashPassword(user,pass)}).then(function(j){setToken(j.token);return j.account;});
 }
+function qrLogin(code){return api("qrLogin",{code:String(code||"")}).then(function(j){setToken(j.token);return j.account;});}
 function refreshSession(){return api("me").then(function(j){setSession(j.account);return j.account;});}
 function fetchRawPublished(){
  return fetch("lumina-data.json?v="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;});
@@ -536,7 +537,7 @@ function inactivity(prog,st,now){
 
 window.Lumina={
  TYPES:TYPES,TYPE_KEYS:TYPE_KEYS,addMonths:addMonths,defaultExpiry:defaultExpiry,accStatus:accStatus,logAcc:logAcc,cleanProfile:cleanProfile,loadProfile:loadProfile,saveProfile:saveProfile,profileOk:profileOk,sessionType:sessionType,applyDummyLock:applyDummyLock,
- api:api,remoteLogin:remoteLogin,refreshSession:refreshSession,getToken:getToken,fetchRawPublished:fetchRawPublished,
+ api:api,remoteLogin:remoteLogin,qrLogin:qrLogin,refreshSession:refreshSession,getToken:getToken,fetchRawPublished:fetchRawPublished,
  KEY:KEY,EXPORT_KEY:EXPORT_KEY,PROG_PREFIX:PROG_PREFIX,DAY:DAY,DEFAULT_ADMIN:DEFAULT_ADMIN,
  SECTIONS:SECTIONS,QSECTIONS:QSECTIONS,MAT_SECTIONS:MAT_SECTIONS,LINK_GROUPS:LINK_GROUPS,LEVELS:LEVELS,SEC_COLOR:SEC_COLOR,
  esc:esc,uid:uid,safeUrl:safeUrl,safeColor:safeColor,normalizeAudioUrl:normalizeAudioUrl,

@@ -427,7 +427,7 @@ function keepNote(){
  if(!me||me.type!=="mahasiswa")return "";
  const left=freezeAt?Math.ceil((freezeAt-Date.now())/86400000):0;
  if(left>0&&left<=2)return "";   /* peringatan "akan dibekukan" sudah tampil di atas */
- return `<div class="draft-banner no-print" style="background:#fff8e6;border-color:#f0d58a;color:#7a5a00;margin:14px 0 0">📚 <b>Teruslah belajar agar akun tetap aktif.</b> Baca materi dan kerjakan latihan dengan rutin. Akun tanpa aktivitas pembelajaran selama 5 hari akan dibekukan, hubungi admin jika ini terjadi.</div>`;
+ return `<div class="draft-banner no-print" style="background:#fff8e6;border-color:#f0d58a;color:#7a5a00;margin:14px 0 0">📚 <b>Keep learning to keep your account active.</b> Read the materials and do the practice questions regularly. Accounts with no learning activity for a few days are frozen automatically, and only the admin can reactivate them.</div>`;
 }
 function renderAlert(){
  const slot=$("alert-slot");let h="";
@@ -939,7 +939,14 @@ function boot(fresh){
  });
 }
 window.addEventListener("focus",()=>{if(me&&cms)renderAlert();});
-boot();
+/* login lewat QR: index.html?qr=KODE (kode dibuang dari alamat setelah dibaca) */
+(function(){
+ const m=location.search.match(/[?&]qr=([0-9a-f]{64})/);
+ if(!m){boot();return;}
+ try{history.replaceState(null,"",location.pathname);}catch(e){}
+ L.setSession(null);
+ L.qrLogin(m[1]).then(a=>{L.setSession(a);return boot(true);}).catch(err=>{bootMsg=err.message||"QR code is invalid.";return boot();});
+})();
 </script>
 <script src="lumina-exam.js"></script>
 <script src="lumina-pretest.js"></script>
