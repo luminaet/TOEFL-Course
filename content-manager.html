@@ -541,8 +541,10 @@ function vAccounts(){
  const now=Date.now();
  const opts=(sel,adm)=>(adm?[["admin","Admin"]]:[]).concat(L.TYPE_KEYS.map(k=>[k,TL(k)])).map(o=>`<option value="${o[0]}" ${o[0]===sel?"selected":""}>${o[1]}</option>`).join("");
  const rows=ACC.map(a=>{
-  const s=L.accStatus(a,now),t=STT[s]||STT.active;
-  return `<tr><td>${esc(a.name)}</td><td>${esc(a.user)}</td><td><span class="tag ${a.role==="admin"?"admin":""}">${esc(TL(a.type)).toUpperCase()}</span></td><td><span class="tag ${t[1]}">${t[0]}</span></td><td>${a.expiresAt?fmtDate(a.expiresAt):"Selamanya"}</td><td>${fmtDate(a.createdAt)}</td><td><div class="acts"><button class="btn secondary small" data-act="accManage" data-id="${esc(a.user)}">Kelola</button>${renewable(a)&&a.expiresAt?`<button class="btn small" data-act="accExtend" data-id="${esc(a.user)}">+6 bln</button>`:""}<button class="btn secondary small" data-act="accPw" data-id="${esc(a.user)}">Ganti password</button></div></td></tr>`;
+  const s=L.accStatus(a,now),t=STT[s]||STT.active,frz=(s==="inactive"&&a.role!=="admin");
+  const lh=frz?((a.history||[]).slice(-1)[0]||null):null;
+  const stTag=frz?`<span class="tag bad" title="Akun nonaktif/dibekukan. Hanya admin yang bisa mengaktifkan kembali.">❄️ Dibekukan</span>${lh?`<div class="hint">${fmtDate(lh.ts)} · ${esc(lh.act)}</div>`:""}`:`<span class="tag ${t[1]}">${t[0]}</span>`;
+  return `<tr><td>${esc(a.name)}</td><td>${esc(a.user)}</td><td><span class="tag ${a.role==="admin"?"admin":""}">${esc(TL(a.type)).toUpperCase()}</span></td><td>${stTag}</td><td>${a.expiresAt?fmtDate(a.expiresAt):"Selamanya"}</td><td>${fmtDate(a.createdAt)}</td><td><div class="acts">${frz?`<button class="btn small" data-act="accReactivate" data-id="${esc(a.user)}">▶ Aktifkan kembali</button>`:""}<button class="btn secondary small" data-act="accManage" data-id="${esc(a.user)}">Kelola</button>${renewable(a)&&a.expiresAt?`<button class="btn small" data-act="accExtend" data-id="${esc(a.user)}">+6 bln</button>`:""}<button class="btn secondary small" data-act="accPw" data-id="${esc(a.user)}">Ganti password</button></div></td></tr>`;
  }).join("");
  $("#view").innerHTML=title("AKUN & LOGIN","Akun & login web","Jenis akun: Admin, Mahasiswa, Student Plus, Customer (masa berlaku 6 bulan, bisa dibuat selamanya), dan Dummy (hanya melihat). Akun tidak dihapus; akun yang berakhir tetap tercatat dan bisa diperpanjang.")+
  (accErr?`<div class="note" style="background:#fff3f4;color:#8f2234">⚠️ ${esc(accErr)} <button class="btn small" data-act="accReload">Coba lagi</button></div>`:"")+
@@ -808,6 +810,16 @@ qDel(id){
   const to=L.addMonths(Math.max(Date.now(),a.expiresAt||0),6);
   if(!confirm("Perpanjang "+a.user+" +6 bulan, sampai "+fmtDate(to)+"?"))return;
   L.api("extend",{user,months:6}).then(()=>loadAcc()).then(()=>toast("Akun diperpanjang ✓")).catch(e=>alert(e.message));
+ },
+ accReactivate(user,btn){
+  const a=ACC.find(x=>x.user===user);if(!a||a.role==="admin")return;
+  const lapse=a.expiresAt&&a.expiresAt<Date.now();
+  const to=lapse?L.addMonths(Date.now(),6):a.expiresAt;
+  if(!confirm("Aktifkan kembali akun "+a.name+" ("+a.user+")?"+(lapse?"\nMasa berlakunya sudah lewat, jadi diperpanjang +6 bulan sampai "+fmtDate(to)+".":"")))return;
+  const req={user,type:a.type,active:true,forever:!a.expiresAt};
+  if(a.expiresAt)req.expiresAt=to;
+  if(btn)btn.disabled=true;
+  L.api("updateAccount",req).then(()=>loadAcc()).then(()=>{toast("Akun diaktifkan kembali ✓");if(tab==="accounts")vAccounts();}).catch(e=>{if(btn)btn.disabled=false;alert(e.message);});
  },
  accManage(user){
   const a=ACC.find(x=>x.user===user);if(!a)return;
