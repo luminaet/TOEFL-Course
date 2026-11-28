@@ -525,7 +525,15 @@ function vPretest(){
 
 /* ---------- AKUN ---------- */
 const TL=k=>(L.TYPES[k]||{label:k}).label;
-const STT={active:["Aktif","ok"],expired:["Kedaluwarsa","bad"],inactive:["Nonaktif","bad"]};
+const STT={active:["Aktif","ok"],expired:["Kedaluwarsa","bad"],inactive:["Nonaktif","bad"],frozen:["❄️ Dibekukan","bad"]};
+/* Status akun: pakai status dari server (frozen/inactive/expired/active); dibekukan otomatis ditandai frozenAt di sheet. */
+function accSt(a,now){
+ const k=(a.role!=="admin"&&a.frozenAt&&(a.status==="frozen"||!a.status))?"frozen":(a.status&&STT[a.status]?a.status:L.accStatus(a,now));
+ const t=STT[k]||STT.active;
+ const days=(a.lastActiveAt?Math.floor((now-a.lastActiveAt)/86400000):null);
+ const waiting=(k==="active"&&a.type==="mahasiswa"&&a.expiresAt&&days!==null&&days>=5);   /* sudah lewat 5 hari, menunggu pembekuan harian server */
+ return {k:k,label:t[0],cls:t[1],frz:k==="frozen",days:days,waiting:waiting};
+}
 const renewable=a=>a.role!=="admin"&&a.type!=="dummy";
 let ACC=[],PFL={},accErr="";
 function loadAcc(){
@@ -541,9 +549,8 @@ function vAccounts(){
  const now=Date.now();
  const opts=(sel,adm)=>(adm?[["admin","Admin"]]:[]).concat(L.TYPE_KEYS.map(k=>[k,TL(k)])).map(o=>`<option value="${o[0]}" ${o[0]===sel?"selected":""}>${o[1]}</option>`).join("");
  const rows=ACC.map(a=>{
-  const s=L.accStatus(a,now),t=STT[s]||STT.active,frz=(s==="inactive"&&a.role!=="admin");
-  const lh=frz?((a.history||[]).slice(-1)[0]||null):null;
-  const stTag=frz?`<span class="tag bad" title="Akun nonaktif/dibekukan. Hanya admin yang bisa mengaktifkan kembali.">❄️ Dibekukan</span>${lh?`<div class="hint">${fmtDate(lh.ts)} · ${esc(lh.act)}</div>`:""}`:`<span class="tag ${t[1]}">${t[0]}</span>`;
+  const st=accSt(a,now),frz=st.frz;
+  const stTag=`<span class="tag ${st.cls}" ${frz?'title="Dibekukan otomatis karena tidak belajar 5 hari. Hanya admin yang bisa mengaktifkan kembali."':""}>${st.label}</span>`+(frz?`<div class="hint">sejak ${fmtDate(a.frozenAt)}</div>`:(st.waiting?`<div class="hint" style="color:#a15c00">⏳ ${st.days} hari tidak aktif, menunggu pembekuan otomatis</div>`:(st.days!==null&&a.type==="mahasiswa"&&st.k==="active"?`<div class="hint">terakhir aktif ${fmtDate(a.lastActiveAt)}</div>`:"")));
   return `<tr><td>${esc(a.name)}</td><td>${esc(a.user)}</td><td><span class="tag ${a.role==="admin"?"admin":""}">${esc(TL(a.type)).toUpperCase()}</span></td><td>${stTag}</td><td>${a.expiresAt?fmtDate(a.expiresAt):"Selamanya"}</td><td>${fmtDate(a.createdAt)}</td><td><div class="acts">${frz?`<button class="btn small" data-act="accReactivate" data-id="${esc(a.user)}">▶ Aktifkan kembali</button>`:""}<button class="btn secondary small" data-act="accManage" data-id="${esc(a.user)}">Kelola</button>${renewable(a)&&a.expiresAt?`<button class="btn small" data-act="accExtend" data-id="${esc(a.user)}">+6 bln</button>`:""}<button class="btn secondary small" data-act="accPw" data-id="${esc(a.user)}">Ganti password</button></div></td></tr>`;
  }).join("");
  $("#view").innerHTML=title("AKUN & LOGIN","Akun & login web","Jenis akun: Admin, Mahasiswa, Student Plus, Customer (masa berlaku 6 bulan, bisa dibuat selamanya), dan Dummy (hanya melihat). Akun tidak dihapus; akun yang berakhir tetap tercatat dan bisa diperpanjang.")+
@@ -813,13 +820,11 @@ qDel(id){
  },
  accReactivate(user,btn){
   const a=ACC.find(x=>x.user===user);if(!a||a.role==="admin")return null;
-  const lapse=a.expiresAt&&a.expiresAt<Date.now();
-  const to=lapse?L.addMonths(Date.now(),6):a.expiresAt;
-  if(!confirm("Aktifkan kembali akun "+a.name+" ("+a.user+")?"+(lapse?"\nMasa berlakunya sudah lewat, jadi diperpanjang +6 bulan sampai "+fmtDate(to)+".":"")))return null;
-  const req={user,type:a.type,active:true,forever:!a.expiresAt};
-  if(a.expiresAt)req.expiresAt=to;
+  if(a.expiresAt&&a.expiresAt<=Date.now()){alert("Masa aktif akun ini sudah berakhir. Perpanjang dulu (tombol +6 bln), lalu aktifkan kembali.");return null;}
+  if(!confirm("Aktifkan kembali akun "+a.name+" ("+a.user+")?\nHitungan 5 hari tanpa belajar dimulai lagi dari sekarang."))return null;
+  const comp=!!a.expiresAt&&confirm("Tambahkan masa aktif sebanyak hari akun dibekukan?\nOK = ya, Batal = tidak (masa aktif tetap).");
   if(btn)btn.disabled=true;
-  return L.api("updateAccount",req).then(()=>loadAcc()).then(()=>{toast("Akun diaktifkan kembali ✓");if(tab==="accounts")vAccounts();return true;}).catch(e=>{if(btn)btn.disabled=false;alert(e.message);return false;});
+  return L.api("unfreeze",{user,compensate:comp}).then(()=>loadAcc()).then(()=>{toast("Akun diaktifkan kembali ✓");if(tab==="accounts")vAccounts();return true;}).catch(e=>{if(btn)btn.disabled=false;alert(e.message);return false;});
  },
  accManage(user){
   const a=ACC.find(x=>x.user===user);if(!a)return;
@@ -830,12 +835,12 @@ qDel(id){
   const photo=pf&&pf.photoUrl?`<a class="btn secondary small" href="${esc(pf.photoUrl)}" target="_blank" rel="noopener">🖼 Buka foto di Drive ↗</a>`:(pf&&pf.photo?`<img src="${pf.photo}" style="width:64px;height:64px;border-radius:50%;object-fit:cover">`:"");
   const prof=pf&&pf.name?`<div class="box"><h3>Profil</h3><div class="row">${photo}</div>
    <div class="sub">${esc(pf.name)}<br>${esc(pf.email)} · ${esc(pf.wa)}<br>Pekerjaan: ${esc(pf.job||"—")} · Semester: ${esc(pf.semester||"—")}</div></div>`:`<p class="hint">Belum ada data profil dari mahasiswa ini.</p>`;
-  const stt=L.accStatus(a,Date.now()),frz=(stt==="inactive"&&!adm),stTag=frz?'<span class="tag bad">❄️ Dibekukan</span>':`<span class="tag ${(STT[stt]||STT.active)[1]}">${(STT[stt]||STT.active)[0]}</span>`;
+  const sx=accSt(a,Date.now()),stt=sx.k,frz=(sx.frz&&!adm),stTag=frz?'<span class="tag bad">❄️ Dibekukan</span>':`<span class="tag ${(STT[stt]||STT.active)[1]}">${(STT[stt]||STT.active)[0]}</span>`;
   const stBox=adm?"":`<div class="row" style="align-items:center;gap:10px"><b style="font-size:12px">Status</b>${stTag}${frz?'<button class="btn small" type="button" id="am-re">▶ Aktifkan kembali</button>':""}</div>`;
   modal(`<h3>${esc(a.name)} <span class="hint">(${esc(a.user)})</span></h3><form class="form" id="am-form">${stBox}
    ${adm?'<p class="hint">Akun admin tidak diubah dari sini (ganti password lewat tombol “Ganti password”).</p>':`<div class="grid2"><label>Jenis akun<select id="am-type">${L.TYPE_KEYS.map(k=>`<option value="${k}" ${k===a.type?"selected":""}>${TL(k)}</option>`).join("")}</select></label><label>Berlaku sampai<input id="am-exp" type="date" value="${dstr}"><span class="hint">Diabaikan jika “Aktif selamanya” dicentang.</span></label></div>
    <label style="display:flex;gap:8px;align-items:center"><input id="am-fv" type="checkbox" style="width:auto" ${!a.expiresAt?"checked":""}> Aktif selamanya (tanpa masa berlaku)</label>
-   <label style="display:flex;gap:8px;align-items:center"><input id="am-act" type="checkbox" style="width:auto" ${a.active!==false?"checked":""}> Akun aktif <span class="hint">(hapus centang = dibekukan)</span></label>`}
+   <label style="display:flex;gap:8px;align-items:center"><input id="am-act" type="checkbox" style="width:auto" ${a.active!==false?"checked":""}> Akun aktif <span class="hint">(hapus centang = dinonaktifkan manual, bukan pembekuan otomatis)</span></label>`}
    ${prof}<div><b style="font-size:12px">Riwayat</b>${hist}</div>
    <div class="row">${adm?"":'<button class="btn" type="submit">Simpan</button>'}<button class="btn secondary" type="button" id="am-c">Tutup</button></div></form>`,()=>{
    $("#am-c").onclick=closeModal;
