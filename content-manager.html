@@ -812,14 +812,14 @@ qDel(id){
   L.api("extend",{user,months:6}).then(()=>loadAcc()).then(()=>toast("Akun diperpanjang ✓")).catch(e=>alert(e.message));
  },
  accReactivate(user,btn){
-  const a=ACC.find(x=>x.user===user);if(!a||a.role==="admin")return;
+  const a=ACC.find(x=>x.user===user);if(!a||a.role==="admin")return null;
   const lapse=a.expiresAt&&a.expiresAt<Date.now();
   const to=lapse?L.addMonths(Date.now(),6):a.expiresAt;
-  if(!confirm("Aktifkan kembali akun "+a.name+" ("+a.user+")?"+(lapse?"\nMasa berlakunya sudah lewat, jadi diperpanjang +6 bulan sampai "+fmtDate(to)+".":"")))return;
+  if(!confirm("Aktifkan kembali akun "+a.name+" ("+a.user+")?"+(lapse?"\nMasa berlakunya sudah lewat, jadi diperpanjang +6 bulan sampai "+fmtDate(to)+".":"")))return null;
   const req={user,type:a.type,active:true,forever:!a.expiresAt};
   if(a.expiresAt)req.expiresAt=to;
   if(btn)btn.disabled=true;
-  L.api("updateAccount",req).then(()=>loadAcc()).then(()=>{toast("Akun diaktifkan kembali ✓");if(tab==="accounts")vAccounts();}).catch(e=>{if(btn)btn.disabled=false;alert(e.message);});
+  return L.api("updateAccount",req).then(()=>loadAcc()).then(()=>{toast("Akun diaktifkan kembali ✓");if(tab==="accounts")vAccounts();return true;}).catch(e=>{if(btn)btn.disabled=false;alert(e.message);return false;});
  },
  accManage(user){
   const a=ACC.find(x=>x.user===user);if(!a)return;
@@ -830,13 +830,16 @@ qDel(id){
   const photo=pf&&pf.photoUrl?`<a class="btn secondary small" href="${esc(pf.photoUrl)}" target="_blank" rel="noopener">🖼 Buka foto di Drive ↗</a>`:(pf&&pf.photo?`<img src="${pf.photo}" style="width:64px;height:64px;border-radius:50%;object-fit:cover">`:"");
   const prof=pf&&pf.name?`<div class="box"><h3>Profil</h3><div class="row">${photo}</div>
    <div class="sub">${esc(pf.name)}<br>${esc(pf.email)} · ${esc(pf.wa)}<br>Pekerjaan: ${esc(pf.job||"—")} · Semester: ${esc(pf.semester||"—")}</div></div>`:`<p class="hint">Belum ada data profil dari mahasiswa ini.</p>`;
-  modal(`<h3>${esc(a.name)} <span class="hint">(${esc(a.user)})</span></h3><form class="form" id="am-form">
+  const stt=L.accStatus(a,Date.now()),frz=(stt==="inactive"&&!adm),stTag=frz?'<span class="tag bad">❄️ Dibekukan</span>':`<span class="tag ${(STT[stt]||STT.active)[1]}">${(STT[stt]||STT.active)[0]}</span>`;
+  const stBox=adm?"":`<div class="row" style="align-items:center;gap:10px"><b style="font-size:12px">Status</b>${stTag}${frz?'<button class="btn small" type="button" id="am-re">▶ Aktifkan kembali</button>':""}</div>`;
+  modal(`<h3>${esc(a.name)} <span class="hint">(${esc(a.user)})</span></h3><form class="form" id="am-form">${stBox}
    ${adm?'<p class="hint">Akun admin tidak diubah dari sini (ganti password lewat tombol “Ganti password”).</p>':`<div class="grid2"><label>Jenis akun<select id="am-type">${L.TYPE_KEYS.map(k=>`<option value="${k}" ${k===a.type?"selected":""}>${TL(k)}</option>`).join("")}</select></label><label>Berlaku sampai<input id="am-exp" type="date" value="${dstr}"><span class="hint">Diabaikan jika “Aktif selamanya” dicentang.</span></label></div>
    <label style="display:flex;gap:8px;align-items:center"><input id="am-fv" type="checkbox" style="width:auto" ${!a.expiresAt?"checked":""}> Aktif selamanya (tanpa masa berlaku)</label>
-   <label style="display:flex;gap:8px;align-items:center"><input id="am-act" type="checkbox" style="width:auto" ${a.active!==false?"checked":""}> Akun aktif</label>`}
+   <label style="display:flex;gap:8px;align-items:center"><input id="am-act" type="checkbox" style="width:auto" ${a.active!==false?"checked":""}> Akun aktif <span class="hint">(hapus centang = dibekukan)</span></label>`}
    ${prof}<div><b style="font-size:12px">Riwayat</b>${hist}</div>
    <div class="row">${adm?"":'<button class="btn" type="submit">Simpan</button>'}<button class="btn secondary" type="button" id="am-c">Tutup</button></div></form>`,()=>{
    $("#am-c").onclick=closeModal;
+   if($("#am-re"))$("#am-re").onclick=()=>{const pr=A.accReactivate(user,$("#am-re"));if(pr)pr.then(ok=>{if(ok)closeModal();});};
    if(!adm)$("#am-type").onchange=()=>{const t=$("#am-type").value;$("#am-fv").checked=(t==="dummy");$("#am-exp").value=t==="dummy"?"":new Date(L.defaultExpiry(t)).toISOString().slice(0,10);};
    $("#am-form").onsubmit=e=>{
     e.preventDefault();
