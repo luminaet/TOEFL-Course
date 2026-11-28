@@ -407,19 +407,20 @@ function recordVisit(user,skill){
  var p=ensureProg(user),now=Date.now(),last=p.visits.length?p.visits[p.visits.length-1]:null;
  if(last&&last.skill===skill&&now-last.ts<600000)return;
  p.visits.push({skill:skill,ts:now}); if(p.visits.length>3000)p.visits=p.visits.slice(-3000);
- saveProg(user,p);
+ saveProg(user,p); queueEv(user,{t:"v",ts:now,skill:skill});
 }
 function recordAttempt(user,att){
  var p=ensureProg(user); att.ts=Date.now(); p.attempts.push(att);
  if(p.attempts.length>3000)p.attempts=p.attempts.slice(-3000);
  saveProg(user,p);
+ queueEv(user,{t:"a",ts:att.ts,ak:att.kind,skill:att.skill,section:att.section,level:att.level,score:att.score,total:att.total,pct:att.pct,answered:att.answered});
 }
 /* ---------- aktivitas yang memenuhi syarat ---------- */
 function recordAct(user,kind,ref,gap){
  var p=ensureProg(user),now=Date.now(),g=(gap==null)?120000:gap;ref=String(ref||"");
  for(var i=p.acts.length-1;i>=0&&now-p.acts[i].ts<g;i--){if(p.acts[i].k===kind&&p.acts[i].ref===ref)return false;}
  p.acts.push({k:kind,ref:ref,ts:now});if(p.acts.length>3000)p.acts=p.acts.slice(-3000);
- saveProg(user,p);return true;
+ saveProg(user,p);queueEv(user,{t:"c",ts:now,k:kind,ref:ref});return true;
 }
 /* menghitung detik AKTIF: tab terlihat dan ada gerakan/ketukan/gulir dalam 2 menit terakhir; memanggil cb tiap kali mencapai "sec" detik */
 function watchActive(sec,cb){
@@ -449,6 +450,35 @@ function startMaterialWatch(){
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",run);else run();
 }
 startMaterialWatch();
+/* ---------- kirim progres ke server (antrian tahan-offline; server mencatat ke tab Progress + waktu) ---------- */
+var OUT_PREFIX="luminaOutbox:", SYNC_PREFIX="luminaSynced:", flushT=0, flushing=false;
+function outLoad(u){try{var a=JSON.parse(localStorage.getItem(OUT_PREFIX+u)||"[]");return Array.isArray(a)?a:[];}catch(e){return [];}}
+function outSave(u,a){try{localStorage.setItem(OUT_PREFIX+u,JSON.stringify(a.slice(-3000)));}catch(e){}}
+function canSync(user){var s=getSession();return !!(s&&s.user===String(user)&&s.role==="student"&&s.type!=="dummy"&&getToken());}
+function schedFlush(user,ms){clearTimeout(flushT);flushT=setTimeout(function(){flushOut(user);},ms);}
+function queueEv(user,ev){if(!canSync(user))return;var a=outLoad(user);a.push(ev);outSave(user,a);schedFlush(user,2500);}
+/* sekali per akun per browser: kirim juga progres lama yang sudah ada di browser ini (server membuang duplikat) */
+function backfill(user){
+ var k=SYNC_PREFIX+user;try{if(localStorage.getItem(k))return;localStorage.setItem(k,String(Date.now()));}catch(e){return;}
+ var p=loadProg(user),ev=[];
+ p.visits.forEach(function(v){ev.push({t:"v",ts:v.ts,skill:v.skill});});
+ p.acts.forEach(function(v){ev.push({t:"c",ts:v.ts,k:v.k,ref:v.ref});});
+ p.attempts.forEach(function(a){ev.push({t:"a",ts:a.ts,ak:a.kind,skill:a.skill,section:a.section,level:a.level,score:a.score,total:a.total,pct:a.pct,answered:a.answered});});
+ ev.sort(function(x,y){return x.ts-y.ts;});
+ outSave(user,ev.slice(-2500).concat(outLoad(user)));
+}
+function flushOut(user){
+ if(flushing||!canSync(user))return Promise.resolve();
+ backfill(user);
+ var a=outLoad(user);if(!a.length)return Promise.resolve();
+ var n=Math.min(150,a.length);flushing=true;
+ return api("logProgress",{events:a.slice(0,n)}).then(function(){
+  var cur=outLoad(user);outSave(user,cur.slice(n));flushing=false;if(cur.length>n)schedFlush(user,500);
+ }).catch(function(e){flushing=false;schedFlush(user,e&&e.api?600000:60000);});
+}
+/* dicek berkala: begitu ada sesi mahasiswa (termasuk tepat setelah login), progres lama + antrean langsung dikirim */
+function autoFlush(){var s=getSession();if(s&&s.role==="student")flushOut(s.user);}
+setTimeout(autoFlush,3000);setInterval(autoFlush,10000);
 function mergeProg(a,b){
  var seenV={},seenA={},out={since:0,acts:[],visits:[],attempts:[]};
  out.since=(a.since&&b.since)?Math.min(a.since,b.since):(a.since||b.since);
@@ -515,7 +545,7 @@ window.Lumina={
  load:loadEditor,loadEditor:loadEditor,loadViewer:loadViewer,loadLocal:loadLocal,save:save,hasLocal:hasLocal,fetchPublished:fetchPublished,
  getExportedAt:getExportedAt,download:download,
  findAccount:findAccount,checkLogin:checkLogin,login:login,getSession:getSession,setSession:setSession,currentAccount:currentAccount,isDefaultPassword:isDefaultPassword,
- cleanProg:cleanProg,loadProg:loadProg,saveProg:saveProg,ensureProg:ensureProg,recordVisit:recordVisit,recordAttempt:recordAttempt,mergeProg:mergeProg,recordAct:recordAct,watchActive:watchActive,
+ cleanProg:cleanProg,loadProg:loadProg,saveProg:saveProg,ensureProg:ensureProg,recordVisit:recordVisit,recordAttempt:recordAttempt,mergeProg:mergeProg,recordAct:recordAct,watchActive:watchActive,flushOut:flushOut,
  exportProgress:exportProgress,getRecap:getRecap,setRecap:setRecap,
  periodInfo:periodInfo,skillStats:skillStats,skillStatus:skillStatus,summary:summary,lastActivity:lastActivity,streak:streak,inactivity:inactivity
 };

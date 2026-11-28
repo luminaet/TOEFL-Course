@@ -525,7 +525,7 @@ function vPretest(){
 
 /* ---------- AKUN ---------- */
 const TL=k=>(L.TYPES[k]||{label:k}).label;
-const STT={active:["Aktif","ok"],expired:["Kedaluwarsa","bad"],inactive:["Nonaktif","bad"],frozen:["Dibekukan","bad"]};
+const STT={active:["Aktif","ok"],expired:["Kedaluwarsa","bad"],inactive:["Nonaktif","bad"],frozen:["❄️ Dibekukan","bad"]};
 /* Status akun: pakai status dari server (frozen/inactive/expired/active); dibekukan otomatis ditandai frozenAt di sheet. */
 function accSt(a,now){
  const k=(a.role!=="admin"&&a.frozenAt&&(a.status==="frozen"||!a.status))?"frozen":(a.status&&STT[a.status]?a.status:L.accStatus(a,now));
@@ -551,7 +551,7 @@ function vAccounts(){
  const rows=ACC.map(a=>{
   const st=accSt(a,now),frz=st.frz;
   const stTag=`<span class="tag ${st.cls}" ${frz?'title="Dibekukan otomatis karena tidak belajar 5 hari. Hanya admin yang bisa mengaktifkan kembali."':""}>${st.label}</span>`+(frz?`<div class="hint">sejak ${fmtDate(a.frozenAt)}</div>`:(st.waiting?`<div class="hint" style="color:#a15c00">⏳ ${st.days} hari tidak aktif, menunggu pembekuan otomatis</div>`:(st.days!==null&&a.type==="mahasiswa"&&st.k==="active"?`<div class="hint">terakhir aktif ${fmtDate(a.lastActiveAt)}</div>`:"")));
-  return `<tr><td>${esc(a.name)}</td><td>${esc(a.user)}</td><td><span class="tag ${a.role==="admin"?"admin":""}">${esc(TL(a.type)).toUpperCase()}</span></td><td>${stTag}</td><td>${a.expiresAt?fmtDate(a.expiresAt):"Selamanya"}</td><td>${fmtDate(a.createdAt)}</td><td><div class="acts">${frz?`<button class="btn small" data-act="accReactivate" data-id="${esc(a.user)}">Reactivate</button>`:""}<button class="btn secondary small" data-act="accManage" data-id="${esc(a.user)}">Kelola</button>${renewable(a)&&a.expiresAt?`<button class="btn small" data-act="accExtend" data-id="${esc(a.user)}">+6 bln</button>`:""}<button class="btn secondary small" data-act="accPw" data-id="${esc(a.user)}">Ganti password</button></div></td></tr>`;
+  return `<tr><td>${esc(a.name)}</td><td>${esc(a.user)}</td><td><span class="tag ${a.role==="admin"?"admin":""}">${esc(TL(a.type)).toUpperCase()}</span></td><td>${stTag}</td><td>${a.expiresAt?fmtDate(a.expiresAt):"Selamanya"}</td><td>${fmtDate(a.createdAt)}</td><td><div class="acts">${frz?`<button class="btn small" data-act="accReactivate" data-id="${esc(a.user)}">▶ Aktifkan kembali</button>`:""}<button class="btn secondary small" data-act="accManage" data-id="${esc(a.user)}">Kelola</button>${renewable(a)&&a.expiresAt?`<button class="btn small" data-act="accExtend" data-id="${esc(a.user)}">+6 bln</button>`:""}<button class="btn secondary small" data-act="accPw" data-id="${esc(a.user)}">Ganti password</button></div></td></tr>`;
  }).join("");
  $("#view").innerHTML=title("AKUN & LOGIN","Akun & login web","Jenis akun: Admin, Mahasiswa, Student Plus, Customer (masa berlaku 6 bulan, bisa dibuat selamanya), dan Dummy (hanya melihat). Akun tidak dihapus; akun yang berakhir tetap tercatat dan bisa diperpanjang.")+
  (accErr?`<div class="note" style="background:#fff3f4;color:#8f2234">⚠️ ${esc(accErr)} <button class="btn small" data-act="accReload">Coba lagi</button></div>`:"")+
@@ -596,26 +596,45 @@ function vAccounts(){
 }
 
 /* ---------- REKAP MAHASISWA ---------- */
+let PRG=null,prgErr="",prgTrunc=false,prgBusy=false;
+/* data progres dari server (tab Progress di spreadsheet): baris -> bentuk progres per mahasiswa */
+function buildPrg(rows){
+ const m={};
+ (rows||[]).forEach(r=>{
+  const [ts,u,kind,ak,skill,sec,lv,score,total,pct,ans]=r;if(!u)return;
+  const p=m[u]||(m[u]={since:0,visits:[],acts:[],attempts:[]});
+  if(!p.since||ts<p.since)p.since=ts;
+  if(kind==="visit")p.visits.push({skill,ts});
+  else if(kind==="act")p.acts.push({k:sec,ref:skill,ts});
+  else if(kind==="attempt")p.attempts.push({kind:ak==="pretest"?"pretest":"skill",skill,section:sec,level:lv,score,total,pct,ts,answered:ans});
+ });
+ Object.keys(m).forEach(u=>{m[u]=L.cleanProg(m[u]);});
+ return m;
+}
+function loadPrg(){
+ prgBusy=true;
+ return L.api("listProgress").then(j=>{PRG=buildPrg(j.rows);prgTrunc=!!j.truncated;prgErr="";}).catch(e=>{PRG={};prgErr=e.message||"Gagal memuat dari server.";}).then(()=>{prgBusy=false;});
+}
 function collectProgress(){
  const out={};
- try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.indexOf(L.PROG_PREFIX)===0){const u=k.slice(L.PROG_PREFIX.length);out[u]={prog:L.loadProg(u),src:"browser ini"};}}}catch(e){}
+ const add=(u,p,src)=>{out[u]=out[u]?{prog:L.mergeProg(out[u].prog,p),src:out[u].src+" + "+src}:{prog:p,src:src};};
+ if(PRG)Object.keys(PRG).forEach(u=>add(u,PRG[u],"server"));
+ try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.indexOf(L.PROG_PREFIX)===0){const u=k.slice(L.PROG_PREFIX.length);add(u,L.loadProg(u),"browser ini");}}}catch(e){}
  const rc=L.getRecap();
- Object.keys(rc).forEach(u=>{
-  const p=L.cleanProg(rc[u].progress);
-  out[u]=out[u]?{prog:L.mergeProg(out[u].prog,p),src:"browser + file"}:{prog:p,src:"file "+fmtDate(rc[u].exportedAt)};
- });
+ Object.keys(rc).forEach(u=>add(u,L.cleanProg(rc[u].progress),"file "+fmtDate(rc[u].exportedAt)));
  return out;
 }
 function vRecap(){
+ if(PRG===null&&!prgBusy)loadPrg().then(()=>{if(tab==="recap")vRecap();});
  const data=collectProgress(),now=Date.now(),st=D.settings,students=ACC.filter(a=>a.role==="student");
  const rows=students.map(a=>{
   const r=data[a.user];
-  if(!r||(!r.prog.attempts.length&&!r.prog.visits.length))return `<tr><td>${esc(a.name)}</td><td>${esc(a.user)}</td><td colspan="5" class="hint">Belum ada data — minta mahasiswa mengunduh <b>laporan progres</b> dari halaman Akun Saya, lalu impor di bawah.</td><td></td></tr>`;
+  if(!r||(!r.prog.attempts.length&&!r.prog.visits.length))return `<tr><td>${esc(a.name)}</td><td>${esc(a.user)}</td><td colspan="5" class="hint">Belum ada data belajar. Data terkirim otomatis ke server saat mahasiswa membuka aplikasi dan belajar.</td><td></td></tr>`;
   const pr=r.prog,last=L.lastActivity(pr),ia=L.inactivity(pr,st,now),pi=L.periodInfo(pr,st,now),sm=L.summary(pr,D,pi.start,pi.end);
   return `<tr><td>${esc(a.name)}</td><td>${esc(a.user)}</td><td>${fmtDate(last)}</td><td>${pr.attempts.length}</td><td>${sm.mastered}/${sm.total}</td><td>${pctTxt(sm.score)}</td><td><span class="tag ${ia.warn?"bad":"ok"}">${ia.warn?"Tidak aktif "+ia.days+" hari":"Aktif"}</span> <span class="hint">${esc(r.src)}</span></td><td><button class="btn secondary small" data-act="rcDetail" data-id="${esc(a.user)}">Detail</button></td></tr>`;
  }).join("");
- $("#view").innerHTML=title("REKAP","Rekap mahasiswa","Pantau aktivitas belajar dan portofolio per skill. Data diambil dari browser ini dan dari file progres yang Anda impor.")+
- `<div class="box"><div class="boxhead"><h3>Daftar mahasiswa</h3><div class="row"><button class="btn secondary small" data-act="rcCsv">⬇ Unduh CSV</button></div></div>
+ $("#view").innerHTML=title("REKAP","Rekap mahasiswa","Pantau aktivitas belajar dan portofolio per skill. Data utama diambil dari server (tab Progress di spreadsheet); browser ini dan file progres yang Anda impor ikut digabung.")+
+ `<div class="box"><div class="boxhead"><h3>Daftar mahasiswa</h3><div class="row"><button class="btn secondary small" data-act="rcReload">↻ Muat ulang dari server</button><button class="btn secondary small" data-act="rcCsv">⬇ Unduh CSV</button></div></div>${prgErr?`<div class="note" style="background:#fff3f4;color:#8f2234">⚠️ ${esc(prgErr)}</div>`:(PRG===null?'<div class="note">Memuat data dari server…</div>':"")}${prgTrunc?'<div class="note">Hanya 30.000 aktivitas terbaru yang dimuat.</div>':""}
   <div style="overflow:auto"><table><thead><tr><th>NAMA</th><th>USERNAME</th><th>TERAKHIR AKTIF</th><th>PERCOBAAN</th><th>SKILL TUNTAS</th><th>SKOR PERIODE</th><th>STATUS</th><th></th></tr></thead><tbody>${rows||'<tr><td colspan="8" class="empty">Belum ada akun mahasiswa.</td></tr>'}</tbody></table></div></div>
  <div class="box"><h3>Impor laporan progres</h3><p class="sub">Pilih satu atau beberapa file <code>progress-username.json</code> yang diunduh mahasiswa dari halaman Akun Saya. Data digabung dengan yang sudah ada.</p>
   <div class="row"><label class="btn secondary file-label" style="cursor:pointer">Pilih file progres (.json)<input id="rc-imp" type="file" accept="application/json,.json" multiple hidden></label><button class="btn danger small" data-act="rcClear">Hapus semua data impor</button></div></div>
@@ -799,6 +818,7 @@ qDel(id){
    L.api("resetPassword",{user,hash:L.hashPassword(user,pw)}).then(()=>toast("Password diganti ✓")).catch(e=>alert(e.message));
   });
  },
+ rcReload(){PRG=null;vRecap();},
  accReload(){loadAcc().then(()=>toast("Data akun dimuat ulang"));},
  async accImport(){
   let list=[];
@@ -835,7 +855,7 @@ qDel(id){
   const photo=pf&&pf.photoUrl?`<a class="btn secondary small" href="${esc(pf.photoUrl)}" target="_blank" rel="noopener">🖼 Buka foto di Drive ↗</a>`:(pf&&pf.photo?`<img src="${pf.photo}" style="width:64px;height:64px;border-radius:50%;object-fit:cover">`:"");
   const prof=pf&&pf.name?`<div class="box"><h3>Profil</h3><div class="row">${photo}</div>
    <div class="sub">${esc(pf.name)}<br>${esc(pf.email)} · ${esc(pf.wa)}<br>Pekerjaan: ${esc(pf.job||"—")} · Semester: ${esc(pf.semester||"—")}</div></div>`:`<p class="hint">Belum ada data profil dari mahasiswa ini.</p>`;
-  const sx=accSt(a,Date.now()),stt=sx.k,frz=(sx.frz&&!adm),stTag=frz?'<span class="tag bad">Dibekukan</span>':`<span class="tag ${(STT[stt]||STT.active)[1]}">${(STT[stt]||STT.active)[0]}</span>`;
+  const sx=accSt(a,Date.now()),stt=sx.k,frz=(sx.frz&&!adm),stTag=frz?'<span class="tag bad">❄️ Dibekukan</span>':`<span class="tag ${(STT[stt]||STT.active)[1]}">${(STT[stt]||STT.active)[0]}</span>`;
   const stBox=adm?"":`<div class="row" style="align-items:center;gap:10px"><b style="font-size:12px">Status</b>${stTag}${frz?'<button class="btn small" type="button" id="am-re">▶ Aktifkan kembali</button>':""}</div>`;
   modal(`<h3>${esc(a.name)} <span class="hint">(${esc(a.user)})</span></h3><form class="form" id="am-form">${stBox}
    ${adm?'<p class="hint">Akun admin tidak diubah dari sini (ganti password lewat tombol “Ganti password”).</p>':`<div class="grid2"><label>Jenis akun<select id="am-type">${L.TYPE_KEYS.map(k=>`<option value="${k}" ${k===a.type?"selected":""}>${TL(k)}</option>`).join("")}</select></label><label>Berlaku sampai<input id="am-exp" type="date" value="${dstr}"><span class="hint">Diabaikan jika “Aktif selamanya” dicentang.</span></label></div>
